@@ -1,0 +1,5 @@
+"0","```r
+prop.zip <- matrix(as.numeric(table(clust_zip[,-1])), ncol=4, byrow = T)
+colnames(prop.zip) <- c(\"1\", \"2\", \"3\", \"4\")
+rownames(prop.zip) <- sort(unique(zip$county_name))
+```"

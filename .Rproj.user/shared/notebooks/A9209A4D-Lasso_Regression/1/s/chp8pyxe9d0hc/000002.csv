@@ -1,0 +1,44 @@
+"0","```r
+vars <- c(\"outcomeGroup\",\"Age\", \"Primary_Substance_positive_changes_index\", \"Primary_Frequency_positive_changes_index\", \"Sex\", \"MOM_worried_losing_housing\",\"Marital_Status\", \"Race\", \"Secondary_Frequency_positive_changes_index\", \"Ever_Treated_for_Mental_Illness\", \"Employment_positive_changes_index\", \"Secondary_Substance_positive_changes_index\", \"Tertiary_Frequency_positive_changes_index\", \"stigma\")
+
+logistic_model <- glm(outcomeGroup ~ ., family = binomial(link = \"logit\"), data = sdoh_data[,vars])
+
+summary(logistic_model)
+```"
+"1","
+Call:
+glm(formula = outcomeGroup ~ ., family = binomial(link = \"logit\"), 
+    data = sdoh_data[, vars])
+
+Coefficients:
+                                            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                 1.953487   0.923948   2.114   0.0345 *  
+Age                                         0.010077   0.011710   0.860   0.3895    
+Primary_Substance_positive_changes_index    0.163822   0.708936   0.231   0.8173    
+Primary_Frequency_positive_changes_index   -0.853979   0.607411  -1.406   0.1597    
+SexMale                                     0.548857   0.246440   2.227   0.0259 *  
+MOM_worried_losing_housing1                -0.580474   0.265266  -2.188   0.0286 *  
+Marital_StatusLiving as Married             0.095250   0.583351   0.163   0.8703    
+Marital_StatusMarried                      -0.004523   0.503191  -0.009   0.9928    
+Marital_StatusNever Married                -0.091916   0.402578  -0.228   0.8194    
+Marital_StatusSeparated                     0.710276   0.593346   1.197   0.2313    
+Marital_StatusWidowed                       0.637239   0.611569   1.042   0.2974    
+RaceOther                                  -0.266573   0.327151  -0.815   0.4152    
+RaceWhite                                   0.094517   0.350892   0.269   0.7877    
+Secondary_Frequency_positive_changes_index  0.518584   0.871845   0.595   0.5520    
+Ever_Treated_for_Mental_IllnessYes          0.382192   0.241025   1.586   0.1128    
+Employment_positive_changes_index          -0.195863   0.505372  -0.388   0.6983    
+Secondary_Substance_positive_changes_index -0.869948   0.971302  -0.896   0.3704    
+Tertiary_Frequency_positive_changes_index  -0.432082   0.501175  -0.862   0.3886    
+stigma1                                    -2.826557   0.269819 -10.476   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 668.60  on 521  degrees of freedom
+Residual deviance: 471.37  on 503  degrees of freedom
+AIC: 509.37
+
+Number of Fisher Scoring iterations: 5
+"

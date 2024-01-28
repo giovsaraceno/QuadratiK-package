@@ -1,0 +1,6 @@
+"0","```r
+clust_zip <- clustering[clustering$ID %in% zip$STUDY_ID, ]
+clust_zip <- cbind(clust_zip, zip$county_name)
+clust_zip <- data.frame(lapply(clust_zip,as.factor))
+head(clust_zip,10)
+```"

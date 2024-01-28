@@ -1,0 +1,54 @@
+"0","```r
+
+final_model <- glmnet(x[,-1], response, alpha=1, lambda=best_lambda, family = \"binomial\")
+print(coef(final_model))
+```"
+"1","20 x 1 sparse Matrix of class \"dgCMatrix\"
+                                                    s0
+(Intercept)                                 2.03004339
+Age                                         .         
+Primary_Substance_positive_changes_index    .         
+Primary_Frequency_positive_changes_index   -0.07942316
+SexMale                                     .         
+MOM_worried_losing_housing1                -0.03658733
+Marital_StatusLiving as Married             .         
+Marital_StatusMarried                       .         
+Marital_StatusNever Married                 .         
+Marital_StatusSeparated                     .         
+Marital_StatusWidowed                       .         
+RaceOther                                   .         
+RaceWhite                                   .         
+Secondary_Frequency_positive_changes_index  .         
+Ever_Treated_for_Mental_IllnessYes          .         
+Employment_positive_changes_index           .         
+Secondary_Substance_positive_changes_index  .         
+Tertiary_Frequency_positive_changes_index   .         
+stigma1                                    -2.25567082
+competing_priority1                         .         
+"
+"0","```r
+print(exp(coef(final_model)))
+```"
+"1","20 x 1 Matrix of class \"dgeMatrix\"
+                                                  s0
+(Intercept)                                7.6144167
+Age                                        1.0000000
+Primary_Substance_positive_changes_index   1.0000000
+Primary_Frequency_positive_changes_index   0.9236490
+SexMale                                    1.0000000
+MOM_worried_losing_housing1                0.9640739
+Marital_StatusLiving as Married            1.0000000
+Marital_StatusMarried                      1.0000000
+Marital_StatusNever Married                1.0000000
+Marital_StatusSeparated                    1.0000000
+Marital_StatusWidowed                      1.0000000
+RaceOther                                  1.0000000
+RaceWhite                                  1.0000000
+Secondary_Frequency_positive_changes_index 1.0000000
+Ever_Treated_for_Mental_IllnessYes         1.0000000
+Employment_positive_changes_index          1.0000000
+Secondary_Substance_positive_changes_index 1.0000000
+Tertiary_Frequency_positive_changes_index  1.0000000
+stigma1                                    0.1048032
+competing_priority1                        1.0000000
+"

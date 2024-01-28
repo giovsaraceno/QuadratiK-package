@@ -1,0 +1,5 @@
+"0","```r
+zip <- read.csv(\"C:/Users/sarac/Box/SDOH_Analysis/Data/StudyID_County.csv\")
+colnames(zip)[2] <- \"zip_code\"
+head(zip)
+```"

@@ -1,0 +1,5 @@
+"0","```r
+no.idx <- which(colnames(sdoh_data)%in%c(\"STUDY_ID\",\"outcomeGroup\",\"SVR\", \"Arm\"))
+x <- sdoh_data[,-no.idx]
+x <- model.matrix(~., data=x)
+```"

@@ -1,0 +1,263 @@
+[
+    {
+        "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+        "file_last_write": 1703004187.0,
+        "definitions": [
+            {
+                "usr": "c:@F@computeKernelMatrix#&1I#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "computeKernelMatrix(const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &)",
+                "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+                "line": 32,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@computePoissonMatrix#&1I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "computePoissonMatrix(const Eigen::MatrixXd &, double)",
+                "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+                "line": 74,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@NonparamCentering#&1I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "NonparamCentering(const Eigen::MatrixXd &, int)",
+                "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+                "line": 110,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@ParamCentering#&1I#S0_#S0_#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "ParamCentering(const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &)",
+                "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+                "line": 149,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@stat2sample#&I#S0_#d#&1I#S1_#&1$@N@std@N@__cxx11@S@basic_string>#C#$@N@std@S@char_traits>#C#$@N@std@S@allocator>#C#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "stat2sample(Eigen::MatrixXd &, Eigen::MatrixXd &, double, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const std::string &)",
+                "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+                "line": 187,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@kbNormTest#I#d#&1I#1I#&1$@N@std@N@__cxx11@S@basic_string>#C#$@N@std@S@char_traits>#C#$@N@std@S@allocator>#C#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "kbNormTest(Eigen::MatrixXd, double, const Eigen::MatrixXd &, const Eigen::MatrixXd, const std::string &)",
+                "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+                "line": 249,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@statPoissonUnif#&1I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "statPoissonUnif(const Eigen::MatrixXd &, double)",
+                "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+                "line": 300,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@stat_ksample_cpp#&1I#S0_#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "stat_ksample_cpp(const Eigen::MatrixXd &, const Eigen::VectorXd &, double, const Eigen::VectorXd &, const Eigen::VectorXd &)",
+                "file": "C:/Users/sarac/Box/Desktop/Documents/QuadratiK/src/kernel_function.cpp",
+                "line": 355,
+                "column": 17,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+        "file_last_write": 1705733244.0,
+        "definitions": [
+            {
+                "usr": "c:@F@computeKernelMatrix#&1I#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "computeKernelMatrix(const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &)",
+                "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+                "line": 25,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@computePoissonMatrix#&1I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "computePoissonMatrix(const Eigen::MatrixXd &, double)",
+                "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+                "line": 67,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@NonparamCentering#&1I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "NonparamCentering(const Eigen::MatrixXd &, int)",
+                "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+                "line": 103,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@ParamCentering#&1I#S0_#S0_#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "ParamCentering(const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &)",
+                "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+                "line": 142,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@stat2sample#&I#S0_#d#&1I#S1_#&1$@N@std@N@__cxx11@S@basic_string>#C#$@N@std@S@char_traits>#C#$@N@std@S@allocator>#C#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "stat2sample(Eigen::MatrixXd &, Eigen::MatrixXd &, double, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const std::string &)",
+                "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+                "line": 180,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@kbNormTest#I#d#&1I#1I#&1$@N@std@N@__cxx11@S@basic_string>#C#$@N@std@S@char_traits>#C#$@N@std@S@allocator>#C#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "kbNormTest(Eigen::MatrixXd, double, const Eigen::MatrixXd &, const Eigen::MatrixXd, const std::string &)",
+                "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+                "line": 242,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@statPoissonUnif#&1I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "statPoissonUnif(const Eigen::MatrixXd &, double)",
+                "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+                "line": 293,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@stat_ksample_cpp#&1I#S0_#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "stat_ksample_cpp(const Eigen::MatrixXd &, const Eigen::VectorXd &, double, const Eigen::VectorXd &, const Eigen::VectorXd &)",
+                "file": "C:/Users/sarac/Desktop/QuadratiK/src/kernel_function.cpp",
+                "line": 348,
+                "column": 17,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+        "file_last_write": 1702271070.0,
+        "definitions": [
+            {
+                "usr": "c:@F@computeKernelMatrix#&1I#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "computeKernelMatrix(const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &)",
+                "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+                "line": 32,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@computePoissonMatrix#&1I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "computePoissonMatrix(const Eigen::MatrixXd &, double)",
+                "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+                "line": 74,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@NonparamCentering#&1I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "NonparamCentering(const Eigen::MatrixXd &, int)",
+                "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+                "line": 110,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@ParamCentering#&1I#S0_#S0_#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "ParamCentering(const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const Eigen::MatrixXd &)",
+                "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+                "line": 149,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@stat2sample#&I#S0_#d#&1I#S1_#&1$@N@std@N@__cxx11@S@basic_string>#C#$@N@std@S@char_traits>#C#$@N@std@S@allocator>#C#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "stat2sample(Eigen::MatrixXd &, Eigen::MatrixXd &, double, const Eigen::MatrixXd &, const Eigen::MatrixXd &, const std::string &)",
+                "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+                "line": 187,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@kbNormTest#I#d#&1I#1I#&1$@N@std@N@__cxx11@S@basic_string>#C#$@N@std@S@char_traits>#C#$@N@std@S@allocator>#C#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "kbNormTest(Eigen::MatrixXd, double, const Eigen::MatrixXd &, const Eigen::MatrixXd, const std::string &)",
+                "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+                "line": 249,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@statPoissonUnif#&1I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "statPoissonUnif(const Eigen::MatrixXd &, double)",
+                "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+                "line": 300,
+                "column": 17,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@stat_ksample_cpp#&1I#S0_#d#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "stat_ksample_cpp(const Eigen::MatrixXd &, const Eigen::VectorXd &, double, const Eigen::VectorXd &, const Eigen::VectorXd &)",
+                "file": "C:/Users/sarac/Dropbox/QuadratiK/src/kernel_function.cpp",
+                "line": 355,
+                "column": 17,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    }
+]

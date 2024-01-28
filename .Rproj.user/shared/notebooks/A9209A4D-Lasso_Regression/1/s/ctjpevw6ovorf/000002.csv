@@ -1,0 +1,4 @@
+"0","```r
+sdoh_data$stigma <- as.factor(ifelse(sdoh_data$Arm==\"Tel\", 0, 1))
+sdoh_data$competing_priority <- as.factor(ifelse(sdoh_data$Arm==\"Tel\", 0, 1))
+```"

@@ -1,0 +1,214 @@
+rm(list=ls())
+
+### Code for creating some data sets to be used for testing that the R and the
+### Python implementations gives the same results.
+
+library(kerneltest)
+library(openxlsx)
+
+####### GENERATE DATA for NORMALITY test and TWO-SAMPLE test
+
+# Scenario 1: two standard normal distributions
+# Scenario 2: X is standard normal distribution and Y follows a skew-normal
+#             distribution with lambda = 0.2
+# The two scenarios are considered for different sample size n and dimension d
+mu_x <- mu_y <- 0
+sigma_x <- sigma_y <- 1
+skewness_y <- c(0,0.2)
+n <- c(100,500)
+d <- c(1,4)
+# Generate the samples and save in the "dataset" folder
+for(l in skewness_y){
+   for(s in n){
+      for(k in d){
+         dat <- generate_SN(k,s,s,mu_x,mu_y,sigma_x,sigma_y,l)
+         dat <- as.data.frame(cbind(rep(c(1,0),each=s),rbind(as.matrix(dat$X),as.matrix(dat$Y))))
+         file.name <- paste0("/Users/gsaracen/Box/KernelTest_implementation/dataset/dat_",l,"_",s,"_",k,".xlsx")
+         write.xlsx(dat, file.name)
+      }
+   }
+}
+
+####### GENERATE DATA for UNIFORMITY test on the Sphere
+
+# Scenario 1: uniform distribution on the Sphere
+# The two scenarios are considered for different sample size n and dimension d
+rho_values <- c(0.1, 0.3, 0.7, 0.9)
+n <- c(100,500)
+d <- c(3,7)
+# Generate the samples from Uniform on the Sphere and save in the "dataset" folder
+for(s in n){
+   for(k in d){
+      dat <- kerneltest:::sample_hypersphere(d = k,n_points = s)
+      file.name <- paste0("/Users/gsaracen/Box/KernelTest_implementation/dataset/unif_sphere_",s,"_",k,".xlsx")
+      write.xlsx(x = as.data.frame(dat), file = file.name)
+   }
+}
+# Scenario 2: Pisson kernel-based distribution with rho = 0.1, 0.3, 0.7, 0.9
+# Generate the samples from PKBD on the Sphere and save in the "dataset" folder
+for( r in rho_values){
+   for(s in n){
+      for(k in d){
+         dat <- rpkb(n = s, mu = c(1,0,0), rho = r)
+         file.name <- paste0("/Users/gsaracen/Box/KernelTest_implementation/dataset/pkbd_sphere_",r,"_",s,"_",k,".xlsx")
+         write.xlsx(as.data.frame(dat$x), file.name)
+      }
+   }
+}
+
+####### GENERATE DATA for CLUSTERING on the Sphere
+
+# Generate 3-dim points from 3 clusters with balanced sample size
+size <- 200
+class<-c(rep(1, size), rep(2, size),rep(3,size))
+rho=0.8
+mu1<-c(1,0,0)
+mu2 <- c(0,1,0)
+mu3 <- c(-1,0,0)
+set.seed(081423)
+data1<-rpkb(size, mu1,rho,method='rejvmf')
+data2<-rpkb(size, mu2,rho,method='rejvmf')
+data3<-rpkb(size, mu3,rho,method='rejvmf')
+data<-rbind(data1$x,data2$x, data3$x)
+data <- cbind(class, data)
+write.xlsx(as.data.frame(data), "/Users/gsaracen/Box/KernelTest_implementation/dataset/clustering_balance_data.xlsx")
+
+# Generate 3-dim points from 3 clusters with un-balanced sample size and different rho's
+class<-c(rep(1, 50), rep(2, 100),rep(3,200))
+mu1<-c(1,0,0)
+mu2 <- c(0,1,0)
+mu3 <- c(-1,0,0)
+set.seed(081423)
+data1<-rpkb(50, mu1,0.3,method='rejvmf')
+data2<-rpkb(100, mu2,0.5,method='rejvmf')
+data3<-rpkb(200, mu3,0.8,method='rejvmf')
+data<-rbind(data1$x,data2$x, data3$x)
+data <- cbind(class, data)
+write.xlsx(as.data.frame(data), "/Users/gsaracen/Box/KernelTest_implementation/dataset/clustering_not_balance_data.xlsx")
+
+##Generate k-sample
+
+generate_data<-function(sizes, eps, type){
+   
+   if(type==1){
+      x1 <- rmvnorm(sizes[1], mean=rep(0,2))
+      x2 <- rmvnorm(sizes[2], mean=rep(0,2))
+      x3 <- rmvnorm(sizes[3], mean=rep(0,2))
+      dat <- rbind(x1, x2, x3)
+   } else if(type==2){
+      x1 <- rmvnorm(sizes[1], mean=rep(0,2))
+      x2 <- rmvnorm(sizes[2], mean=rep(0,2))
+      x3 <- rmvnorm(sizes[3], mean = c(0,eps))
+      dat <- rbind(x1, x2, x3)
+   } else if(type==3){
+      x1 <- rmvnorm(sizes[1], mean = c(0,sqrt(3)*eps/3))
+      x2 <- rmvnorm(sizes[2], mean = c(-eps/2,-sqrt(3)*eps/6))
+      x3 <- rmvnorm(sizes[3], mean = c(eps/2,-sqrt(3)*eps/6))
+      dat <- rbind(x1, x2, x3)
+   }
+   groups <- as.factor(rep(c(1,2,3), times=sizes))
+   
+   return(list("x"=dat, "y"=groups))
+}
+
+sizes <- rep(200,3)
+library(mvtnorm)
+
+dati0 <- generate_data(sizes = sizes, eps = 0, type = 1)
+dati1 <- generate_data(sizes = sizes, eps = 0.5, type = 3)
+
+write.xlsx(as.data.frame(dati0), "/Users/gsaracen/Box/KernelTest_implementation/dataset/ksample_0data.xlsx")
+
+write.xlsx(as.data.frame(dati1), "/Users/gsaracen/Box/KernelTest_implementation/dataset/ksample_1data.xlsx")
+
+## H0 true
+
+dat0 <- read.xlsx("/Users/gsaracen/Box/KernelTest_implementation/dataset/ksample_0data.xlsx")
+x = as.matrix(dat0[,1:2])
+y = dat0[,3]
+h=1
+n_B=150
+#time_h <- system.time( selected_h0 <- select_h_k(dat_x=x, dat_y=y, alternative="skewness"))
+time_stat <- system.time( statistic <- stat_ksample(x = x,y = y,h = h))
+time_perm <- system.time({
+   CV_p <- cv_ksample(x=x, y=y, h=h, B=n_B, method="permutation")
+})
+
+time_boot <- system.time({
+   CV_b <- cv_ksample(x=x, y=y, h=h, B=n_B, method="bootstrap")
+})
+
+time_sub <- system.time({
+   CV_s <- cv_ksample(x=x, y=y, h=h, B=n_B, method="subsampling", b=0.8)
+})
+res0 <- c(statistic, CV_p, CV_b, CV_s, time_stat[3], time_perm[3], time_boot[3], time_sub[3])
+res0
+
+# H0 FALSE
+
+dat1 <- read.xlsx("/Users/gsaracen/Box/KernelTest_implementation/dataset/ksample_1data.xlsx")
+x = as.matrix(dat1[,1:2])
+y = dat1[,3]
+h=1
+n_B=150
+#time_h <- system.time( selected_h0 <- select_h_k(dat_x=x, dat_y=y, alternative="skewness"))
+time_stat <- system.time( statistic <- stat_ksample(x = x,y = y,h = h))
+time_perm <- system.time({
+   CV_p <- cv_ksample(x=x, y=y, h=h, B=n_B, method="permutation")
+})
+
+time_boot <- system.time({
+   CV_b <- cv_ksample(x=x, y=y, h=h, B=n_B, method="bootstrap")
+})
+
+time_sub <- system.time({
+   CV_s <- cv_ksample(x=x, y=y, h=h, B=n_B, method="subsampling", b=0.8)
+})
+res <- c(statistic, CV_p, CV_b, CV_s, time_stat[3], time_perm[3], time_boot[3], time_sub[3])
+res
+
+results <- rbind(res0,res)
+colnames(results)= c("stat1", "stat2", "CVperm1", "CVperm2", "CVboot1", "CVboot2", "CVsub1", "CVsub2", "time_stat", "time_perm", "time_boot", "time_sub")
+
+write.xlsx(as.data.frame(results), "/Users/gsaracen/Box/KernelTest_implementation/dataset/resultsR_ksample.xlsx")
+
+
+## Generate data for testing the alternative "scale" in the select_h function
+
+## For two-sample test
+set.seed(012424)
+x <- matrix(rnorm(500),ncol=5)
+
+set.seed(012424)
+y1 <- matrix(rnorm(500),ncol=5)
+set.seed(012424)
+y2 <- matrix(rnorm(500, sd=1.2),ncol=5)
+set.seed(012424)
+y3 <- matrix(rnorm(500, sd=2),ncol=5)
+
+write.csv(x, "C:/Users/sarac/Box/KernelTest_implementation/dataset/select_h_scale_x.csv")
+write.csv(y1, "C:/Users/sarac/Box/KernelTest_implementation/dataset/select_h_scale_y1.csv")
+write.csv(y2, "C:/Users/sarac/Box/KernelTest_implementation/dataset/select_h_scale_y2.csv")
+write.csv(y3, "C:/Users/sarac/Box/KernelTest_implementation/dataset/select_h_scale_y3.csv")
+
+QuadratiK::select_h(x=x, y=y1, alternative="scale")
+# h_sel = 1.2
+QuadratiK::select_h(x=x, y=y2, alternative="scale")
+# h_sel = 1.2
+QuadratiK::select_h(x=x, y=y3, alternative="scale")
+# h_sel = 2
+
+
+## For k-sample test
+set.seed(012424)
+x <- rbind(matrix(rnorm(300, sd=1.2),ncol=3),
+           matrix(rnorm(600),ncol=3))
+
+y <- rep(c(1,2,3), each=100)
+
+
+write.csv(cbind(y,x), "C:/Users/sarac/Box/KernelTest_implementation/dataset/select_h_scale_k1.csv")
+
+QuadratiK::select_h(x=x, y=y, alternative="scale")
+# h_sel = 1.6
+QuadratiK::kb.test(x,y)

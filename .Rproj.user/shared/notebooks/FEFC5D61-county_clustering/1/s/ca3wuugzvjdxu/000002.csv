@@ -1,0 +1,8 @@
+"0","```r
+zip_na <- clustering[!(clustering$ID %in% zip$STUDY_ID), ]
+t(table(zip_na[,2]))
+```"
+"1","      
+        1  2  3  4
+  [1,] 13 18 35 59
+"

@@ -1,0 +1,19 @@
+"0","```r
+response <- sdoh_data$outcomeGroup
+
+no.idx <- which(colnames(sdoh_data)%in%c(\"STUDY_ID\",\"outcomeGroup\",\"SVR\"))
+x <- sdoh_data[,-no.idx]
+vars <- c(\"Arm\", \"Age\", \"Primary_Substance_positive_changes_index\", \"Primary_Frequency_positive_changes_index\", \"Sex\", \"MOM_worried_losing_housing\",\"Marital_Status\", \"Race\", \"Secondary_Frequency_positive_changes_index\", \"Ever_Treated_for_Mental_Illness\", \"Employment_positive_changes_index\", \"Secondary_Substance_positive_changes_index\", \"Tertiary_Frequency_positive_changes_index\")
+x <- x[,vars]
+x <- model.matrix(~., data=x)
+
+set.seed(1234) 
+cv_fit <- cv.glmnet(x[,-1], response, alpha=1, nfolds=5, family=\"binomial\")
+best_lambda <- cv_fit$lambda.min
+best_lambda
+```"
+"1","[1] 0.03685666
+"
+"0","```r
+plot(cv_fit)
+```"

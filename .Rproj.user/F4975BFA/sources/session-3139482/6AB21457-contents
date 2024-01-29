@@ -346,7 +346,7 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' @examples
 #' #We generate three sample of 100 observations from 3-dimensional
 #' #Poisson kernel-based densities with rho=0.8 and different mean directions
-#' size <- 100
+   #' size <- 20
 #' groups<-c(rep(1, size), rep(2, size),rep(3,size))
 #' rho=0.8
 #' set.seed(081423)
@@ -356,7 +356,7 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' data<-rbind(data1$x,data2$x, data3$x)
 #'
 #' #Perform the clustering algorithm
-#' pkbc_res<- pkbc(data, 2:6)
+#' pkbc_res<- pkbc(data, 2:4)
 #' validation(pkbc_res)
 #'
 #' @export

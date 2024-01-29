@@ -4,10 +4,15 @@ Title: Collection of Methods Constructed using the Kernel-Based Quadratic Distan
 Version: 1.0.0
 Date: 2024-01-28
 Authors@R: c(
-    person("Giovanni", "Saraceno", email = "gsaracen@buffalo.edu", role = c("cre"), comment = "ORCID 000-0002-1753-2367", comment = "Maintainer"),
+    person("Giovanni", "Saraceno", email = "gsaracen@buffalo.edu", role = c("cre"), comment = "Maintainer; ORCID: 000-0002-1753-2367"),
     person("Marianthi", "Markatou", role = c("aut")),
     person("Raktim", "Mukhopadhyay", role = c("aut")),
-    person("Mojgan", "Golzygiven", role = "aut")
+    person("Mojgan", "Golzygiven", role = "aut"))
+Authors: Giovanni Saraceno [aut, cre],
+         Marianthi Markatou [aut],
+         Raktim Mukhopadhyay [aut],
+         Mojgan Golzy [aut]
+Manteiner: Giovanni Saraceno <gsaracen@buffalo.edu>
 Description: It includes test for multivariate normality, test for uniformity on the Sphere, non-parametric two- and k-sample tests, random generation of points from the Poisson kernel-based density and clustering algorithm for spherical data.
 License: AGPL (>= 3)
 Encoding: UTF-8

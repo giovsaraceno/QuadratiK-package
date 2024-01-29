@@ -32,7 +32,7 @@ The function extract the within-cluster sum of squares and displays the obtained
 \examples{
 #We generate three sample of 100 observations from 3-dimensional
 #Poisson kernel-based densities with rho=0.8 and different mean directions
-size <- 100
+size <- 20
 groups<-c(rep(1, size), rep(2, size),rep(3,size))
 rho=0.8
 set.seed(081423)
@@ -42,7 +42,7 @@ data3<-rpkb(size, c(-1,0,0),rho,method='rejvmf')
 data<-rbind(data1$x,data2$x, data3$x)
 
 #Perform the clustering algorithm
-pkbc_res<- pkbc(data, 2:6)
+pkbc_res<- pkbc(data, 2:4)
 validation(pkbc_res)
 
 }

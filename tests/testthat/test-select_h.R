@@ -4,13 +4,13 @@ test_that("Select h alhorithm works", {
    #------------------------------------------------------
    ## Selection of h for two-sample test
    ## 
-   size <- 100
+   size <- 200
    d <- 2
    set.seed(012924)
    x <- matrix(rnorm(size),ncol=d)
    y <- matrix(rnorm(size),ncol=d)
-   h_sel <- select_h(x,y,"skewness")
-   
+   h_sel <- select_h(x=x,y=y,alternative = "skewness")
+
    expect_true(is.numeric(h_sel$h_sel))
    expect_gt(max(h_sel$power), 0.5)
    
@@ -25,9 +25,9 @@ test_that("Select h alhorithm works", {
    x <- matrix(rnorm(size*d*k),ncol=d)
    y <- rep(1:k,each=size)
    h_sel <- select_h(x,y,"location")
-   
+
    expect_true(is.numeric(h_sel$h_sel))
    expect_gt(max(h_sel$power), 0.5)
-   
+
 
 })

@@ -46,7 +46,7 @@ If a value of $h$ is not provided, the function automatically perform the functi
 
 For a more accurate search of the tuning parameter, the function ``select_h`` can be used.This function needs the input ``x`` and ``y`` as the function ``kb.test`` for the $k$-sample problem. 
 ```{r fig.width=6, fig.height=4}
-set.seed(2468)
+set.seed(246)
 h_k <- select_h(x=x, y=y, alternative="skewness")
 ```
 ```{r}

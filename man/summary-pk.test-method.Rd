@@ -20,3 +20,10 @@ List with the following components:
 \description{
 \code{summary} method for the class \code{pk.test}
 }
+\examples{
+# create a pk.test object
+x_sp <- sample_hypersphere(3, n_points=100)
+unif_test <- pk.test(x_sp,rho=0.8)
+summary(unif_test)
+
+}

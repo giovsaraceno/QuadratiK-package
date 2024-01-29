@@ -19,3 +19,9 @@ See the function \code{pkbc} for more details.
 \item{\code{input}}{List of input data}
 }}
 
+\examples{
+data("wireless")
+res <- pkbc(as.matrix(wireless[,-8]),4)
+
+
+}

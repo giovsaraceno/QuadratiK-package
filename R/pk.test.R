@@ -1,5 +1,5 @@
 #' 
-#' Poisson kernal-based quadratic distance test of Uniformity on the Sphere
+#' Poisson kernel-based quadratic distance test of Uniformity on the Sphere
 #' 
 #' This function performs the kernel-based quadratic distance Goodness-of-fit tests for Uniformity for spherical data using the Poisson kernel with concentration parameter \code{rho}.
 #'
@@ -126,6 +126,12 @@ setMethod("show", "pk.test",
 #'
 #' @import ggpubr
 #' @import ggplot2
+#' 
+#' @examples
+#' # create a pk.test object
+#' x_sp <- sample_hypersphere(3, n_points=100)
+#' unif_test <- pk.test(x_sp,rho=0.8)
+#' summary(unif_test)
 #'
 #' @export
 #'

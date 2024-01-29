@@ -321,7 +321,7 @@ setMethod("pkbc", signature(dat = "ANY"),
 #'
 #' @param object object of class \code{pkbc}
 #' @param true_label vector of true membership to clusters (if available)
-#' @param elbow.plot logical, if TRUE the function retuns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).
+#' @param elbow.plot logical, if TRUE the function returns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).
 #' @param h tuning parameter of the k-sample test. (default: 1.5)
 #'
 #' @details The function extract the within-cluster sum of squares and displays the obtained elbow plots. The following evaluation measures are computed: k-sample test, In-Group Proportion. If true label are provided, ARI, Average Silhouette Width, Macro-Precision and Macro-Recall are computed.
@@ -466,6 +466,22 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
 #' @param true_label vector of true memberships to clusters (default: NULL).
 #'
 #' @details The function computes mean, standard deviation, median, inter-quantile range, minimum and maximum for each variable in the data set given the final membership assigned by the clustering algorithm. If dimension is equal to 2 or 3, points are displayed on the circle and Sphere, respectively. If dimension if greater than 3, the spherical Principal Component procedure proposed by Locantore et al., (1999) is applied for dimensionality reduction and the first three principal components are normalized and displayed on the Sphere.
+#' 
+#' @examples
+#' #We generate three sample of 100 observations from 3-dimensional
+#' #Poisson kernel-based densities with rho=0.8 and different mean directions
+#' size <- 100
+#' groups<-c(rep(1, size), rep(2, size),rep(3,size))
+#' rho=0.8
+#' set.seed(081423)
+#' data1<-rpkb(size, c(1,0,0),rho,method='rejvmf')
+#' data2<-rpkb(size, c(0,1,0),rho,method='rejvmf')
+#' data3<-rpkb(size, c(-1,0,0),rho,method='rejvmf')
+#' data<-rbind(data1$x,data2$x, data3$x)
+#'
+#' #Perform the clustering algorithm
+#' pkbc_res<- pkbc(data, 3)
+#' summary_stat(pkbc_res, 3)
 #' 
 #' @references
 #' Locantore, N., Marron, J.S., Simpson, D.G. et al. Robust principal component analysis for functional data. Test 8, 1–73 (1999). https://doi.org/10.1007/BF02595862

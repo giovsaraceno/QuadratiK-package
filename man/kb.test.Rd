@@ -43,7 +43,7 @@ kb.test(
 
 \item{y}{numeric matrix or vector of data values. Depending on the input \code{y}, the corresponding test is performed.
 \itemize{
-   \item if \code{y} = NULL, the function performs the tests for normlity on \code{x}
+   \item if \code{y} = NULL, the function performs the tests for normality on \code{x}
    \item if \code{y} is a data matrix, with same dimensions of \code{x}, the function performs the two-sample test between \code{x} and \code{y}.
    \item if \code{y} if a numeric or factor vector, indicating the group memberships for each observation, the function performs the k-sample test.
 }}
@@ -64,7 +64,7 @@ kb.test(
 
 \item{centeringType}{String indicating the method used for centering the normal kernel ('Param' or 'Nonparam').}
 
-\item{K_threshold}{maximum number of groups allowed. Defauelt is 10. It is a control parameter. Change in case of more than 10 samples.}
+\item{K_threshold}{maximum number of groups allowed. Default is 10. It is a control parameter. Change in case of more than 10 samples.}
 
 \item{alternative}{family of alternative chosen for selecting h, between "mean", "scale" and "skewness" (only if \code{h} is not provided).}
 

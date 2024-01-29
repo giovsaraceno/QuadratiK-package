@@ -78,7 +78,7 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
 #'
 #' @details 
 #' For each replication, a sample of d-dimensional observations from the uniform distribution 
-#' on the Sphere are genereted and the Poisson kernel-based U-statistic is computed. 
+#' on the Sphere are generated and the Poisson kernel-based U-statistic is computed. 
 #' After B iterations, the critical value is selected as the \code{Quantile} of the empirical distribution of the computed test statistics.
 #' 
 #' @references

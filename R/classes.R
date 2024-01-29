@@ -86,6 +86,12 @@ setClass("pk.test",
 #' @slot input List of input data
 #'
 #' @details See the function \code{pkbc} for more details.
+#' 
+#' @examples 
+#' data("wireless")
+#' res <- pkbc(as.matrix(wireless[,-8]),4)
+#' 
+#' 
 #' @export
 setClass("pkbc",
          slots = list(

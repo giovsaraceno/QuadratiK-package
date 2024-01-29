@@ -11,7 +11,7 @@ validation(object, true_label = NULL, elbow.plot = TRUE, h = 1.5)
 
 \item{true_label}{vector of true membership to clusters (if available)}
 
-\item{elbow.plot}{logical, if TRUE the function retuns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).}
+\item{elbow.plot}{logical, if TRUE the function returns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).}
 
 \item{h}{tuning parameter of the k-sample test. (default: 1.5)}
 }

@@ -4,7 +4,7 @@
 \alias{pk.test}
 \alias{pk.test,ANY-method}
 \alias{show,pk.test-method}
-\title{Poisson kernal-based quadratic distance test of Uniformity on the Sphere}
+\title{Poisson kernel-based quadratic distance test of Uniformity on the Sphere}
 \usage{
 pk.test(x, rho = NULL, B = 300, Quantile = 0.95)
 

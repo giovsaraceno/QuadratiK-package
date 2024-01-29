@@ -6,8 +6,8 @@
 \usage{
 select_h(
   x,
-  y,
-  alternative,
+  y = NULL,
+  alternative = NULL,
   method = "subsampling",
   b = 0.8,
   B = 100,

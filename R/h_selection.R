@@ -46,7 +46,7 @@
 #' @useDynLib QuadratiK
 #'
 #' @export
-select_h <- function(x, y, alternative, method="subsampling", b=0.8, B=100, delta_dim=1, delta=NULL, h_values=NULL,Nrep=50, n_cores=4, Quantile=0.95, power.plot=TRUE) {
+select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, B=100, delta_dim=1, delta=NULL, h_values=NULL,Nrep=50, n_cores=4, Quantile=0.95, power.plot=TRUE) {
    
    
    # Convert vectors to a single column matrix
@@ -66,9 +66,9 @@ select_h <- function(x, y, alternative, method="subsampling", b=0.8, B=100, delt
       } else if(!is.matrix(y)){
          stop("y must be a vector or a matrix")
       }
-   } else {
-      stop("y must be provided.")
-   }
+   } #else {
+      #stop("y must be provided.")
+   #}
    
    if(!(alternative %in% c("location", "scale", "skewness"))){
       
@@ -77,7 +77,6 @@ select_h <- function(x, y, alternative, method="subsampling", b=0.8, B=100, delt
    
    n <- nrow(x)
    d <- ncol(x)
-   d_y <- ncol(y)
 
    if (is.null(h_values)) h_values <- seq(0.4, 3.3, 0.4)
    
@@ -91,27 +90,34 @@ select_h <- function(x, y, alternative, method="subsampling", b=0.8, B=100, delt
       }
    }
    
-   if(d_y > 1){
+   if(!is.null(y)){
       
-      # Check that they have the same number of columns (features):
-      if(ncol(x) != ncol(y)) {
-         stop("'x' and 'y' must have the same number of columns.")
+      d_y <- ncol(y)
+      if(d_y > 1){
+         
+         # Check that they have the same number of columns (features):
+         if(ncol(x) != ncol(y)) {
+            stop("'x' and 'y' must have the same number of columns.")
+         }
+         
+         m <- nrow(y)
+         pooled <- rbind(x, y)
+         
+      } else if(d_y==1){
+         
+         # if(nrow(x) != length(y)) {
+         #    stop("Number of rows of 'x' and the length of 'y' must coincide.")
+         # }
+         if(nrow(x) != nrow(y)) {
+          stop("'x' and 'y' must have the same number of rows.")
+         }
+         
+         K <- length(unique(y))
+         nk <- round(n/K)
+         pooled <- x
       }
       
-      m <- nrow(y)
-      pooled <- rbind(x, y)
-      
-   } else if(d_y==1){
-      
-      # if(nrow(x) != length(y)) {
-      #    stop("Number of rows of 'x' and the length of 'y' must coincide.")
-      # }
-      if(nrow(x) != nrow(y)) {
-       stop("'x' and 'y' must have the same number of rows.")
-      }
-      
-      K <- length(unique(y))
-      nk <- round(n/K)
+   } else {
       pooled <- x
    }
    
@@ -185,6 +191,32 @@ select_h <- function(x, y, alternative, method="subsampling", b=0.8, B=100, delt
       
       return(c(STATISTIC < CV))
    }
+   # Define the objective function for the alternative normality test
+   objective_norm <- function(h,k) {
+      
+      dk <- delta_dim*delta[k]
+      
+      if(alternative=='location'){
+         mean_tilde <- mean_dat + dk
+         S_tilde <- S_dat
+         skew_tilde <- skew_data
+      } else if(alternative=='scale'){
+         mean_tilde <- mean_dat
+         S_tilde <- S_dat*dk
+         skew_tilde <- skew_data
+      } else if(alternative=='skewness'){
+         mean_tilde <- mean_dat
+         skew_tilde <- skew_data + dk
+         S_tilde <- S_dat
+      }
+      
+      xnew <- sn::rmsn(n, xi = mean_tilde, Omega = S_tilde, alpha = skew_tilde)
+      
+      STATISTIC <- kbNormTest(xnew, h, mean_dat, S_dat, centeringType = "Param")
+      CV <- normal_CV(d,n,h,mean_dat,S_dat,B,Quantile)
+      
+      return(c(STATISTIC < CV))
+   }
    
    num_cores <- as.numeric(n_cores)
    registerDoParallel(cores=n_cores)
@@ -203,7 +235,11 @@ select_h <- function(x, y, alternative, method="subsampling", b=0.8, B=100, delt
    for(k in k_values){
       results <- foreach(pars = params, .combine = rbind, .packages=c("sn", "moments", "stats", "rlecuyer","QuadratiK")) %dopar% {
          h <- as.numeric(pars$h)
-         if(d_y > 1){
+         if(is.null(y)){
+            
+            objective_result <- objective_norm(h,k)
+         
+            } else if(d_y > 1){
             
             objective_result <- objective_2(h, k)
             

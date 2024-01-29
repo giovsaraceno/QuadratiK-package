@@ -25,8 +25,10 @@ Imports: Rcpp (>= 1.0.10), RcppEigen (>= 0.3.3.5.0), sn, methods, stats, MASS,
 RoxygenNote: 7.2.3
 URL: https://github.com/giovsaraceno/QuadratiK-package
 BugReports: https://github.com/giovsaraceno/QuadratiK-package/issues
+VignetteBuilder: knitr
 Suggests: 
     rmarkdown,
     testthat (>= 3.0.0),
-    roxygen2
+    roxygen2,
+    knitr
 Config/testthat/edition: 3

@@ -188,6 +188,6 @@ setMethod("summary", "pk.test", function(object) {
       Reject_H0 = c(object@H0_Un, object@H0_Vn)
    )
    print(test_results)
-   
+   print(figure)
    return(list(summary_tables = stats, test_results = test_results, qqplots = figure))
 })

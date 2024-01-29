@@ -119,7 +119,9 @@ setMethod("kb.test", signature(x = "ANY"),
              
              if (is.null(h) & is.null(y)){
                 
-                stop("A value of the tuning parameter h must be provided to perform the kernel-based quadratic distance Normality tests")
+                #stop("A value of the tuning parameter h must be provided to perform the kernel-based quadratic distance Normality tests")
+                h_best <- select_h(x=x, alternative=alternative, method=method, b=b, B=B, power.plot=FALSE)
+                h <- h_best$h_sel
              
              } else if (is.null(h)& !(is.null(y))){
                 
@@ -310,7 +312,7 @@ setMethod("summary", "kb.test", function(object) {
          compute_stats(sample1[[name]], sample2[[name]], name)$stats
          
       })
-      
+      print(figure)
       
    }
    

@@ -1,0 +1,51 @@
+---
+title: "Clustering algorithm on the Wireless data"
+author: "Giovanni Saraceno"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Clustering algorithm on the Wireless data}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+### The Wireless Indoor Localization Data
+
+We consider the Wireless Indoor Localization Data Set, publicly available in the UCI Machine Learning Repository’s website. This data set is used to study the performance of different indoor localization algorithms. It is available within the ``QuadratiK`` package as ``wireless``. 
+```{r}
+library(QuadratiK)
+head(wireless)
+```
+
+The Wireless Indoor Localization data set contains the measurements of the Wi-Fi signal strength in different indoor rooms. It consists of a data frame with 2000 rows and 8 columns. The first 7 variables report the values of the Wi-Fi signal strength received from 7 different Wi-Fi routers in an office location in Pittsburgh (USA). The last column indicates the class labels, from 1 to 4, indicating the different rooms. Notice that, the Wi-Fi signal strength is measured in dBm, decibel milliwatts, which is expressed as a negative value ranging from -100 to 0. In total, we have 500 observations for each room.
+
+Given that the Wi-Fi signal strength takes values in a limited range, it is appropriate to consider the spherically transformed observations, by $L_2$ normalization, and consequently perform the clustering algorithm on the 7-dimensional sphere.
+ 
+We perform the clustering algorithm on the ``wireless`` data set. We consider the $K= 3, 4, 5, 6$ as possible values for the number of clusters. 
+```{r}
+wire <- wireless[,-8]
+labels <- wireless[,8]
+wire_norm <- wire/sqrt(rowSums(wire^2))
+set.seed(2468)
+res_pk <- pkbc(as.matrix(wire_norm),3:6)
+```
+
+To guide the choice of the number of clusters, the function ``validation`` provides cluster validation measures and graphical tools. Specifically, it displays the Elbow plot from the computed within-cluster sum of squares values and returns an object with ``IGP`` the InGroup Proportion (IGP), and ``metrics`` a table of computed evaluation measures.  This include the $k$-sample test statistics with corresponding critical value and, if the true labels are provided, the measures of adjusted rand index (ARI), Macro-Precision and Macro-Recall. 
+```{r eval=FALSE}
+set.seed(2468)
+res_validation <- validation(res_pk, true_label = labels)
+res_validation$IGP
+round(res_validation$metrics, 8)
+```
+
+The Elbow plots and the reported metrics suggest $K=4$ as number of clusters. This is in accordance with the know ground truth. 
+Once the number of clusters is selected, the function ``summary_stat`` in the ``QuadratiK`` package can be used to obtain additional summary information with respect to the clustering results. In particular, the function provides mean, standard deviation, median, inter-quantile range, minimum and maximum computed for each variable, overall and by the assigned membership, as well as a representation of data points. For $d=2$ and $d=3$, observations are displayed on the unit circle and unit sphere, respectively. If $d>3$, the spherical PCA is applied on the data set, and the first 3 principal components are used for visualizing data points on the sphere, after application of  $L_2$ normalization. 
+```{r fig.width=6, fig.height=8}
+summary_clust <- summary_stat(res_pk,4,true_label=labels)
+```
+
+```{r}
+summary_clust$metrics
+```
+
+The figure shows the data points according to the first three spherical principal components, colored by the true labels and the assigned membership. 
+The clusters identified with $k=4$ achieve high performance in terms of ARI, Macro Precision and Macro Recall. The plot of points using the principal components also shows that the identified cluster follows the initial labels.

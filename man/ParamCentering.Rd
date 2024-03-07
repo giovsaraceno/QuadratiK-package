@@ -25,16 +25,15 @@ Compute the Gaussian kernel centered with respect to a Normal distribution
 with mean vector mu and covariance Sigma
 }
 \examples{
-#h <- 0.5
-#H <- h^2*diag(2)
-#x <- matrix(rnorm(100), ncol = 2)
-#y <- matrix(rnorm(100), ncol = 2)
-#z <- rbind(x, y)
-#mu_hat <- matrix(colMeans(z),nrow=1)
-#Sigma_hat <- cov(z)
-#k_mat <- computeKernelMatrix(z, z, H)
-#ParamCentering(k_mat, z, H, mu_hat, Sigma_hat)
+h <- 0.5
+H <- h^2*diag(2)
+x <- matrix(rnorm(100), ncol = 2)
+y <- matrix(rnorm(100), ncol = 2)
+z <- rbind(x, y)
+mu_hat <- matrix(colMeans(z),nrow=1)
+Sigma_hat <- cov(z)
+k_mat <- computeKernelMatrix(z, z, H)
+ParamCentering(k_mat, z, H, mu_hat, Sigma_hat)
 
 
 }
-\keyword{internal}

@@ -3,7 +3,7 @@
 \docType{class}
 \name{pkbc-class}
 \alias{pkbc-class}
-\title{A S4 class for the clustering algorithm on the Sphere based on
+\title{A S4 class for the clustering algorithm on the sphere based on
 Poisson kernel-based distributions.}
 \description{
 A class to represent the results of Poisson kernel-based clustering procedure for spherical observations.

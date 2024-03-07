@@ -2,20 +2,20 @@
 % Please edit documentation in R/utility.R
 \name{sample_hypersphere}
 \alias{sample_hypersphere}
-\title{Generate random Sample from the hypersphere}
+\title{Generate random sample from the hypersphere}
 \usage{
 sample_hypersphere(d, n_points = 1)
 }
 \arguments{
-\item{d}{number of dimensions.}
+\item{d}{Number of dimensions.}
 
-\item{n_points}{number of sampled observations.}
+\item{n_points}{Number of sampled observations.}
 }
 \value{
-data matrix with the sampled observations.
+Data matrix with the sampled observations.
 }
 \description{
-Generate random Sample from the hypersphere
+Generate random sample from the hypersphere
 }
 \examples{
 x_sp <- sample_hypersphere(3,100)

@@ -18,14 +18,14 @@ using namespace std;
 //'
 //' @return Matrix of computed Gaussian kernel values 
 //'
-//' @useDynLib Quadratik
+//' @useDynLib QuadratiK
 //' @rdname computeKernelMatrix
 //' @keywords internal
+//' 
+//' @noRd
 // [[Rcpp::export]]
 Eigen::MatrixXd computeKernelMatrix(const Eigen::MatrixXd& x_mat, const Eigen::MatrixXd& y_mat, const Eigen::MatrixXd& H)
 {
-   int n_x = x_mat.rows();
-   int n_y = y_mat.rows();
    int k = x_mat.cols();
    
    Eigen::MatrixXd H_inv_sqrt_x, H_inv_sqrt_y, x_mat_star, y_mat_star, x_mat_rowsum, y_mat_rowsum, Qd;
@@ -54,15 +54,11 @@ Eigen::MatrixXd computeKernelMatrix(const Eigen::MatrixXd& x_mat, const Eigen::M
 //'
 //' @return Matrix of computed Poisson kernel values
 //'
-//' @examples
-//' #x <- matrix(rnorm(300),ncol=3)
-//' # Normalize each observation
-//' #x <- x/sqrt(rowSums(x^2))
-//' #computePoissonMatrix(x_mat = x, rho=0.8)
-//'
-//' @useDynLib Quadratik
+//' @useDynLib QuadratiK
 //' @rdname computePoissonMatrix
 //' @keywords internal
+//' 
+//' @noRd
 // [[Rcpp::export]]
 Eigen::MatrixXd computePoissonMatrix(const Eigen::MatrixXd& x_mat, double rho)
 {
@@ -87,18 +83,13 @@ Eigen::MatrixXd computePoissonMatrix(const Eigen::MatrixXd& x_mat, double rho)
 //'
 //' @return Matrix of centered kernel
 //'
-//' @examples
-//' #h <- 0.5
-//' #H <- h^2*diag(2)
-//' #x <- matrix(rnorm(100), ncol = 2) #50 x 2
-//' #y <- matrix(rnorm(100), ncol = 2) #50 x 2
-//' #k_mat <- computeKernelMatrix(x, y, H) #50 x 50
-//' #NonparamCentering(k_mat, 50)
 //'
 //'
-//' @useDynLib Quadratik
+//' @useDynLib QuadratiK
 //' @rdname NonparamCentering
 //' @keywords internal
+//' 
+//' @noRd
 // [[Rcpp::export]]
 Eigen::MatrixXd NonparamCentering(const Eigen::MatrixXd& kmat_zz, int n_z)
 {
@@ -123,21 +114,11 @@ Eigen::MatrixXd NonparamCentering(const Eigen::MatrixXd& kmat_zz, int n_z)
 //'
 //' @return Matrix of centered kernel
 //'
-//' @examples
-//' #h <- 0.5
-//' #H <- h^2*diag(2)
-//' #x <- matrix(rnorm(100), ncol = 2)
-//' #y <- matrix(rnorm(100), ncol = 2)
-//' #z <- rbind(x, y)
-//' #mu_hat <- matrix(colMeans(z),nrow=1)
-//' #Sigma_hat <- cov(z)
-//' #k_mat <- computeKernelMatrix(z, z, H)
-//' #ParamCentering(k_mat, z, H, mu_hat, Sigma_hat)
-//'
-//'
-//' @useDynLib Quadratik
+//' @useDynLib QuadratiK
 //' @rdname ParamCentering
 //' @keywords internal
+//' 
+//' @noRd
 // [[Rcpp::export]]
 Eigen::MatrixXd ParamCentering(const Eigen::MatrixXd& kmat_zz, const Eigen::MatrixXd& z_mat,
                                const Eigen::MatrixXd& H, const Eigen::MatrixXd& mu_hat,
@@ -166,16 +147,12 @@ Eigen::MatrixXd ParamCentering(const Eigen::MatrixXd& kmat_zz, const Eigen::Matr
 //' \code{mu_hat} and \code{Sigma_hat} need to be provided even if they are used 
 //' only in case of "Param" \code{centeringType}.
 //' 
-//' @examples
-//' #x <- matrix(rnorm(100), ncol = 2)
-//' #y <- matrix(rnorm(100), ncol = 2)
-//' #mu_hat <- matrix(0,nrow=1)
-//' #sigma_hat <- diag(2)
-//' #stat2sample(x, y, h = 1, mu_hat=mu_hat, Sigma_hat=sigma_hat)
 //'
-//' @useDynLib Quadratik
+//' @useDynLib QuadratiK
 //' @rdname stat2sample
 //' @keywords internal
+//' 
+//' @noRd
 // [[Rcpp::export]]
 double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
                    const Eigen::MatrixXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, const std::string& centeringType = "Nonparam")
@@ -227,17 +204,11 @@ double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
 //'
 //' @return A scalar value representing the test statistic.
 //'
-//' @examples
-//' #x <- matrix(rnorm(100), ncol = 2)
-//' #h=1
-//' 
-//' #mu_hat = matrix(rep(0,2),nrow=1)
-//' #sigma_hat = diag(2)
-//' #kbNormTest(x, h, mu_hat=mu_hat, Sigma_hat=sigma_hat ,centeringType = "Param")
-//'
-//' @useDynLib Quadratik
+//' @useDynLib QuadratiK
 //' @rdname kbNormTest
 //' @keywords internal
+//' 
+//' @noRd
 // [[Rcpp::export]]
 double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat, const Eigen::MatrixXd Sigma_hat, const std::string& centeringType = "Param")
 {
@@ -280,15 +251,11 @@ double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat
 //'
 //' @return Vector with the values of the U-statistic and V-statistic
 //'
-//' @examples
-//' #x <- matrix(rnorm(300),ncol=3)
-//' # Normalize each observation
-//' #x <- x/sqrt(rowSums(x^2))
-//' #statPoissonUnif(x, rho=0.7)
-//'
-//' @useDynLib Quadratik
+//' @useDynLib QuadratiK
 //' @rdname statPoissonUnif
 //' @keywords internal
+//' 
+//' @noRd
 // [[Rcpp::export]]
 Eigen::VectorXd statPoissonUnif(const Eigen::MatrixXd& x_mat, double rho)
 {
@@ -331,19 +298,11 @@ Eigen::VectorXd statPoissonUnif(const Eigen::MatrixXd& x_mat, double rho)
 //'
 //' @return A vector containing the two k-sample test statistics
 //'
-//' @examples
-//' #x1 <- matrix(rnorm(200), ncol = 2)
-//' #x2 <- matrix(rnorm(200), ncol = 2)
-//' #x3 <- matrix(rnorm(200, 2), ncol = 2)
-//' #x <- rbind(x1, x2, x3)
-//' #y <- rep(c(1,2,3), each=100)
-//' #sizes <- as.vector(table(y))
-//' #cum_size <- c(0,cumsum(sizes))
-//' #stat_ksample_cpp(x, y, h = 1, sizes, cum_size)
-//'
-//' @useDynLib Quadratik
+//' @useDynLib QuadratiK
 //' @rdname stat_ksample_cpp
 //' @keywords internal
+//' 
+//' @noRd
 // [[Rcpp::export]]
 Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd& y,
                                  double h, const Eigen::VectorXd& sizes, const Eigen::VectorXd& cum_size) {

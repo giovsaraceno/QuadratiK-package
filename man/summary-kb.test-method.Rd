@@ -7,13 +7,13 @@
 \S4method{summary}{kb.test}(object)
 }
 \arguments{
-\item{object}{object of class \code{kb.test}}
+\item{object}{Object of class \code{kb.test}}
 }
 \value{
 List with the following components:
 \itemize{
    \item \code{summary_tables} Table of computed descriptive statistics per variable (and per group if available).
-   \item \code{test_results} data frame with the results of the performed kernel-based quadratic distance test.
+   \item \code{test_results} Data frame with the results of the performed kernel-based quadratic distance test.
    \item \code{qqplots} Figure with qq-plots for each variable.
 }
 }

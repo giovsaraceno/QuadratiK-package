@@ -24,14 +24,13 @@ A vector containing the two k-sample test statistics
 Compute the kernel-based quadratic distance k-sample tests with the Normal kernel and bandwidth parameter h.
 }
 \examples{
-#x1 <- matrix(rnorm(200), ncol = 2)
-#x2 <- matrix(rnorm(200), ncol = 2)
-#x3 <- matrix(rnorm(200, 2), ncol = 2)
-#x <- rbind(x1, x2, x3)
-#y <- rep(c(1,2,3), each=100)
-#sizes <- as.vector(table(y))
-#cum_size <- c(0,cumsum(sizes))
-#stat_ksample_cpp(x, y, h = 1, sizes, cum_size)
+x1 <- matrix(rnorm(200), ncol = 2)
+x2 <- matrix(rnorm(200), ncol = 2)
+x3 <- matrix(rnorm(200, 2), ncol = 2)
+x <- rbind(x1, x2, x3)
+y <- rep(c(1,2,3), each=100)
+sizes <- as.vector(table(y))
+cum_size <- c(0,cumsum(sizes))
+stat_ksample_cpp(x, y, h = 1, sizes, cum_size)
 
 }
-\keyword{internal}

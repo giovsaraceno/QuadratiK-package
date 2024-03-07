@@ -18,10 +18,9 @@ Matrix of computed Poisson kernel values
 Compute the Poisson kernel matrix between observations in a sample.
 }
 \examples{
-#x <- matrix(rnorm(300),ncol=3)
+x <- matrix(rnorm(300),ncol=3)
 # Normalize each observation
-#x <- x/sqrt(rowSums(x^2))
-#computePoissonMatrix(x_mat = x, rho=0.8)
+x <- x/sqrt(rowSums(x^2))
+computePoissonMatrix(x_mat = x, rho=0.8)
 
 }
-\keyword{internal}

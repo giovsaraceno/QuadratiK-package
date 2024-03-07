@@ -1,13 +1,13 @@
 #' @rdname kb.test-class
 #'
-#' @title An S4 class for kernel-based distance tests with Normal kernel
+#' @title An S4 class for kernel-based distance tests with normal kernel
 #'
-#' @description A class to represent the results of Gaussian kernel-based quadratic distance tests. This includes the Normality test, the two-sample test statistics and the k-sample tests.
+#' @description A class to represent the results of Gaussian kernel-based quadratic distance tests. This includes the normality test, the two-sample test statistics and the k-sample tests.
 #'
-#' @slot method String indicating the Normal Kernel-based quadratic distance test performed.
+#' @slot method String indicating the normal kernel-based quadratic distance test performed.
 #' @slot Dn The value of the test statistic.
 #' @slot H0 A logical value indicating whether or not the null hypothesis is rejected.
-#' @slot data list of samples X (and Y).
+#' @slot data List of samples X (and Y).
 #' @slot CV The critical value computed for the test.
 #' @slot cv_method The method used to estimate the critical value (one of "subsampling", "permutation" or "bootstrap").
 #' @slot h A list with the value of bandwidth parameter used for the Gaussian kernel. If the function \code{select_h} is used, then also the matrix of computed power values and the resulting power plot are provided. 
@@ -40,10 +40,10 @@ setClass("kb.test",
 #'
 #' @title An S4 class for Poisson kernel-based quadratic distance tests.
 #'
-#' @description A class to represent the results of Poisson kernel-based quadratic distance tests for Uniformity on the Sphere.
+#' @description A class to represent the results of Poisson kernel-based quadratic distance tests for Uniformity on the sphere.
 #'
 #' @slot method The method used for the test ("Poisson Kernel-based quadratic distance test of Uniformity on the Sphere").
-#' @slot x matrix of data
+#' @slot x Matrix of data
 #' @slot Un The value of the U-statistic.
 #' @slot CV_Un The critical value for Un computed through replications.
 #' @slot H0_Un A logical value indicating whether or not the null hypothesis is rejected according to Un.
@@ -77,7 +77,7 @@ setClass("pk.test",
 )
 #' @rdname pkbc-class
 #'
-#' @title A S4 class for the clustering algorithm on the Sphere based on
+#' @title A S4 class for the clustering algorithm on the sphere based on
 #' Poisson kernel-based distributions.
 #'
 #' @description A class to represent the results of Poisson kernel-based clustering procedure for spherical observations.

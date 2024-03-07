@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Giovanni Saraceno" />
+
+
+<title>Clustering algorithm on the Wireless data</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Clustering algorithm on the Wireless
+data</h1>
+<h4 class="author">Giovanni Saraceno</h4>
+
+
+
+<div id="the-wireless-indoor-localization-data" class="section level3">
+<h3>The Wireless Indoor Localization Data</h3>
+<p>We consider the Wireless Indoor Localization Data Set, publicly
+available in the UCI Machine Learning Repository’s website. This data
+set is used to study the performance of different indoor localization
+algorithms. It is available within the <code>QuadratiK</code> package as
+<code>wireless</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(QuadratiK)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">head</span>(wireless)</span></code></pre></div>
+<pre><code>##    V1  V2  V3  V4  V5  V6  V7 V8
+## 1 -64 -56 -61 -66 -71 -82 -81  1
+## 2 -68 -57 -61 -65 -71 -85 -85  1
+## 3 -63 -60 -60 -67 -76 -85 -84  1
+## 4 -61 -60 -68 -62 -77 -90 -80  1
+## 5 -63 -65 -60 -63 -77 -81 -87  1
+## 6 -64 -55 -63 -66 -76 -88 -83  1</code></pre>
+<p>The Wireless Indoor Localization data set contains the measurements
+of the Wi-Fi signal strength in different indoor rooms. It consists of a
+data frame with 2000 rows and 8 columns. The first 7 variables report
+the values of the Wi-Fi signal strength received from 7 different Wi-Fi
+routers in an office location in Pittsburgh (USA). The last column
+indicates the class labels, from 1 to 4, indicating the different rooms.
+Notice that, the Wi-Fi signal strength is measured in dBm, decibel
+milliwatts, which is expressed as a negative value ranging from -100 to
+0. In total, we have 500 observations for each room.</p>
+<p>Given that the Wi-Fi signal strength takes values in a limited range,
+it is appropriate to consider the spherically transformed observations,
+by <span class="math inline">\(L_2\)</span> normalization, and
+consequently perform the clustering algorithm on the 7-dimensional
+sphere.</p>
+<p>We perform the clustering algorithm on the <code>wireless</code> data
+set. We consider the <span class="math inline">\(K= 3, 4, 5, 6\)</span>
+as possible values for the number of clusters.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>wire <span class="ot">&lt;-</span> wireless[,<span class="sc">-</span><span class="dv">8</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>labels <span class="ot">&lt;-</span> wireless[,<span class="dv">8</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>wire_norm <span class="ot">&lt;-</span> wire<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">rowSums</span>(wire<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>res_pk <span class="ot">&lt;-</span> <span class="fu">pkbc</span>(<span class="fu">as.matrix</span>(wire_norm),<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>)</span></code></pre></div>
+<p>To guide the choice of the number of clusters, the function
+<code>validation</code> provides cluster validation measures and
+graphical tools. Specifically, it displays the Elbow plot from the
+computed within-cluster sum of squares values and returns an object with
+<code>IGP</code> the InGroup Proportion (IGP), and <code>metrics</code>
+a table of computed evaluation measures. This include the <span class="math inline">\(k\)</span>-sample test statistics with
+corresponding critical value and, if the true labels are provided, the
+measures of adjusted rand index (ARI), Macro-Precision and
+Macro-Recall.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>res_validation <span class="ot">&lt;-</span> <span class="fu">validation</span>(res_pk, <span class="at">true_label =</span> labels)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>res_validation<span class="sc">$</span>IGP</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">round</span>(res_validation<span class="sc">$</span>metrics, <span class="dv">8</span>)</span></code></pre></div>
+<p>The Elbow plots and the reported metrics suggest <span class="math inline">\(K=4\)</span> as number of clusters. This is in
+accordance with the know ground truth. Once the number of clusters is
+selected, the function <code>summary_stat</code> in the
+<code>QuadratiK</code> package can be used to obtain additional summary
+information with respect to the clustering results. In particular, the
+function provides mean, standard deviation, median, inter-quantile
+range, minimum and maximum computed for each variable, overall and by
+the assigned membership, as well as a representation of data points. For
+<span class="math inline">\(d=2\)</span> and <span class="math inline">\(d=3\)</span>, observations are displayed on the
+unit circle and unit sphere, respectively. If <span class="math inline">\(d&gt;3\)</span>, the spherical PCA is applied on
+the data set, and the first 3 principal components are used for
+visualizing data points on the sphere, after application of <span class="math inline">\(L_2\)</span> normalization.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>summary_clust <span class="ot">&lt;-</span> <span class="fu">summary_stat</span>(res_pk,<span class="dv">4</span>,<span class="at">true_label=</span>labels)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>summary_clust<span class="sc">$</span>metrics</span></code></pre></div>
+<pre><code>## [[1]]
+##            Group 1     Group 2     Group 3     Group 4     Overall
+## mean   -0.33976246 -0.23423419 -0.29470203 -0.34377323 -0.30363137
+## sd      0.01283014  0.05324085  0.01581506  0.01298448  0.05251967
+## median -0.33952107 -0.24604104 -0.29625176 -0.34242063 -0.31847692
+## IQR     0.01674475  0.03014941  0.02182651  0.01835030  0.06412536
+## min    -0.37455424 -0.30643954 -0.34994496 -0.39357081 -0.39357081
+## max    -0.29339739 -0.06308050 -0.23847076 -0.31226867 -0.06308050
+## 
+## [[2]]
+##            Group 1     Group 2     Group 3     Group 4     Overall
+## mean   -0.30636324 -0.35918738 -0.32636022 -0.31540450 -0.32655905
+## sd      0.01392354  0.02052666  0.01842337  0.01608549  0.02635941
+## median -0.30600005 -0.35809184 -0.32487137 -0.31538238 -0.32221067
+## IQR     0.01958541  0.02460137  0.02426854  0.02263003  0.03624468
+## min    -0.35600342 -0.45578394 -0.40026324 -0.36631517 -0.45578394
+## max    -0.26903743 -0.30605235 -0.27775661 -0.27586207 -0.26903743
+## 
+## [[3]]
+##            Group 1     Group 2     Group 3     Group 4     Overall
+## mean   -0.32905221 -0.35786158 -0.31417147 -0.28929074 -0.32231793
+## sd      0.01563476  0.02459888  0.01710971  0.02094437  0.03163402
+## median -0.32915518 -0.35575396 -0.31237754 -0.29072716 -0.32209343
+## IQR     0.01957377  0.03437142  0.02422092  0.02851547  0.03973413
+## min    -0.38248214 -0.43623816 -0.38676345 -0.33639128 -0.43623816
+## max    -0.28256746 -0.28237524 -0.26460827 -0.23485570 -0.23485570
+## 
+## [[4]]
+##            Group 1     Group 2     Group 3     Group 4     Overall
+## mean   -0.34918727 -0.24111635 -0.30079691 -0.35013402 -0.31082318
+## sd      0.01475930  0.04839750  0.01973759  0.01679759  0.05251032
+## median -0.34858664 -0.24898566 -0.30107248 -0.35004522 -0.32519736
+## IQR     0.01898212  0.03356955  0.02672633  0.02286452  0.06907237
+## min    -0.40129910 -0.31690470 -0.35542814 -0.41273961 -0.41273961
+## max    -0.30779911 -0.07399736 -0.23119131 -0.30906423 -0.07399736
+## 
+## [[5]]
+##            Group 1     Group 2     Group 3     Group 4     Overall
+## mean   -0.38226045 -0.43319403 -0.37583631 -0.28257085 -0.36807675
+## sd      0.01770626  0.02787579  0.01814674  0.02110273  0.05820777
+## median -0.37991233 -0.43009295 -0.37549563 -0.28337199 -0.37738801
+## IQR     0.02531565  0.04108696  0.02541214  0.02710382  0.06966093
+## min    -0.45385132 -0.52580164 -0.42808192 -0.34353824 -0.52580164
+## max    -0.34027255 -0.36916034 -0.33333333 -0.21464345 -0.21464345
+## 
+## [[6]]
+##            Group 1     Group 2     Group 3     Group 4     Overall
+## mean   -0.45125600 -0.46327257 -0.48366352 -0.49713921 -0.47391075
+## sd      0.01446455  0.02195263  0.01814601  0.01412842  0.02488735
+## median -0.45081811 -0.46519225 -0.48319020 -0.49649227 -0.47411000
+## IQR     0.01833254  0.02770315  0.02503768  0.01895624  0.03825696
+## min    -0.51475369 -0.53938031 -0.53130759 -0.53840040 -0.53938031
+## max    -0.41652096 -0.40313011 -0.44107352 -0.45551482 -0.40313011
+## 
+## [[7]]
+##            Group 1     Group 2     Group 3     Group 4     Overall
+## mean   -0.45728346 -0.46863418 -0.48984740 -0.49701329 -0.47827795
+## sd      0.01710219  0.02396734  0.01993870  0.01587742  0.02515570
+## median -0.45703017 -0.46920446 -0.49013407 -0.49711582 -0.47914650
+## IQR     0.02311965  0.03050579  0.02784124  0.02030659  0.03643335
+## min    -0.50728615 -0.56835661 -0.54571977 -0.53648350 -0.56835661
+## max    -0.41326597 -0.38995633 -0.43815927 -0.44423198 -0.38995633</code></pre>
+<p>The figure shows the data points according to the first three
+spherical principal components, colored by the true labels and the
+assigned membership. The clusters identified with <span class="math inline">\(k=4\)</span> achieve high performance in terms of
+ARI, Macro Precision and Macro Recall. The plot of points using the
+principal components also shows that the identified cluster follows the
+initial labels.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

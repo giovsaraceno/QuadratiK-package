@@ -31,15 +31,6 @@ This function computes the critical value for two-sample kernel tests with
 centered Gaussian kernel
 using one of three methods: bootstrap, permutation, or subsampling.
 }
-\examples{
-# compute the critical value using the bootstrap
-#size <- 100
-#x <- matrix(rnorm(size),ncol=2)
-#y <- matrix(rnorm(size),ncol=2)
-#z <- rbind(x,y)
-#compute_CV(150,0.95,z,50,50,0.5,"bootstrap")
-
-}
 \references{
 Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample Tests Based on Quadratic Distances.” Manuscript, (Department of Biostatistics, University at Buffalo)
 }

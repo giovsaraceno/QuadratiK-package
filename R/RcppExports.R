@@ -10,9 +10,11 @@
 #'
 #' @return Matrix of computed Gaussian kernel values 
 #'
-#' @useDynLib Quadratik
+#' @useDynLib QuadratiK
 #' @rdname computeKernelMatrix
 #' @keywords internal
+#' 
+#' @noRd
 computeKernelMatrix <- function(x_mat, y_mat, H) {
     .Call('_QuadratiK_computeKernelMatrix', PACKAGE = 'QuadratiK', x_mat, y_mat, H)
 }
@@ -24,15 +26,11 @@ computeKernelMatrix <- function(x_mat, y_mat, H) {
 #'
 #' @return Matrix of computed Poisson kernel values
 #'
-#' @examples
-#' #x <- matrix(rnorm(300),ncol=3)
-#' # Normalize each observation
-#' #x <- x/sqrt(rowSums(x^2))
-#' #computePoissonMatrix(x_mat = x, rho=0.8)
-#'
-#' @useDynLib Quadratik
+#' @useDynLib QuadratiK
 #' @rdname computePoissonMatrix
 #' @keywords internal
+#' 
+#' @noRd
 computePoissonMatrix <- function(x_mat, rho) {
     .Call('_QuadratiK_computePoissonMatrix', PACKAGE = 'QuadratiK', x_mat, rho)
 }
@@ -47,18 +45,13 @@ computePoissonMatrix <- function(x_mat, rho) {
 #'
 #' @return Matrix of centered kernel
 #'
-#' @examples
-#' #h <- 0.5
-#' #H <- h^2*diag(2)
-#' #x <- matrix(rnorm(100), ncol = 2) #50 x 2
-#' #y <- matrix(rnorm(100), ncol = 2) #50 x 2
-#' #k_mat <- computeKernelMatrix(x, y, H) #50 x 50
-#' #NonparamCentering(k_mat, 50)
 #'
 #'
-#' @useDynLib Quadratik
+#' @useDynLib QuadratiK
 #' @rdname NonparamCentering
 #' @keywords internal
+#' 
+#' @noRd
 NonparamCentering <- function(kmat_zz, n_z) {
     .Call('_QuadratiK_NonparamCentering', PACKAGE = 'QuadratiK', kmat_zz, n_z)
 }
@@ -76,21 +69,11 @@ NonparamCentering <- function(kmat_zz, n_z) {
 #'
 #' @return Matrix of centered kernel
 #'
-#' @examples
-#' #h <- 0.5
-#' #H <- h^2*diag(2)
-#' #x <- matrix(rnorm(100), ncol = 2)
-#' #y <- matrix(rnorm(100), ncol = 2)
-#' #z <- rbind(x, y)
-#' #mu_hat <- matrix(colMeans(z),nrow=1)
-#' #Sigma_hat <- cov(z)
-#' #k_mat <- computeKernelMatrix(z, z, H)
-#' #ParamCentering(k_mat, z, H, mu_hat, Sigma_hat)
-#'
-#'
-#' @useDynLib Quadratik
+#' @useDynLib QuadratiK
 #' @rdname ParamCentering
 #' @keywords internal
+#' 
+#' @noRd
 ParamCentering <- function(kmat_zz, z_mat, H, mu_hat, Sigma_hat) {
     .Call('_QuadratiK_ParamCentering', PACKAGE = 'QuadratiK', kmat_zz, z_mat, H, mu_hat, Sigma_hat)
 }
@@ -110,16 +93,12 @@ ParamCentering <- function(kmat_zz, z_mat, H, mu_hat, Sigma_hat) {
 #' \code{mu_hat} and \code{Sigma_hat} need to be provided even if they are used 
 #' only in case of "Param" \code{centeringType}.
 #' 
-#' @examples
-#' #x <- matrix(rnorm(100), ncol = 2)
-#' #y <- matrix(rnorm(100), ncol = 2)
-#' #mu_hat <- matrix(0,nrow=1)
-#' #sigma_hat <- diag(2)
-#' #stat2sample(x, y, h = 1, mu_hat=mu_hat, Sigma_hat=sigma_hat)
 #'
-#' @useDynLib Quadratik
+#' @useDynLib QuadratiK
 #' @rdname stat2sample
 #' @keywords internal
+#' 
+#' @noRd
 stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Nonparam") {
     .Call('_QuadratiK_stat2sample', PACKAGE = 'QuadratiK', x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType)
 }
@@ -134,17 +113,11 @@ stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Non
 #'
 #' @return A scalar value representing the test statistic.
 #'
-#' @examples
-#' #x <- matrix(rnorm(100), ncol = 2)
-#' #h=1
-#' 
-#' #mu_hat = matrix(rep(0,2),nrow=1)
-#' #sigma_hat = diag(2)
-#' #kbNormTest(x, h, mu_hat=mu_hat, Sigma_hat=sigma_hat ,centeringType = "Param")
-#'
-#' @useDynLib Quadratik
+#' @useDynLib QuadratiK
 #' @rdname kbNormTest
 #' @keywords internal
+#' 
+#' @noRd
 kbNormTest <- function(x_mat, h, mu_hat, Sigma_hat, centeringType = "Param") {
     .Call('_QuadratiK_kbNormTest', PACKAGE = 'QuadratiK', x_mat, h, mu_hat, Sigma_hat, centeringType)
 }
@@ -158,15 +131,11 @@ kbNormTest <- function(x_mat, h, mu_hat, Sigma_hat, centeringType = "Param") {
 #'
 #' @return Vector with the values of the U-statistic and V-statistic
 #'
-#' @examples
-#' #x <- matrix(rnorm(300),ncol=3)
-#' # Normalize each observation
-#' #x <- x/sqrt(rowSums(x^2))
-#' #statPoissonUnif(x, rho=0.7)
-#'
-#' @useDynLib Quadratik
+#' @useDynLib QuadratiK
 #' @rdname statPoissonUnif
 #' @keywords internal
+#' 
+#' @noRd
 statPoissonUnif <- function(x_mat, rho) {
     .Call('_QuadratiK_statPoissonUnif', PACKAGE = 'QuadratiK', x_mat, rho)
 }
@@ -183,19 +152,11 @@ statPoissonUnif <- function(x_mat, rho) {
 #'
 #' @return A vector containing the two k-sample test statistics
 #'
-#' @examples
-#' #x1 <- matrix(rnorm(200), ncol = 2)
-#' #x2 <- matrix(rnorm(200), ncol = 2)
-#' #x3 <- matrix(rnorm(200, 2), ncol = 2)
-#' #x <- rbind(x1, x2, x3)
-#' #y <- rep(c(1,2,3), each=100)
-#' #sizes <- as.vector(table(y))
-#' #cum_size <- c(0,cumsum(sizes))
-#' #stat_ksample_cpp(x, y, h = 1, sizes, cum_size)
-#'
-#' @useDynLib Quadratik
+#' @useDynLib QuadratiK
 #' @rdname stat_ksample_cpp
 #' @keywords internal
+#' 
+#' @noRd
 stat_ksample_cpp <- function(x, y, h, sizes, cum_size) {
     .Call('_QuadratiK_stat_ksample_cpp', PACKAGE = 'QuadratiK', x, y, h, sizes, cum_size)
 }

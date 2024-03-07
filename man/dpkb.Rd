@@ -10,13 +10,13 @@ dpkb(x, mu, rho, logdens = FALSE)
 rpkb(n, mu, rho, method = "rejvmf")
 }
 \arguments{
-\item{x}{is a matrix (or data.frame) with number of columns >=2.}
+\item{x}{Matrix (or data.frame) with number of columns >=2.}
 
 \item{mu}{location vector parameter with length indicating the dimension of generated points.}
 
 \item{rho}{is the concentration parameter, with 0 <= rho < 1.}
 
-\item{logdens}{logical; if 'TRUE', densities d are given as log(d).}
+\item{logdens}{Logical; if 'TRUE', densities d are given as log(d).}
 
 \item{n}{number of observations.}
 
@@ -31,11 +31,13 @@ rpkb(n, mu, rho, method = "rejvmf")
 \code{dpkb} gives the density value.
 \code{rpkb} generates random observations from the PKBD. 
 
-The number of observation generated is determined by \code{n} for \code{rpkb}.
-This function returns a list with the matrix of generated observations \code{x}, the number of tries \code{numTries} and the number of acceptance \code{numAccepted}.
+The number of observations generated is determined by \code{n} for \code{rpkb}.
+This function returns a list with the matrix of generated observations \code{x},
+the number of tries \code{numTries} and the number of acceptances \code{numAccepted}.
 }
 \description{
-Density function and random generation from the Poisson kernel-based Distribution with mean direction vector \code{mu} and concentration parameter \code{rho}.
+Density function and random number generation from the Poisson kernel-based Distribution
+with mean direction vector \code{mu} and concentration parameter \code{rho}.
 }
 \examples{
 # Generate some data from pkbd density
@@ -47,7 +49,11 @@ dens_val <- dpkb(pkbd_dat$x, c(0.5,0.5),0.5)
 
 }
 \references{
-Mojgan Golzy & Marianthi Markatou (2020) Poisson Kernel-Based Clustering on the Sphere: Convergence Properties, Identifiability, and a Method of Sampling, Journal of Computational and Graphical Statistics, 29:4, 758-770, DOI: 10.1080/10618600.2020.1740713.
+Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
+Convergence Properties, Identifiability, and a Method of Sampling, Journal of
+Computational and Graphical Statistics, 29:4, 758-770, 
+DOI: 10.1080/10618600.2020.1740713.
 
-Sablica L., Hornik K., Leydold J. "Efficient sampling from the PKBD distribution," Electronic Journal of Statistics, Electronic Journal of Statistics, 17(2), 2180-2209, (2023)
+Sablica L., Hornik K., Leydold J. (2023) "Efficient sampling from the PKBD 
+distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 }

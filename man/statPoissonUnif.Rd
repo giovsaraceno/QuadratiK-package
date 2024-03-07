@@ -18,10 +18,9 @@ Vector with the values of the U-statistic and V-statistic
 Compute the Poisson kernel-based test for Uniformity given a sample of observations on the Sphere
 }
 \examples{
-#x <- matrix(rnorm(300),ncol=3)
+x <- matrix(rnorm(300),ncol=3)
 # Normalize each observation
-#x <- x/sqrt(rowSums(x^2))
-#statPoissonUnif(x, rho=0.7)
+x <- x/sqrt(rowSums(x^2))
+statPoissonUnif(x, rho=0.7)
 
 }
-\keyword{internal}

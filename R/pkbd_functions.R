@@ -1,19 +1,21 @@
 #'
 #' The Poisson kernel-based Distribution (PKBD)
 #' 
-#' Density function and random generation from the Poisson kernel-based Distribution with mean direction vector \code{mu} and concentration parameter \code{rho}.
+#' Density function and random number generation from the Poisson kernel-based Distribution
+#' with mean direction vector \code{mu} and concentration parameter \code{rho}.
 #'  
-#' @param x is a matrix (or data.frame) with number of columns >=2.
-#' @param mu is the location parameter with same length as the rows of x. Normalized to length one.
-#' @param rho is the concentration parameter, with 0 <= rho < 1.
-#' @param logdens logical; if 'TRUE', densities d are given as log(d).
+#' @param x Matrix (or data.frame) with number of columns >=2.
+#' @param mu Location parameter with same length as the rows of x. Normalized to length one.
+#' @param rho Concentration parameter, with 0 <= rho < 1.
+#' @param logdens Logical; if 'TRUE', densities d are given as log(d).
 #'
 #' @return 
 #' \code{dpkb} gives the density value.
 #' \code{rpkb} generates random observations from the PKBD. 
 #' 
-#' The number of observation generated is determined by \code{n} for \code{rpkb}.
-#' This function returns a list with the matrix of generated observations \code{x}, the number of tries \code{numTries} and the number of acceptance \code{numAccepted}.
+#' The number of observations generated is determined by \code{n} for \code{rpkb}.
+#' This function returns a list with the matrix of generated observations \code{x},
+#' the number of tries \code{numTries} and the number of acceptances \code{numAccepted}.
 #'
 #' 
 #' @examples
@@ -76,9 +78,13 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #' }
 #' 
 #' @references
-#' Mojgan Golzy & Marianthi Markatou (2020) Poisson Kernel-Based Clustering on the Sphere: Convergence Properties, Identifiability, and a Method of Sampling, Journal of Computational and Graphical Statistics, 29:4, 758-770, DOI: 10.1080/10618600.2020.1740713.
+#' Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
+#' Convergence Properties, Identifiability, and a Method of Sampling, Journal of
+#' Computational and Graphical Statistics, 29:4, 758-770, 
+#' DOI: 10.1080/10618600.2020.1740713.
 #' 
-#' Sablica L., Hornik K., Leydold J. "Efficient sampling from the PKBD distribution," Electronic Journal of Statistics, Electronic Journal of Statistics, 17(2), 2180-2209, (2023)
+#' Sablica L., Hornik K., Leydold J. (2023) "Efficient sampling from the PKBD 
+#' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 #'
 #' @import movMF
 #' @import Tinflex

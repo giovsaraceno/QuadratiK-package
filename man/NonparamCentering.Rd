@@ -19,13 +19,12 @@ Compute the values of the non-parametric centered kernel given the values of the
 kernel matrix.
 }
 \examples{
-#h <- 0.5
-#H <- h^2*diag(2)
-#x <- matrix(rnorm(100), ncol = 2) #50 x 2
-#y <- matrix(rnorm(100), ncol = 2) #50 x 2
-#k_mat <- computeKernelMatrix(x, y, H) #50 x 50
-#NonparamCentering(k_mat, 50)
+h <- 0.5
+H <- h^2*diag(2)
+x <- matrix(rnorm(100), ncol = 2) #50 x 2
+y <- matrix(rnorm(100), ncol = 2) #50 x 2
+k_mat <- computeKernelMatrix(x, y, H) #50 x 50
+NonparamCentering(k_mat, 50)
 
 
 }
-\keyword{internal}

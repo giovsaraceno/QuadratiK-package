@@ -15,40 +15,40 @@ select_h(
   delta = NULL,
   h_values = NULL,
   Nrep = 50,
-  n_cores = 4,
+  n_cores = 2,
   Quantile = 0.95,
   power.plot = TRUE
 )
 }
 \arguments{
-\item{x}{data set of observations from X.}
+\item{x}{Data set of observations from X.}
 
-\item{y}{data set of observations from Y.}
+\item{y}{Data set of observations from Y.}
 
-\item{alternative}{family of alternative chosen for selecting h, between "mean", "scale" and "skewness".}
+\item{alternative}{Family of alternative chosen for selecting h, between "location", "scale" and "skewness".}
 
-\item{method}{the method used for critical value estimation ("subsampling", "bootstrap", or "permutation").}
+\item{method}{The method used for critical value estimation ("subsampling", "bootstrap", or "permutation").}
 
-\item{b}{the size of the subsamples used in the subsampling algorithm .}
+\item{b}{The size of the subsamples used in the subsampling algorithm .}
 
-\item{B}{the number of iterations to use for critical value estimation, B = 150 as default.}
+\item{B}{The number of iterations to use for critical value estimation, B = 150 as default.}
 
-\item{delta_dim}{vector of coefficient of alternative with respect to each dimension}
+\item{delta_dim}{Vector of coefficient of alternative with respect to each dimension}
 
-\item{delta}{vector of parameter values indicating chosen alternatives}
+\item{delta}{Vector of parameter values indicating chosen alternatives}
 
-\item{h_values}{values of the tuning parameter used for the selection}
+\item{h_values}{Values of the tuning parameter used for the selection}
 
-\item{Nrep}{number of bootstrap/permutation/subsampling replications.}
+\item{Nrep}{Number of bootstrap/permutation/subsampling replications.}
 
-\item{n_cores}{number of cores used to parallel the h selection algorithm (default:4).}
+\item{n_cores}{Number of cores used to parallel the h selection algorithm (default:2).}
 
-\item{Quantile}{the quantile to use for critical value estimation, 0.95 is the default value.}
+\item{Quantile}{The quantile to use for critical value estimation, 0.95 is the default value.}
 
 \item{power.plot}{Logical. If TRUE, it is displayed the plot of power for values in h_values and delta.}
 }
 \value{
-a list with the following attributes:
+A list with the following attributes:
 \itemize{
    \item \code{h_sel} the selected value of tuning parameter h;
    \item \code{power} matrix of power values computed for the considered values of \code{delta} and \code{h_values};
@@ -59,16 +59,20 @@ a list with the following attributes:
 This function computes the kernel bandwidth of the Gaussian kernel for the two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
 }
 \details{
-The function performs the selection of the optimal value for the tuning parameter \eqn{h} of the Normal kernel function, for the two-sample and k-sample KBQD tests. It performs a small simulation study, generating sample according to the family of \code{alternative} specified, for the chosen values of \code{h_values} and \code{delta}.
+The function performs the selection of the optimal value for the tuning parameter \eqn{h} of the normal kernel function, for the two-sample and k-sample KBQD tests. It performs a small simulation study, generating sample according to the family of \code{alternative} specified, for the chosen values of \code{h_values} and \code{delta}.
 }
 \examples{
 # Select the value of h using the mid-power algorithm
-#x <- matrix(rnorm(100),ncol=2)
-#y <- matrix(rnorm(100),ncol=2)
-#h_sel <- select_h(x,y,"skewness")
-#h_sel
+\donttest{
+x <- matrix(rnorm(100),ncol=2)
+y <- matrix(rnorm(100),ncol=2)
+h_sel <- select_h(x,y,"skewness")
+h_sel
+}
 
 }
 \references{
-Markatou M, Saraceno G, Chen Y (2023). “Two- and k-Sample Tests Based on Quadratic Distances.” Manuscript, (Department of Biostatistics, University at Buffalo)
+Markatou, M., Saraceno, G., Chen, Y. (2023). “Two- and k-Sample Tests Based on
+Quadratic Distances.” Manuscript, (Department of Biostatistics, University at
+Buffalo)
 }

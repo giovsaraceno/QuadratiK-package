@@ -19,4 +19,11 @@ Matrix of computed Gaussian kernel values
 \description{
 Compute the Gaussian kernel matrix between two samples
 }
-\keyword{internal}
+\examples{
+h <- 0.5
+H <- h^2*diag(2)
+x <- matrix(rnorm(100), ncol = 2)
+y <- matrix(rnorm(100), ncol = 2)
+computeKernelMatrix(x, y, H)
+
+}

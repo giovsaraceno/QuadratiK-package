@@ -1,17 +1,17 @@
 #' 
-#' Poisson kernel-based quadratic distance test of Uniformity on the Sphere
+#' Poisson kernel-based quadratic distance test of Uniformity on the sphere
 #' 
-#' This function performs the kernel-based quadratic distance Goodness-of-fit tests for Uniformity for spherical data using the Poisson kernel with concentration parameter \code{rho}.
+#' This function performs the kernel-based quadratic distance goodness-of-fit tests for Uniformity for spherical data using the Poisson kernel with concentration parameter \code{rho}.
 #'
-#' @param x a numeric d-dim matrix of data points on the Sphere S^(d-1).
+#' @param x A numeric d-dim matrix of data points on the Sphere S^(d-1).
 #' @param rho Concentration parameter of the Poisson kernel function.
 #' @param B Number of iterations for critical value estimation of Un (default: 300).
-#' @param Quantile the quantile to use for critical value estimation, 0.95 is the default value.
+#' @param Quantile The quantile to use for critical value estimation, 0.95 is the default value.
 #'
-#' @return an S4 object of class \code{pk.test} containing the results of the Poisson kernel-based tests. The object contains the following slots:
+#' @return An S4 object of class \code{pk.test} containing the results of the Poisson kernel-based tests. The object contains the following slots:
 #'\itemize{
-#'   \item \code{method}: string indicating that the Poisson Kernel-based test is performed.
-#'   \item \code{x} data matrix.
+#'   \item \code{method}: String indicating that the Poisson Kernel-based test is performed.
+#'   \item \code{x} Data matrix.
 #'   \item \code{Un} The value of the U-statistic.
 #'   \item \code{CV_Un} The empirical critical value for Un.
 #'   \item \code{H0_Vn} A logical value indicating whether or not the null hypothesis is rejected according to Un.
@@ -24,7 +24,9 @@
 #'
 #'
 #' @references
-#' Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.” Statistica Sinica. doi: doi:10.5705/ss.202022.0347
+#' Ding, Y., Markatou, M., Saraceno, G. (2023). “Poisson Kernel-Based Tests for
+#' Uniformity on the d-Dimensional Sphere.” Statistica Sinica. 
+#' doi: doi:10.5705/ss.202022.0347
 #' 
 #' @examples
 #' # create a pk.test object
@@ -87,7 +89,7 @@ setMethod("pk.test", signature(x = "ANY"),
           })
 #' @rdname pk.test
 #'
-#' @param object object of class \code{pk.test}
+#' @param object Object of class \code{pk.test}
 #'
 #' @export
 setMethod("show", "pk.test",
@@ -115,12 +117,12 @@ setMethod("show", "pk.test",
 #'
 #' \code{summary} method for the class \code{pk.test}
 #'
-#' @param object object of class \code{pk.test}
+#' @param object Object of class \code{pk.test}
 #' 
 #' @return List with the following components:
 #' \itemize{
 #'    \item \code{summary_tables} Table of computed descriptive statistics per variable.
-#'    \item \code{test_results} data frame with the results of the performed Poisson kernel-based test.
+#'    \item \code{test_results} Data frame with the results of the performed Poisson kernel-based test.
 #'    \item \code{qqplots} Figure with qq-plots for each variable against the uniform distribution.
 #' }
 #'

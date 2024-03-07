@@ -18,13 +18,6 @@
 #' @references
 #' Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample Tests Based on Quadratic Distances.” Manuscript, (Department of Biostatistics, University at Buffalo)
 #'
-#' @examples
-#' # compute the critical value using the bootstrap
-#' #size <- 100
-#' #x <- matrix(rnorm(size),ncol=2)
-#' #y <- matrix(rnorm(size),ncol=2)
-#' #z <- rbind(x,y)
-#' #compute_CV(150,0.95,z,50,50,0.5,"bootstrap")
 #'
 #' @useDynLib QuadratiK
 #' @importFrom stats quantile
@@ -158,19 +151,6 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
 #' @param method the method to use for computing the critical value (one of "bootstrap", "permutation")
 #'
 #' @return a vector of two critical values corresponding to different formulation of the k-sample test statistics.
-#' 
-#' @references
-#' Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample Tests Based on Quadratic Distances.” Manuscript, (Department of Biostatistics, University at Buffalo)
-#' 
-#' @examples
-#' # compute the critical value using the bootstrap
-#' #x1 <- matrix(rnorm(200), ncol=2)
-#' #x2 <- matrix(rnorm(200), ncol=2)
-#' #x3 <- matrix(rnorm(200,2), ncol=2)
-#' #x <- rbind(x1,x2,x3)
-#' #y <- matrix(rep(c(1,2,3), each=100),ncol=1)
-#' 
-#' #cv_ksample(x,y,h=1.5)
 #'
 #' @useDynLib QuadratiK
 #' @importFrom stats quantile

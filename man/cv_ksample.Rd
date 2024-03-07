@@ -28,18 +28,4 @@ a vector of two critical values corresponding to different formulation of the k-
 This function computes the empirical critical value for the k-sample KBQD tests using the
 centered Gaussian kernel, with bootstrap, permutation, or subsampling.
 }
-\examples{
-# compute the critical value using the bootstrap
-#x1 <- matrix(rnorm(200), ncol=2)
-#x2 <- matrix(rnorm(200), ncol=2)
-#x3 <- matrix(rnorm(200,2), ncol=2)
-#x <- rbind(x1,x2,x3)
-#y <- matrix(rep(c(1,2,3), each=100),ncol=1)
-
-#cv_ksample(x,y,h=1.5)
-
-}
-\references{
-Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample Tests Based on Quadratic Distances.” Manuscript, (Department of Biostatistics, University at Buffalo)
-}
 \keyword{internal}

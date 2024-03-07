@@ -24,12 +24,11 @@ A scalar value representing the test statistic.
 Compute kernel-based quadratic distance test for Normality
 }
 \examples{
-#x <- matrix(rnorm(100), ncol = 2)
-#h=1
+x <- matrix(rnorm(100), ncol = 2)
+h=1
 
-#mu_hat = matrix(rep(0,2),nrow=1)
-#sigma_hat = diag(2)
-#kbNormTest(x, h, mu_hat=mu_hat, Sigma_hat=sigma_hat ,centeringType = "Param")
+mu_hat = matrix(rep(0,2),nrow=1)
+sigma_hat = diag(2)
+kbNormTest(x, h, mu_hat=mu_hat, Sigma_hat=sigma_hat ,centeringType = "Param")
 
 }
-\keyword{internal}

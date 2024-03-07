@@ -7,14 +7,14 @@
 \format{
 A data frame containing the following columns:
 \itemize{
-   \item \code{V1} signal strength from router 1.
-   \item \code{V2} signal strength from router 2.
-   \item \code{V3} signal strength from router 3.
-   \item \code{V4} signal strength from router 4.
-   \item \code{V5} signal strength from router 5.
-   \item \code{V6} signal strength from router 6.
-   \item \code{V7} signal strength from router 7.
-   \item \code{V8} group memberships, from 1 to 4.
+   \item \code{V1} Signal strength from router 1.
+   \item \code{V2} Signal strength from router 2.
+   \item \code{V3} Signal strength from router 3.
+   \item \code{V4} Signal strength from router 4.
+   \item \code{V5} Signal strength from router 5.
+   \item \code{V6} Signal strength from router 6.
+   \item \code{V7} Signal strength from router 7.
+   \item \code{V8} Group memberships, from 1 to 4.
 }
 }
 \source{
@@ -42,6 +42,6 @@ summary(wireless)
 
 }
 \references{
-Rohra, J.G., Perumal, B., Narayanan, S.J., Thakur, P., Bhatt, R.B. (2017). User Localization in an Indoor Environment Using Fuzzy Hybrid of Particle Swarm Optimization & Gravitational Search Algorithm with Neural Networks. In: Deep, K., et al. Proceedings of Sixth International Conference on Soft Computing for Problem Solving. Advances in Intelligent Systems and Computing, vol 546. Springer, Singapore. https://doi.org/10.1007/978-981-10-3322-3_27
+Rohra, J.G., Perumal, B., Narayanan, S.J., Thakur, P., Bhatt, R.B. (2017). "User Localization in an Indoor Environment Using Fuzzy Hybrid of Particle Swarm Optimization & Gravitational Search Algorithm with Neural Networks". In: Deep, K., et al. Proceedings of Sixth International Conference on Soft Computing for Problem Solving. Advances in Intelligent Systems and Computing, vol 546. Springer, Singapore. https://doi.org/10.1007/978-981-10-3322-3_27
 }
 \keyword{datasets}

@@ -3,7 +3,7 @@
 \name{pkbc}
 \alias{pkbc}
 \alias{pkbc,ANY-method}
-\title{Poisson kernel-based clustering on the Sphere}
+\title{Poisson kernel-based clustering on the sphere}
 \usage{
 pkbc(
   dat,
@@ -24,26 +24,31 @@ pkbc(
 )
 }
 \arguments{
-\item{dat}{data matrix of observations to be clustered.}
+\item{dat}{Data matrix of observations to be clustered.}
 
-\item{nClust}{number of clusters. It can be a single value or a numeric vector.}
+\item{nClust}{Number of clusters. It can be a single value or a numeric vector.}
 
-\item{maxIter}{the maximum number of iterations before a run is terminated.}
+\item{maxIter}{The maximum number of iterations before a run is terminated.}
 
-\item{stoppingRule}{string describing the stopping rule to be
-used within each run. Currently must be either \code{'max'} (until the change in the log-likelihood is less than a given threshold $(1e-7)$), \code{'membership'} (until the membership is unchanged), or \code{'loglik'} (based on a maximum number of iterations).}
+\item{stoppingRule}{String describing the stopping rule to be
+used within each run. Currently must be either \code{'max'} (until the change
+in the log-likelihood is less than a given threshold $(1e-7)$), \code{'membership'}
+ (until the membership is unchanged), or \code{'loglik'} (based on a maximum
+  number of iterations).}
 
-\item{initMethod}{string describing the initialization method to be used.
+\item{initMethod}{String describing the initialization method to be used.
 Currently must be \code{'sampleData'}.}
 
-\item{numInit}{number of initializations.}
+\item{numInit}{Number of initializations.}
 }
 \value{
-An S4 object of class \code{pkbc} containing the results of the clustering procedure based on Poisson kernel-based distributions. The object contains the following slots:
+An S4 object of class \code{pkbc} containing the results of the clustering
+ procedure based on Poisson kernel-based distributions. The object contains 
+ the following slots:
 
   \code{res_k}: List of results of the Poisson kernel-based clustering algorithm for each value of number of clusters specified in \code{nClust}. Each object in the list contains:
   \itemize{
-     \item \code{postProbs} posterior probabilities of each observation for the indicated clusters.
+     \item \code{postProbs} Posterior probabilities of each observation for the indicated clusters.
      \item \code{LogLik} Maximum value of log-likelihood function
      \item \code{wcss} Values of within-cluster sum of squares computed with Euclidean distance and cosine similarity, respectively.
      \item \code{params} List of estimated parameters of the mixture model
@@ -62,13 +67,16 @@ An S4 object of class \code{pkbc} containing the results of the clustering proce
   \code{input}: List of input information.
 }
 \description{
-The function \code{pkbc} performs the Poisson kernel-based clustering algorithm on the Sphere based on the Poisson kernel-based densities.
+The function \code{pkbc} performs the Poisson kernel-based clustering algorithm 
+on the sphere based on the Poisson kernel-based densities.
 }
 \details{
-The function estimates the parameter of a mixture of Poisson kernel-based densities. The obtained estimates are used for assigning final memberships, identifying the \code{nClust} clusters.
+The function estimates the parameter of a mixture of Poisson kernel-based
+ densities. The obtained estimates are used for assigning final memberships, 
+ identifying the \code{nClust} clusters.
 }
 \examples{
-#We generate three sample of 100 observations from 3-dimensional
+#We generate three samples of 100 observations from 3-dimensional
 #Poisson kernel-based densities with rho=0.8 and different mean directions
 size <- 100
 groups<-c(rep(1, size), rep(2, size),rep(3,size))
@@ -80,14 +88,18 @@ data3<-rpkb(size, c(-1,0,0),rho,method='rejvmf')
 dat<-rbind(data1$x,data2$x, data3$x)
 
 #The following code can be used for plotting
-#library("rgl")
-#plot3d(dat,col = groups, size=4,xlab = "", ylab = "",zlab = "")
-# legend3d("right", legend = c("Class 1", "Class 2", "Class 3"), col = 1:3, pch = 20)
-
-#Perform the clustering algorithm
+\donttest{
+library("rgl")
+plot3d(dat,col = groups, size=4,xlab = "", ylab = "",zlab = "")
+legend3d("right", legend = c("Class 1", "Class 2", "Class 3"), col = 1:3, pch = 20)
+}
+#Perform the clustering algorithm with number od clusters k=3.
 pkbd<- pkbc(dat, 3)
 
 }
 \references{
-Mojgan Golzy & Marianthi Markatou (2020) Poisson Kernel-Based Clustering on the Sphere: Convergence Properties, Identifiability, and a Method of Sampling, Journal of Computational and Graphical Statistics, 29:4, 758-770, DOI: 10.1080/10618600.2020.1740713.
+Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
+Convergence Properties, Identifiability, and a Method of Sampling, Journal of
+Computational and Graphical Statistics, 29:4, 758-770, 
+DOI: 10.1080/10618600.2020.1740713.
 }

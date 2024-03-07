@@ -30,11 +30,10 @@ Compute kernel-based quadratic distance two-sample test with Normal kernel
 only in case of "Param" \code{centeringType}.
 }
 \examples{
-#x <- matrix(rnorm(100), ncol = 2)
-#y <- matrix(rnorm(100), ncol = 2)
-#mu_hat <- matrix(0,nrow=1)
-#sigma_hat <- diag(2)
-#stat2sample(x, y, h = 1, mu_hat=mu_hat, Sigma_hat=sigma_hat)
+x <- matrix(rnorm(100), ncol = 2)
+y <- matrix(rnorm(100), ncol = 2)
+mu_hat <- matrix(0,nrow=1)
+sigma_hat <- diag(2)
+stat2sample(x, y, h = 1, mu_hat=mu_hat, Sigma_hat=sigma_hat)
 
 }
-\keyword{internal}

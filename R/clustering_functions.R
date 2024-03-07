@@ -1,24 +1,32 @@
 #'
-#' Poisson kernel-based clustering on the Sphere
+#' Poisson kernel-based clustering on the sphere
 #'
-#' The function \code{pkbc} performs the Poisson kernel-based clustering algorithm on the Sphere based on the Poisson kernel-based densities.
+#' The function \code{pkbc} performs the Poisson kernel-based clustering algorithm 
+#' on the sphere based on the Poisson kernel-based densities.
 #'
-#' @param dat data matrix of observations to be clustered.
-#' @param nClust number of clusters. It can be a single value or a numeric vector.
-#' @param maxIter the maximum number of iterations before a run is terminated.
-#' @param stoppingRule string describing the stopping rule to be
-#'   used within each run. Currently must be either \code{'max'} (until the change in the log-likelihood is less than a given threshold $(1e-7)$), \code{'membership'} (until the membership is unchanged), or \code{'loglik'} (based on a maximum number of iterations).
-#' @param initMethod string describing the initialization method to be used.
+#' @param dat Data matrix of observations to be clustered.
+#' @param nClust Number of clusters. It can be a single value or a numeric vector.
+#' @param maxIter The maximum number of iterations before a run is terminated.
+#' @param stoppingRule String describing the stopping rule to be
+#'   used within each run. Currently must be either \code{'max'} (until the change
+#'   in the log-likelihood is less than a given threshold $(1e-7)$), \code{'membership'}
+#'    (until the membership is unchanged), or \code{'loglik'} (based on a maximum
+#'     number of iterations).
+#' @param initMethod String describing the initialization method to be used.
 #'   Currently must be \code{'sampleData'}.
-#' @param numInit number of initializations.
+#' @param numInit Number of initializations.
 #'
-#' @details The function estimates the parameter of a mixture of Poisson kernel-based densities. The obtained estimates are used for assigning final memberships, identifying the \code{nClust} clusters.
+#' @details The function estimates the parameter of a mixture of Poisson kernel-based
+#'  densities. The obtained estimates are used for assigning final memberships, 
+#'  identifying the \code{nClust} clusters.
 #'
-#' @return An S4 object of class \code{pkbc} containing the results of the clustering procedure based on Poisson kernel-based distributions. The object contains the following slots:
+#' @return An S4 object of class \code{pkbc} containing the results of the clustering
+#'  procedure based on Poisson kernel-based distributions. The object contains 
+#'  the following slots:
 #'
 #'   \code{res_k}: List of results of the Poisson kernel-based clustering algorithm for each value of number of clusters specified in \code{nClust}. Each object in the list contains:
 #'   \itemize{
-#'      \item \code{postProbs} posterior probabilities of each observation for the indicated clusters.
+#'      \item \code{postProbs} Posterior probabilities of each observation for the indicated clusters.
 #'      \item \code{LogLik} Maximum value of log-likelihood function
 #'      \item \code{wcss} Values of within-cluster sum of squares computed with Euclidean distance and cosine similarity, respectively.
 #'      \item \code{params} List of estimated parameters of the mixture model
@@ -37,10 +45,13 @@
 #'   \code{input}: List of input information.
 #'
 #' @references
-#' Mojgan Golzy & Marianthi Markatou (2020) Poisson Kernel-Based Clustering on the Sphere: Convergence Properties, Identifiability, and a Method of Sampling, Journal of Computational and Graphical Statistics, 29:4, 758-770, DOI: 10.1080/10618600.2020.1740713.
+#' Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
+#' Convergence Properties, Identifiability, and a Method of Sampling, Journal of
+#' Computational and Graphical Statistics, 29:4, 758-770, 
+#' DOI: 10.1080/10618600.2020.1740713.
 #'
 #' @examples
-#' #We generate three sample of 100 observations from 3-dimensional
+#' #We generate three samples of 100 observations from 3-dimensional
 #' #Poisson kernel-based densities with rho=0.8 and different mean directions
 #' size <- 100
 #' groups<-c(rep(1, size), rep(2, size),rep(3,size))
@@ -52,11 +63,12 @@
 #' dat<-rbind(data1$x,data2$x, data3$x)
 #'
 #' #The following code can be used for plotting
-#' #library("rgl")
-#' #plot3d(dat,col = groups, size=4,xlab = "", ylab = "",zlab = "")
-#' # legend3d("right", legend = c("Class 1", "Class 2", "Class 3"), col = 1:3, pch = 20)
-#'
-#' #Perform the clustering algorithm
+#' \donttest{
+#' library("rgl")
+#' plot3d(dat,col = groups, size=4,xlab = "", ylab = "",zlab = "")
+#' legend3d("right", legend = c("Class 1", "Class 2", "Class 3"), col = 1:3, pch = 20)
+#' }
+#' #Perform the clustering algorithm with number od clusters k=3.
 #' pkbd<- pkbc(dat, 3)
 #'
 #' @export
@@ -319,12 +331,12 @@ setMethod("pkbc", signature(dat = "ANY"),
 #'
 #' Method for objects of class \code{pkbc} which displays the elbow plots for the given values of number of clusters and compute evaluation measures for clustering results.
 #'
-#' @param object object of class \code{pkbc}
-#' @param true_label vector of true membership to clusters (if available)
-#' @param elbow.plot logical, if TRUE the function returns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).
-#' @param h tuning parameter of the k-sample test. (default: 1.5)
+#' @param object Object of class \code{pkbc}
+#' @param true_label Vector of true membership to clusters (if available)
+#' @param elbow.plot Logical, if TRUE the function returns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).
+#' @param h Tuning parameter of the k-sample test. (default: 1.5)
 #'
-#' @details The function extract the within-cluster sum of squares and displays the obtained elbow plots. The following evaluation measures are computed: k-sample test, In-Group Proportion. If true label are provided, ARI, Average Silhouette Width, Macro-Precision and Macro-Recall are computed.
+#' @details The function extracts the within-cluster sum of squares and displays the obtained elbow plots. The following evaluation measures are computed: k-sample test, In-Group Proportion. If true label are provided, ARI, Average Silhouette Width, Macro-Precision and Macro-Recall are computed.
 #'
 #' @return List with the following components:
 #' \itemize{
@@ -334,7 +346,8 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' }
 #'
 #' @references
-#' Kapp A.V., Tibshirani R., Are clusters found in one dataset present in another dataset?, Biostatistics, Volume 8, Issue 1, January 2007, Pages 9–31, https://doi.org/10.1093/biostatistics/kxj029
+#' Kapp, A.V., Tibshirani, R. (2007) "Are clusters found in one dataset present in another dataset?", Biostatistics, 8(1), 9–31, 
+#' https://doi.org/10.1093/biostatistics/kxj029
 #' 
 #' Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20, 53–65.
 #'
@@ -346,7 +359,8 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' @examples
 #' #We generate three sample of 100 observations from 3-dimensional
 #' #Poisson kernel-based densities with rho=0.8 and different mean directions
-   #' size <- 20
+#' \donttest{
+#' size <- 20
 #' groups<-c(rep(1, size), rep(2, size),rep(3,size))
 #' rho=0.8
 #' set.seed(081423)
@@ -358,7 +372,8 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' #Perform the clustering algorithm
 #' pkbc_res<- pkbc(data, 2:4)
 #' validation(pkbc_res)
-#'
+#' }
+#' 
 #' @export
 validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
    
@@ -461,14 +476,14 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
 #'
 #' Method for objects of class \code{pkbc} which computes and displays some descriptive for each variable with respect to the detected groups. It also generates a plot of data points colored by the final membership.
 #'
-#' @param object object of class \code{pkbc}.
-#' @param k number of clusters to be used.
-#' @param true_label vector of true memberships to clusters (default: NULL).
+#' @param object Object of class \code{pkbc}.
+#' @param k Number of clusters to be used.
+#' @param true_label Vector of true memberships to clusters (default: NULL).
 #'
-#' @details The function computes mean, standard deviation, median, inter-quantile range, minimum and maximum for each variable in the data set given the final membership assigned by the clustering algorithm. If dimension is equal to 2 or 3, points are displayed on the circle and Sphere, respectively. If dimension if greater than 3, the spherical Principal Component procedure proposed by Locantore et al., (1999) is applied for dimensionality reduction and the first three principal components are normalized and displayed on the Sphere.
+#' @details The function computes mean, standard deviation, median, inter-quantile range, minimum and maximum for each variable in the data set given the final membership assigned by the clustering algorithm. If dimension is equal to 2 or 3, points are displayed on the circle and sphere, respectively. If dimension if greater than 3, the spherical Principal Component procedure proposed by Locantore et al., (1999) is applied for dimensionality reduction and the first three principal components are normalized and displayed on the sphere.
 #' 
 #' @examples
-#' #We generate three sample of 100 observations from 3-dimensional
+#' #We generate three samples of 100 observations from 3-dimensional
 #' #Poisson kernel-based densities with rho=0.8 and different mean directions
 #' size <- 100
 #' groups<-c(rep(1, size), rep(2, size),rep(3,size))
@@ -484,7 +499,8 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
 #' summary_stat(pkbc_res, 3)
 #' 
 #' @references
-#' Locantore, N., Marron, J.S., Simpson, D.G. et al. Robust principal component analysis for functional data. Test 8, 1–73 (1999). https://doi.org/10.1007/BF02595862
+#' Locantore, N., Marron, J.S., Simpson, D.G. et al. (1999) "Robust principal component
+#' analysis for functional data." Test 8, 1–73. https://doi.org/10.1007/BF02595862
 #'
 #' @return List with computed descriptive statistics for each variable. For d > 3, the complete results from the \code{PcaLocantore} function (package \code{rrcov}) are also returned. 
 #'

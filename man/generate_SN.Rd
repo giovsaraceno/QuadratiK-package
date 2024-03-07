@@ -29,11 +29,4 @@ a list containing the generated X and Y data sets.
 \description{
 This function generates data from skew-normal distributions with the specified parameters of means and covariance matrices.
 }
-\examples{
-# generate data with d=2, size_x=100, size_y=100, mu_x=0, mu_y=1,
-# sigma_x=1, sigma_y=1, and skewness_y=1.
-#dat <- generate_SN(d=2, size_x=100, size_y=100, 
-              #  mu_x=0, mu_y=1, sigma_x=1, sigma_y=1, skewness_y=1)
-
-}
 \keyword{internal}

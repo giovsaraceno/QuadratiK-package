@@ -4,7 +4,7 @@
 \alias{pk.test}
 \alias{pk.test,ANY-method}
 \alias{show,pk.test-method}
-\title{Poisson kernel-based quadratic distance test of Uniformity on the Sphere}
+\title{Poisson kernel-based quadratic distance test of Uniformity on the sphere}
 \usage{
 pk.test(x, rho = NULL, B = 300, Quantile = 0.95)
 
@@ -13,21 +13,21 @@ pk.test(x, rho = NULL, B = 300, Quantile = 0.95)
 \S4method{show}{pk.test}(object)
 }
 \arguments{
-\item{x}{a numeric d-dim matrix of data points on the Sphere S^(d-1).}
+\item{x}{A numeric d-dim matrix of data points on the Sphere S^(d-1).}
 
 \item{rho}{Concentration parameter of the Poisson kernel function.}
 
 \item{B}{Number of iterations for critical value estimation of Un (default: 300).}
 
-\item{Quantile}{the quantile to use for critical value estimation, 0.95 is the default value.}
+\item{Quantile}{The quantile to use for critical value estimation, 0.95 is the default value.}
 
-\item{object}{object of class \code{pk.test}}
+\item{object}{Object of class \code{pk.test}}
 }
 \value{
-an S4 object of class \code{pk.test} containing the results of the Poisson kernel-based tests. The object contains the following slots:
+An S4 object of class \code{pk.test} containing the results of the Poisson kernel-based tests. The object contains the following slots:
 \itemize{
-  \item \code{method}: string indicating that the Poisson Kernel-based test is performed.
-  \item \code{x} data matrix.
+  \item \code{method}: String indicating that the Poisson Kernel-based test is performed.
+  \item \code{x} Data matrix.
   \item \code{Un} The value of the U-statistic.
   \item \code{CV_Un} The empirical critical value for Un.
   \item \code{H0_Vn} A logical value indicating whether or not the null hypothesis is rejected according to Un.
@@ -39,7 +39,7 @@ an S4 object of class \code{pk.test} containing the results of the Poisson kerne
 }
 }
 \description{
-This function performs the kernel-based quadratic distance Goodness-of-fit tests for Uniformity for spherical data using the Poisson kernel with concentration parameter \code{rho}.
+This function performs the kernel-based quadratic distance goodness-of-fit tests for Uniformity for spherical data using the Poisson kernel with concentration parameter \code{rho}.
 }
 \examples{
 # create a pk.test object
@@ -49,5 +49,7 @@ unif_test
 
 }
 \references{
-Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.” Statistica Sinica. doi: doi:10.5705/ss.202022.0347
+Ding, Y., Markatou, M., Saraceno, G. (2023). “Poisson Kernel-Based Tests for
+Uniformity on the d-Dimensional Sphere.” Statistica Sinica. 
+doi: doi:10.5705/ss.202022.0347
 }

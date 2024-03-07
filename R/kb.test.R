@@ -1,45 +1,56 @@
 #'
 #' Kernel-based quadratic distance Goodness-of-Fit tests
 #'
-#' This function performs the kernel-based quadratic distance Goodness-of-fit tests using the Gaussian kernel with tuning parameter h.
+#' This function performs the kernel-based quadratic distance goodness-of-fit tests using the Gaussian kernel with tuning parameter h.
 #'
-#' @param x numeric matrix or vector of data values.
-#' @param y numeric matrix or vector of data values. Depending on the input \code{y}, the corresponding test is performed.
+#' @param x Numeric matrix or vector of data values.
+#' @param y Numeric matrix or vector of data values. Depending on the input \code{y}, the corresponding test is performed.
 #' \itemize{
 #'    \item if \code{y} = NULL, the function performs the tests for normality on \code{x}
 #'    \item if \code{y} is a data matrix, with same dimensions of \code{x}, the function performs the two-sample test between \code{x} and \code{y}.
 #'    \item if \code{y} if a numeric or factor vector, indicating the group memberships for each observation, the function performs the k-sample test.
 #' }
-#' @param h bandwidth for the kernel function. If a value is not provided, the algorithm for the selection of an optimal h is performed automatically. See the function \code{\link{select_h}} for more details.
-#' @param method the method used for critical value estimation ("subsampling", "bootstrap", or "permutation")(default: "subsampling").
-#' @param B the number of iterations to use for critical value estimation (default: 150).
-#' @param b the size of the subsamples used in the subsampling algorithm  (default: 0.8).
-#' @param Quantile the quantile to use for critical value estimation, 0.95 is the default value.
+#' @param h Bandwidth for the kernel function. If a value is not provided, the algorithm for the selection of an optimal h is performed automatically. See the function \code{\link{select_h}} for more details.
+#' @param method The method used for critical value estimation ("subsampling", "bootstrap", or "permutation")(default: "subsampling").
+#' @param B The number of iterations to use for critical value estimation (default: 150).
+#' @param b The size of the subsamples used in the subsampling algorithm  (default: 0.8).
+#' @param Quantile The quantile to use for critical value estimation, 0.95 is the default value.
 #' @param mu_hat Mean vector for the reference distribution.
 #' @param Sigma_hat Covariance matrix of the reference distribution.
 #' @param centeringType String indicating the method used for centering the normal kernel ('Param' or 'Nonparam').
 #' @param K_threshold maximum number of groups allowed. Default is 10. It is a control parameter. Change in case of more than 10 samples.
-#' @param alternative family of alternative chosen for selecting h, between "mean", "scale" and "skewness" (only if \code{h} is not provided).
+#' @param alternative Family of alternative chosen for selecting h, between "location", "scale" and "skewness" (only if \code{h} is not provided).
 #'
-#' @details The function \code{kb.test} performs the kernel-based quadratic distance tests using the Gaussian kernel with bandwidth parameter \code{h}. depending on the shape of the input \code{y} the function performs the tests of Multivariate Normality, the non-parametric Two-Sample tests or the k-sample tests.
+#' @details The function \code{kb.test} performs the kernel-based quadratic
+#' distance tests using the Gaussian kernel with bandwidth parameter \code{h}.
+#' Depending on the shape of the input \code{y} the function performs the tests 
+#' of multivariate normality, the non-parametric two-sample tests or the 
+#' k-sample tests.
 #'
 #'
-#' @return an S4 object of class \code{kb.test} containing the results of the kernel-based quadratic distance tests, based on the normal kernel. The object contains the following slots:
+#' @return An S4 object of class \code{kb.test} containing the results of the 
+#' kernel-based quadratic distance tests, based on the normal kernel. The object 
+#' contains the following slots:
 #'\itemize{
-#'   \item \code{method}: string indicating the Normal Kernel-based quadratic distance test performed.
+#'   \item \code{method}: String indicating the normal kernel-based quadratic distance test performed.
 #'   \item \code{Dn} The value of the test statistic.
 #'   \item \code{H0} A logical value indicating whether or not the null hypothesis is rejected.
-#'   \item \code{data} data list of samples X (and Y).
+#'   \item \code{data} Data list of samples X (and Y).
 #'   \item \code{CV} The critical value computed for the test.
 #'   \item \code{cv_method} The method used to estimate the critical value (one of "subsampling", "permutation" or "bootstrap").
-#'   \item \code{h} List with the value of bandwidth parameter used for the Normal kernel function. If \code{select_h} is used, the matrix of computed power values and the corresponding power plot are also provided. 
+#'   \item \code{h} List with the value of bandwidth parameter used for the normal kernel function. If \code{select_h} is used, the matrix of computed power values and the corresponding power plot are also provided. 
 #'   \item \code{B} Number of bootstrap/permutation/subsampling replications.
 #'}
 #'
 #' @references
-#' Markatou M, Saraceno G, Chen Y (2023). “Two- and k-Sample Tests Based on Quadratic Distances.” Manuscript, (Department of Biostatistics, University at Buffalo)
+#' Markatou, M., Saraceno, G., Chen Y (2023). “Two- and k-Sample Tests Based on 
+#' Quadratic Distances.” Manuscript, (Department of Biostatistics, University at 
+#' Buffalo)
 #'
-#' Bruce G. Lindsay, Marianthi Markatou & Surajit Ray (2014) Kernels, Degrees of Freedom, and Power Properties of Quadratic Distance Goodness-of-Fit Tests, Journal of the American Statistical Association, 109:505, 395-410, DOI: 10.1080/01621459.2013.836972
+#' Lindsay, B.G., Markatou, M. & Ray, S. (2014) "Kernels, Degrees of Freedom, and 
+#' Power Properties of Quadratic Distance Goodness-of-Fit Tests", Journal of the
+#' American Statistical Association, 109:505, 395-410, 
+#' DOI: 10.1080/01621459.2013.836972
 #'
 #'
 #'@examples
@@ -50,7 +61,7 @@
 #' my_test <- kb.test(x, h=0.5)
 #' my_test
 #' # Two-sample test
-#' my_test <- kb.test(x,y,h=0.5, method="subsampling",b=0.9)
+#' my_test <- kb.test(x,y,h=0.5, method="subsampling",b=0.9,centeringType = "Nonparam")
 #' my_test
 #' # k-sample test
 #' z <- matrix(rnorm(100,2),ncol=2)
@@ -220,7 +231,7 @@ setMethod("kb.test", signature(x = "ANY"),
           })
 #' @rdname kb.test
 #'
-#' @param object object of class \code{kb.test}
+#' @param object Object of class \code{kb.test}
 #'
 #' @export
 setMethod("show", "kb.test",
@@ -243,12 +254,12 @@ setMethod("show", "kb.test",
 #'
 #' \code{summary} method for the class \code{kb.test}
 #'
-#' @param object object of class \code{kb.test}
+#' @param object Object of class \code{kb.test}
 #'
 #' @return List with the following components:
 #' \itemize{
 #'    \item \code{summary_tables} Table of computed descriptive statistics per variable (and per group if available).
-#'    \item \code{test_results} data frame with the results of the performed kernel-based quadratic distance test.
+#'    \item \code{test_results} Data frame with the results of the performed kernel-based quadratic distance test.
 #'    \item \code{qqplots} Figure with qq-plots for each variable.
 #' }
 #'
@@ -298,6 +309,7 @@ setMethod("summary", "kb.test", function(object) {
       
       sample1 <- as.data.frame(object@data$x)
       sample2 <- as.data.frame(object@data$y)
+      colnames(sample2) <- colnames(sample1)
       plot_list <- lapply(names(sample1), function(name) {
          list(
             compare_qq(sample1[[name]], sample2[[name]], name),

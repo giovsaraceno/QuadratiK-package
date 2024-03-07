@@ -3,20 +3,20 @@
 \docType{class}
 \name{kb.test-class}
 \alias{kb.test-class}
-\title{An S4 class for kernel-based distance tests with Normal kernel}
+\title{An S4 class for kernel-based distance tests with normal kernel}
 \description{
-A class to represent the results of Gaussian kernel-based quadratic distance tests. This includes the Normality test, the two-sample test statistics and the k-sample tests.
+A class to represent the results of Gaussian kernel-based quadratic distance tests. This includes the normality test, the two-sample test statistics and the k-sample tests.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{method}}{String indicating the Normal Kernel-based quadratic distance test performed.}
+\item{\code{method}}{String indicating the normal kernel-based quadratic distance test performed.}
 
 \item{\code{Dn}}{The value of the test statistic.}
 
 \item{\code{H0}}{A logical value indicating whether or not the null hypothesis is rejected.}
 
-\item{\code{data}}{list of samples X (and Y).}
+\item{\code{data}}{List of samples X (and Y).}
 
 \item{\code{CV}}{The critical value computed for the test.}
 

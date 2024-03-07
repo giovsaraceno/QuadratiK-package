@@ -7,13 +7,13 @@
 \S4method{summary}{pk.test}(object)
 }
 \arguments{
-\item{object}{object of class \code{pk.test}}
+\item{object}{Object of class \code{pk.test}}
 }
 \value{
 List with the following components:
 \itemize{
    \item \code{summary_tables} Table of computed descriptive statistics per variable.
-   \item \code{test_results} data frame with the results of the performed Poisson kernel-based test.
+   \item \code{test_results} Data frame with the results of the performed Poisson kernel-based test.
    \item \code{qqplots} Figure with qq-plots for each variable against the uniform distribution.
 }
 }

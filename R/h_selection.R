@@ -2,38 +2,42 @@
 #'
 #' This function computes the kernel bandwidth of the Gaussian kernel for the two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
 #'
-#' @param x data set of observations from X.
-#' @param y data set of observations from Y.
-#' @param alternative family of alternative chosen for selecting h, between "mean", "scale" and "skewness".
-#' @param method the method used for critical value estimation ("subsampling", "bootstrap", or "permutation").
-#' @param b the size of the subsamples used in the subsampling algorithm .
-#' @param B the number of iterations to use for critical value estimation, B = 150 as default.
-#' @param delta_dim vector of coefficient of alternative with respect to each dimension
-#' @param delta vector of parameter values indicating chosen alternatives
-#' @param h_values values of the tuning parameter used for the selection
-#' @param Nrep number of bootstrap/permutation/subsampling replications.
-#' @param n_cores number of cores used to parallel the h selection algorithm (default:4).
-#' @param Quantile the quantile to use for critical value estimation, 0.95 is the default value.
+#' @param x Data set of observations from X.
+#' @param y Data set of observations from Y.
+#' @param alternative Family of alternative chosen for selecting h, between "location", "scale" and "skewness".
+#' @param method The method used for critical value estimation ("subsampling", "bootstrap", or "permutation").
+#' @param b The size of the subsamples used in the subsampling algorithm .
+#' @param B The number of iterations to use for critical value estimation, B = 150 as default.
+#' @param delta_dim Vector of coefficient of alternative with respect to each dimension
+#' @param delta Vector of parameter values indicating chosen alternatives
+#' @param h_values Values of the tuning parameter used for the selection
+#' @param Nrep Number of bootstrap/permutation/subsampling replications.
+#' @param n_cores Number of cores used to parallel the h selection algorithm (default:2).
+#' @param Quantile The quantile to use for critical value estimation, 0.95 is the default value.
 #' @param power.plot Logical. If TRUE, it is displayed the plot of power for values in h_values and delta.
 #' 
-#' @return a list with the following attributes:
+#' @return A list with the following attributes:
 #' \itemize{
 #'    \item \code{h_sel} the selected value of tuning parameter h;
 #'    \item \code{power} matrix of power values computed for the considered values of \code{delta} and \code{h_values};
 #'    \item \code{power.plot} power plots (if \code{power.plot} is \code{TRUE}).
 #' }
 #' @details
-#' The function performs the selection of the optimal value for the tuning parameter \eqn{h} of the Normal kernel function, for the two-sample and k-sample KBQD tests. It performs a small simulation study, generating sample according to the family of \code{alternative} specified, for the chosen values of \code{h_values} and \code{delta}.
+#' The function performs the selection of the optimal value for the tuning parameter \eqn{h} of the normal kernel function, for the two-sample and k-sample KBQD tests. It performs a small simulation study, generating sample according to the family of \code{alternative} specified, for the chosen values of \code{h_values} and \code{delta}.
 #' 
 #' @references
-#' Markatou M, Saraceno G, Chen Y (2023). “Two- and k-Sample Tests Based on Quadratic Distances.” Manuscript, (Department of Biostatistics, University at Buffalo)
+#' Markatou, M., Saraceno, G., Chen, Y. (2023). “Two- and k-Sample Tests Based on
+#' Quadratic Distances.” Manuscript, (Department of Biostatistics, University at
+#' Buffalo)
 #' 
 #' @examples
 #' # Select the value of h using the mid-power algorithm
-#' #x <- matrix(rnorm(100),ncol=2)
-#' #y <- matrix(rnorm(100),ncol=2)
-#' #h_sel <- select_h(x,y,"skewness")
-#' #h_sel
+#' \donttest{
+#' x <- matrix(rnorm(100),ncol=2)
+#' y <- matrix(rnorm(100),ncol=2)
+#' h_sel <- select_h(x,y,"skewness")
+#' h_sel
+#' }
 #'
 #' @importFrom moments skewness
 #' @importFrom sn rmsn
@@ -42,11 +46,12 @@
 #' @import stats
 #' @import rlecuyer
 #' @import ggplot2
+#' @import RcppEigen
 #'
 #' @useDynLib QuadratiK
 #'
 #' @export
-select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, B=100, delta_dim=1, delta=NULL, h_values=NULL,Nrep=50, n_cores=4, Quantile=0.95, power.plot=TRUE) {
+select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, B=100, delta_dim=1, delta=NULL, h_values=NULL,Nrep=50, n_cores=2, Quantile=0.95, power.plot=TRUE) {
    
    
    # Convert vectors to a single column matrix
@@ -212,8 +217,8 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, B
       
       xnew <- sn::rmsn(n, xi = mean_tilde, Omega = S_tilde, alpha = skew_tilde)
       
-      STATISTIC <- kbNormTest(xnew, h, mean_dat, S_dat, centeringType = "Param")
-      CV <- normal_CV(d,n,h,mean_dat,S_dat,B,Quantile)
+      STATISTIC <- kbNormTest(xnew, h, matrix(mean_dat,nrow = 1), S_dat, centeringType = "Param")
+      CV <- normal_CV(d,n,h,matrix(mean_dat,nrow = 1),S_dat,B,Quantile)
       
       return(c(STATISTIC < CV))
    }
@@ -239,7 +244,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, B
             
             objective_result <- objective_norm(h,k)
          
-            } else if(d_y > 1){
+         } else if(d_y > 1){
             
             objective_result <- objective_2(h, k)
             
@@ -272,6 +277,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, B
       min_h <- results_mean$h[1]
    }
    
+   stopImplicitCluster()
    results <- list(h_sel = min_h, power = res)
    
    pl <- ggplot(res, aes(x = h, y = power)) +

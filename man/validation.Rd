@@ -7,13 +7,13 @@
 validation(object, true_label = NULL, elbow.plot = TRUE, h = 1.5)
 }
 \arguments{
-\item{object}{object of class \code{pkbc}}
+\item{object}{Object of class \code{pkbc}}
 
-\item{true_label}{vector of true membership to clusters (if available)}
+\item{true_label}{Vector of true membership to clusters (if available)}
 
-\item{elbow.plot}{logical, if TRUE the function returns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).}
+\item{elbow.plot}{Logical, if TRUE the function returns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).}
 
-\item{h}{tuning parameter of the k-sample test. (default: 1.5)}
+\item{h}{Tuning parameter of the k-sample test. (default: 1.5)}
 }
 \value{
 List with the following components:
@@ -27,11 +27,12 @@ List with the following components:
 Method for objects of class \code{pkbc} which displays the elbow plots for the given values of number of clusters and compute evaluation measures for clustering results.
 }
 \details{
-The function extract the within-cluster sum of squares and displays the obtained elbow plots. The following evaluation measures are computed: k-sample test, In-Group Proportion. If true label are provided, ARI, Average Silhouette Width, Macro-Precision and Macro-Recall are computed.
+The function extracts the within-cluster sum of squares and displays the obtained elbow plots. The following evaluation measures are computed: k-sample test, In-Group Proportion. If true label are provided, ARI, Average Silhouette Width, Macro-Precision and Macro-Recall are computed.
 }
 \examples{
 #We generate three sample of 100 observations from 3-dimensional
 #Poisson kernel-based densities with rho=0.8 and different mean directions
+\donttest{
 size <- 20
 groups<-c(rep(1, size), rep(2, size),rep(3,size))
 rho=0.8
@@ -44,10 +45,12 @@ data<-rbind(data1$x,data2$x, data3$x)
 #Perform the clustering algorithm
 pkbc_res<- pkbc(data, 2:4)
 validation(pkbc_res)
+}
 
 }
 \references{
-Kapp A.V., Tibshirani R., Are clusters found in one dataset present in another dataset?, Biostatistics, Volume 8, Issue 1, January 2007, Pages 9–31, https://doi.org/10.1093/biostatistics/kxj029
+Kapp, A.V., Tibshirani, R. (2007) "Are clusters found in one dataset present in another dataset?", Biostatistics, 8(1), 9–31, 
+https://doi.org/10.1093/biostatistics/kxj029
 
 Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20, 53–65.
 }

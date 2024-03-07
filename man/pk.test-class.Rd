@@ -5,14 +5,14 @@
 \alias{pk.test-class}
 \title{An S4 class for Poisson kernel-based quadratic distance tests.}
 \description{
-A class to represent the results of Poisson kernel-based quadratic distance tests for Uniformity on the Sphere.
+A class to represent the results of Poisson kernel-based quadratic distance tests for Uniformity on the sphere.
 }
 \section{Slots}{
 
 \describe{
 \item{\code{method}}{The method used for the test ("Poisson Kernel-based quadratic distance test of Uniformity on the Sphere").}
 
-\item{\code{x}}{matrix of data}
+\item{\code{x}}{Matrix of data}
 
 \item{\code{Un}}{The value of the U-statistic.}
 

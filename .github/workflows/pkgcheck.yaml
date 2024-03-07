@@ -12,6 +12,7 @@ on:
   push:
     branches:
       - main
+      - master
 
 jobs:
   pkgcheck:
@@ -19,4 +20,4 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: ropensci-review-tools/pkgcheck-action@v1.0.0
+      - uses: ropensci-review-tools/pkgcheck-action@main

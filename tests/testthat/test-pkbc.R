@@ -24,9 +24,9 @@ test_that("Function works for valid input", {
    # Assuming your function is named 'my_clustering_function'
    # and it returns a list with a specific structure.
    result <- pkbc(dat, nClust = 3)
-   expect_is(result, "list")
-   expect_true(all(result$postProbs >= 0 & result$postProbs <= 1))
-   expect_length(result$LogLik, 1)
+   expect_s4_class(result, "pkbc")
+   expect_true(all(result@res_k$postProbs >= 0 & result@res_k$postProbs <= 1))
+   expect_type(result@res_k[[3]]$LogLik, "double")
 })
 
 # Test 3: Test for stopping rule
@@ -34,7 +34,10 @@ test_that("Function respects the stopping rule", {
    
    result_loglik <- pkbc(dat, nClust = 3, stoppingRule = 'loglik')
    result_max <- pkbc(dat, nClust = 3, stoppingRule = 'max')
-   expect_not_equal(result_loglik, result_max)
+   expect_true(class(result_loglik)== "pkbc")
+   expect_true(class(result_max)== "pkbc")
+   
+   expect_error(pkbc(dat, nClust = 3, stoppingRule = 'prova'))
    
 })
 

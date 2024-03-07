@@ -38,10 +38,14 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
-      - name: Prepare Ubuntu dependencies
-      - run: sudo cp /etc/apt/sources.list /etc/apt/sources.list~
-      - run: sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-      - run: sudo apt update
+      - name: Prepare sources 1
+        run: sudo cp /etc/apt/sources.list /etc/apt/sources.list~
+      
+      - name: Prepare sources 2
+        run: sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+
+      - name: Prepare sources 3
+        run: sudo apt update
 
       - name: Install Mesa build dependencies
         run: sudo apt-get build-dep mesa

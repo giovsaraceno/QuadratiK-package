@@ -50,7 +50,7 @@ setMethod("pk.test", signature(x = "ANY"),
           {
              
              # Convert vectors to a single column matrix
-             if(is.vector(x)) {
+             if(is.vector(x) & mode(x)=="numeric") {
                 x <- matrix(x, ncol = 1)
              } else if(is.data.frame(x)) {
                 x <- as.matrix(x)
@@ -59,10 +59,10 @@ setMethod("pk.test", signature(x = "ANY"),
              }
              
              if(Quantile<=0 | Quantile>1){
-                stop("Quantile indicates the level used for the critical value computation. It must be in (0,1].")
+                stop("Quantile must be in (0,1].")
              }
              if(!is.numeric(rho) | (rho<=0 | rho>1)){
-                stop("rho indicates the concentration parameter of the Poisson kernel, it must be in (0,1).")
+                stop("rho must be in (0,1).")
              }
              
              

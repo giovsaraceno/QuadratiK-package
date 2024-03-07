@@ -19,5 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
+    env:
+      RGL_USE_NULL: TRUE
     steps:
       - uses: ropensci-review-tools/pkgcheck-action@main

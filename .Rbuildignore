@@ -6,3 +6,4 @@
 ^codemeta.json$
 ^\.github$
 ^CONTRIBUTING\.md$
+^codecov\.yml$

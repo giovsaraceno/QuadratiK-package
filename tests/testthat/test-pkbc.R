@@ -1,6 +1,6 @@
 library(testthat)
 
-context("Tests for my custom clustering function")
+## "Tests for my custom clustering function"
 
 #------------------------------------------------------
 ## Clustering on the Sphere
@@ -21,8 +21,6 @@ test_that("Error is thrown for invalid nClust", {
 # Test 2: Test for valid input
 test_that("Function works for valid input", {
    
-   # Assuming your function is named 'my_clustering_function'
-   # and it returns a list with a specific structure.
    result <- pkbc(dat, nClust = 3)
    expect_s4_class(result, "pkbc")
    expect_true(all(result@res_k$postProbs >= 0 & result@res_k$postProbs <= 1))

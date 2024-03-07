@@ -52,6 +52,12 @@ jobs:
       
       - name: Install Mesa build dependencies 2
         run: sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
+
+      - name: ENV-VAR1
+        run: export DISPLAY=:99
+        
+      - name: ENV-VAR2
+        run: export RGL_USE_NULL=true
   
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

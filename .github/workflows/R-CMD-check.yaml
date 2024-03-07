@@ -22,11 +22,14 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-latest,   r: 'release'}
+          - { os: ubuntu-latest, r: "release" }
+          - { os: macos-latest, r: "release" }
+          - { os: windows-latest, r: "release" }
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      RGL_USE_NULL: TRUE
 
     steps:
       - uses: actions/checkout@v4
@@ -38,27 +41,6 @@ jobs:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
 
-      - name: Prepare sources 1
-        run: sudo cp /etc/apt/sources.list /etc/apt/sources.list~
-      
-      - name: Prepare sources 2
-        run: sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-
-      - name: Prepare sources 3
-        run: sudo apt update
-
-      - name: Install Mesa build dependencies 1
-        run: sudo apt-get update
-      
-      - name: Install Mesa build dependencies 2
-        run: sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
-
-      - name: ENV-VAR1
-        run: export DISPLAY=:99
-        
-      - name: ENV-VAR2
-        run: export RGL_USE_NULL=true
-  
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck

@@ -512,7 +512,6 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
 #' @export
 summary_stat <- function(object, k, true_label=NULL){
    
-   options(rgl.useNULL = TRUE)
    
    if(!(k %in% object@input$nClust)){
       stop("The provided pkbc object does not contain results for the requested number of clusters")

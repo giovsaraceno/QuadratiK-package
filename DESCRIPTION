@@ -22,6 +22,7 @@ Description: It includes test for multivariate normality, test for
     <doi:10.1080/10618600.2020.1740713>.
 License: GPL (>= 3)
 URL: https://cran.r-project.org/web/packages/QuadratiK/index.html
+BugReports: https://www.google.com/
 Depends: 
     R (>= 3.5.0)
 Imports: 

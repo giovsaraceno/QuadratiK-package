@@ -1,7 +1,0 @@
-"0","```r
-vars <- c(\"outcomeGroup\", \"Arm\", \"Age\", \"Primary_Substance_positive_changes_index\", \"Primary_Frequency_positive_changes_index\", \"Sex\", \"MOM_worried_losing_housing\",\"Marital_Status\", \"Race\", \"Secondary_Frequency_positive_changes_index\", \"Ever_Treated_for_Mental_Illness\", \"Employment_positive_changes_index\", \"Secondary_Substance_positive_changes_index\", \"Tertiary_Frequency_positive_changes_index\")
-
-logistic_model <- glm(outcomeGroup ~ ., family = binomial(link = \"logit\"), data = sdoh_data[,vars])
-
-summary(logistic_model)
-```"

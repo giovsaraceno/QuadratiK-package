@@ -1,6 +1,0 @@
-"0","```r
-#set.seed(1234) 
-cv_fit <- cv.glmnet(x[,-1], response, alpha=1, nfolds=5, family=\"binomial\")
-best_lambda <- cv_fit$lambda.min
-best_lambda
-```"

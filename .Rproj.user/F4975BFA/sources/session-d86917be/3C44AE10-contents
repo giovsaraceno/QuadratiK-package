@@ -1,0 +1,26 @@
+Package: QuadratiK
+Type: Package
+Title: Collection of methods constructed using the kernel-based quadratic distances
+Version: 1.0.0
+Date: 2023-12-11
+Authors@R: c(
+    person("Giovanni", "Saraceno", , "gsaracen@buffalo.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1753-2367")),
+    person("Marianthi", "Markatou", role = c("aut", "com"))
+  )
+Manteiner: Giovanni Saraceno <gsaracen@buffalo.edu>
+Description: 'QuadratiK' includes test for multivariate normality, test for uniformity on the Sphere, non-parametric two- and k-sample tests, random generation of points from the Poisson kernel-based density and clustering algorithm for spherical data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.5.0)
+Imports: Rcpp (>= 1.0.10), RcppEigen (>= 0.3.3.5.0), 
+         sn, methods, stats, MASS, moments, mvtnorm,
+         movMF, rlecuyer, foreach, doParallel, Tinflex,  ggpp,
+         ggplot2, rgl, clusterRepro, ggpubr, mclust, rrcov, cluster
+LinkingTo: Rcpp, RcppEigen
+RoxygenNote: 7.2.3
+Suggests: 
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

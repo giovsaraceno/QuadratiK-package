@@ -1,4 +1,0 @@
-"0","```r
-final_model <- glmnet(x[,-1], response, alpha=1, lambda=best_lambda, family = \"binomial\")
-print(coef(final_model))
-```"

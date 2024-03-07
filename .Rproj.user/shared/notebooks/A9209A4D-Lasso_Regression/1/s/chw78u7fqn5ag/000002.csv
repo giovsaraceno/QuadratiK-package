@@ -1,6 +1,0 @@
-"0","```r
-sdoh_data <- read.csv2(\"C:/Users/sarac/Box/SDOH_Analysis/Data/finalDataset16Jan2024.csv\", header = TRUE,stringsAsFactors = TRUE)
-
-
-sdoh_data[,c(\"outcomeGroup\", \"MOM_stable_housing\", \"MOM_worried_losing_housing\", \"MOM_jail\", \"MOM_food\")] <- lapply(sdoh_data[,c(\"outcomeGroup\", \"MOM_stable_housing\", \"MOM_worried_losing_housing\", \"MOM_jail\", \"MOM_food\")], as.factor)
-```"

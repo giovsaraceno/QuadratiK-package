@@ -1,9 +1,0 @@
-"0","```r
-sdoh_tel <- sdoh_data[which(sdoh_data$Arm==\"Tel\"),]
-
-response <- sdoh_tel$outcomeGroup
-
-no.idx <- which(colnames(sdoh_tel)%in%c(\"STUDY_ID\",\"outcomeGroup\",\"SVR\", \"Arm\"))
-x <- sdoh_tel[,-no.idx]
-x <- model.matrix(~., data=x)
-```"

@@ -1,7 +1,0 @@
-"0","```r
-no.idx <- which(colnames(sdoh_data)%in%c(\"STUDY_ID\",\"SVR\"))
-
-logistic_model <- glm(outcomeGroup ~ ., family = binomial(link = \"logit\"), data = sdoh_data[,-no.idx])
-
-summary(logistic_model)
-```"

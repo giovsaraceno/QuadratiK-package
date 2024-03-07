@@ -21,3 +21,6 @@ jobs:
       issues: write
     steps:
       - uses: ropensci-review-tools/pkgcheck-action@main
+      
+  env:
+    RGL_USE_NULL: TRUE

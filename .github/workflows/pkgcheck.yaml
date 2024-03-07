@@ -1,0 +1,125 @@
+name: "pkgcheck"
+description: "Test your package with {pkgcheck}."
+branding:
+  icon: 'check-circle'
+  color: 'blue'
+inputs:
+  ref:
+    description: "The ref to checkout and check. Set to empty string to skip checkout."
+    default: "${{ github.ref }}"
+    required: true
+  post-to-issue:
+    description: "Should the pkgcheck results be posted as an issue?"
+    # If you use the 'pull_request' trigger and the PR is from outside the repo
+    # (e.g. a fork), the job will fail due to permission issues
+    # if this is set to 'true'. The default will prevent this.
+    default: ${{ github.event_name != 'pull_request' }}
+    required: true
+  issue-title:
+    description: "Name for the issue containing the pkgcheck results. Will be created or updated."
+    # This will create a new issue for every branch, set it to something fixed 
+    # to only create one issue that is updated via edits. 
+    default: "pkgcheck results - ${{ github.ref_name }}"
+    required: true
+  summary-only:
+    description: "Only post the check summary to issue. Set to false to get the full results in the issue."
+    default: false
+    required: true
+  append-to-issue:
+    description: "Should issue results be appended to existing issue, or posted in new issues."
+    default: true
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repo
+      if: ${{ inputs.ref != ''}}
+      uses: actions/checkout@v3
+      with:
+        ref: "${{ inputs.ref }}"
+        fetch-depth: 0
+    - uses: docker://ghcr.io/ropensci-review-tools/pkgcheck-action:latest
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      id: pkgcheck
+    - uses: actions/upload-artifact@v2
+      with:
+        name: visual-network
+        path: "${{ steps.pkgcheck.outputs.visnet_path }}"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: results
+        path: "${{ steps.pkgcheck.outputs.results }}"
+    - name: Check for active issue
+      id: get-id
+      if: ${{ inputs.post-to-issue}}
+      uses: actions/github-script@v5
+      with:
+        script: |
+          const bot_name = "github-actions[bot]"
+          const query = "repo:${{ github.repository }} is:issue is:open user:" + bot_name + " in:title ${{ inputs.issue-title }}"
+          const issues = await github.rest.search.issuesAndPullRequests({ q: query, sort: "created" })
+          let issue_nr
+          if(typeof issues === "undefined") {
+            issue_nr = -1
+          } else {
+            const issue = issues.data.items.find(e => e.title === "${{ inputs.issue-title }}" && 
+                                                                   e.state === "open" && 
+                                                                   e.user.login === bot_name
+            )
+            issue_nr = typeof issue === "undefined" ? -1 : issue.number
+          }
+          return issue_nr
+    - id: get-repo
+      if: ${{ inputs.post-to-issue}}
+      uses: actions/github-script@v5
+      with:
+        result-encoding: string
+        script: |
+          return "${{ github.repository }}".split("/", 2)[1]
+    - name: Create/Update Issue
+      uses: actions/github-script@v5
+      with:
+        script: |
+          const fs = require('fs')
+          const md_path = ("${{ inputs.summary-only }}" === "true" ? "${{ steps.pkgcheck.outputs.summary_md }}" : "${{ steps.pkgcheck.outputs.full_md }}").trim()
+          let issue_body;
+
+          try {
+            issue_body = fs.readFileSync(md_path, 'utf8')
+          } catch (err) {
+            console.error(err)
+          }
+
+          const owner = "${{ github.repository_owner }}"
+          const repo = "${{ steps.get-repo.outputs.result }}"
+
+          if (${{ steps.get-id.outputs.result != -1 && inputs.post-to-issue }}) {
+            if (${{ inputs.append-to-issue }}) {
+              github.rest.issues.createComment({
+                owner: owner,
+                repo: repo,
+                issue_number: "${{ steps.get-id.outputs.result }}",
+                body: issue_body
+              })
+            } else {
+              github.rest.issues.update({
+                  owner: owner,
+                  repo: repo,
+                  issue_number: "${{ steps.get-id.outputs.result }}",
+                  body: issue_body,
+              })
+            }
+          } else if (${{ steps.get-id.outputs.result == -1 && inputs.post-to-issue }}) {
+              github.rest.issues.create({
+                  owner: owner,
+                  repo: repo,
+                  title: "${{ inputs.issue-title }}",
+                  body: issue_body
+              })
+          }
+          
+    - name: Fail if pkgcheck found problems
+      run: exit ${{ steps.pkgcheck.outputs.status }}
+      shell: bash

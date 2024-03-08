@@ -6,7 +6,8 @@
 \title{A S4 class for the clustering algorithm on the sphere based on
 Poisson kernel-based distributions.}
 \description{
-A class to represent the results of Poisson kernel-based clustering procedure for spherical observations.
+A class to represent the results of Poisson kernel-based clustering 
+procedure for spherical observations.
 }
 \details{
 See the function \code{pkbc} for more details.
@@ -14,7 +15,8 @@ See the function \code{pkbc} for more details.
 \section{Slots}{
 
 \describe{
-\item{\code{res_k}}{List of objects with the results of the clustering algorithm for each value of possible number of clusters considered.}
+\item{\code{res_k}}{List of objects with the results of the clustering algorithm for 
+each value of possible number of clusters considered.}
 
 \item{\code{input}}{List of input data}
 }}

@@ -12,7 +12,8 @@ rpkb(n, mu, rho, method = "rejvmf")
 \arguments{
 \item{x}{Matrix (or data.frame) with number of columns >=2.}
 
-\item{mu}{location vector parameter with length indicating the dimension of generated points.}
+\item{mu}{location vector parameter with length indicating the dimension of 
+generated points.}
 
 \item{rho}{is the concentration parameter, with 0 <= rho < 1.}
 
@@ -20,24 +21,31 @@ rpkb(n, mu, rho, method = "rejvmf")
 
 \item{n}{number of observations.}
 
-\item{method}{string that indicates the method used for sampling observations. The available methods are 
+\item{method}{string that indicates the method used for sampling 
+         observations. The available methods are 
 \itemize{
-   \item \code{'rejvmf'} acceptance-rejection algorithm using von Mises-Fisher envelops (Algorithm in Table 2 of Golzy and Markatou 2020);
-   \item \code{'rejacg'} using angular central Gaussian envelops (Algorithm in Table 1 of Sablica et al. 2023);
-   \item \code{'rejpsaw'} using projected Saw distributions (Algorithm in Table 2 of Sablica et al. 2023).
+   \item \code{'rejvmf'} acceptance-rejection algorithm using 
+                        von Mises-Fisher envelops (Algorithm in Table 2 of 
+                        Golzy and Markatou 2020);
+   \item \code{'rejacg'} using angular central Gaussian envelops 
+                        (Algorithm in Table 1 of Sablica et al. 2023);
+   \item \code{'rejpsaw'} using projected Saw distributions 
+                        (Algorithm in Table 2 of Sablica et al. 2023).
 }}
 }
 \value{
 \code{dpkb} gives the density value.
 \code{rpkb} generates random observations from the PKBD. 
 
-The number of observations generated is determined by \code{n} for \code{rpkb}.
-This function returns a list with the matrix of generated observations \code{x},
-the number of tries \code{numTries} and the number of acceptances \code{numAccepted}.
+The number of observations generated is determined by \code{n} for 
+\code{rpkb}. This function returns a list with the matrix of generated 
+observations \code{x}, the number of tries \code{numTries} and the number of 
+acceptances \code{numAccepted}.
 }
 \description{
-Density function and random number generation from the Poisson kernel-based Distribution
-with mean direction vector \code{mu} and concentration parameter \code{rho}.
+Density function and random number generation from the Poisson kernel-based 
+Distribution with mean direction vector \code{mu} and concentration parameter 
+\code{rho}.
 }
 \examples{
 # Generate some data from pkbd density

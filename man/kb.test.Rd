@@ -41,32 +41,45 @@ kb.test(
 \arguments{
 \item{x}{Numeric matrix or vector of data values.}
 
-\item{y}{Numeric matrix or vector of data values. Depending on the input \code{y}, the corresponding test is performed.
+\item{y}{Numeric matrix or vector of data values. Depending on the input 
+         \code{y}, the corresponding test is performed.
 \itemize{
-   \item if \code{y} = NULL, the function performs the tests for normality on \code{x}
-   \item if \code{y} is a data matrix, with same dimensions of \code{x}, the function performs the two-sample test between \code{x} and \code{y}.
-   \item if \code{y} if a numeric or factor vector, indicating the group memberships for each observation, the function performs the k-sample test.
+   \item if \code{y} = NULL, the function performs the tests for normality o
+   n \code{x}
+   \item if \code{y} is a data matrix, with same dimensions of \code{x}, the 
+   function performs the two-sample test between \code{x} and \code{y}.
+   \item if \code{y} if a numeric or factor vector, indicating the group 
+   memberships for each observation, the function performs the k-sample test.
 }}
 
-\item{h}{Bandwidth for the kernel function. If a value is not provided, the algorithm for the selection of an optimal h is performed automatically. See the function \code{\link{select_h}} for more details.}
+\item{h}{Bandwidth for the kernel function. If a value is not provided, the 
+algorithm for the selection of an optimal h is performed automatically. See 
+the function \code{\link{select_h}} for more details.}
 
-\item{method}{The method used for critical value estimation ("subsampling", "bootstrap", or "permutation")(default: "subsampling").}
+\item{method}{The method used for critical value estimation ("subsampling", 
+"bootstrap", or "permutation")(default: "subsampling").}
 
-\item{B}{The number of iterations to use for critical value estimation (default: 150).}
+\item{B}{The number of iterations to use for critical value estimation 
+(default: 150).}
 
-\item{b}{The size of the subsamples used in the subsampling algorithm  (default: 0.8).}
+\item{b}{The size of the subsamples used in the subsampling algorithm
+(default: 0.8).}
 
-\item{Quantile}{The quantile to use for critical value estimation, 0.95 is the default value.}
+\item{Quantile}{The quantile to use for critical value estimation, 0.95 is 
+the default value.}
 
 \item{mu_hat}{Mean vector for the reference distribution.}
 
 \item{Sigma_hat}{Covariance matrix of the reference distribution.}
 
-\item{centeringType}{String indicating the method used for centering the normal kernel ('Param' or 'Nonparam').}
+\item{centeringType}{String indicating the method used for centering the 
+normal kernel ('Param' or 'Nonparam').}
 
-\item{K_threshold}{maximum number of groups allowed. Default is 10. It is a control parameter. Change in case of more than 10 samples.}
+\item{K_threshold}{maximum number of groups allowed. Default is 10. It is a 
+control parameter. Change in case of more than 10 samples.}
 
-\item{alternative}{Family of alternative chosen for selecting h, between "location", "scale" and "skewness" (only if \code{h} is not provided).}
+\item{alternative}{Family of alternative chosen for selecting h, between 
+"location", "scale" and "skewness" (only if \code{h} is not provided).}
 
 \item{object}{Object of class \code{kb.test}}
 }
@@ -75,18 +88,24 @@ An S4 object of class \code{kb.test} containing the results of the
 kernel-based quadratic distance tests, based on the normal kernel. The object 
 contains the following slots:
 \itemize{
-  \item \code{method}: String indicating the normal kernel-based quadratic distance test performed.
+  \item \code{method}: String indicating the normal kernel-based quadratic 
+  distance test performed.
   \item \code{Dn} The value of the test statistic.
-  \item \code{H0} A logical value indicating whether or not the null hypothesis is rejected.
+  \item \code{H0} A logical value indicating whether or not the null 
+  hypothesis is rejected.
   \item \code{data} Data list of samples X (and Y).
   \item \code{CV} The critical value computed for the test.
-  \item \code{cv_method} The method used to estimate the critical value (one of "subsampling", "permutation" or "bootstrap").
-  \item \code{h} List with the value of bandwidth parameter used for the normal kernel function. If \code{select_h} is used, the matrix of computed power values and the corresponding power plot are also provided. 
+  \item \code{cv_method} The method used to estimate the critical value 
+  (one of "subsampling", "permutation" or "bootstrap").
+  \item \code{h} List with the value of bandwidth parameter used for the 
+  normal kernel function. If \code{select_h} is used, the matrix of computed 
+  power values and the corresponding power plot are also provided. 
   \item \code{B} Number of bootstrap/permutation/subsampling replications.
 }
 }
 \description{
-This function performs the kernel-based quadratic distance goodness-of-fit tests using the Gaussian kernel with tuning parameter h.
+This function performs the kernel-based quadratic distance goodness-of-fit 
+tests using the Gaussian kernel with tuning parameter h.
 }
 \details{
 The function \code{kb.test} performs the kernel-based quadratic
@@ -103,7 +122,8 @@ y <- matrix(rnorm(100),ncol=2)
 my_test <- kb.test(x, h=0.5)
 my_test
 # Two-sample test
-my_test <- kb.test(x,y,h=0.5, method="subsampling",b=0.9,centeringType = "Nonparam")
+my_test <- kb.test(x,y,h=0.5, method="subsampling",b=0.9,
+                     centeringType = "Nonparam")
 my_test
 # k-sample test
 z <- matrix(rnorm(100,2),ncol=2)
@@ -118,8 +138,8 @@ Markatou, M., Saraceno, G., Chen Y (2023). “Two- and k-Sample Tests Based on
 Quadratic Distances.” Manuscript, (Department of Biostatistics, University at 
 Buffalo)
 
-Lindsay, B.G., Markatou, M. & Ray, S. (2014) "Kernels, Degrees of Freedom, and 
-Power Properties of Quadratic Distance Goodness-of-Fit Tests", Journal of the
-American Statistical Association, 109:505, 395-410, 
+Lindsay, B.G., Markatou, M. & Ray, S. (2014) "Kernels, Degrees of Freedom, 
+and Power Properties of Quadratic Distance Goodness-of-Fit Tests", Journal 
+of the American Statistical Association, 109:505, 395-410, 
 DOI: 10.1080/01621459.2013.836972
 }

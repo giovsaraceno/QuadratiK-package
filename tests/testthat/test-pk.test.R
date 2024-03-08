@@ -10,7 +10,9 @@ test_that("Error on invalid x input", {
 
 # Test 2: Error on Invalid Quantile Input
 test_that("Error on invalid Quantile input", {
-   expect_error(pk.test(x = matrix(rnorm(100), ncol=2), rho = 0.5, Quantile = 1.1), "Quantile must be in (0,1]", fixed=TRUE)
+   expect_error(pk.test(x = matrix(rnorm(100), ncol=2), rho = 0.5, 
+                        Quantile = 1.1), "Quantile must be in (0,1]", 
+                fixed=TRUE)
 })
 
 # Test 3: Error on Invalid rho Input
@@ -22,8 +24,10 @@ test_that("Error on invalid rho input", {
 # Test 4: Handling Vector x Input
 test_that("Handle vector x input correctly", {
    
-   expect_s4_class(pk.test(x = matrix(rnorm(100), ncol = 2), rho = 0.5), "pk.test")
-   expect_s4_class(pk.test(x = data.frame(matrix(rnorm(100), ncol = 2)), rho = 0.5), "pk.test")
+   expect_s4_class(pk.test(x = matrix(rnorm(100), ncol = 2), rho = 0.5), 
+                   "pk.test")
+   expect_s4_class(pk.test(x = data.frame(matrix(rnorm(100), ncol = 2)), 
+                           rho = 0.5), "pk.test")
 })
 
 # Test 5: Main Functionality with Valid Inputs

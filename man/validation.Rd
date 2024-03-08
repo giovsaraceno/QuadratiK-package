@@ -11,7 +11,8 @@ validation(object, true_label = NULL, elbow.plot = TRUE, h = 1.5)
 
 \item{true_label}{Vector of true membership to clusters (if available)}
 
-\item{elbow.plot}{Logical, if TRUE the function returns the elbow plots computed with the Euclidean distance and cosine similarity (default: TRUE).}
+\item{elbow.plot}{Logical, if TRUE the function returns the elbow plots 
+computed with the Euclidean distance and cosine similarity (default: TRUE).}
 
 \item{h}{Tuning parameter of the k-sample test. (default: 1.5)}
 }
@@ -19,15 +20,22 @@ validation(object, true_label = NULL, elbow.plot = TRUE, h = 1.5)
 List with the following components:
 \itemize{
    \item \code{metrics} Table of computed evaluation measures.
-   \item \code{IGP} List of in-group proportions for each value of number of clusters specified.
-   \item \code{wcss} Table of collected values of within-cluster sum of squares.
+   \item \code{IGP} List of in-group proportions for each value of number of 
+   clusters specified.
+   \item \code{wcss} Table of collected values of within-cluster sum of 
+   squares.
 }
 }
 \description{
-Method for objects of class \code{pkbc} which displays the elbow plots for the given values of number of clusters and compute evaluation measures for clustering results.
+Method for objects of class \code{pkbc} which displays the elbow plots for 
+the given values of number of clusters and compute evaluation measures for 
+clustering results.
 }
 \details{
-The function extracts the within-cluster sum of squares and displays the obtained elbow plots. The following evaluation measures are computed: k-sample test, In-Group Proportion. If true label are provided, ARI, Average Silhouette Width, Macro-Precision and Macro-Recall are computed.
+The function extracts the within-cluster sum of squares and displays
+ the obtained elbow plots. The following evaluation measures are computed: 
+ k-sample test, In-Group Proportion. If true label are provided, ARI, Average
+  Silhouette Width, Macro-Precision and Macro-Recall are computed.
 }
 \examples{
 #We generate three sample of 100 observations from 3-dimensional
@@ -49,8 +57,11 @@ validation(pkbc_res)
 
 }
 \references{
-Kapp, A.V., Tibshirani, R. (2007) "Are clusters found in one dataset present in another dataset?", Biostatistics, 8(1), 9–31, 
+Kapp, A.V., Tibshirani, R. (2007) "Are clusters found in one dataset present 
+in another dataset?", Biostatistics, 8(1), 9–31, 
 https://doi.org/10.1093/biostatistics/kxj029
 
-Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20, 53–65.
+Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and
+ validation of cluster analysis. Journal of Computational and Applied 
+ Mathematics, 20, 53–65.
 }

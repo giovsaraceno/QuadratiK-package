@@ -17,29 +17,40 @@ pk.test(x, rho = NULL, B = 300, Quantile = 0.95)
 
 \item{rho}{Concentration parameter of the Poisson kernel function.}
 
-\item{B}{Number of iterations for critical value estimation of Un (default: 300).}
+\item{B}{Number of iterations for critical value estimation of Un 
+(default: 300).}
 
-\item{Quantile}{The quantile to use for critical value estimation, 0.95 is the default value.}
+\item{Quantile}{The quantile to use for critical value estimation, 
+0.95 is the default value.}
 
 \item{object}{Object of class \code{pk.test}}
 }
 \value{
-An S4 object of class \code{pk.test} containing the results of the Poisson kernel-based tests. The object contains the following slots:
+An S4 object of class \code{pk.test} containing the results of the 
+Poisson kernel-based tests. The object contains the following slots:
 \itemize{
-  \item \code{method}: String indicating that the Poisson Kernel-based test is performed.
+  \item \code{method}: String indicating that the Poisson Kernel-based test 
+  is performed.
   \item \code{x} Data matrix.
   \item \code{Un} The value of the U-statistic.
   \item \code{CV_Un} The empirical critical value for Un.
-  \item \code{H0_Vn} A logical value indicating whether or not the null hypothesis is rejected according to Un.
+  \item \code{H0_Vn} A logical value indicating whether or not the null 
+  hypothesis is rejected according to Un.
   \item \code{Vn} The value of the V-statistic.
-  \item \code{CV_Vn} The critical value for Vn computed following the asymptotic distribution.
-  \item \code{H0_Vn} A logical value indicating whether or not the null hypothesis is rejected according to Vn.
-  \item \code{rho} The value of concentration parameter used for the Poisson kernel function.
-  \item \code{B} Number of replications for the critical value of the U-statistic.
+  \item \code{CV_Vn} The critical value for Vn computed following the 
+  asymptotic distribution.
+  \item \code{H0_Vn} A logical value indicating whether or not the null 
+  hypothesis is rejected according to Vn.
+  \item \code{rho} The value of concentration parameter used for the Poisson 
+  kernel function.
+  \item \code{B} Number of replications for the critical value of the 
+  U-statistic.
 }
 }
 \description{
-This function performs the kernel-based quadratic distance goodness-of-fit tests for Uniformity for spherical data using the Poisson kernel with concentration parameter \code{rho}.
+This function performs the kernel-based quadratic distance goodness-of-fit 
+tests for Uniformity for spherical data using the Poisson kernel with 
+concentration parameter \code{rho}.
 }
 \examples{
 # create a pk.test object

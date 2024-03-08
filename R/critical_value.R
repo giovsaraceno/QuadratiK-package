@@ -5,18 +5,24 @@
 #' using one of three methods: bootstrap, permutation, or subsampling.
 #'
 #' @param B the number of bootstrap/permutation/subsampling samples to generate.
-#' @param Quantile the quantile of the bootstrap/permutation/subsampling distribution to use as the critical value.
+#' @param Quantile the quantile of the bootstrap/permutation/subsampling 
+#' distribution to use as the critical value.
 #' @param data_pool a matrix containing the data to be used in the test.
-#' @param size_x the number of rows in the \code{data_pool} matrix corresponding to group X.
-#' @param size_y the number of rows in the \code{data_pool} matrix corresponding to group Y.
+#' @param size_x the number of rows in the \code{data_pool} matrix corresponding 
+#' to group X.
+#' @param size_y the number of rows in the \code{data_pool} matrix corresponding 
+#' to group Y.
 #' @param h the tuning parameter for the kernel test.
-#' @param method the method to use for computing the critical value (one of "bootstrap", "permutation", or "subsampling").
+#' @param method the method to use for computing the critical value 
+#' (one of "bootstrap", "permutation", or "subsampling").
 #' @param b the subsampling block size (only used if \code{method} is "subsampling").
 #'
 #' @return the critical value for the specified method and significance level.
 #' 
 #' @references
-#' Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample Tests Based on Quadratic Distances.” Manuscript, (Department of Biostatistics, University at Buffalo)
+#' Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample 
+#' Tests Based on Quadratic Distances.” Manuscript, (Department of 
+#' Biostatistics, University at Buffalo)
 #'
 #'
 #' @useDynLib QuadratiK
@@ -50,7 +56,8 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
          data_y_star<-as.matrix(data_pool[newsample[(round(size_x*b)+1):length(newsample)], ])
       }
       
-      Results[i] <-   stat2sample(data_x_star,data_y_star,h,matrix(0,nrow=1),diag(1),"Nonparam")
+      Results[i] <-   stat2sample(data_x_star,data_y_star,h,
+                                  matrix(0,nrow=1),diag(1),"Nonparam")
    }
    return(as.numeric(quantile(Results, Quantile)))
    
@@ -58,8 +65,8 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
 #' 
 #' Compute the critical value for the Poisson KBQD tests for Uniformity
 #' 
-#' This function computes the empirical critical value for the U-statistics for testing uniformity on the 
-#' sphere based on the centered poisson kernel.  
+#' This function computes the empirical critical value for the U-statistics for 
+#' testing uniformity on the sphere based on the centered poisson kernel.  
 #'
 #' @param d the dimension of generated samples.
 #' @param size the number of observations to be generated.
@@ -70,12 +77,16 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
 #' @return the critical value for the specified dimension, size and level.
 #'
 #' @details 
-#' For each replication, a sample of d-dimensional observations from the uniform distribution 
-#' on the Sphere are generated and the Poisson kernel-based U-statistic is computed. 
-#' After B iterations, the critical value is selected as the \code{Quantile} of the empirical distribution of the computed test statistics.
+#' For each replication, a sample of d-dimensional observations from the uniform
+#' distribution on the Sphere are generated and the Poisson kernel-based 
+#' U-statistic is computed. After B iterations, the critical value is selected 
+#' as the \code{Quantile} of the empirical distribution of the computed test 
+#' statistics.
 #' 
 #' @references
-#' Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.” Statistica Sinica. doi: doi:10.5705/ss.202022.0347
+#' Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson 
+#' Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.” 
+#' Statistica Sinica. doi: doi:10.5705/ss.202022.0347
 #' 
 #' @useDynLib QuadratiK
 #' @importFrom stats quantile
@@ -113,10 +124,12 @@ poisson_CV<-function(d, size, rho, B, Quantile){
 #' @return the critical value for the specified dimension, size and level.
 #' 
 #' @details 
-#' For each replication, a sample from the d-dimensional Normal distribution with mean vector
-#' \code{mu_hat} and covariance matrix \code{Sigma_hat} is generated and the KBQD test U-statistic for 
-#' Normality is computed. 
-#' After B iterations, the critical value is selected as the \code{Quantile} of the empirical distribution of the computed test statistics.
+#' For each replication, a sample from the d-dimensional Normal distribution 
+#' with mean vector
+#' \code{mu_hat} and covariance matrix \code{Sigma_hat} is generated and the 
+#' KBQD test U-statistic for Normality is computed. 
+#' After B iterations, the critical value is selected as the \code{Quantile} 
+#' of the empirical distribution of the computed test statistics.
 #' 
 #' @useDynLib QuadratiK
 #' @import mvtnorm
@@ -139,18 +152,22 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
 }
 #' Compute the critical value for the KBQD k-sample tests
 #'
-#' This function computes the empirical critical value for the k-sample KBQD tests using the
-#' centered Gaussian kernel, with bootstrap, permutation, or subsampling.
+#' This function computes the empirical critical value for the k-sample KBQD 
+#' tests using the centered Gaussian kernel, with bootstrap, permutation, or 
+#' subsampling.
 #'
 #' @param x matrix containing the observations to be used in the k-sample test
 #' @param y vector indicating the sample for each observation
 #' @param h the tuning parameter for the test using the Gaussian kernel
 #' @param B the number of bootstrap/permutation/subsampling samples to generate
 #' @param b the subsampling block size (only used if \code{method} is "subsampling")
-#' @param Quantile the quantile of the bootstrap/permutation/subsampling distribution to use as the critical value
-#' @param method the method to use for computing the critical value (one of "bootstrap", "permutation")
+#' @param Quantile the quantile of the bootstrap/permutation/subsampling 
+#' distribution to use as the critical value
+#' @param method the method to use for computing the critical value 
+#' (one of "bootstrap", "permutation")
 #'
-#' @return a vector of two critical values corresponding to different formulation of the k-sample test statistics.
+#' @return a vector of two critical values corresponding to different 
+#' formulation of the k-sample test statistics.
 #'
 #' @useDynLib QuadratiK
 #' @importFrom stats quantile
@@ -171,7 +188,8 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, method="subsamplin
       
       if(method=="bootstrap"){
          
-         ind_k <- unlist(lapply(1:K, function(k) sample(1:sizes[k], sizes[k], replace=T) + cum_size[k]))
+         ind_k <- unlist(lapply(1:K, function(k) sample(1:sizes[k], sizes[k], 
+                                                      replace=T) + cum_size[k]))
          ind_k <- sample(ind_k,length(ind_k),replace = F)
          #y_ind <- y
          
@@ -182,7 +200,8 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, method="subsamplin
          
       } else if(method=="subsampling"){
          
-         ind_k <- unlist(lapply(1:K, function(j) {sample(1:sizes[j], round(sizes[j]*b), replace=F) + cum_size[j]}))
+         ind_k <- unlist(lapply(1:K, function(j) {
+            sample(1:sizes[j], round(sizes[j]*b), replace=F) + cum_size[j]}))
          #y_ind <- y[ind_k]
          ind_k <- sample(ind_k,length(ind_k),replace = F)
       }
@@ -193,7 +212,8 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, method="subsamplin
       sizes_sub <- as.vector(table(y_ind))
       cum_size_sub <- c(0,cumsum(sizes_sub))
       
-      Results[i,] <-   stat_ksample_cpp(as.matrix(data_k), c(y_ind), h, sizes_sub, cum_size_sub)
+      Results[i,] <-   stat_ksample_cpp(as.matrix(data_k), c(y_ind), h, 
+                                        sizes_sub, cum_size_sub)
    }
    
    cv_k <- apply(Results,2,function(x) as.numeric(quantile(x, Quantile,na.rm=T)))

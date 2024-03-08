@@ -2,15 +2,21 @@
 #'
 #' @title An S4 class for kernel-based distance tests with normal kernel
 #'
-#' @description A class to represent the results of Gaussian kernel-based quadratic distance tests. This includes the normality test, the two-sample test statistics and the k-sample tests.
+#' @description A class to represent the results of Gaussian kernel-based 
+#' quadratic distance tests. This includes the normality test, the two-sample 
+#' test statistics and the k-sample tests.
 #'
-#' @slot method String indicating the normal kernel-based quadratic distance test performed.
+#' @slot method String indicating the normal kernel-based quadratic distance 
+#' test performed.
 #' @slot Dn The value of the test statistic.
 #' @slot H0 A logical value indicating whether or not the null hypothesis is rejected.
 #' @slot data List of samples X (and Y).
 #' @slot CV The critical value computed for the test.
-#' @slot cv_method The method used to estimate the critical value (one of "subsampling", "permutation" or "bootstrap").
-#' @slot h A list with the value of bandwidth parameter used for the Gaussian kernel. If the function \code{select_h} is used, then also the matrix of computed power values and the resulting power plot are provided. 
+#' @slot cv_method The method used to estimate the critical value (one of 
+#' "subsampling", "permutation" or "bootstrap").
+#' @slot h A list with the value of bandwidth parameter used for the Gaussian kernel. 
+#' If the function \code{select_h} is used, then also the matrix of computed power
+#'  values and the resulting power plot are provided. 
 #' @slot B Number of bootstrap/permutation/subsampling replications.
 #'
 #' @examples
@@ -40,16 +46,20 @@ setClass("kb.test",
 #'
 #' @title An S4 class for Poisson kernel-based quadratic distance tests.
 #'
-#' @description A class to represent the results of Poisson kernel-based quadratic distance tests for Uniformity on the sphere.
+#' @description A class to represent the results of Poisson kernel-based quadratic
+#'  distance tests for Uniformity on the sphere.
 #'
-#' @slot method The method used for the test ("Poisson Kernel-based quadratic distance test of Uniformity on the Sphere").
+#' @slot method The method used for the test ("Poisson Kernel-based quadratic 
+#' distance test of Uniformity on the Sphere").
 #' @slot x Matrix of data
 #' @slot Un The value of the U-statistic.
 #' @slot CV_Un The critical value for Un computed through replications.
-#' @slot H0_Un A logical value indicating whether or not the null hypothesis is rejected according to Un.
+#' @slot H0_Un A logical value indicating whether or not the null hypothesis is 
+#' rejected according to Un.
 #' @slot Vn The value of the V-statistic.
 #' @slot CV_Vn The critical value for Vn computed following the asymptotic distribution.
-#' @slot H0_Vn A logical value indicating whether or not the null hypothesis is rejected according to Vn.
+#' @slot H0_Vn A logical value indicating whether or not the null hypothesis is 
+#' rejected according to Vn.
 #' @slot rho The concentration parameter of the Poisson kernel.
 #' @slot B Number of replications.
 #'
@@ -80,9 +90,11 @@ setClass("pk.test",
 #' @title A S4 class for the clustering algorithm on the sphere based on
 #' Poisson kernel-based distributions.
 #'
-#' @description A class to represent the results of Poisson kernel-based clustering procedure for spherical observations.
+#' @description A class to represent the results of Poisson kernel-based clustering 
+#' procedure for spherical observations.
 #'
-#' @slot res_k List of objects with the results of the clustering algorithm for each value of possible number of clusters considered.
+#' @slot res_k List of objects with the results of the clustering algorithm for 
+#' each value of possible number of clusters considered.
 #' @slot input List of input data
 #'
 #' @details See the function \code{pkbc} for more details.

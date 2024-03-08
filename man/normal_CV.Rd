@@ -29,9 +29,11 @@ This function computes the empirical critical value for the Normality test
 based on the KBQD tests using the centered Gaussian kernel.
 }
 \details{
-For each replication, a sample from the d-dimensional Normal distribution with mean vector
-\code{mu_hat} and covariance matrix \code{Sigma_hat} is generated and the KBQD test U-statistic for 
-Normality is computed. 
-After B iterations, the critical value is selected as the \code{Quantile} of the empirical distribution of the computed test statistics.
+For each replication, a sample from the d-dimensional Normal distribution 
+with mean vector
+\code{mu_hat} and covariance matrix \code{Sigma_hat} is generated and the 
+KBQD test U-statistic for Normality is computed. 
+After B iterations, the critical value is selected as the \code{Quantile} 
+of the empirical distribution of the computed test statistics.
 }
 \keyword{internal}

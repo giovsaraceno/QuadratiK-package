@@ -38,7 +38,8 @@ sample_hypersphere <- function(d, n_points=1) {
 }
 #' Generate two samples data from skew-normal distributions
 #'
-#' This function generates data from skew-normal distributions with the specified parameters of means and covariance matrices.
+#' This function generates data from skew-normal distributions with the 
+#' specified parameters of means and covariance matrices.
 #'
 #' @param d number of dimensions.
 #' @param size_x the number of observations for sample X
@@ -56,7 +57,8 @@ sample_hypersphere <- function(d, n_points=1) {
 #' @useDynLib QuadratiK
 #' 
 #' @keywords internal
-generate_SN<-function(d, size_x, size_y, mu_x, mu_y, sigma_x, sigma_y, skewness_y){
+generate_SN<-function(d, size_x, size_y, mu_x, mu_y, 
+                      sigma_x, sigma_y, skewness_y){
    
    muX <- rep(mu_x, d)
    SigmaX <- diag(rep(sigma_x,d))
@@ -84,8 +86,10 @@ generate_SN<-function(d, size_x, size_y, mu_x, mu_y, sigma_x, sigma_y, skewness_
 #' 
 compare_qq <- function(sample1, sample2, main_title) {
    # Compute quantiles
-   quantiles1 <- quantile(sample1, probs = seq(0, 1, length.out = length(sample1)))
-   quantiles2 <- quantile(sample2, probs = seq(0, 1, length.out = length(sample2)))
+   quantiles1 <- quantile(sample1, 
+                          probs = seq(0, 1, length.out = length(sample1)))
+   quantiles2 <- quantile(sample2, 
+                          probs = seq(0, 1, length.out = length(sample2)))
    df <- data.frame(q1 = quantiles1, q2 = quantiles2)
    
    pl <- ggplot(df, aes(x=df$q1,y=df$q2))+
@@ -120,12 +124,19 @@ compare_qq <- function(sample1, sample2, main_title) {
 compute_stats <- function(var1, var2, var_name,eps=3) {
    
    overall <- c(var1, var2)
-   stats <- data.frame(matrix(c(mean(var1),mean(var2),mean(overall),sd(var1),sd(var2),sd(overall),median(var1),median(var2),median(overall),IQR(var1),IQR(var2),IQR(overall),min(var1),min(var2),min(overall),max(var1),max(var2),max(overall)),nrow=6,ncol=3,byrow=TRUE))
+   stats <- data.frame(matrix(c(mean(var1),mean(var2),mean(overall),sd(var1),
+                                sd(var2),sd(overall),median(var1),median(var2),
+                                median(overall),IQR(var1),IQR(var2),
+                                IQR(overall),min(var1),min(var2),min(overall),
+                                max(var1),max(var2),max(overall)),
+                                 nrow=6,ncol=3,byrow=TRUE))
    colnames(stats) <- c("Group 1", "Group 2", "Overall")
    rownames(stats) <- c("mean", "sd", "median", "IQR", "min", "max")
    
    pl <- ggplot() +
-      ggpp::annotate('table', x = 0.5, y = 0.5, label = data.frame(Stat = rownames(stats),stats), hjust = 0.5, vjust = 0.5) +
+      ggpp::annotate('table', x = 0.5, y = 0.5, 
+                     label = data.frame(Stat = rownames(stats),stats), 
+                     hjust = 0.5, vjust = 0.5) +
       theme_void() +
       ggtitle(paste(var_name))+
       scale_color_brewer(palette='Set1')

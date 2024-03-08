@@ -1,25 +1,39 @@
 #'
 #' Kernel-based quadratic distance Goodness-of-Fit tests
 #'
-#' This function performs the kernel-based quadratic distance goodness-of-fit tests using the Gaussian kernel with tuning parameter h.
+#' This function performs the kernel-based quadratic distance goodness-of-fit 
+#' tests using the Gaussian kernel with tuning parameter h.
 #'
 #' @param x Numeric matrix or vector of data values.
-#' @param y Numeric matrix or vector of data values. Depending on the input \code{y}, the corresponding test is performed.
+#' @param y Numeric matrix or vector of data values. Depending on the input 
+#'          \code{y}, the corresponding test is performed.
 #' \itemize{
-#'    \item if \code{y} = NULL, the function performs the tests for normality on \code{x}
-#'    \item if \code{y} is a data matrix, with same dimensions of \code{x}, the function performs the two-sample test between \code{x} and \code{y}.
-#'    \item if \code{y} if a numeric or factor vector, indicating the group memberships for each observation, the function performs the k-sample test.
+#'    \item if \code{y} = NULL, the function performs the tests for normality o
+#'    n \code{x}
+#'    \item if \code{y} is a data matrix, with same dimensions of \code{x}, the 
+#'    function performs the two-sample test between \code{x} and \code{y}.
+#'    \item if \code{y} if a numeric or factor vector, indicating the group 
+#'    memberships for each observation, the function performs the k-sample test.
 #' }
-#' @param h Bandwidth for the kernel function. If a value is not provided, the algorithm for the selection of an optimal h is performed automatically. See the function \code{\link{select_h}} for more details.
-#' @param method The method used for critical value estimation ("subsampling", "bootstrap", or "permutation")(default: "subsampling").
-#' @param B The number of iterations to use for critical value estimation (default: 150).
-#' @param b The size of the subsamples used in the subsampling algorithm  (default: 0.8).
-#' @param Quantile The quantile to use for critical value estimation, 0.95 is the default value.
+#' @param h Bandwidth for the kernel function. If a value is not provided, the 
+#' algorithm for the selection of an optimal h is performed automatically. See 
+#' the function \code{\link{select_h}} for more details.
+#' @param method The method used for critical value estimation ("subsampling", 
+#' "bootstrap", or "permutation")(default: "subsampling").
+#' @param B The number of iterations to use for critical value estimation 
+#' (default: 150).
+#' @param b The size of the subsamples used in the subsampling algorithm  
+#' (default: 0.8).
+#' @param Quantile The quantile to use for critical value estimation, 0.95 is 
+#' the default value.
 #' @param mu_hat Mean vector for the reference distribution.
 #' @param Sigma_hat Covariance matrix of the reference distribution.
-#' @param centeringType String indicating the method used for centering the normal kernel ('Param' or 'Nonparam').
-#' @param K_threshold maximum number of groups allowed. Default is 10. It is a control parameter. Change in case of more than 10 samples.
-#' @param alternative Family of alternative chosen for selecting h, between "location", "scale" and "skewness" (only if \code{h} is not provided).
+#' @param centeringType String indicating the method used for centering the 
+#' normal kernel ('Param' or 'Nonparam').
+#' @param K_threshold maximum number of groups allowed. Default is 10. It is a 
+#' control parameter. Change in case of more than 10 samples.
+#' @param alternative Family of alternative chosen for selecting h, between 
+#' "location", "scale" and "skewness" (only if \code{h} is not provided).
 #'
 #' @details The function \code{kb.test} performs the kernel-based quadratic
 #' distance tests using the Gaussian kernel with bandwidth parameter \code{h}.
@@ -32,13 +46,18 @@
 #' kernel-based quadratic distance tests, based on the normal kernel. The object 
 #' contains the following slots:
 #'\itemize{
-#'   \item \code{method}: String indicating the normal kernel-based quadratic distance test performed.
+#'   \item \code{method}: String indicating the normal kernel-based quadratic 
+#'   distance test performed.
 #'   \item \code{Dn} The value of the test statistic.
-#'   \item \code{H0} A logical value indicating whether or not the null hypothesis is rejected.
+#'   \item \code{H0} A logical value indicating whether or not the null 
+#'   hypothesis is rejected.
 #'   \item \code{data} Data list of samples X (and Y).
 #'   \item \code{CV} The critical value computed for the test.
-#'   \item \code{cv_method} The method used to estimate the critical value (one of "subsampling", "permutation" or "bootstrap").
-#'   \item \code{h} List with the value of bandwidth parameter used for the normal kernel function. If \code{select_h} is used, the matrix of computed power values and the corresponding power plot are also provided. 
+#'   \item \code{cv_method} The method used to estimate the critical value 
+#'   (one of "subsampling", "permutation" or "bootstrap").
+#'   \item \code{h} List with the value of bandwidth parameter used for the 
+#'   normal kernel function. If \code{select_h} is used, the matrix of computed 
+#'   power values and the corresponding power plot are also provided. 
 #'   \item \code{B} Number of bootstrap/permutation/subsampling replications.
 #'}
 #'
@@ -47,9 +66,9 @@
 #' Quadratic Distances.” Manuscript, (Department of Biostatistics, University at 
 #' Buffalo)
 #'
-#' Lindsay, B.G., Markatou, M. & Ray, S. (2014) "Kernels, Degrees of Freedom, and 
-#' Power Properties of Quadratic Distance Goodness-of-Fit Tests", Journal of the
-#' American Statistical Association, 109:505, 395-410, 
+#' Lindsay, B.G., Markatou, M. & Ray, S. (2014) "Kernels, Degrees of Freedom, 
+#' and Power Properties of Quadratic Distance Goodness-of-Fit Tests", Journal 
+#' of the American Statistical Association, 109:505, 395-410, 
 #' DOI: 10.1080/01621459.2013.836972
 #'
 #'
@@ -61,7 +80,8 @@
 #' my_test <- kb.test(x, h=0.5)
 #' my_test
 #' # Two-sample test
-#' my_test <- kb.test(x,y,h=0.5, method="subsampling",b=0.9,centeringType = "Nonparam")
+#' my_test <- kb.test(x,y,h=0.5, method="subsampling",b=0.9,
+#'                      centeringType = "Nonparam")
 #' my_test
 #' # k-sample test
 #' z <- matrix(rnorm(100,2),ncol=2)
@@ -78,7 +98,10 @@
 #' @importFrom Rcpp sourceCpp
 #'
 #' @export
-setGeneric("kb.test",function(x, y=NULL, h = NULL, method = "subsampling", B = 150, b = NULL, Quantile = 0.95, mu_hat = NULL, Sigma_hat = NULL, centeringType="Nonparam", K_threshold=10, alternative="skewness"){
+setGeneric("kb.test",function(x, y=NULL, h = NULL, method = "subsampling", 
+                              B = 150, b = NULL, Quantile = 0.95, mu_hat = NULL, 
+                              Sigma_hat = NULL, centeringType="Nonparam", 
+                              K_threshold=10, alternative="skewness"){
    
    standardGeneric("kb.test")
 })
@@ -92,14 +115,18 @@ setMethod("kb.test", signature(x = "ANY"),
              
              
              if(!(method%in%c("bootstrap", "permutation", "subsampling"))){
-                stop("method must be one of 'bootstrap', 'permutation' or 'subsampling'")
+                stop("method must be one of 'bootstrap', 'permutation' or 
+                     'subsampling'")
              }
              if(b<=0 | b>1){
-                stop("b indicates the proportion used for the subsamples in the subsampling algoritm. It must be in (0,1].")
+                stop("b indicates the proportion used for the subsamples in the 
+                     subsampling algoritm. It must be in (0,1].")
              }
              
              if(!(alternative%in%c("skewness", "location", "scale"))){
-               stop("The algorithm for selecting the value of h can be performed with respect to the following families of alternatives: 'location', 'scale' or 'skewness'")
+               stop("The algorithm for selecting the value of h can be performed
+                    with respect to the following families of alternatives: 
+                    'location', 'scale' or 'skewness'")
              }
              
              if(!(centeringType%in%c("Param", "Nonparam"))){
@@ -130,13 +157,16 @@ setMethod("kb.test", signature(x = "ANY"),
              
              if (is.null(h) & is.null(y)){
                 
-                #stop("A value of the tuning parameter h must be provided to perform the kernel-based quadratic distance Normality tests")
-                h_best <- select_h(x=x, alternative=alternative, method=method, b=b, B=B, power.plot=FALSE)
+                #stop("A value of the tuning parameter h must be provided to 
+                #perform the kernel-based quadratic distance Normality tests")
+                h_best <- select_h(x=x, alternative=alternative, method=method, 
+                                   b=b, B=B, power.plot=FALSE)
                 h <- h_best$h_sel
              
              } else if (is.null(h)& !(is.null(y))){
                 
-                h_best <- select_h(x=x, y=y, alternative=alternative, method=method, b=b, B=B, power.plot=FALSE)
+                h_best <- select_h(x=x, y=y, alternative=alternative, 
+                                   method=method, b=b, B=B, power.plot=FALSE)
                 h <- h_best$h_sel
 
              } else {
@@ -162,13 +192,17 @@ setMethod("kb.test", signature(x = "ANY"),
                 
                 H0 <- (STATISTIC > CV)
                 
-                res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, method = METHOD, data = list(x = x), cv_method = "Empirical", B= B, h= h_best)
+                res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, 
+                           method = METHOD, data = list(x = x), 
+                           cv_method = "Empirical", B= B, h= h_best)
                 
              } else {
                 
                 K <- length(unique(y))
                 
-                if(K > K_threshold){ #Here we consider a maximum number of groups. However this threshold can be set to a higher value by the user if needed
+                if(K > K_threshold){ 
+                   #Here we consider a maximum number of groups. However this 
+                   #threshold can be set to a higher value by the user if needed
                    
                    # Check that they have the same number of columns (features):
                    if(!is.null(y) && ncol(x) != ncol(y)) {
@@ -183,7 +217,8 @@ setMethod("kb.test", signature(x = "ANY"),
                    
                    if(centeringType == "Param"){
                       
-                      # Compute the estimates of mean and covariance from the data
+                      # Compute the estimates of mean and covariance from the 
+                      # data
                       if(is.null(mu_hat)){
                          mu_hat <- matrix(colMeans(data_pool),nrow=1)
                       }
@@ -191,28 +226,31 @@ setMethod("kb.test", signature(x = "ANY"),
                          Sigma_hat <- cov(data_pool)
                       }
                       
-                      STATISTIC <- stat2sample(x, y, h, mu_hat, Sigma_hat, "Param")
+                      STATISTIC <- stat2sample(x, y, h, mu_hat, 
+                                               Sigma_hat, "Param")
                       
                    } else if(centeringType == "Nonparam"){
                       
-                      STATISTIC <- stat2sample(x, y, h, matrix(0,nrow=1),diag(1),"Nonparam")
+                      STATISTIC <- stat2sample(x, y, h, matrix(0,nrow=1),
+                                               diag(1),"Nonparam")
                    }
                    
-                   CV <- compute_CV(B, Quantile, data_pool, size_x, size_y, h, method, b)
+                   CV <- compute_CV(B, Quantile, data_pool, size_x, size_y, h, 
+                                    method, b)
                    
                    H0 <- (STATISTIC > CV)
                    
-                   res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, method = METHOD, data = list(x = x, y = y), cv_method = method, B= B, h= h_best)
+                   res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, 
+                              method = METHOD, data = list(x = x, y = y), 
+                              cv_method = method, B= B, h= h_best)
                 } else {
                    
                    
-                   # Check that they have the same number of rows (observations):
+                   # Check that they have the same number of rows (observations)
                    if(!is.null(y) && nrow(x) != nrow(y)) {
                       stop("'x' and 'y' must have the same number of rows.")
                    }
-                   #if (is.null(h)){
-                   #  stop("A value of the tuning parameter h must be provided to perform the kernel-based quadratic distance k-sample test")
-                   #}
+
                    METHOD <- "Kernel-based quadratic distance k-sample test"
                    
                    sizes <- as.vector(table(y))
@@ -223,7 +261,9 @@ setMethod("kb.test", signature(x = "ANY"),
                    
                    H0 <- (STATISTIC[1] > CV[1])
                    
-                   res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, method = METHOD, data = list(x = x, y = y), cv_method = method, B= B, h= h_best)
+                   res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, 
+                              method = METHOD, data = list(x = x, y = y), 
+                              cv_method = method, B= B, h= h_best)
                 }
              }
              
@@ -258,8 +298,10 @@ setMethod("show", "kb.test",
 #'
 #' @return List with the following components:
 #' \itemize{
-#'    \item \code{summary_tables} Table of computed descriptive statistics per variable (and per group if available).
-#'    \item \code{test_results} Data frame with the results of the performed kernel-based quadratic distance test.
+#'    \item \code{summary_tables} Table of computed descriptive statistics per 
+#'    variable (and per group if available).
+#'    \item \code{test_results} Data frame with the results of the performed 
+#'    kernel-based quadratic distance test.
 #'    \item \code{qqplots} Figure with qq-plots for each variable.
 #' }
 #'
@@ -285,7 +327,7 @@ setMethod("summary", "kb.test", function(object) {
       k <- length(unique(y))
       
       stats <- list()
-      for(i in 1:ncol(x)){
+      for(i in seq_len(ncol(x))){
          res <- rbind(as.numeric(by(x[,i],y,mean)),
                       as.numeric(by(x[,i],y,sd)),
                       as.numeric(by(x[,i],y,median)),
@@ -294,7 +336,8 @@ setMethod("summary", "kb.test", function(object) {
                       as.numeric(by(x[,i],y,max))
          )
          res <- as.data.frame(res)
-         res <- cbind(res, c(mean(x[,i]),sd(x[,i]),median(x[,i]),IQR(x[,i]),min(x[,i]),max(x[,i])))
+         res <- cbind(res, c(mean(x[,i]),sd(x[,i]),median(x[,i]),
+                             IQR(x[,i]),min(x[,i]),max(x[,i])))
          rownames(res) <- c("mean","sd", "median", "IQR", "min", "max")
          colnames(res) <- c(paste("Group ",seq(1,k),sep=""),"Overall")
          stats[[i]] <- res
@@ -317,7 +360,8 @@ setMethod("summary", "kb.test", function(object) {
          )
       })
       plot_list <- do.call(c, plot_list)
-      figure <- ggarrange(plotlist = plot_list, ncol = 2, nrow = length(plot_list) / 2, widths=c(1,1.3))
+      figure <- ggarrange(plotlist = plot_list, ncol = 2, 
+                          nrow = length(plot_list) / 2, widths=c(1,1.3))
       
       stats <- lapply(names(sample1), function(name) {
          
@@ -334,9 +378,11 @@ setMethod("summary", "kb.test", function(object) {
       
       plot_list <- list()
       stats <- list()
-      for(i in 1:ncol(dat_x)) {
+      for(i in seq_len(ncol(dat_x))) {
          
-         qq_df <- data.frame(x = sort(qqnorm(dat_x[,i], plot = FALSE)$x), sample_quantiles = quantile(dat_x[,i], probs = seq(0, 1, length.out = nrow(dat_x))))
+         qq_df <- data.frame(x = sort(qqnorm(dat_x[,i], plot = FALSE)$x), 
+                     sample_quantiles = quantile(dat_x[,i], 
+                                 probs = seq(0, 1, length.out = nrow(dat_x))))
          
          pl <- ggplot(qq_df, aes(x = qq_df$x, y = qq_df$sample_quantiles)) +
             geom_line(col="blue") +
@@ -346,14 +392,19 @@ setMethod("summary", "kb.test", function(object) {
             xlab("Theoretical Quantiles") +
             ylab("Sample Quantiles")
          
-         stats_step <- data.frame(matrix(c(mean(dat_x[,i]),sd(dat_x[,i]),median(dat_x[,i]),IQR(dat_x[,i]),min(dat_x[,i]),max(dat_x[,i])),nrow=6,ncol=1,byrow=TRUE))
+         stats_step <- data.frame(matrix(c(mean(dat_x[,i]),sd(dat_x[,i]),
+                                           median(dat_x[,i]),IQR(dat_x[,i]),
+                                           min(dat_x[,i]),max(dat_x[,i])),
+                                             nrow=6,ncol=1,byrow=TRUE))
          colnames(stats_step) <- c(paste(names(dat_x)[i]))
          rownames(stats_step) <- c("mean", "sd", "median", "IQR", "min", "max")
          
          stats[length(stats) +1] <- stats_step
          
          pl_stat <- ggplot() +
-            ggpp::annotate('table', x = 0.5, y = 0.5, label = data.frame(Stat = rownames(stats_step),stats_step), hjust = 0.5, vjust = 0.5) +
+            ggpp::annotate('table', x = 0.5, y = 0.5, 
+                     label = data.frame(Stat = rownames(stats_step),stats_step), 
+                     hjust = 0.5, vjust = 0.5) +
             theme_void() +
             ggtitle("")+
             scale_color_brewer(palette='Set1')
@@ -362,7 +413,8 @@ setMethod("summary", "kb.test", function(object) {
          
       }
       plot_list <- do.call(c, plot_list)
-      figure <- ggarrange(plotlist = plot_list, nrow = length(plot_list)/2, ncol = 2)
+      figure <- ggarrange(plotlist = plot_list,
+                          nrow = length(plot_list)/2, ncol = 2)
       print(figure)
       
       stats <- do.call(cbind, stats)
@@ -380,5 +432,7 @@ setMethod("summary", "kb.test", function(object) {
    )
    print(test_results)
    
-   return(list(summary_tables = stats, test_results = test_results, qqplots = figure))
+   return(list(summary_tables = stats, 
+               test_results = test_results, 
+               qqplots = figure))
 })

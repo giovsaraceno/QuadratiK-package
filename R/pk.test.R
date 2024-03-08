@@ -1,25 +1,36 @@
 #' 
 #' Poisson kernel-based quadratic distance test of Uniformity on the sphere
 #' 
-#' This function performs the kernel-based quadratic distance goodness-of-fit tests for Uniformity for spherical data using the Poisson kernel with concentration parameter \code{rho}.
+#' This function performs the kernel-based quadratic distance goodness-of-fit 
+#' tests for Uniformity for spherical data using the Poisson kernel with 
+#' concentration parameter \code{rho}.
 #'
 #' @param x A numeric d-dim matrix of data points on the Sphere S^(d-1).
 #' @param rho Concentration parameter of the Poisson kernel function.
-#' @param B Number of iterations for critical value estimation of Un (default: 300).
-#' @param Quantile The quantile to use for critical value estimation, 0.95 is the default value.
+#' @param B Number of iterations for critical value estimation of Un 
+#' (default: 300).
+#' @param Quantile The quantile to use for critical value estimation, 
+#' 0.95 is the default value.
 #'
-#' @return An S4 object of class \code{pk.test} containing the results of the Poisson kernel-based tests. The object contains the following slots:
+#' @return An S4 object of class \code{pk.test} containing the results of the 
+#' Poisson kernel-based tests. The object contains the following slots:
 #'\itemize{
-#'   \item \code{method}: String indicating that the Poisson Kernel-based test is performed.
+#'   \item \code{method}: String indicating that the Poisson Kernel-based test 
+#'   is performed.
 #'   \item \code{x} Data matrix.
 #'   \item \code{Un} The value of the U-statistic.
 #'   \item \code{CV_Un} The empirical critical value for Un.
-#'   \item \code{H0_Vn} A logical value indicating whether or not the null hypothesis is rejected according to Un.
+#'   \item \code{H0_Vn} A logical value indicating whether or not the null 
+#'   hypothesis is rejected according to Un.
 #'   \item \code{Vn} The value of the V-statistic.
-#'   \item \code{CV_Vn} The critical value for Vn computed following the asymptotic distribution.
-#'   \item \code{H0_Vn} A logical value indicating whether or not the null hypothesis is rejected according to Vn.
-#'   \item \code{rho} The value of concentration parameter used for the Poisson kernel function.
-#'   \item \code{B} Number of replications for the critical value of the U-statistic.
+#'   \item \code{CV_Vn} The critical value for Vn computed following the 
+#'   asymptotic distribution.
+#'   \item \code{H0_Vn} A logical value indicating whether or not the null 
+#'   hypothesis is rejected according to Vn.
+#'   \item \code{rho} The value of concentration parameter used for the Poisson 
+#'   kernel function.
+#'   \item \code{B} Number of replications for the critical value of the 
+#'   U-statistic.
 #'}
 #'
 #'
@@ -66,7 +77,8 @@ setMethod("pk.test", signature(x = "ANY"),
              }
              
              
-             METHOD <- "Poisson Kernel-based quadratic distance test of Uniformity on the Sphere"
+             METHOD <- "Poisson Kernel-based quadratic distance test of 
+                        Uniformity on the Sphere"
              
              d<- ncol(x)
              n <- nrow(x)
@@ -84,7 +96,10 @@ setMethod("pk.test", signature(x = "ANY"),
              
              CV_Un <- poisson_CV(d=d, size=n, rho=rho, B=B, Quantile=Quantile )
              
-             res <- new("pk.test", Un = pk[1]/sqrt(var_Un), CV_Un = CV_Un, Vn = pk[2], CV_Vn = CV_Vn, method = METHOD, x = x, B= B, rho= rho, H0_Un = pk[1]/sqrt(var_Un) > CV_Un, H0_Vn = pk[2] > CV_Vn)
+             res <- new("pk.test", Un = pk[1]/sqrt(var_Un), CV_Un = CV_Un, 
+                        Vn = pk[2], CV_Vn = CV_Vn, method = METHOD, x = x, B= B, 
+                        rho= rho, H0_Un = pk[1]/sqrt(var_Un) > CV_Un, 
+                        H0_Vn = pk[2] > CV_Vn)
              return(res)
           })
 #' @rdname pk.test
@@ -121,9 +136,12 @@ setMethod("show", "pk.test",
 #' 
 #' @return List with the following components:
 #' \itemize{
-#'    \item \code{summary_tables} Table of computed descriptive statistics per variable.
-#'    \item \code{test_results} Data frame with the results of the performed Poisson kernel-based test.
-#'    \item \code{qqplots} Figure with qq-plots for each variable against the uniform distribution.
+#'    \item \code{summary_tables} Table of computed descriptive statistics per 
+#'    variable.
+#'    \item \code{test_results} Data frame with the results of the performed 
+#'    Poisson kernel-based test.
+#'    \item \code{qqplots} Figure with qq-plots for each variable against the 
+#'    uniform distribution.
 #' }
 #'
 #' @import ggpubr
@@ -145,10 +163,12 @@ setMethod("summary", "pk.test", function(object) {
    
    plot_list <- list()
    stats <- list()
-   for(i in 1:ncol(dat_x)) {
+   for(i in seq_len(ncol(dat_x))) {
       
       unif_data <- runif(nrow(dat_x),-1,1)
-      qq_df <- data.frame(x = quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))), sample_quantiles = quantile(dat_x[,i], probs = seq(0, 1, length.out = nrow(dat_x))))
+      qq_df <- data.frame(
+         x = quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))), 
+         sample_quantiles = quantile(dat_x[,i], probs = seq(0, 1, length.out = nrow(dat_x))))
       
       pl <- ggplot(qq_df, aes(x = qq_df$x, y = qq_df$sample_quantiles)) +
          geom_line(col="blue") +
@@ -159,14 +179,19 @@ setMethod("summary", "pk.test", function(object) {
          ylab("Sample Quantiles")
       
       
-      stats_step <- data.frame(matrix(c(mean(dat_x[,i]),sd(dat_x[,i]),median(dat_x[,i]),IQR(dat_x[,i]),min(dat_x[,i]),max(dat_x[,i])),nrow=6,ncol=1,byrow=TRUE))
+      stats_step <- data.frame(matrix(c(mean(dat_x[,i]),sd(dat_x[,i]),
+                                        median(dat_x[,i]),IQR(dat_x[,i]),
+                                        min(dat_x[,i]),max(dat_x[,i])),
+                                      nrow=6,ncol=1,byrow=TRUE))
       colnames(stats_step) <- c(paste(names(dat_x)[i]))
       rownames(stats_step) <- c("mean", "sd", "median", "IQR", "min", "max")
       
       stats[[i]] <- stats_step
       
       pl_stat <- ggplot() +
-         ggpp::annotate('table', x = 0.5, y = 0.5, label = data.frame(Stat = rownames(stats_step),stats_step), hjust = 0.5, vjust = 0.5) +
+         ggpp::annotate('table', x = 0.5, y = 0.5, 
+                     label = data.frame(Stat = rownames(stats_step),stats_step), 
+                     hjust = 0.5, vjust = 0.5) +
          theme_void() +
          ggtitle("")+
          scale_color_brewer(palette='Set1')
@@ -180,7 +205,8 @@ setMethod("summary", "pk.test", function(object) {
    rownames(stats) <- c("mean", "sd", "median", "IQR", "min", "max")
    
    plot_list <- do.call(c, plot_list)
-   figure <- ggarrange(plotlist = plot_list, nrow = length(plot_list)/2, ncol = 2)
+   figure <- ggarrange(plotlist = plot_list, 
+                       nrow = length(plot_list)/2, ncol = 2)
    
    # Print main results of the test
    cat( "\n", object@method, "\n")
@@ -191,5 +217,7 @@ setMethod("summary", "pk.test", function(object) {
    )
    print(test_results)
    print(figure)
-   return(list(summary_tables = stats, test_results = test_results, qqplots = figure))
+   return(list(summary_tables = stats, 
+               test_results = test_results, 
+               qqplots = figure))
 })

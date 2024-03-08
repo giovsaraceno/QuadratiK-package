@@ -25,15 +25,19 @@ select_h(
 
 \item{y}{Data set of observations from Y.}
 
-\item{alternative}{Family of alternative chosen for selecting h, between "location", "scale" and "skewness".}
+\item{alternative}{Family of alternative chosen for selecting h, between 
+"location", "scale" and "skewness".}
 
-\item{method}{The method used for critical value estimation ("subsampling", "bootstrap", or "permutation").}
+\item{method}{The method used for critical value estimation 
+("subsampling", "bootstrap", or "permutation").}
 
 \item{b}{The size of the subsamples used in the subsampling algorithm .}
 
-\item{B}{The number of iterations to use for critical value estimation, B = 150 as default.}
+\item{B}{The number of iterations to use for critical value estimation, 
+B = 150 as default.}
 
-\item{delta_dim}{Vector of coefficient of alternative with respect to each dimension}
+\item{delta_dim}{Vector of coefficient of alternative with respect to each 
+dimension}
 
 \item{delta}{Vector of parameter values indicating chosen alternatives}
 
@@ -41,25 +45,34 @@ select_h(
 
 \item{Nrep}{Number of bootstrap/permutation/subsampling replications.}
 
-\item{n_cores}{Number of cores used to parallel the h selection algorithm (default:2).}
+\item{n_cores}{Number of cores used to parallel the h selection algorithm 
+(default:2).}
 
-\item{Quantile}{The quantile to use for critical value estimation, 0.95 is the default value.}
+\item{Quantile}{The quantile to use for critical value estimation, 0.95 is 
+the default value.}
 
-\item{power.plot}{Logical. If TRUE, it is displayed the plot of power for values in h_values and delta.}
+\item{power.plot}{Logical. If TRUE, it is displayed the plot of power for 
+values in h_values and delta.}
 }
 \value{
 A list with the following attributes:
 \itemize{
    \item \code{h_sel} the selected value of tuning parameter h;
-   \item \code{power} matrix of power values computed for the considered values of \code{delta} and \code{h_values};
+   \item \code{power} matrix of power values computed for the considered 
+   values of \code{delta} and \code{h_values};
    \item \code{power.plot} power plots (if \code{power.plot} is \code{TRUE}).
 }
 }
 \description{
-This function computes the kernel bandwidth of the Gaussian kernel for the two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
+This function computes the kernel bandwidth of the Gaussian kernel for the 
+two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
 }
 \details{
-The function performs the selection of the optimal value for the tuning parameter \eqn{h} of the normal kernel function, for the two-sample and k-sample KBQD tests. It performs a small simulation study, generating sample according to the family of \code{alternative} specified, for the chosen values of \code{h_values} and \code{delta}.
+The function performs the selection of the optimal value for the tuning 
+parameter \eqn{h} of the normal kernel function, for the two-sample and 
+k-sample KBQD tests. It performs a small simulation study, generating sample 
+according to the family of \code{alternative} specified, for the chosen 
+values of \code{h_values} and \code{delta}.
 }
 \examples{
 # Select the value of h using the mid-power algorithm
@@ -72,7 +85,7 @@ h_sel
 
 }
 \references{
-Markatou, M., Saraceno, G., Chen, Y. (2023). “Two- and k-Sample Tests Based on
-Quadratic Distances.” Manuscript, (Department of Biostatistics, University at
-Buffalo)
+Markatou, M., Saraceno, G., Chen, Y. (2023). “Two- and k-Sample Tests Based 
+on Quadratic Distances.” Manuscript, (Department of Biostatistics, University 
+at Buffalo)
 }

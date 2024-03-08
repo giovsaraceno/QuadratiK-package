@@ -27,6 +27,7 @@ generate_SN(d, size_x, size_y, mu_x, mu_y, sigma_x, sigma_y, skewness_y)
 a list containing the generated X and Y data sets.
 }
 \description{
-This function generates data from skew-normal distributions with the specified parameters of means and covariance matrices.
+This function generates data from skew-normal distributions with the 
+specified parameters of means and covariance matrices.
 }
 \keyword{internal}

@@ -6,8 +6,8 @@ library(testthat)
 ## Clustering on the Sphere
 ## 
 size <- 100
-groups<-c(rep(1, size), rep(2, size),rep(3,size))
-rho=0.8
+groups <- c(rep(1, size), rep(2, size),rep(3,size))
+rho <- 0.8
 data1<-rpkb(size, c(1,0,0),rho,method='rejvmf')
 data2<-rpkb(size, c(0,1,0),rho,method='rejacg')
 data3<-rpkb(size, c(-1,0,0),rho,method='rejpsaw')

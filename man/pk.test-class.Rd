@@ -5,12 +5,14 @@
 \alias{pk.test-class}
 \title{An S4 class for Poisson kernel-based quadratic distance tests.}
 \description{
-A class to represent the results of Poisson kernel-based quadratic distance tests for Uniformity on the sphere.
+A class to represent the results of Poisson kernel-based quadratic
+ distance tests for Uniformity on the sphere.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{method}}{The method used for the test ("Poisson Kernel-based quadratic distance test of Uniformity on the Sphere").}
+\item{\code{method}}{The method used for the test ("Poisson Kernel-based quadratic 
+distance test of Uniformity on the Sphere").}
 
 \item{\code{x}}{Matrix of data}
 
@@ -18,13 +20,15 @@ A class to represent the results of Poisson kernel-based quadratic distance test
 
 \item{\code{CV_Un}}{The critical value for Un computed through replications.}
 
-\item{\code{H0_Un}}{A logical value indicating whether or not the null hypothesis is rejected according to Un.}
+\item{\code{H0_Un}}{A logical value indicating whether or not the null hypothesis is 
+rejected according to Un.}
 
 \item{\code{Vn}}{The value of the V-statistic.}
 
 \item{\code{CV_Vn}}{The critical value for Vn computed following the asymptotic distribution.}
 
-\item{\code{H0_Vn}}{A logical value indicating whether or not the null hypothesis is rejected according to Vn.}
+\item{\code{H0_Vn}}{A logical value indicating whether or not the null hypothesis is 
+rejected according to Vn.}
 
 \item{\code{rho}}{The concentration parameter of the Poisson kernel.}
 

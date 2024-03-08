@@ -5,12 +5,15 @@
 \alias{kb.test-class}
 \title{An S4 class for kernel-based distance tests with normal kernel}
 \description{
-A class to represent the results of Gaussian kernel-based quadratic distance tests. This includes the normality test, the two-sample test statistics and the k-sample tests.
+A class to represent the results of Gaussian kernel-based 
+quadratic distance tests. This includes the normality test, the two-sample 
+test statistics and the k-sample tests.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{method}}{String indicating the normal kernel-based quadratic distance test performed.}
+\item{\code{method}}{String indicating the normal kernel-based quadratic distance 
+test performed.}
 
 \item{\code{Dn}}{The value of the test statistic.}
 
@@ -20,9 +23,12 @@ A class to represent the results of Gaussian kernel-based quadratic distance tes
 
 \item{\code{CV}}{The critical value computed for the test.}
 
-\item{\code{cv_method}}{The method used to estimate the critical value (one of "subsampling", "permutation" or "bootstrap").}
+\item{\code{cv_method}}{The method used to estimate the critical value (one of 
+"subsampling", "permutation" or "bootstrap").}
 
-\item{\code{h}}{A list with the value of bandwidth parameter used for the Gaussian kernel. If the function \code{select_h} is used, then also the matrix of computed power values and the resulting power plot are provided.}
+\item{\code{h}}{A list with the value of bandwidth parameter used for the Gaussian kernel. 
+If the function \code{select_h} is used, then also the matrix of computed power
+ values and the resulting power plot are provided.}
 
 \item{\code{B}}{Number of bootstrap/permutation/subsampling replications.}
 }}

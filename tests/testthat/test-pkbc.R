@@ -15,7 +15,9 @@ dat<-rbind(data1$x,data2$x, data3$x)
 
 # Test 1: Verify Error on Invalid nClust
 test_that("Error is thrown for invalid nClust", {
-   expect_error(pkbc(dat, nClust = 0), "nClust must be greater than 0")
+   dat <- matrix(rnorm(100),ncol=2)
+   expect_error(pkbc(dat, nClust = 0), "Values in the input parameter nClust must be 
+                        greater than 0")
 })
 
 # Test 2: Test for valid input

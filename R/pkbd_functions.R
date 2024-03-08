@@ -181,7 +181,7 @@ rpkb <- function(n, mu, rho, method = 'rejvmf') {
       
    } else if (method == 'rejpsaw') {
       
-      retvals <- vapply(1:n, function(x){
+      retvals <- sapply(1:n, function(x){
          lambda <- (2*rho)/(1+rho^2)
          # pSaw: log-density and derivatives
          lpdf <- function(t) {-p*log(1-lambda*t) + (p-3)*(log(1+t) + log(1-t))}

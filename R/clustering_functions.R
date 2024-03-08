@@ -286,7 +286,7 @@ setMethod("pkbc", signature(dat = "ANY"),
                 memb_best <- apply(normprobMat_best, 1, which.max)
                 
                 # Calculate the within-cluster sum of squares
-                wcss <- vapply(1:numClust, function(cl) {
+                wcss <- sapply(1:numClust, function(cl) {
                    idx <- which(memb_best==cl)
                    
                    if(length(idx)>0){
@@ -306,7 +306,7 @@ setMethod("pkbc", signature(dat = "ANY"),
                 
                 # Calculate the within-cluster sum of squares using cosine 
                 # similarity
-                wcss_cos <- vapply(1:numClust, function(cl) {
+                wcss_cos <- sapply(1:numClust, function(cl) {
                    idx <- which(memb_best==cl)
                    if(length(idx)>0){
                       dat_memb <- matrix(t(dat[idx,]),ncol=numVar, byrow=TRUE)

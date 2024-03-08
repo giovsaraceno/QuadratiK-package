@@ -357,7 +357,7 @@ generate the sample <span class="math inline">\(y = (y_1,
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>x_2 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(n, <span class="at">mean =</span> <span class="fu">rep</span>(<span class="dv">0</span>,d))</span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>y_2 <span class="ot">&lt;-</span> <span class="fu">rmsn</span>(<span class="at">n=</span>n, <span class="at">xi=</span><span class="dv">0</span>, <span class="at">Omega =</span> <span class="fu">diag</span>(d), <span class="at">alpha=</span><span class="fu">rep</span>(skewness_y,d))</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>h <span class="ot">=</span> <span class="dv">2</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>two_test <span class="ot">&lt;-</span> <span class="fu">kb.test</span>(<span class="at">x=</span>x_2, <span class="at">y=</span>y_2, <span class="at">h=</span>h)</span></code></pre></div>
 <p>For the two-sample case, the <code>summary</code> function provides

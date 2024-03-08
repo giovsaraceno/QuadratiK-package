@@ -3,7 +3,7 @@
 ^LICENSE\.md$
 ^doc$
 ^Meta$
-^codemeta.json$
+^codemeta\.json$
 ^\.github$
 ^CONTRIBUTING\.md$
 ^codecov\.yml$

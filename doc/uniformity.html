@@ -355,13 +355,14 @@ from the uniform distribution on <span class="math inline">\(S^{d-1}\)</span>, w
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>dat_sphere <span class="ot">&lt;-</span> z<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">rowSums</span>(z<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
 <p>The <code>pk.test</code> is used for testing uniformity of the
 generated sample.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>rho <span class="ot">=</span> <span class="fl">0.7</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>res_unif <span class="ot">&lt;-</span> <span class="fu">pk.test</span>(<span class="at">x=</span>dat_sphere, <span class="at">rho=</span>rho)</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>res_unif</span></code></pre></div>
 <pre><code>## 
-##  Poisson Kernel-based quadratic distance test of Uniformity on the Sphere 
+##  Poisson Kernel-based quadratic distance test of 
+##                         Uniformity on the Sphere 
 ## Selected consentration parameter rho:  0.7 
 ## 
 ## U-statistic:
@@ -381,7 +382,8 @@ figure showing the qq-plots against the uniform distribution of each
 variable with a table of standard descriptive statistics.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>summary_unif <span class="ot">&lt;-</span> <span class="fu">summary</span>(res_unif)</span></code></pre></div>
 <pre><code>## 
-##  Poisson Kernel-based quadratic distance test of Uniformity on the Sphere 
+##  Poisson Kernel-based quadratic distance test of 
+##                         Uniformity on the Sphere 
 ##   Test_Statistics Critical_Value Reject_H0
 ## 1      -0.9756673     0.02660107     FALSE
 ## 2      14.8959834    23.22948694     FALSE</code></pre>

@@ -8,14 +8,14 @@ test_that("Error on invalid method input", {
    expect_error(kb.test(x = matrix(rnorm(100), ncol = 2), h=0.5, 
                         method = "invalid_method"), 
                 "method must be one of 'bootstrap', 'permutation' or 
-                'subsampling'", fixed=TRUE)
+                     'subsampling'", fixed=TRUE)
 })
 
 # Test 2: Verify Error on Invalid b Input
 test_that("Error on invalid b input", {
    expect_error(kb.test(x = matrix(rnorm(100), ncol = 2), h=0.5, b = 10), 
                 "b indicates the proportion used for the subsamples in the 
-                subsampling algoritm. It must be in (0,1]", fixed=TRUE)
+                     subsampling algoritm. It must be in (0,1].", fixed=TRUE)
 })
 
 # Test 3: Error on Invalid alternative Input
@@ -24,9 +24,9 @@ test_that("Error on invalid alternative input", {
    expect_error(kb.test(x = matrix(rnorm(100), ncol= 2), 
                         y = matrix(rnorm(100), ncol= 2), h=0.5, 
                         alternative = "invalid"),
-                "The algorithm for selecting the value of h can be performed 
-                with respect to the following families of alternatives: 
-                'location', 'scale' or 'skewness'", fixed=TRUE)
+                "The algorithm for selecting the value of h can be performed
+                    with respect to the following families of alternatives: 
+                    'location', 'scale' or 'skewness'", fixed=TRUE)
 })
 
 # Test 4: Error on Invalid centeringType Input

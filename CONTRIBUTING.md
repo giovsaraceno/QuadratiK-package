@@ -1,17 +1,17 @@
-# Contributing to our_package
+# Contributing to QuadratiK
 
 <!-- This CONTRIBUTING.md is adapted from https://gist.github.com/peterdesmet/e90a1b0dc17af6c12daf6e8b2f044e7c -->
 
-First of all, thanks for considering contributing to our_package! 👍 It's people like you that make it rewarding for us - the project maintainers - to work on our_package. 😊
+First of all, thanks for considering contributing to QuadratiK! 👍 It's people like you that make it rewarding for us - the project maintainers - to work on our package. 😊
 
-our_package is an open source project, maintained by people who care. We are not directly funded to do so.
+QuadratiK is an open source project, maintained by people who care. We are not directly funded to do so.
 
-[repo]: https://github.com/our_org/our_package
-[issues]: https://github.com/our_org/our_package/issues
-[new_issue]: https://github.com/our_org/our_package/issues/new
-[website]: https://our_org.github.io/our_package
-[citation]: https://our_org.github.io/our_package/authors.html
-[email]: mailto:maintainer_email
+[repo]: https://github.com/giovsaraceno/QuadratiK-package
+[issues]: https://github.com/giovsaraceno/QuadratiK-package/issues
+[new_issue]: https://github.com/giovsaraceno/QuadratiK-package/issues/new
+[website]: https://github.com/giovsaraceno/QuadratiK-package
+[citation]: https://arxiv.org/abs/2402.02290
+[email]: mailto:gsaracen@buffalo.edu
 
 ## Code of conduct
 
@@ -23,19 +23,19 @@ There are several ways you can contribute to this project. If you want to know m
 
 ### Share the love ❤️
 
-Think our_package is useful? Let others discover it, by telling them in person, via Twitter or a blog post.
+Think QuadratiK is useful? Let others discover it, by telling them in person, via Twitter, ResearchGate or a blog post.
 
-Using our_package for a paper you are writing? Consider [citing it][citation].
+Using QuadratiK for a paper you are writing? Consider [citing it][citation].
 
 ### Ask a question ⁉️
 
-Using our_package and got stuck? Browse the [documentation][website] to see if you can find a solution. Still stuck? Post your question as an [issue on GitHub][new_issue]. While we cannot offer user support, we'll try to do our best to address it, as questions often lead to better documentation or the discovery of bugs.
+Using QuadratiK and got stuck? Browse the [documentation][website] to see if you can find a solution. Still stuck? Post your question as an [issue on GitHub][new_issue]. While we cannot offer user support, we'll try to do our best to address it, as questions often lead to better documentation or the discovery of bugs.
 
 Want to ask a question in private? Contact the package maintainer by [email][mailto:email].
 
 ### Propose an idea 💡
 
-Have an idea for a new our_package feature? Take a look at the [documentation][website] and [issue list][issues] to see if it isn't included or suggested yet. If not, suggest your idea as an [issue on GitHub][new_issue]. While we can't promise to implement your idea, it helps to:
+Have an idea for a new QuadratiK feature? Take a look at the [documentation][website] and [issue list][issues] to see if it isn't included or suggested yet. If not, suggest your idea as an [issue on GitHub][new_issue]. While we can't promise to implement your idea, it helps to:
 
 * Explain in detail how it would work.
 * Keep the scope as narrow as possible.
@@ -44,7 +44,7 @@ See below if you want to contribute code for your idea as well.
 
 ### Report a bug 🐛
 
-Using our_package and discovered a bug? That's annoying! Don't let others have the same experience and report it as an [issue on GitHub][new_issue] so we can fix it. A good bug report makes it easier for us to do so, so please include:
+Using QuadratiK and discovered a bug? That's annoying! Don't let others have the same experience and report it as an [issue on GitHub][new_issue] so we can fix it. A good bug report makes it easier for us to do so, so please include:
 
 * Your operating system name and version (e.g. Mac OS 10.13.6).
 * Any details about your local setup that might be helpful in troubleshooting.
@@ -68,7 +68,7 @@ Functions are described as comments near their code and translated to documentat
 
 ### Contribute code 📝
 
-Care to fix bugs or implement new functionality for our_package? Awesome! 👏 Have a look at the [issue list][issues] and leave a comment on the things you want to work on. See also the development guidelines below.
+Care to fix bugs or implement new functionality for QuadratiK? Awesome! 👏 Have a look at the [issue list][issues] and leave a comment on the things you want to work on. See also the development guidelines below.
 
 ## Development guidelines
 

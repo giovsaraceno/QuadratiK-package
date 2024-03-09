@@ -7,7 +7,7 @@
 \usage{
 pkbc(
   dat,
-  nClust,
+  nClust = NULL,
   maxIter = 300,
   stoppingRule = "loglik",
   initMethod = "sampleData",
@@ -16,7 +16,7 @@ pkbc(
 
 \S4method{pkbc}{ANY}(
   dat,
-  nClust,
+  nClust = NULL,
   maxIter = 300,
   stoppingRule = "loglik",
   initMethod = "sampleData",

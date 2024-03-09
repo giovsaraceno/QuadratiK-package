@@ -78,7 +78,7 @@
 #'
 #' @export
 setGeneric("pkbc",function(dat,
-                           nClust,
+                           nClust=NULL,
                            maxIter = 300,
                            stoppingRule = 'loglik',
                            initMethod = 'sampleData',
@@ -90,7 +90,7 @@ setGeneric("pkbc",function(dat,
 #' @export
 setMethod("pkbc", signature(dat = "ANY"),
           function(dat,
-                   nClust,
+                   nClust=NULL,
                    maxIter = 300,
                    stoppingRule = 'loglik',
                    initMethod = 'sampleData',
@@ -101,7 +101,7 @@ setMethod("pkbc", signature(dat = "ANY"),
              
              # validate input
              if(is.null(nClust)){
-                stop("Input parameter nClust is require. Provide one specific 
+                stop("Input parameter nClust is required. Provide one specific 
                      value or a set of possible values.")
              } else {
                 if(any(nClust < 1)){
@@ -388,6 +388,7 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' @importFrom mclust adjustedRandIndex
 #' @import clusterRepro
 #' @import ggplot2
+#' @import ggpubr
 #' @importFrom cluster silhouette
 #'
 #' @examples
@@ -485,6 +486,7 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
    }
    
    wcss <- wcss[-1,]
+   wcss <- matrix(wcss,ncol=2)
    colnames(wcss) <- c("Euclidean","cosine_similarity")
    rownames(wcss) <- paste0("k=",object@input$nClust)
    
@@ -506,11 +508,12 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
               y = "Within-cluster sum of squares (WCSS)") +
          theme_minimal()
       
-      print(pl)
-      print(pl_cos)
+      fig <- ggarrange(plotlist = list(pl, pl_cos), nrow=1)
+   } else {
+      fig <- NULL
    }
    
-   results <- list(metrics = metrics, IGP = igp_k, wcss = wcss)
+   results <- list(metrics = metrics, IGP = igp_k, wcss = wcss, elbow = fig)
    
    return(results)
 }

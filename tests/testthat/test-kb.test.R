@@ -58,6 +58,13 @@ test_that("Functionality with valid inputs", {
    expect_true(is.numeric(result@Dn))
    expect_false(result@H0)
    
+   ## Test all the methods for the CV computation
+   result <- kb.test(x, y, h=0.5, method = "bootstrap")
+   expect_s4_class(result, "kb.test")
+   
+   result <- kb.test(x, y, h=0.5, method = "permutation")
+   expect_s4_class(result, "kb.test")
+   
 })
 
 # Test 7: Testing main functionality: k-sample test

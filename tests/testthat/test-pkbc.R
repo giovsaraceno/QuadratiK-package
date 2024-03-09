@@ -51,8 +51,10 @@ test_that("Function respects the stopping rule", {
    dat<-rbind(matrix(rnorm(50),ncol=2), matrix(rnorm(50,4),ncol=2))
    result_loglik <- pkbc(dat, nClust = 3, stoppingRule = 'loglik')
    result_max <- pkbc(dat, nClust = 3, stoppingRule = 'max')
+   result_memb <- pkbc(dat, nClust = 3, stoppingRule = 'membership')
    expect_true(class(result_loglik)== "pkbc")
    expect_true(class(result_max)== "pkbc")
+   expect_true(class(result_memb)== "pkbc")
    
    expect_error(pkbc(dat, nClust = 3, stoppingRule = 'prova'))
    

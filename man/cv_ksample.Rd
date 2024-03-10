@@ -17,19 +17,19 @@ cv_ksample(x, y, h, B = 150, b = 0.9, Quantile = 0.95, method = "subsampling")
 
 \item{b}{the subsampling block size (only used if \code{method} is "subsampling")}
 
-\item{Quantile}{the quantile of the bootstrap/permutation/subsampling 
+\item{Quantile}{the quantile of the bootstrap/permutation/subsampling
 distribution to use as the critical value}
 
-\item{method}{the method to use for computing the critical value 
+\item{method}{the method to use for computing the critical value
 (one of "bootstrap", "permutation")}
 }
 \value{
-a vector of two critical values corresponding to different 
+a vector of two critical values corresponding to different
 formulation of the k-sample test statistics.
 }
 \description{
-This function computes the empirical critical value for the k-sample KBQD 
-tests using the centered Gaussian kernel, with bootstrap, permutation, or 
+This function computes the empirical critical value for the k-sample KBQD
+tests using the centered Gaussian kernel, with bootstrap, permutation, or
 subsampling.
 }
 \keyword{internal}

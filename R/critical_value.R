@@ -30,6 +30,8 @@
 #' @importFrom MASS ginv
 #' @import RcppEigen
 #'
+#' @srrstats {G1.4a} roxigen2 is used
+#' 
 #' @keywords internal
 compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
    
@@ -92,6 +94,8 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
 #' @importFrom stats quantile
 #' @import RcppEigen
 #'
+#' @srrstats {G1.4a} roxigen2 is used
+#'  
 #' @keywords internal
 poisson_CV<-function(d, size, rho, B, Quantile){
    
@@ -135,6 +139,8 @@ poisson_CV<-function(d, size, rho, B, Quantile){
 #' @import mvtnorm
 #' @import RcppEigen
 #'
+#' @srrstats {G1.4a} roxigen2 is used
+#' 
 #' @keywords internal
 normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
    
@@ -173,6 +179,8 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
 #' @importFrom stats quantile
 #' @import RcppEigen
 #'
+#' @srrstats {G1.4a} roxigen2 is used
+#' 
 #' @keywords internal
 cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, method="subsampling"){
    

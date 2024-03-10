@@ -32,8 +32,8 @@ pkbc(
 
 \item{stoppingRule}{String describing the stopping rule to be
 used within each run. Currently must be either \code{'max'} (until the change
-in the log-likelihood is less than a given threshold $(1e-7)$), 
-\code{'membership'} (until the membership is unchanged), or \code{'loglik'} 
+in the log-likelihood is less than a given threshold $(1e-7)$),
+\code{'membership'} (until the membership is unchanged), or \code{'loglik'}
 (based on a maximum number of iterations).}
 
 \item{initMethod}{String describing the initialization method to be used.
@@ -42,41 +42,41 @@ Currently must be \code{'sampleData'}.}
 \item{numInit}{Number of initializations.}
 }
 \value{
-An S4 object of class \code{pkbc} containing the results of the 
-clustering procedure based on Poisson kernel-based distributions. The object 
+An S4 object of class \code{pkbc} containing the results of the
+clustering procedure based on Poisson kernel-based distributions. The object
 contains the following slots:
 
-  \code{res_k}: List of results of the Poisson kernel-based clustering 
-  algorithm for each value of number of clusters specified in \code{nClust}. 
-  Each object in the list contains:
-  \itemize{
-     \item \code{postProbs} Posterior probabilities of each observation for 
-     the indicated clusters.
-     \item \code{LogLik} Maximum value of log-likelihood function
-     \item \code{wcss} Values of within-cluster sum of squares computed with 
-     Euclidean distance and cosine similarity, respectively.
-     \item \code{params} List of estimated parameters of the mixture model
-          \itemize{
-             \item \code{mu} estimated centroids
-             \item \code{rho} estimated concentration parameters rho
-             \item \code{alpha} estimated mixing proportions
-          }
-     \item \code{finalMemb} Vector of final memberships
-     \item \code{runInfo} List of information of the EM algorithm iterations
-          \itemize{
-             \item \code{lokLikVec} vector of log-likelihood values
-             \item \code{numIterPerRun} number of E-M iterations per run
-          }
-  }
-  \code{input}: List of input information.
+\code{res_k}: List of results of the Poisson kernel-based clustering
+algorithm for each value of number of clusters specified in \code{nClust}.
+Each object in the list contains:
+\itemize{
+\item \code{postProbs} Posterior probabilities of each observation for
+the indicated clusters.
+\item \code{LogLik} Maximum value of log-likelihood function
+\item \code{wcss} Values of within-cluster sum of squares computed with
+Euclidean distance and cosine similarity, respectively.
+\item \code{params} List of estimated parameters of the mixture model
+\itemize{
+\item \code{mu} estimated centroids
+\item \code{rho} estimated concentration parameters rho
+\item \code{alpha} estimated mixing proportions
+}
+\item \code{finalMemb} Vector of final memberships
+\item \code{runInfo} List of information of the EM algorithm iterations
+\itemize{
+\item \code{lokLikVec} vector of log-likelihood values
+\item \code{numIterPerRun} number of E-M iterations per run
+}
+}
+\code{input}: List of input information.
 }
 \description{
-The function \code{pkbc} performs the Poisson kernel-based clustering 
+The function \code{pkbc} performs the Poisson kernel-based clustering
 algorithm on the sphere based on the Poisson kernel-based densities.
 }
 \details{
 The function estimates the parameter of a mixture of Poisson
-kernel-based densities. The obtained estimates are used for assigning final 
+kernel-based densities. The obtained estimates are used for assigning final
 memberships, identifying the \code{nClust} clusters.
 }
 \examples{
@@ -105,6 +105,6 @@ pkbd<- pkbc(dat, 3)
 \references{
 Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
 Convergence Properties, Identifiability, and a Method of Sampling, Journal of
-Computational and Graphical Statistics, 29:4, 758-770, 
+Computational and Graphical Statistics, 29:4, 758-770,
 DOI: 10.1080/10618600.2020.1740713.
 }

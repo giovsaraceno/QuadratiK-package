@@ -12,12 +12,12 @@
 \value{
 List with the following components:
 \itemize{
-   \item \code{summary_tables} Table of computed descriptive statistics per 
-   variable.
-   \item \code{test_results} Data frame with the results of the performed 
-   Poisson kernel-based test.
-   \item \code{qqplots} Figure with qq-plots for each variable against the 
-   uniform distribution.
+\item \code{summary_tables} Table of computed descriptive statistics per
+variable.
+\item \code{test_results} Data frame with the results of the performed
+Poisson kernel-based test.
+\item \code{qqplots} Figure with qq-plots for each variable against the
+uniform distribution.
 }
 }
 \description{

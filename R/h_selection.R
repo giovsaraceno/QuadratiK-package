@@ -63,6 +63,10 @@
 #'
 #' @useDynLib QuadratiK
 #'
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G2.0,G2.1,G2.2,G2.3a} The code considers the different types of input
+#' @srrstats {G2.6,G2.7,G2.8} different types of input are considered
+#' 
 #' @export
 select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, 
                      B=100, delta_dim=1, delta=NULL, h_values=NULL,Nrep=50, 

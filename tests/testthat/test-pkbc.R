@@ -1,11 +1,17 @@
+#' Test for pkbc
+#' 
+#' Clustering on the Sphere
+#' 
+#' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
+#' @srrstats {G5.5} random seed
+#' @srrstats {G5.6} expected results
+#' @srrstats {G5.8} edge conditions
+#' @noRd
 library(testthat)
-
-#------------------------------------------------------
-## Clustering on the Sphere
-## 
 
 # Test 1: Verify Error on Invalid inputs
 test_that("Error is thrown for invalid inputs", {
+   set.seed(123)
    dat <- matrix(rnorm(100),ncol=2)
    
    #Invalid nClust
@@ -27,6 +33,7 @@ test_that("Error is thrown for invalid inputs", {
 
 # Test 2: Verify Error on Invalid data
 test_that("Error is thrown for invalid data", {
+   set.seed(123)
    dat <- matrix(rnorm(6),ncol=2)
    
    #Invalid nClust
@@ -38,6 +45,7 @@ test_that("Error is thrown for invalid data", {
 # Test 3: Test for valid input
 test_that("Function works for valid input", {
    
+   set.seed(123)
    dat<-rbind(matrix(rnorm(50),ncol=2), matrix(rnorm(50,4),ncol=2))
    result <- pkbc(dat, nClust = 2)
    expect_s4_class(result, "pkbc")
@@ -48,6 +56,7 @@ test_that("Function works for valid input", {
 # Test 4: Test for stopping rule
 test_that("Function respects the stopping rule", {
    
+   set.seed(123)
    dat<-rbind(matrix(rnorm(50),ncol=2), matrix(rnorm(50,4),ncol=2))
    result_loglik <- pkbc(dat, nClust = 3, stoppingRule = 'loglik')
    result_max <- pkbc(dat, nClust = 3, stoppingRule = 'max')
@@ -63,6 +72,7 @@ test_that("Function respects the stopping rule", {
 # Test 5: Test for clustering algorithm
 test_that("Clustering algorithm works", {
    
+   set.seed(123)
    dat<-rbind(matrix(rnorm(50),ncol=2), matrix(rnorm(50,4),ncol=2))
    pkbd_res<- pkbc(dat, 3)
    

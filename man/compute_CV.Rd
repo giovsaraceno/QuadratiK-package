@@ -9,20 +9,20 @@ compute_CV(B, Quantile, data_pool, size_x, size_y, h, method, b = 1)
 \arguments{
 \item{B}{the number of bootstrap/permutation/subsampling samples to generate.}
 
-\item{Quantile}{the quantile of the bootstrap/permutation/subsampling 
+\item{Quantile}{the quantile of the bootstrap/permutation/subsampling
 distribution to use as the critical value.}
 
 \item{data_pool}{a matrix containing the data to be used in the test.}
 
-\item{size_x}{the number of rows in the \code{data_pool} matrix corresponding 
+\item{size_x}{the number of rows in the \code{data_pool} matrix corresponding
 to group X.}
 
-\item{size_y}{the number of rows in the \code{data_pool} matrix corresponding 
+\item{size_y}{the number of rows in the \code{data_pool} matrix corresponding
 to group Y.}
 
 \item{h}{the tuning parameter for the kernel test.}
 
-\item{method}{the method to use for computing the critical value 
+\item{method}{the method to use for computing the critical value
 (one of "bootstrap", "permutation", or "subsampling").}
 
 \item{b}{the subsampling block size (only used if \code{method} is "subsampling").}
@@ -36,8 +36,8 @@ centered Gaussian kernel
 using one of three methods: bootstrap, permutation, or subsampling.
 }
 \references{
-Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample 
-Tests Based on Quadratic Distances.” Manuscript, (Department of 
+Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample
+Tests Based on Quadratic Distances.” Manuscript, (Department of
 Biostatistics, University at Buffalo)
 }
 \keyword{internal}

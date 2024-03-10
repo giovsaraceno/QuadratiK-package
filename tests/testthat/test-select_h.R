@@ -1,3 +1,9 @@
+#' Test for select_h
+#' 
+#' 
+#' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
+#' @srrstats {G5.5} random seed
+#' @noRd
 library(testthat)
 
 ## "Tests for select_h function"
@@ -5,6 +11,7 @@ library(testthat)
 # Test 1: Verify Error on Invalid Input
 test_that("Error on invalid method input", {
    
+   set.seed(123)
    expect_error(select_h(x = matrix(rnorm(100), ncol = 2), 
                         alternative = "invalid"), 
                 "The alternative argument should be one of 'location', 'scale' or 
@@ -29,7 +36,7 @@ test_that("Error on invalid method input", {
 
 ## # Test 1: test for select_h
 test_that("Select h", {
-   
+   set.seed(123)
    # normality
    result <- select_h(x = matrix(rnorm(20),ncol=2), alternative="location")
    expect_equal(class(result$h_sel), "numeric")

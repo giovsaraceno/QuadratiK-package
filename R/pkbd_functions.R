@@ -28,7 +28,9 @@
 #' # Calculate the PKBD density values
 #' dens_val <- dpkb(pkbd_dat$x, c(0.5,0.5),0.5)
 #'
-#'
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G2.2,G2.3a} check unidimensional inputs 
+#' @srrstats {G5.4a} testes on simple examples
 #' @export
 dpkb <- function(x, mu, rho, logdens = FALSE) {
    # validate input
@@ -98,6 +100,10 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #' @import movMF
 #' @import Tinflex
 #'
+#' @srrstats {G1.0} Reference section reports the related literature
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G5.4a} testes on simple examples
+#' 
 #' @export
 rpkb <- function(n, mu, rho, method = 'rejvmf') {
    

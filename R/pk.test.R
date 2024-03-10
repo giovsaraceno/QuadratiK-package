@@ -50,6 +50,12 @@
 #' @useDynLib QuadratiK
 #' @importFrom Rcpp sourceCpp
 #'
+#' @srrstats {G1.0} Reference section reports the related literature
+#' @srrstats {G1.3} description of parameter
+#' @srrstats {G2.0, G2.2,G2.3a} The code considers the different types of input 
+#' @srrstats {G2.6,G2.7,G2.8} different types of input are considered
+#' @srrstats {G5.4a} testes on simple examples
+#' 
 #' @export
 setGeneric("pk.test",function(x, rho = NULL, B = 300, Quantile = 0.95){
    standardGeneric("pk.test")

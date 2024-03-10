@@ -21,19 +21,19 @@ poisson_CV(d, size, rho, B, Quantile)
 the critical value for the specified dimension, size and level.
 }
 \description{
-This function computes the empirical critical value for the U-statistics for 
+This function computes the empirical critical value for the U-statistics for
 testing uniformity on the sphere based on the centered poisson kernel.
 }
 \details{
 For each replication, a sample of d-dimensional observations from the uniform
-distribution on the Sphere are generated and the Poisson kernel-based 
-U-statistic is computed. After B iterations, the critical value is selected 
-as the \code{Quantile} of the empirical distribution of the computed test 
+distribution on the Sphere are generated and the Poisson kernel-based
+U-statistic is computed. After B iterations, the critical value is selected
+as the \code{Quantile} of the empirical distribution of the computed test
 statistics.
 }
 \references{
-Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson 
-Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.” 
+Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson
+Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.”
 Statistica Sinica. doi: doi:10.5705/ss.202022.0347
 }
 \keyword{internal}

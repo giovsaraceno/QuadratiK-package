@@ -25,6 +25,8 @@
 #'   interpretability and usability of the analysis.
 #' }
 #' 
+#' For the Life Cycle Statement of QuadratiK, see the 'LifeCycleStatement.md'
+#' 
 #' @details The work has been supported by Kaleida Health Foundation, National 
 #' Science Foundation and Department of Biostatistics, University at Buffalo.
 #' 
@@ -50,4 +52,17 @@
 #' Markatou M, Saraceno G, Chen Y (2023). “Two- and k-Sample Tests Based on 
 #' Quadratic Distances.” Manuscript, (Department of Biostatistics, 
 #' University at Buffalo).
+#' 
+#' @srrstats {G1.0} Reference section reports the related literature
+#' @srrstats {G1.1} Reported in the description section
+#' @srrstats {G1.2} see the 'LifeCycleStatement.md'
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G1.5} the usage is shown here
+#' @srrstats {G3.0} in all the codes floating point numbers are not compared
+#' @srrstats {G5.7,G5.9} it is showed in the simulation study in the references 
+#' 
+#' @srrstatsTODO {G2.11, G2.12} data.frame
+#' @srrstatsTODO {G2.13, G2.14, G2.15} Missing data
+#' @srrstatsTODO {G2.16, G5.3} Undefined values
+#' 
 NULL

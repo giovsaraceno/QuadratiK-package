@@ -29,6 +29,8 @@
 #' # Two-sample test
 #' kb.test(x,y,h=0.5, method="subsampling",b=0.9)
 #' 
+#' @srrstats {G1.4} roxigen2 is used
+#' 
 #' @export
 setClass("kb.test",
          slots = list(

@@ -1,3 +1,11 @@
+#' Test for pk.test
+#' 
+#' 
+#' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
+#' @srrstats {G5.5} random seed
+#' @srrstats {G5.6} expected results
+#' @srrstats {G5.8} edge conditions
+#' @noRd
 library(testthat)
 
 ## "Tests for pk.test function"
@@ -5,6 +13,7 @@ library(testthat)
 # Test 1: Error on Invalid x Input
 test_that("Error on invalid x input", {
    
+   set.seed(123)
    expect_error(pk.test(x = "Not matrix", rho = 0.5),
                 "x must be numeric", fixed=TRUE)
    
@@ -15,6 +24,7 @@ test_that("Error on invalid x input", {
 # Test 2: Error on Invalid Quantile Input
 test_that("Error on invalid Quantile input", {
    
+   set.seed(123)
    expect_error(pk.test(x = matrix(rnorm(100), ncol=2), rho = 0.5, 
                         Quantile = 1.1), "Quantile must be in (0,1]", 
                 fixed=TRUE)
@@ -25,7 +35,7 @@ test_that("Error on invalid Quantile input", {
 
 # Test 3: Error on Invalid rho Input
 test_that("Error on invalid rho input", {
-   
+   set.seed(123)
    expect_error(pk.test(x = matrix(rnorm(100), ncol=2), rho = -0.1),
                 "rho must be in (0,1)", fixed=TRUE)
    
@@ -36,6 +46,7 @@ test_that("Error on invalid rho input", {
 # Test 4: Handling Vector x Input
 test_that("Handle vector x input correctly", {
    
+   set.seed(123)
    expect_s4_class(pk.test(x = matrix(rnorm(100), ncol = 2), rho = 0.5), 
                    "pk.test")
    expect_s4_class(pk.test(x = data.frame(matrix(rnorm(100), ncol = 2)), 
@@ -47,7 +58,7 @@ test_that("Functionality with valid inputs", {
    
    size <- 100
    d <- 3
-   set.seed(012924)
+   set.seed(123)
    x_sp <- sample_hypersphere(d, n_points=size)
    
    unif_test <- pk.test(x_sp,rho=0.8)

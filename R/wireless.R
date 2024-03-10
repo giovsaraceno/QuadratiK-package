@@ -40,5 +40,8 @@
 #' In: Deep, K., et al. Proceedings of Sixth International Conference on Soft 
 #' Computing for Problem Solving. Advances in Intelligent Systems and Computing, 
 #' vol 546. Springer, Singapore. https://doi.org/10.1007/978-981-10-3322-3_27
-#'
+#' 
+#' @srrstats {G1.0} Reference section reports the related literature
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G5.1} the data set is made available
 "wireless"

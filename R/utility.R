@@ -9,7 +9,8 @@
 #'
 #' @return a list containing the DOF and the coefficient c of the asymptotic
 #' distribution
-#'
+#' 
+#' @srrstats {G1.4a} roxigen2 is used
 #' @keywords internal
 DOF <- function(d, rho){
    num_c <- (1+rho^2)/((1-rho^2)^(d-1)) -1
@@ -30,6 +31,8 @@ DOF <- function(d, rho){
 #' @examples
 #' x_sp <- sample_hypersphere(3,100)
 #'
+#' @srrstats {G1.4} roxigen2 is used
+#' 
 #' @export
 sample_hypersphere <- function(d, n_points=1) {
    z <- matrix(rnorm(n_points * d), n_points, d)
@@ -56,6 +59,7 @@ sample_hypersphere <- function(d, n_points=1) {
 #'
 #' @useDynLib QuadratiK
 #' 
+#' @srrstats {G1.4a} roxigen2 is used 
 #' @keywords internal
 generate_SN<-function(d, size_x, size_y, mu_x, mu_y, 
                       sigma_x, sigma_y, skewness_y){
@@ -82,8 +86,10 @@ generate_SN<-function(d, size_x, size_y, mu_x, mu_y,
 #' @return QQ-plot of given samples
 #'
 #' @import ggplot2
-#' @keywords internal
 #' 
+#' @srrstats {G1.4a} roxigen2 is used
+#' 
+#' @keywords internal
 compare_qq <- function(sample1, sample2, main_title) {
    # Compute quantiles
    quantiles1 <- quantile(sample1, 
@@ -120,6 +126,9 @@ compare_qq <- function(sample1, sample2, main_title) {
 #' @import ggplot2
 #'
 #' @return Computed statistics with a plot
+#' 
+#' @srrstats {G1.4a} roxigen2 is used
+#' 
 #' @keywords internal
 compute_stats <- function(var1, var2, var_name,eps=3) {
    

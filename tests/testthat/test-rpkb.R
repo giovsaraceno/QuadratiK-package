@@ -1,9 +1,15 @@
+#' Test for rpkb
+#' 
+#' 
+#' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
+#' @srrstats {G5.5} random seed
+#' @noRd
 library(testthat)
 test_that("Random Generation from PKBD works", {
 
    
    # Check the errors
-
+   set.seed(123)
    expect_error(rpkb(10, mu = c(1,0,0), rho = 2), 'Input argument rho must be within [0,1)',fixed=TRUE)
    expect_error(rpkb(10, mu = c(0,0,0), rho = 0.8), 'Input argument mu cannot be a vector of zeros',fixed=TRUE)
    expect_error(rpkb(-10, mu = c(1,0,0), rho = 0.8), 'n must be a positive integer',fixed=TRUE)

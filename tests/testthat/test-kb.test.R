@@ -1,10 +1,18 @@
+#' Test for kb.test
+#' 
+#' 
+#' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
+#' @srrstats {G5.5} random seed
+#' @srrstats {G5.6} expected results
+#' @srrstats {G5.8} edge conditions
+#' @noRd
 library(testthat)
 
 ## "Tests for kb.test function"
 
 # Test 1: Verify Error on Invalid Method Input
 test_that("Error on invalid method input", {
-   
+   set.seed(123)
    expect_error(kb.test(x = matrix(rnorm(100), ncol = 2), h=0.5, 
                         method = "invalid_method"), 
                 "method must be one of 'bootstrap', 'permutation' or 
@@ -13,6 +21,7 @@ test_that("Error on invalid method input", {
 
 # Test 2: Verify Error on Invalid b Input
 test_that("Error on invalid b input", {
+   set.seed(123)
    expect_error(kb.test(x = matrix(rnorm(100), ncol = 2), h=0.5, b = 10), 
                 "b indicates the proportion used for the subsamples in the 
                      subsampling algoritm. It must be in (0,1].", fixed=TRUE)
@@ -21,6 +30,7 @@ test_that("Error on invalid b input", {
 # Test 3: Error on Invalid alternative Input
 test_that("Error on invalid alternative input", {
    
+   set.seed(123)
    expect_error(kb.test(x = matrix(rnorm(100), ncol= 2), 
                         y = matrix(rnorm(100), ncol= 2), h=0.5, 
                         alternative = "invalid"),
@@ -32,6 +42,7 @@ test_that("Error on invalid alternative input", {
 # Test 4: Error on Invalid centeringType Input
 test_that("Error on invalid centeringType input", {
    
+   set.seed(123)
    expect_error(kb.test(x = matrix(rnorm(100), ncol= 2), 
                         y = matrix(rnorm(100), ncol= 2), h=0.5, 
                         centeringType = "invalid"),
@@ -43,6 +54,7 @@ test_that("Error on invalid centeringType input", {
 # Test 5: Correct handling of vector x input
 test_that("Handle vector x input correctly", {
    
+   set.seed(123)
    # x is a vector
    result <- kb.test(x = rnorm(10), h=0.5)
    expect_s4_class(result, "kb.test")
@@ -72,6 +84,7 @@ test_that("Handle vector x input correctly", {
 # Test 6: Testing main functionality: two-sample test
 test_that("Functionality with valid inputs", {
    
+   set.seed(123)
    dat <- generate_SN(d = 2, 100, 100, c(0,0),c(0,0), 1, 1, 0)
    x <- dat$X
    y <- dat$Y
@@ -111,6 +124,7 @@ test_that("Functionality with valid inputs", {
 
 # Test 7: Testing main functionality: k-sample test
 test_that("Functionality with valid inputs", {
+   set.seed(123)
    x <- matrix(rnorm(100), ncol = 2)
    y <- rep(c(1,2), each=25)
    result <- kb.test(x, y, h=0.5, method = "subsampling", b = 0.5)
@@ -144,6 +158,7 @@ test_that("Functionality with valid inputs", {
 # Test 8: Testing selection of h
 test_that("Selection of h from kb.test", {
    
+   set.seed(123)
    x <- matrix(rnorm(100), ncol = 2)
    y <- rep(c(1,2), each=25)
    

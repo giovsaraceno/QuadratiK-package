@@ -1,6 +1,13 @@
+#' Test for dpkb
+#' 
+#' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
+#' @srrstats {G5.5} random seed
+#' @srrstats {G5.6} expected results
+#' @noRd
 library(testthat)
 test_that("Density of PKBD", {
    
+   set.seed(123)
    size <- 100
    rho <- 0.8
    mu <- c(1,0,0)

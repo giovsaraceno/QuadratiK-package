@@ -28,6 +28,8 @@ software includes additional graphical functions, aiding users in
 validating and representing the cluster results as well as enhancing the
 interpretability and usability of the analysis.
 }
+
+For the Life Cycle Statement of QuadratiK, see the 'LifeCycleStatement.md'
 }
 \details{
 The work has been supported by Kaleida Health Foundation, National

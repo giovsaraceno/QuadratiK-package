@@ -54,7 +54,6 @@ pkbd_dat <- rpkb(10, c(0.5,0), 0.5)
 # Calculate the PKBD density values
 dens_val <- dpkb(pkbd_dat$x, c(0.5,0.5),0.5)
 
-
 }
 \references{
 Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:

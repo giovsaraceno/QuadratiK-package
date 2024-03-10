@@ -14,7 +14,6 @@
 #' @rdname computeKernelMatrix
 #' @keywords internal
 #' 
-#' @srrstats {G1.4a} roxigen2 is used
 #' @noRd
 computeKernelMatrix <- function(x_mat, y_mat, H) {
     .Call('_QuadratiK_computeKernelMatrix', PACKAGE = 'QuadratiK', x_mat, y_mat, H)
@@ -31,7 +30,6 @@ computeKernelMatrix <- function(x_mat, y_mat, H) {
 #' @rdname computePoissonMatrix
 #' @keywords internal
 #' 
-#' @srrstats {G1.4a} roxigen2 is used
 #' @noRd
 computePoissonMatrix <- function(x_mat, rho) {
     .Call('_QuadratiK_computePoissonMatrix', PACKAGE = 'QuadratiK', x_mat, rho)
@@ -53,7 +51,6 @@ computePoissonMatrix <- function(x_mat, rho) {
 #' @rdname NonparamCentering
 #' @keywords internal
 #' 
-#' @srrstats {G1.4a} roxigen2 is used
 #' @noRd
 NonparamCentering <- function(kmat_zz, n_z) {
     .Call('_QuadratiK_NonparamCentering', PACKAGE = 'QuadratiK', kmat_zz, n_z)
@@ -76,7 +73,6 @@ NonparamCentering <- function(kmat_zz, n_z) {
 #' @rdname ParamCentering
 #' @keywords internal
 #' 
-#' @srrstats {G1.4a} roxigen2 is used
 #' @noRd
 ParamCentering <- function(kmat_zz, z_mat, H, mu_hat, Sigma_hat) {
     .Call('_QuadratiK_ParamCentering', PACKAGE = 'QuadratiK', kmat_zz, z_mat, H, mu_hat, Sigma_hat)
@@ -102,7 +98,6 @@ ParamCentering <- function(kmat_zz, z_mat, H, mu_hat, Sigma_hat) {
 #' @rdname stat2sample
 #' @keywords internal
 #' 
-#' @srrstats {G1.4a} roxigen2 is used
 #' @noRd
 stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Nonparam") {
     .Call('_QuadratiK_stat2sample', PACKAGE = 'QuadratiK', x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType)
@@ -122,7 +117,6 @@ stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Non
 #' @rdname kbNormTest
 #' @keywords internal
 #' 
-#' @srrstats {G1.4a} roxigen2 is used
 #' @noRd
 kbNormTest <- function(x_mat, h, mu_hat, Sigma_hat, centeringType = "Param") {
     .Call('_QuadratiK_kbNormTest', PACKAGE = 'QuadratiK', x_mat, h, mu_hat, Sigma_hat, centeringType)
@@ -141,7 +135,6 @@ kbNormTest <- function(x_mat, h, mu_hat, Sigma_hat, centeringType = "Param") {
 #' @rdname statPoissonUnif
 #' @keywords internal
 #' 
-#' @srrstats {G1.4a} roxigen2 is used
 #' @noRd
 statPoissonUnif <- function(x_mat, rho) {
     .Call('_QuadratiK_statPoissonUnif', PACKAGE = 'QuadratiK', x_mat, rho)
@@ -163,7 +156,6 @@ statPoissonUnif <- function(x_mat, rho) {
 #' @rdname stat_ksample_cpp
 #' @keywords internal
 #' 
-#' @srrstats {G1.4a} roxigen2 is used
 #' @noRd
 stat_ksample_cpp <- function(x, y, h, sizes, cum_size) {
     .Call('_QuadratiK_stat_ksample_cpp', PACKAGE = 'QuadratiK', x, y, h, sizes, cum_size)

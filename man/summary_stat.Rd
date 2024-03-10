@@ -36,9 +36,9 @@ normalized and displayed on the sphere.
 \examples{
 #We generate three samples of 100 observations from 3-dimensional
 #Poisson kernel-based densities with rho=0.8 and different mean directions
-size <- 100
+size<-100
 groups<-c(rep(1, size), rep(2, size),rep(3,size))
-rho=0.8
+rho<-0.8
 set.seed(081423)
 data1<-rpkb(size, c(1,0,0),rho,method='rejvmf')
 data2<-rpkb(size, c(0,1,0),rho,method='rejvmf')

@@ -82,13 +82,13 @@ memberships, identifying the \code{nClust} clusters.
 \examples{
 #We generate three samples of 100 observations from 3-dimensional
 #Poisson kernel-based densities with rho=0.8 and different mean directions
-size <- 100
+size<-100
 groups<-c(rep(1, size), rep(2, size),rep(3,size))
-rho=0.8
+rho<-0.8
 set.seed(081423)
-data1<-rpkb(size, c(1,0,0),rho,method='rejvmf')
-data2<-rpkb(size, c(0,1,0),rho,method='rejvmf')
-data3<-rpkb(size, c(-1,0,0),rho,method='rejvmf')
+data1<-rpkb(size, c(1,0,0),rho,method="rejvmf")
+data2<-rpkb(size, c(0,1,0),rho,method="rejvmf")
+data3<-rpkb(size, c(0,0,1),rho,method="rejvmf")
 dat<-rbind(data1$x,data2$x, data3$x)
 
 #The following code can be used for plotting

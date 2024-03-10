@@ -41,13 +41,13 @@ The function extracts the within-cluster sum of squares and displays
 #We generate three sample of 100 observations from 3-dimensional
 #Poisson kernel-based densities with rho=0.8 and different mean directions
 \donttest{
-size <- 20
+size<-20
 groups<-c(rep(1, size), rep(2, size),rep(3,size))
-rho=0.8
+rho<-0.8
 set.seed(081423)
 data1<-rpkb(size, c(1,0,0),rho,method='rejvmf')
 data2<-rpkb(size, c(0,1,0),rho,method='rejvmf')
-data3<-rpkb(size, c(-1,0,0),rho,method='rejvmf')
+data3<-rpkb(size, c(1,0,0),rho,method='rejvmf')
 data<-rbind(data1$x,data2$x, data3$x)
 
 #Perform the clustering algorithm

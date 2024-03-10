@@ -92,7 +92,7 @@ compare_qq <- function(sample1, sample2, main_title) {
                           probs = seq(0, 1, length.out = length(sample2)))
    df <- data.frame(q1 = quantiles1, q2 = quantiles2)
    
-   pl <- ggplot(df, aes(x=df$q1,y=df$q2))+
+   with(df, {pl <- ggplot(df, aes(x=q1,y=q2))+
       geom_abline(slope=1, col="red") +
       geom_line(col="blue", linewidth=0.9)+
       ggtitle(main_title) +
@@ -107,7 +107,7 @@ compare_qq <- function(sample1, sample2, main_title) {
             strip.text = element_text(size = 14)) +
       scale_color_brewer(palette='Set1')
    
-   return(pl)
+      return(pl)})
 }
 #'
 #' Compute and display some descriptive statistics for the two sample tests

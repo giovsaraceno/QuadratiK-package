@@ -70,12 +70,14 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    
    
    # Convert vectors to a single column matrix
+   if(!is.numeric(x) & !is.data.frame(x)){
+      stop("x must be numeric")
+   }
+   # Convert vectors to a single column matrix
    if(is.vector(x)) {
       x <- matrix(x, ncol = 1)
    } else if(is.data.frame(x)) {
       x <- as.matrix(x)
-   } else if(!is.matrix(x)){
-      stop("x must be a matrix or a data.frame")
    }
    
    if(!is.null(y)){
@@ -83,12 +85,8 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
          y <- matrix(as.numeric(y), ncol = 1)
       } else if(is.data.frame(y)) {
          y <- as.matrix(y)
-      } else if(!is.matrix(y)){
-         stop("y must be a vector or a matrix")
       }
-   } #else {
-      #stop("y must be provided.")
-   #}
+   }
    
    if(!(alternative %in% c("location", "scale", "skewness"))){
       
@@ -126,9 +124,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
          
       } else if(d_y==1){
          
-         # if(nrow(x) != length(y)) {
-         #    stop("Number of rows of 'x' and the length of 'y' must coincide.")
-         # }
+         
          if(nrow(x) != nrow(y)) {
           stop("'x' and 'y' must have the same number of rows.")
          }

@@ -43,10 +43,10 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
    }
    p <- ncol(x)
    if (p < 2) {
-      stop('vectors must have length >= 2')
+      stop('x must have dimension >= 2')
    }
    if (length(mu) != p) {
-      stop('vectors and mu must have the same length')
+      stop('number of rows of x must be equal to the length of mu')
    }
    if (rho >= 1 | rho < 0) {
       stop('Input argument rho must be within [0,1)')

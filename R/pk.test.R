@@ -52,21 +52,20 @@
 #'
 #' @export
 setGeneric("pk.test",function(x, rho = NULL, B = 300, Quantile = 0.95){
-   standardGeneric("pk.test")})
-
+   standardGeneric("pk.test")
+})
 #' @rdname pk.test
 #' @export
 setMethod("pk.test", signature(x = "ANY"),
           function(x,  rho, B = 300, Quantile = 0.95)
           {
              
-             # Convert vectors to a single column matrix
-             if(is.vector(x) & mode(x)=="numeric") {
-                x <- matrix(x, ncol = 1)
+             if(!is.numeric(x) & !is.data.frame(x)){
+                stop("x must be numeric")
              } else if(is.data.frame(x)) {
                 x <- as.matrix(x)
              } else if(!is.matrix(x)){
-                stop("x must be a matrix or a data.frame")
+                stop("x must be a matrix or a data.frame with dimension greater than 1.")
              }
              
              if(Quantile<=0 | Quantile>1){

@@ -601,11 +601,11 @@ summary_stat <- function(object, k, true_label=NULL){
    if (ncol(x) == 2) {
       
       df <- data.frame(V1 = x[,1], V2 = x[,2], clusters = as.factor(y))
-      pl <- ggplot(df, aes(x = V1, y = V2, color = as.factor(clusters))) +
+      with(df, {pl <- ggplot(df, aes(x = V1, y = V2, color = as.factor(clusters))) +
          geom_point() +
          theme_minimal() +
-         labs(color = "Cluster")
-      print(pl)
+         labs(color = "Cluster") 
+         print(pl)})
       
    } else if (ncol(x) == 3) {
       

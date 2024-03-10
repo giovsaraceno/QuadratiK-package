@@ -4,20 +4,32 @@ library(testthat)
 
 # Test 1: Error on Invalid x Input
 test_that("Error on invalid x input", {
+   
    expect_error(pk.test(x = "Not matrix", rho = 0.5),
-                "x must be a matrix or a data.frame", fixed=TRUE)
+                "x must be numeric", fixed=TRUE)
+   
+   expect_error(pk.test(x = rnorm(50), rho = 0.5),
+                "x must be a matrix or a data.frame with dimension greater than 1.", fixed=TRUE)
 })
 
 # Test 2: Error on Invalid Quantile Input
 test_that("Error on invalid Quantile input", {
+   
    expect_error(pk.test(x = matrix(rnorm(100), ncol=2), rho = 0.5, 
                         Quantile = 1.1), "Quantile must be in (0,1]", 
+                fixed=TRUE)
+   expect_error(pk.test(x = matrix(rnorm(100), ncol=2), rho = 0.5, 
+                        Quantile = -1), "Quantile must be in (0,1]", 
                 fixed=TRUE)
 })
 
 # Test 3: Error on Invalid rho Input
 test_that("Error on invalid rho input", {
+   
    expect_error(pk.test(x = matrix(rnorm(100), ncol=2), rho = -0.1),
+                "rho must be in (0,1)", fixed=TRUE)
+   
+   expect_error(pk.test(x = matrix(rnorm(100), ncol=2), rho = 2),
                 "rho must be in (0,1)", fixed=TRUE)
 })
 
@@ -44,6 +56,17 @@ test_that("Functionality with valid inputs", {
    expect_true(is.numeric(unif_test@Un))
    expect_true(is.numeric(unif_test@Vn))
    expect_false(unif_test@H0_Un)
+   
+   # test show method
+   output <- capture.output(show(unif_test))
+   expect_true(any(grepl("H0 is rejected: ", output)))
+   expect_true(any(grepl("Statistic Un: ", output)))
+   expect_true(any(grepl("Statistic Vn: ", output)))
+   
+   # test summary method
+   s <- summary(unif_test)
+   expect_type(s$summary_tables, "list")
+   expect_equal(nrow(s$test_results), 2)
    
 })
 

@@ -42,21 +42,54 @@ test_that("Error on invalid centeringType input", {
 
 # Test 5: Correct handling of vector x input
 test_that("Handle vector x input correctly", {
+   
+   # x is a vector
    result <- kb.test(x = rnorm(10), h=0.5)
    expect_s4_class(result, "kb.test")
    expect_equal(result@method, "Kernel-based quadratic distance Normality test")
+   
+   # x is a data.frame
+   result <- kb.test(x = data.frame(matrix(rnorm(20),ncol=2)), h=0.5)
+   expect_s4_class(result, "kb.test")
+   
+   # x is a matrix
+   result <- kb.test(x = matrix(rnorm(20),ncol=2), h=0.5)
+   expect_s4_class(result, "kb.test")
+   
+   # test summary method
+   s <- summary(result)
+   expect_true("matrix" %in% class(s$summary_tables))
+   expect_equal(nrow(s$test_results), 1)
+   
+   # x is not numeric
+   expect_error(kb.test(x = "invalid", h=0.5), "x must be numeric", fixed=TRUE)
+   
+   # x is not matrix or data.frame
+   expect_error(kb.test(x = list(rnorm(10),rnorm(10)), h=0.5), "x must be numeric", fixed=TRUE)
 })
 
 
 # Test 6: Testing main functionality: two-sample test
 test_that("Functionality with valid inputs", {
-   x <- matrix(rnorm(100), ncol = 2)
-   y <- matrix(rnorm(100), ncol = 2)
+   
+   dat <- generate_SN(d = 2, 100, 100, c(0,0),c(0,0), 1, 1, 0)
+   x <- dat$X
+   y <- dat$Y
    result <- kb.test(x, y, h=0.5, method = "subsampling", b = 0.5)
    expect_s4_class(result, "kb.test")
   expect_equal(result@method, "Kernel-based quadratic distance two-sample test")
    expect_true(is.numeric(result@Dn))
    expect_false(result@H0)
+   
+   # test summary method
+   s <- summary(result)
+   expect_type(s$summary_tables, "list")
+   expect_equal(nrow(s$test_results), 1)
+   
+   # Test parametric centering
+   result <- kb.test(x, y, h=0.5, method = "bootstrap", centeringType = "Param")
+   expect_s4_class(result, "kb.test")
+   expect_equal(result@method, "Kernel-based quadratic distance two-sample test")
    
    ## Test all the methods for the CV computation
    result <- kb.test(x, y, h=0.5, method = "bootstrap")
@@ -64,6 +97,15 @@ test_that("Functionality with valid inputs", {
    
    result <- kb.test(x, y, h=0.5, method = "permutation")
    expect_s4_class(result, "kb.test")
+   
+   # Test if y is a data.frame
+   y <- data.frame(matrix(rnorm(100), ncol = 2))
+   result <- kb.test(x, y, h=0.5, method = "subsampling", b = 0.5)
+   expect_s4_class(result, "kb.test")
+   
+   # Test additional errors
+   y <- matrix(rnorm(90), ncol = 3)
+   expect_error(kb.test(x, y, h=0.5),"'x' and 'y' must have the same number of columns.", fixed=TRUE)
    
 })
 
@@ -76,6 +118,43 @@ test_that("Functionality with valid inputs", {
    expect_equal(result@method, "Kernel-based quadratic distance k-sample test")
    expect_true(is.numeric(result@Dn))
    expect_false(result@H0)
+   
+   # test show method
+   output <- capture.output(show(result))
+   expect_true(any(grepl("H0 is rejected: ", output)))
+   expect_true(any(grepl("Test Statistic: ", output)))
+   
+   # test summary method
+   s <- summary(result)
+   expect_type(s$summary_tables, "list")
+   expect_equal(nrow(s$test_results), 2)
+   
+   # Test all the methods for computing the CV
+   result <- kb.test(x, y, h=0.5, method = "bootstrap")
+   expect_s4_class(result, "kb.test")
+   result <- kb.test(x, y, h=0.5, method = "permutation")
+   expect_s4_class(result, "kb.test")
+   
+   # Test additional errors
+   y <- rep(c(1,2), each=20)
+   expect_error(kb.test(x, y, h=0.5),"'x' and 'y' must have the same number of rows.", fixed=TRUE)
+   
+})
+
+# Test 8: Testing selection of h
+test_that("Selection of h from kb.test", {
+   
+   x <- matrix(rnorm(100), ncol = 2)
+   y <- rep(c(1,2), each=25)
+   
+   result <- kb.test(x, method = "subsampling", b = 0.5)
+   expect_s4_class(result, "kb.test")
+   expect_equal(result@method, "Kernel-based quadratic distance Normality test")
+   expect_equal(class(result@h$h_sel), "numeric")
+   
+   result <- kb.test(x, y, method = "subsampling", b = 0.5)
+   expect_s4_class(result, "kb.test")
+   expect_equal(class(result@h$h_sel), "numeric")
    
 })
 

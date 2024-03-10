@@ -88,7 +88,7 @@
     },
     {
         "file": "C:/Users/sarac/Documents/GitHub/QuadratiK-package/src/kernel_function.cpp",
-        "file_last_write": 1709782148.0,
+        "file_last_write": 1710029076.0,
         "definitions": [
             {
                 "usr": "c:@F@computeKernelMatrix#&1I#S0_#S0_#",
@@ -146,7 +146,7 @@
                 "parent_name": "",
                 "name": "kbNormTest(Eigen::MatrixXd, double, const Eigen::MatrixXd &, const Eigen::MatrixXd, const std::string &)",
                 "file": "C:/Users/sarac/Documents/GitHub/QuadratiK-package/src/kernel_function.cpp",
-                "line": 213,
+                "line": 208,
                 "column": 8,
                 "hidden": false
             },
@@ -156,7 +156,7 @@
                 "parent_name": "",
                 "name": "statPoissonUnif(const Eigen::MatrixXd &, double)",
                 "file": "C:/Users/sarac/Documents/GitHub/QuadratiK-package/src/kernel_function.cpp",
-                "line": 260,
+                "line": 251,
                 "column": 17,
                 "hidden": false
             },
@@ -166,7 +166,7 @@
                 "parent_name": "",
                 "name": "stat_ksample_cpp(const Eigen::MatrixXd &, const Eigen::VectorXd &, double, const Eigen::VectorXd &, const Eigen::VectorXd &)",
                 "file": "C:/Users/sarac/Documents/GitHub/QuadratiK-package/src/kernel_function.cpp",
-                "line": 307,
+                "line": 298,
                 "column": 17,
                 "hidden": false
             }

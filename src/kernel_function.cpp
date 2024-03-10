@@ -180,11 +180,6 @@ double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
    {
       k_center = ParamCentering( kmat_zz,  z_mat, H, mu_hat, Sigma_hat);
    }
-   else
-   {
-      // Handle error for unknown centeringType or use a default centering
-      stop("Unknown centering type.");
-   }
    
    k_center.diagonal().setZero();
    
@@ -229,10 +224,6 @@ double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat
    else if (centeringType == "Param")
    {
       k_center = ParamCentering( kmat_zz,  x_mat, H, mu_hat, Sigma_hat);
-   }
-   else
-   {
-      stop("Unknown centering type.");
    }
    
    k_center.diagonal().setZero();

@@ -24,7 +24,9 @@ pkbc(
 )
 }
 \arguments{
-\item{dat}{Data matrix of observations to be clustered.}
+\item{dat}{Data matrix or data.frame of data points on the sphere to be
+clustered. The observations in dat are normalized to ensure that
+they lie on the d-simensional sphere. Note that d > 1.}
 
 \item{nClust}{Number of clusters. It can be a single value or a numeric
 vector.}

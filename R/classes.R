@@ -110,6 +110,10 @@ setClass("pk.test",
 #' res <- pkbc(as.matrix(wireless[,-8]),4)
 #' 
 #' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {UL4.0, UL4.1, UL4.2} class object created for the clustering 
+#'            results. It allows to create an object without running the 
+#'            algorithm. All the input control parameters can be extracted from
+#'            the result object.
 #' 
 #' @export
 setClass("pkbc",

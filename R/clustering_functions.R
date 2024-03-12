@@ -4,7 +4,9 @@
 #' The function \code{pkbc} performs the Poisson kernel-based clustering 
 #' algorithm on the sphere based on the Poisson kernel-based densities.
 #'
-#' @param dat Data matrix of observations to be clustered.
+#' @param dat Data matrix or data.frame of data points on the sphere to be 
+#'            clustered. The observations in dat are normalized to ensure that
+#'            they lie on the d-simensional sphere. Note that d > 1.
 #' @param nClust Number of clusters. It can be a single value or a numeric 
 #'               vector.
 #' @param maxIter The maximum number of iterations before a run is terminated.
@@ -81,7 +83,10 @@
 #' @srrstats {G2.0a} Documentation of input nClust
 #' @srrstats {G1.3} description of parameter
 #' @srrstats {G1.4} roxigen2 is used
-#' @srrstats {G2.0,G2.2,G2.3a} The code considers the different types of input 
+#' @srrstats {G2.0,G2.2,G2.3a} The code considers the different types of input
+#' 
+#' @srrstats {UL1.0,UL1.1} format of input data is specified, with checks 
+#' @srrstats {UL1.4} assumptions are taken into consideration
 #' 
 #' @export
 setGeneric("pkbc",function(dat,
@@ -98,6 +103,10 @@ setGeneric("pkbc",function(dat,
 #' @srrstats {G2.0} input nClust
 #' @srrstats {G2.7,G2.8} different types of tabular input are considered
 #' @srrstats {G2.13,G2.14,G2.14a,G2.15,G2.16} error for NA, Nan, Inf, -Inf
+#' 
+#' @srrstats {UL2.1} normalization of input dat
+#' @srrstats {UL2.3} inputs are all checked
+#' @srrstats {UL7.0} error messages are inserted for inappropriate inputs
 #' 
 #' @export
 setMethod("pkbc", signature(dat = "ANY"),
@@ -440,6 +449,8 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' 
 #' @srrstats {G1.4} roxigen2 is used
 #' @srrstats {G2.0, G2.0a, G2.1, G2.1a,G2.2} input true_label
+#' @srrstats {UL3.2} true label can be provided as a separate input 
+#' @srrstats {UL6.1} this function includes a plot method
 #' 
 #' @export
 validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
@@ -611,6 +622,10 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
 #' @importFrom rrcov PcaLocantore
 #'
 #' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {UL3.2} true label can be provided as a separate input
+#' @srrstats {UL3.4} the function computes summary statistics with respect to 
+#'                   the identified clusters.
+#' @srrstats {UL6.1} this function includes a plot method
 #' 
 #' @export
 summary_stat <- function(object, k, true_label=NULL){

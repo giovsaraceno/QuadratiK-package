@@ -20,5 +20,18 @@
 #' @srrstatsNA {G5.8d} there are no such data
 #' @srrstatsNA {G5.9a,G5.9b} correctness tested on simple cases
 #' @srrstatsNA {G5.10, G5.11, G5.11a, G5.12} there are no extended tests
+#' 
+#' @srrstatsNA {UL1.2,UL1.3,UL1.3a} rownames and colnames are not used
+#' @srrstatsNA {UL1.4a,UL1.4b} there are no differences with respect to scales
+#' @srrstatsNA {UL2.0} Violations of assumptions are not considered.
+#' @srrstatsNA {UL2.2} do not accept NA
+#' @srrstatsNA {UL3.0,UL7.2,UL7.3} Labels are not ordered with respect to sizes
+#' @srrstatsNA {UL3.1} not a dimensionality reduction software 
+#' @srrstatsNA {UL3.3, UL7.4} prediction function is not implemented
+#' @srrstatsNA {UL4.3,UL4.3a} there is no a print method
+#' @srrstatsNA {UL4.4} there is no a summary method
+#' @srrstatsNA {UL6.0,UL6.2} there is no a plot method
+#' @srrstatsNA {UL7.5,UL7.5a} there are no batch processes
+#' 
 #' @noRd
 NULL

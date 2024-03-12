@@ -2,7 +2,8 @@
 #  #' srr tags
 #  #'
 #  #'
-#  #' @srrstats {G1.5} application to the wireless data set in the associated paper
+#  #' @srrstats {G1.5} application to the wireless data set in the
+#  #'                  associated paper
 
 ## -----------------------------------------------------------------------------
 library(QuadratiK)

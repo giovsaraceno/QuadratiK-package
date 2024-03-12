@@ -13,7 +13,8 @@ vignette: >
 #' srr tags
 #' 
 #' 
-#' @srrstats {G1.5} application to the wireless data set in the associated paper
+#' @srrstats {G1.5} application to the wireless data set in the 
+#'                  associated paper
 ```
 We consider the Wireless Indoor Localization Data Set, publicly available in the UCI Machine Learning Repository’s website. This data set is used to study the performance of different indoor localization algorithms. It is available within the ``QuadratiK`` package as ``wireless``. 
 ```{r}

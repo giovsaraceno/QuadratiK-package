@@ -51,6 +51,7 @@
 #' @srrstats {G1.0} Reference section reports the related literature
 #' @srrstats {G1.1, G1.3} First implementation of provided methods
 #' @srrstats {G1.2} see the 'CONTRIBUTING.md' for states of development
+#' @srrstats {G1.5} vignettes reproduce results in the associated publication
 #' @srrstats {G3.0} in all the codes floating point numbers are not compared
 #' @srrstats {G5.7, G5.9} Verified through the simulation studies in the 
 #'                        indicated references. 

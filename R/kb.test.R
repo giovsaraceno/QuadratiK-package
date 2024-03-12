@@ -171,7 +171,7 @@ setMethod("kb.test", signature(x = "ANY"),
                 if(any(is.na(y))){
                    stop("There are missing values in y!")
                 } else if(any(is.infinite(y) |is.nan(y))){
-                   stop("There are undefined values in y, that is Nan, Inf, -Inf")
+                   stop("There are undefined values in y, that is Nan, Inf")
                 }
              }
              

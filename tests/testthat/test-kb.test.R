@@ -3,7 +3,8 @@
 #' 
 #' 
 #' 
-#' @srrstats {G5.1, G5.5} data sets are generated using simple functions with fixed seed
+#' @srrstats {G5.1, G5.5} data sets are generated using simple functions with 
+#'                        fixed seed
 #' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
 #' @srrstats {G5.4,G5.4a} correctness tested on simple cases
 #' @srrstats {G5.8, G5.8a,G5.8b,G5.8c} edge conditions

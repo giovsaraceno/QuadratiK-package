@@ -1,3 +1,9 @@
+## ----srr-tags, eval = FALSE, echo = FALSE-------------------------------------
+#  #' srr tags
+#  #'
+#  #'
+#  #' @srrstats {G1.5} k-sample test example in the associated paper
+
 ## -----------------------------------------------------------------------------
 library(mvtnorm)
 library(QuadratiK)

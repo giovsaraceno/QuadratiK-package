@@ -9,31 +9,34 @@
 #'          \code{y}, the corresponding test is performed.
 #' \itemize{
 #'    \item if \code{y} = NULL, the function performs the tests for normality o
-#'    n \code{x}
+#'          n \code{x}
 #'    \item if \code{y} is a data matrix, with same dimensions of \code{x}, the 
-#'    function performs the two-sample test between \code{x} and \code{y}.
+#'          function performs the two-sample test between \code{x} and \code{y}.
 #'    \item if \code{y} if a numeric or factor vector, indicating the group 
-#'    memberships for each observation, the function performs the k-sample test.
+#'          memberships for each observation, the function performs the k-sample
+#'          test.
 #' }
 #' @param h Bandwidth for the kernel function. If a value is not provided, the 
-#' algorithm for the selection of an optimal h is performed automatically. See 
-#' the function \code{\link{select_h}} for more details.
+#'          algorithm for the selection of an optimal h is performed 
+#'          automatically. See the function \code{\link{select_h}} for more 
+#'          details.
 #' @param method The method used for critical value estimation ("subsampling", 
-#' "bootstrap", or "permutation")(default: "subsampling").
+#'               "bootstrap", or "permutation")(default: "subsampling").
 #' @param B The number of iterations to use for critical value estimation 
-#' (default: 150).
+#'          (default: 150).
 #' @param b The size of the subsamples used in the subsampling algorithm  
-#' (default: 0.8).
+#'          (default: 0.8).
 #' @param Quantile The quantile to use for critical value estimation, 0.95 is 
-#' the default value.
+#'                 the default value.
 #' @param mu_hat Mean vector for the reference distribution.
 #' @param Sigma_hat Covariance matrix of the reference distribution.
 #' @param centeringType String indicating the method used for centering the 
-#' normal kernel ('Param' or 'Nonparam').
+#'                      normal kernel ('Param' or 'Nonparam').
 #' @param K_threshold maximum number of groups allowed. Default is 10. It is a 
-#' control parameter. Change in case of more than 10 samples.
+#'                    control parameter. Change in case of more than 10 samples.
 #' @param alternative Family of alternative chosen for selecting h, between 
-#' "location", "scale" and "skewness" (only if \code{h} is not provided).
+#'                    "location", "scale" and "skewness" (only if \code{h} 
+#'                    is not provided).
 #'
 #' @details The function \code{kb.test} performs the kernel-based quadratic
 #' distance tests using the Gaussian kernel with bandwidth parameter \code{h}.
@@ -43,9 +46,9 @@
 #'
 #'
 #' @return An S4 object of class \code{kb.test} containing the results of the 
-#' kernel-based quadratic distance tests, based on the normal kernel. The object 
+#' kernel-based quadratic distance tests, based on the normal kernel. The object
 #' contains the following slots:
-#'\itemize{
+#' \itemize{
 #'   \item \code{method}: String indicating the normal kernel-based quadratic 
 #'   distance test performed.
 #'   \item \code{Dn} The value of the test statistic.
@@ -59,11 +62,11 @@
 #'   normal kernel function. If \code{select_h} is used, the matrix of computed 
 #'   power values and the corresponding power plot are also provided. 
 #'   \item \code{B} Number of bootstrap/permutation/subsampling replications.
-#'}
+#' }
 #'
 #' @references
 #' Markatou, M., Saraceno, G., Chen Y (2023). “Two- and k-Sample Tests Based on 
-#' Quadratic Distances.” Manuscript, (Department of Biostatistics, University at 
+#' Quadratic Distances.” Manuscript, (Department of Biostatistics, University at
 #' Buffalo)
 #'
 #' Lindsay, B.G., Markatou, M. & Ray, S. (2014) "Kernels, Degrees of Freedom, 
@@ -72,7 +75,7 @@
 #' DOI: 10.1080/01621459.2013.836972
 #'
 #'
-#'@examples
+#' @examples
 #' # create a kb.test object
 #' x <- matrix(rnorm(100),ncol=2)
 #' y <- matrix(rnorm(100),ncol=2)
@@ -98,20 +101,25 @@
 #' @importFrom Rcpp sourceCpp
 #'
 #' @srrstats {G1.0} Reference section reports the related literature
-#' @srrstats {G1.3} description of parameter
-#' @srrstats {G2.0,G2.1,G2.2,G2.3a} The code considers the different types of input
-#' @srrstats {G2.6,G2.7,G2.8} different types of input are considered
-#' @srrstats {G5.4a} testes on simple examples
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G2.0a,G2.1,G2.3b} The code considers the different inputs
 #' 
 #' @export
 setGeneric("kb.test",function(x, y=NULL, h = NULL, method = "subsampling", 
-                              B = 150, b = NULL, Quantile = 0.95, mu_hat = NULL, 
-                              Sigma_hat = NULL, centeringType="Nonparam", 
+                              B = 150, b = NULL, Quantile = 0.95, 
+                              mu_hat = NULL, Sigma_hat = NULL, 
+                              centeringType="Nonparam", 
                               K_threshold=10, alternative="skewness"){
    
    standardGeneric("kb.test")
 })
 #' @rdname kb.test
+#' 
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G2.0,G2.3a, G2.4b} The code considers the different inputs
+#' @srrstats {G2.7,G2.8} different types of input are considered
+#' @srrstats {G2.13,G2.14,G2.14a,G2.15,G2.16} error for NA, Nan, Inf, -Inf
+#' 
 #' @export
 setMethod("kb.test", signature(x = "ANY"),
           function(x, y=NULL, h=NULL, method="subsampling", B = 150,
@@ -148,12 +156,22 @@ setMethod("kb.test", signature(x = "ANY"),
              } else if(is.data.frame(x)) {
                 x <- as.matrix(x)
              } 
+             if(any(is.na(x))){
+                stop("There are missing values in x!")
+             } else if(any(is.infinite(x) |is.nan(x))){
+                stop("There are undefined values in x, that is Nan, Inf, -Inf")
+             }
              
              if(!is.null(y)){
                 if(is.vector(y) | is.factor(y)) {
                    y <- matrix(as.numeric(y), ncol = 1)
                 } else if(is.data.frame(y)) {
                    y <- as.matrix(y)
+                }
+                if(any(is.na(y))){
+                   stop("There are missing values in y!")
+                } else if(any(is.infinite(y) |is.nan(y))){
+                   stop("There are undefined values in y, that is Nan, Inf, -Inf")
                 }
              }
              
@@ -278,6 +296,8 @@ setMethod("kb.test", signature(x = "ANY"),
 #'
 #' @param object Object of class \code{kb.test}
 #'
+#' @srrstats {G1.4} roxigen2 is used
+#' 
 #' @export
 setMethod("show", "kb.test",
           function(object) {
@@ -321,8 +341,9 @@ setMethod("show", "kb.test",
 #' my_test <- kb.test(x, h=0.5)
 #' summary(my_test)
 #' 
+#' @srrstats {G1.4} roxigen2 is used
+#' 
 #' @export
-#'
 setMethod("summary", "kb.test", function(object) {
    
    if(object@method=="Kernel-based quadratic distance k-sample test"){
@@ -408,7 +429,7 @@ setMethod("summary", "kb.test", function(object) {
          
          pl_stat <- ggplot() +
             ggpp::annotate('table', x = 0.5, y = 0.5, 
-                     label = data.frame(Stat = rownames(stats_step),stats_step), 
+                     label = data.frame(Stat = rownames(stats_step),stats_step),
                      hjust = 0.5, vjust = 0.5) +
             theme_void() +
             ggtitle("")+

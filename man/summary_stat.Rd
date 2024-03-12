@@ -26,8 +26,8 @@ generates a plot of data points colored by the final membership.
 \details{
 The function computes mean, standard deviation, median,
 inter-quantile range, minimum and maximum for each variable in the data set
-given the final membership assigned by the clustering algorithm. If dimension
-is equal to 2 or 3, points are displayed on the circle and sphere,
+given the final membership assigned by the clustering algorithm. If
+dimension is equal to 2 or 3, points are displayed on the circle and sphere,
 respectively. If dimension if greater than 3, the spherical Principal
 Component procedure proposed by Locantore et al., (1999) is applied for
 dimensionality reduction and the first three principal components are

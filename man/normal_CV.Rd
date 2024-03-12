@@ -19,7 +19,8 @@ normal_CV(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile = 0.95)
 
 \item{B}{the number of replications.}
 
-\item{Quantile}{the quantile of the distribution use to select the critical value}
+\item{Quantile}{the quantile of the distribution use to select the critical
+value}
 }
 \value{
 the critical value for the specified dimension, size and level.
@@ -30,9 +31,8 @@ based on the KBQD tests using the centered Gaussian kernel.
 }
 \details{
 For each replication, a sample from the d-dimensional Normal distribution
-with mean vector
-\code{mu_hat} and covariance matrix \code{Sigma_hat} is generated and the
-KBQD test U-statistic for Normality is computed.
+with mean vector \code{mu_hat} and covariance matrix \code{Sigma_hat} is
+generated and the KBQD test U-statistic for Normality is computed.
 After B iterations, the critical value is selected as the \code{Quantile}
 of the empirical distribution of the computed test statistics.
 }

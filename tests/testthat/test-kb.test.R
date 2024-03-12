@@ -1,10 +1,13 @@
+#' 
 #' Test for kb.test
 #' 
 #' 
+#' 
+#' @srrstats {G5.1, G5.5} data sets are generated using simple functions with fixed seed
 #' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
-#' @srrstats {G5.5} random seed
-#' @srrstats {G5.6} expected results
-#' @srrstats {G5.8} edge conditions
+#' @srrstats {G5.4,G5.4a} correctness tested on simple cases
+#' @srrstats {G5.8, G5.8a,G5.8b,G5.8c} edge conditions
+#' 
 #' @noRd
 library(testthat)
 
@@ -77,7 +80,8 @@ test_that("Handle vector x input correctly", {
    expect_error(kb.test(x = "invalid", h=0.5), "x must be numeric", fixed=TRUE)
    
    # x is not matrix or data.frame
-   expect_error(kb.test(x = list(rnorm(10),rnorm(10)), h=0.5), "x must be numeric", fixed=TRUE)
+   expect_error(kb.test(x = list(rnorm(10),rnorm(10)), h=0.5), 
+                "x must be numeric", fixed=TRUE)
 })
 
 
@@ -102,7 +106,7 @@ test_that("Functionality with valid inputs", {
    # Test parametric centering
    result <- kb.test(x, y, h=0.5, method = "bootstrap", centeringType = "Param")
    expect_s4_class(result, "kb.test")
-   expect_equal(result@method, "Kernel-based quadratic distance two-sample test")
+   expect_equal(result@method,"Kernel-based quadratic distance two-sample test")
    
    ## Test all the methods for the CV computation
    result <- kb.test(x, y, h=0.5, method = "bootstrap")
@@ -118,7 +122,9 @@ test_that("Functionality with valid inputs", {
    
    # Test additional errors
    y <- matrix(rnorm(90), ncol = 3)
-   expect_error(kb.test(x, y, h=0.5),"'x' and 'y' must have the same number of columns.", fixed=TRUE)
+   expect_error(kb.test(x, y, h=0.5),
+                "'x' and 'y' must have the same number of columns.", 
+                fixed=TRUE)
    
 })
 
@@ -151,7 +157,8 @@ test_that("Functionality with valid inputs", {
    
    # Test additional errors
    y <- rep(c(1,2), each=20)
-   expect_error(kb.test(x, y, h=0.5),"'x' and 'y' must have the same number of rows.", fixed=TRUE)
+   expect_error(kb.test(x, y, h=0.5),
+                "'x' and 'y' must have the same number of rows.", fixed=TRUE)
    
 })
 

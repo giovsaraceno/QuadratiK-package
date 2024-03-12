@@ -4,31 +4,42 @@
 #' two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
 #'
 #' @param x Data set of observations from X.
-#' @param y Data set of observations from Y.
+#' @param y Numeric matrix or vector of data values. Depending on the input 
+#'          \code{y}, the selection of h is performed for the corresponding 
+#'          test.
+#' \itemize{
+#'    \item if \code{y} = NULL, the function performs the tests for normality o
+#'          n \code{x}
+#'    \item if \code{y} is a data matrix, with same dimensions of \code{x}, the 
+#'          function performs the two-sample test between \code{x} and \code{y}.
+#'    \item if \code{y} if a numeric or factor vector, indicating the group 
+#'          memberships for each observation, the function performs the k-sample
+#'          test.
+#' }
 #' @param alternative Family of alternative chosen for selecting h, between 
-#' "location", "scale" and "skewness".
+#'                    "location", "scale" and "skewness".
 #' @param method The method used for critical value estimation 
-#' ("subsampling", "bootstrap", or "permutation").
+#'               ("subsampling", "bootstrap", or "permutation").
 #' @param b The size of the subsamples used in the subsampling algorithm .
 #' @param B The number of iterations to use for critical value estimation, 
-#' B = 150 as default.
+#'          B = 150 as default.
 #' @param delta_dim Vector of coefficient of alternative with respect to each 
-#' dimension
+#'                  dimension
 #' @param delta Vector of parameter values indicating chosen alternatives
 #' @param h_values Values of the tuning parameter used for the selection
 #' @param Nrep Number of bootstrap/permutation/subsampling replications.
 #' @param n_cores Number of cores used to parallel the h selection algorithm 
-#' (default:2).
+#'                (default:2).
 #' @param Quantile The quantile to use for critical value estimation, 0.95 is 
-#' the default value.
+#'                 the default value.
 #' @param power.plot Logical. If TRUE, it is displayed the plot of power for 
-#' values in h_values and delta.
+#'                   values in h_values and delta.
 #' 
 #' @return A list with the following attributes:
 #' \itemize{
 #'    \item \code{h_sel} the selected value of tuning parameter h;
 #'    \item \code{power} matrix of power values computed for the considered 
-#'    values of \code{delta} and \code{h_values};
+#'                       values of \code{delta} and \code{h_values};
 #'    \item \code{power.plot} power plots (if \code{power.plot} is \code{TRUE}).
 #' }
 #' @details
@@ -40,7 +51,7 @@
 #' 
 #' @references
 #' Markatou, M., Saraceno, G., Chen, Y. (2023). “Two- and k-Sample Tests Based 
-#' on Quadratic Distances.” Manuscript, (Department of Biostatistics, University 
+#' on Quadratic Distances.” Manuscript, (Department of Biostatistics, University
 #' at Buffalo)
 #' 
 #' @examples
@@ -64,8 +75,12 @@
 #' @useDynLib QuadratiK
 #'
 #' @srrstats {G1.4} roxigen2 is used
-#' @srrstats {G2.0,G2.1,G2.2,G2.3a} The code considers the different types of input
-#' @srrstats {G2.6,G2.7,G2.8} different types of input are considered
+#' @srrstats {G2.0, G2.0a} input y, delta_dim, B, b
+#' @srrstats {G2.1, G2.1a} input y, delta_dim, delta, h_values
+#' @srrstats {G2.2, G2.4b} input y
+#' @srrstats {G2.3, G2.3a, G2.3b} input alternative, method
+#' @srrstats {G2.7,G2.8} different types of input are considered
+#' @srrstats {G2.13,G2.14,G2.14a,G2.15,G2.16} error for NA, Nan, Inf, -Inf
 #' 
 #' @export
 select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, 
@@ -84,11 +99,22 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       x <- as.matrix(x)
    }
    
+   if(any(is.na(x))){
+      stop("There are missing values in x!")
+   } else if(any(is.infinite(x) |is.nan(x))){
+      stop("There are undefined values in x, that is Nan, Inf, -Inf")
+   }
+   
    if(!is.null(y)){
       if(is.vector(y) | is.factor(y)) {
          y <- matrix(as.numeric(y), ncol = 1)
       } else if(is.data.frame(y)) {
          y <- as.matrix(y)
+      }
+      if(any(is.na(y))){
+         stop("There are missing values in y!")
+      } else if(any(is.infinite(y) |is.nan(y))){
+         stop("There are undefined values in y, that is Nan, Inf, -Inf")
       }
    }
    
@@ -101,7 +127,11 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    n <- nrow(x)
    d <- ncol(x)
 
-   if (is.null(h_values)) h_values <- seq(0.4, 3.3, 0.4)
+   if (is.null(h_values)) {
+      h_values <- seq(0.4, 3.3, 0.4)
+   } else if(!(is.numeric(h_values) & is.vector(h_values))){
+      stop("h_values must be a numeric vector")
+   }
    
    if(is.null(delta)){
       if(alternative=='location'){
@@ -111,6 +141,8 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       } else if(alternative=='skewness'){
          delta <- c(0.2, 0.3, 0.6)
       }
+   } else if(!(is.numeric(delta) & is.vector(delta))){
+      stop("delta must be a numeric vector.")
    }
    
    if(!is.null(y)){

@@ -5,8 +5,8 @@
 \alias{pk.test-class}
 \title{An S4 class for Poisson kernel-based quadratic distance tests.}
 \description{
-A class to represent the results of Poisson kernel-based quadratic
-distance tests for Uniformity on the sphere.
+A class to represent the results of Poisson kernel-based
+quadratic distance tests for Uniformity on the sphere.
 }
 \section{Slots}{
 
@@ -25,7 +25,8 @@ rejected according to Un.}
 
 \item{\code{Vn}}{The value of the V-statistic.}
 
-\item{\code{CV_Vn}}{The critical value for Vn computed following the asymptotic distribution.}
+\item{\code{CV_Vn}}{The critical value for Vn computed following the asymptotic
+distribution.}
 
 \item{\code{H0_Vn}}{A logical value indicating whether or not the null hypothesis is
 rejected according to Vn.}

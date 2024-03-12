@@ -1,10 +1,12 @@
 #' Test for pk.test
 #' 
 #' 
+#' 
+#' @srrstats {G5.1, G5.5} data sets are generated using simple functions with fixed seed
 #' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
-#' @srrstats {G5.5} random seed
-#' @srrstats {G5.6} expected results
-#' @srrstats {G5.8} edge conditions
+#' @srrstats {G5.4,G5.4a} correctness tested on simple cases
+#' @srrstats {G5.8, G5.8a,G5.8b,G5.8c} edge conditions
+#' 
 #' @noRd
 library(testthat)
 
@@ -18,7 +20,9 @@ test_that("Error on invalid x input", {
                 "x must be numeric", fixed=TRUE)
    
    expect_error(pk.test(x = rnorm(50), rho = 0.5),
-                "x must be a matrix or a data.frame with dimension greater than 1.", fixed=TRUE)
+         "x must be a matrix or a data.frame with dimension greater 
+                     than 1.", 
+         fixed=TRUE)
 })
 
 # Test 2: Error on Invalid Quantile Input

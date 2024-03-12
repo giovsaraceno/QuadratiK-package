@@ -14,18 +14,19 @@ distribution to use as the critical value.}
 
 \item{data_pool}{a matrix containing the data to be used in the test.}
 
-\item{size_x}{the number of rows in the \code{data_pool} matrix corresponding
-to group X.}
+\item{size_x}{the number of rows in the \code{data_pool} matrix
+corresponding to group X.}
 
-\item{size_y}{the number of rows in the \code{data_pool} matrix corresponding
-to group Y.}
+\item{size_y}{the number of rows in the \code{data_pool} matrix
+corresponding to group Y.}
 
 \item{h}{the tuning parameter for the kernel test.}
 
 \item{method}{the method to use for computing the critical value
 (one of "bootstrap", "permutation", or "subsampling").}
 
-\item{b}{the subsampling block size (only used if \code{method} is "subsampling").}
+\item{b}{the subsampling block size (only used if \code{method} is
+"subsampling").}
 }
 \value{
 the critical value for the specified method and significance level.

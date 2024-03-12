@@ -15,7 +15,8 @@ cv_ksample(x, y, h, B = 150, b = 0.9, Quantile = 0.95, method = "subsampling")
 
 \item{B}{the number of bootstrap/permutation/subsampling samples to generate}
 
-\item{b}{the subsampling block size (only used if \code{method} is "subsampling")}
+\item{b}{the subsampling block size (only used if \code{method} is
+"subsampling")}
 
 \item{Quantile}{the quantile of the bootstrap/permutation/subsampling
 distribution to use as the critical value}

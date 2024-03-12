@@ -26,15 +26,17 @@ pkbc(
 \arguments{
 \item{dat}{Data matrix of observations to be clustered.}
 
-\item{nClust}{Number of clusters. It can be a single value or a numeric vector.}
+\item{nClust}{Number of clusters. It can be a single value or a numeric
+vector.}
 
 \item{maxIter}{The maximum number of iterations before a run is terminated.}
 
-\item{stoppingRule}{String describing the stopping rule to be
-used within each run. Currently must be either \code{'max'} (until the change
-in the log-likelihood is less than a given threshold $(1e-7)$),
-\code{'membership'} (until the membership is unchanged), or \code{'loglik'}
-(based on a maximum number of iterations).}
+\item{stoppingRule}{String describing the stopping rule to be used within
+each run. Currently must be either:
+\code{'max'} (until the change in the log-likelihood is less
+than a given threshold (1e-7)),
+\code{'membership'} (until the membership is unchanged), or
+\code{'loglik'} (based on a maximum number of iterations).}
 
 \item{initMethod}{String describing the initialization method to be used.
 Currently must be \code{'sampleData'}.}

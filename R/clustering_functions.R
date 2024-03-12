@@ -5,15 +5,17 @@
 #' algorithm on the sphere based on the Poisson kernel-based densities.
 #'
 #' @param dat Data matrix of observations to be clustered.
-#' @param nClust Number of clusters. It can be a single value or a numeric vector.
+#' @param nClust Number of clusters. It can be a single value or a numeric 
+#'               vector.
 #' @param maxIter The maximum number of iterations before a run is terminated.
-#' @param stoppingRule String describing the stopping rule to be
-#'   used within each run. Currently must be either \code{'max'} (until the change
-#'   in the log-likelihood is less than a given threshold $(1e-7)$), 
-#'   \code{'membership'} (until the membership is unchanged), or \code{'loglik'} 
-#'   (based on a maximum number of iterations).
+#' @param stoppingRule String describing the stopping rule to be used within 
+#'                     each run. Currently must be either: 
+#'                \code{'max'} (until the change in the log-likelihood is less 
+#'                than a given threshold (1e-7)), 
+#'                \code{'membership'} (until the membership is unchanged), or 
+#'                \code{'loglik'} (based on a maximum number of iterations).
 #' @param initMethod String describing the initialization method to be used.
-#'   Currently must be \code{'sampleData'}.
+#'                   Currently must be \code{'sampleData'}.
 #' @param numInit Number of initializations.
 #'
 #' @details The function estimates the parameter of a mixture of Poisson
@@ -76,12 +78,10 @@
 #' #Perform the clustering algorithm with number od clusters k=3.
 #' pkbd<- pkbc(dat, 3)
 #'
-#' @srrstats {G1.0} Reference section reports the related literature
+#' @srrstats {G2.0a} Documentation of input nClust
 #' @srrstats {G1.3} description of parameter
 #' @srrstats {G1.4} roxigen2 is used
 #' @srrstats {G2.0,G2.2,G2.3a} The code considers the different types of input 
-#' @srrstats {G2.6,G2.7,G2.8} different types of input are considered
-#' @srrstats {G5.4a} testes on simple examples
 #' 
 #' @export
 setGeneric("pkbc",function(dat,
@@ -94,268 +94,287 @@ setGeneric("pkbc",function(dat,
    standardGeneric("pkbc")
 })
 #' @rdname pkbc
+#' 
+#' @srrstats {G2.0} input nClust
+#' @srrstats {G2.7,G2.8} different types of tabular input are considered
+#' @srrstats {G2.13,G2.14,G2.14a,G2.15,G2.16} error for NA, Nan, Inf, -Inf
+#' 
 #' @export
 setMethod("pkbc", signature(dat = "ANY"),
-          function(dat,
-                   nClust=NULL,
-                   maxIter = 300,
-                   stoppingRule = 'loglik',
-                   initMethod = 'sampleData',
-                   numInit = 10){
-             # Constant defining threshold by which log likelihood must change 
-             # to continue iterations, if applicable.
-             LL_TOL <- 1e-7
+    function(dat,
+             nClust=NULL,
+             maxIter = 300,
+             stoppingRule = 'loglik',
+             initMethod = 'sampleData',
+             numInit = 10){
+       # Constant defining threshold by which log likelihood must change 
+       # to continue iterations, if applicable.
+       LL_TOL <- 1e-7
+       
+       # validate input
+       if(is.null(nClust)){
+          stop("Input parameter nClust is required. Provide one specific 
+               value or a set of possible values.")
+       } else if(is.vector(nClust) & is.numeric(nClust)){
+          if(any(nClust < 1)){
+             stop('Values in the input parameter nClust must be 
+                  greater than 0')
+          }
+       } else {
+          stop("nClust must be a signle value or a numeric vector of possible
+                  values")
+       }
+       if (maxIter < 1) {
+          stop('Input parameter maxIter must be greater than 0')
+       }
+       if ( !(stoppingRule %in% c('max', 'membership', 'loglik')) ) {
+          stop(paste('Unrecognized value "', stoppingRule, '" in input 
+          parameter stoppingRule.', sep=''))
+       }
+       if ( !(initMethod %in% c('sampleData')) ) {
+          stop(paste('Unrecognized value "', initMethod, '" in input 
+          parameter initMethod.', sep=''))
+       }
+       if (numInit < 1) {
+          stop('Input parameter numInit must be greater than 0')
+       }
+       
+       # set options for stopping rule
+       checkMembership <- stoppingRule == 'membership'
+       checkLoglik <- stoppingRule == 'loglik'
+       
+       if(is.data.frame(dat)){
+          dat <- as.matrix(dat)
+       } else if(!is.matrix(dat)){
+          stop("dat must be a matrix or a data.frame")
+       }
+       if(!is.numeric(dat)){
+          stop("dat must be a numeric matrix or data.frame")
+       }
+       
+       if(any(is.na(dat))){
+          stop("There are missing values in the data set!")
+       } else if(any(is.infinite(dat) |is.nan(dat))){
+          stop("There are undefined values, that is Nan, Inf, -Inf")
+       }
+       # Normalize the data
+       dat <- dat/sqrt(rowSums(dat^2))
+       
+       # Initialize variables of interest
+       numVar <- ncol(dat)
+       numData <- nrow(dat)
+       
+       res_k <- list()
+       for(numClust in nClust){
+          
+          logLikVec <- rep(-Inf, numInit)
+          numIterPerRun <- rep(-99, numInit)
+          alpha_best <- rep(-99, numClust)
+          rho_best <- rep(-99, numClust)
+          mu_best <- matrix(nrow = numClust, ncol = numVar)
+          normprobMat_best <- matrix(-99,nrow=numData, ncol=numClust)
+          if (initMethod == 'sampleData') {
+             uniqueData <- unique(dat)
+             numUniqueObs <- nrow(uniqueData)
+             if (numUniqueObs < numClust) {
+                stop(paste('Only', numUniqueObs, 'unique observations.',
+                           'When initMethod = "sampleData", must have more
+                           than numClust unique observations.'
+                ))
+             }
+          }
+          log_w_d <- (numVar / 2) * (log(2) + log(pi)) - lgamma(numVar / 2)
+          
+          # Begin initializations
+          for (init in 1:numInit) {
              
-             # validate input
-             if(is.null(nClust)){
-                stop("Input parameter nClust is required. Provide one specific 
-                     value or a set of possible values.")
+             # initialize parameters
+             alpha_current <- rep(1/numClust, numClust)
+             rho_current <- rep(0.5,numClust)
+             
+             # Initializing mu
+             if (initMethod == 'sampleData') {
+                # sampling w/o replacement from unique data points
+                mu_current <- matrix(t(uniqueData[sample(numUniqueObs, 
+                                 size=numClust, replace=FALSE) ,]), 
+                                 ncol=numVar, byrow=TRUE)
+             }
+             
+             currentIter <- 1
+             membCurrent <- rep.int(0, times = numData)
+             loglikCurrent <- -Inf
+             
+             # Begin EM iterations
+             while (currentIter <= maxIter) {
+                v_mat <- dat %*% t(mu_current)
+                alpha_mat_current <- matrix(
+                   alpha_current,
+                   nrow = numData,
+                   ncol = numClust,
+                   byrow = TRUE
+                )
+                rho_mat_current <- matrix(
+                   rho_current,
+                   nrow = numData,
+                   ncol = numClust,
+                   byrow = TRUE
+                )
+                log_probMat_denom <- log(1 + rho_mat_current^2 - 
+                                            2*rho_mat_current*v_mat)
+                # eq (11) in ICMLD16 paper
+                log_probMat <- log(1 - (rho_mat_current^2)) - log_w_d - 
+                                    (numVar / 2) * log_probMat_denom
+                ######### E step done#####################################
+                ########## M step now#####################################
+                # Denominator of eq (18) in ICMLD16 paper
+                probSum <- matrix(
+                   exp(log_probMat) %*% alpha_current,
+                   nrow = numData,
+                   ncol = numClust
+                )
+                # eq (18) in ICMLD16 paper
+                log_normProbMat_current <- log(alpha_mat_current) + 
+                                             log_probMat - log(probSum)
+                # denominator of eq (20) in ICMLD16 paper
+                log_weightMat <- log_normProbMat_current - log_probMat_denom
+                
+                # eq (19) in ICMLD16 paper
+                alpha_current <- colSums(exp(log_normProbMat_current)) / numData
+                # numerator of fraction in eq (21) of ICMLD16 paper
+                mu_num_sum_MAT <- t(exp(log_weightMat)) %*% dat
+                norm_vec <- function(x) sqrt(sum(x^2))
+                mu_denom <- apply(mu_num_sum_MAT, 1, norm_vec)
+                # eq (21) of ICMLD16 paper without sign function
+                mu_current <- mu_num_sum_MAT / mu_denom
+                for(h in 1:numClust){
+                   # update rho params
+                   sum_h_weightMat <- sum(exp(log_weightMat[,h]))
+                   alpha_current_h <- alpha_current[h]
+                   mu_denom_h <- mu_denom[h]
+                   root_func <- function(x) {
+                      (-2*numData*x*alpha_current_h)/(1 - x^2) + 
+                         numVar*mu_denom_h -numVar*x*sum_h_weightMat
+                   }
+                   rho_current[h] <- (uniroot(
+                      f = root_func,
+                      interval = c(0,1),
+                      f.lower = root_func(0),
+                      f.upper = root_func(1),
+                      tol = 0.001
+                   ))$root
+                } # for h
+                
+                # Terminate iterations if maxIter is reached. Redundant 
+                # with while condition, but this ensures that the stored 
+                # numIter below is accurate.
+                if (currentIter >= maxIter) {
+                   break
+                }
+                
+                # Terminate iterations if membership is unchanged, if applicable
+                if (checkMembership) {
+                   # calculate and store group membership
+                   membPrevious <- membCurrent
+                   membCurrent <-apply(exp(log_normProbMat_current),1,which.max)
+                   if (all(membPrevious == membCurrent)) {
+                      break
+                   }
+                }
+                # Terminate iterations if log-likelihood is unchanged, if 
+                # applicable.
+                if (checkLoglik) {
+                   loglikPrevious <- loglikCurrent
+                   # Calculate log likelihood for the current iteration
+                   loglikCurrent <- sum(log( exp(log_probMat)%*%alpha_current))
+                   if (abs(loglikPrevious - loglikCurrent) < LL_TOL) {
+                      break
+                   }
+                }
+                # Update counter to NEXT iteration number.
+                currentIter <- currentIter + 1
+             } # for currentIter
+             # Compare the current log likelihood to the best stored log 
+             # likelihood; if it exceeds the stored, then store it and all 
+             # associated estimates.
+             # alpha, rho, mu, normprobMat
+             loglikCurrent <- sum(log( exp(log_probMat) %*% alpha_current ))
+             if (loglikCurrent > max(logLikVec)) {
+                alpha_best <- alpha_current
+                rho_best <- rho_current
+                mu_best <- mu_current
+                normprobMat_best <- exp(log_normProbMat_current)
+             }
+             logLikVec[init] <- loglikCurrent
+             numIterPerRun[init] <- currentIter - 1
+             # Store run info
+          } # for init
+          # Calculate final membership
+          memb_best <- apply(normprobMat_best, 1, which.max)
+          
+          # Calculate the within-cluster sum of squares
+          wcss <- vapply(1:numClust, function(cl) {
+             idx <- which(memb_best==cl)
+             
+             if(length(idx)>0){
+                
+                dat_memb <- matrix(t(dat[idx,]),ncol=numVar, byrow=TRUE)
+                mu_memb <- matrix(rep(as.numeric(mu_best[cl,]), 
+                                      times = nrow(dat_memb)), 
+                                       ncol=numVar, 
+                                       byrow=TRUE)
+                return(sum(apply(dat_memb - mu_memb, 1, norm, "2")**2))
+                
              } else {
-                if(any(nClust < 1)){
-                   stop('Values in the input parameter nClust must be 
-                        greater than 0')
-                }
-             }#else if(length(nClust)==1){
-             #if (nClust < 2 ) {
-             #  stop('Input parameter nClust must be an integer greater than 1')
-             # }
-             #}
-             if (maxIter < 1) {
-                stop('Input parameter maxIter must be greater than 0')
+                return(0)
              }
-             if ( !(stoppingRule %in% c('max', 'membership', 'loglik')) ) {
-                stop(paste('Unrecognized value "', stoppingRule, '" in input 
-                parameter stoppingRule.', sep=''))
-             }
-             if ( !(initMethod %in% c('sampleData')) ) {
-                stop(paste('Unrecognized value "', initMethod, '" in input 
-                parameter initMethod.', sep=''))
-             }
-             if (numInit < 1) {
-                stop('Input parameter numInit must be greater than 0')
-             }
-             
-             # set options for stopping rule
-             checkMembership <- stoppingRule == 'membership'
-             checkLoglik <- stoppingRule == 'loglik'
-             
-             # Normalize the data
-             dat <- dat/sqrt(rowSums(dat^2))
-             
-             # Initialize variables of interest
-             numVar <- ncol(dat)
-             numData <- nrow(dat)
-             
-             res_k <- list()
-             for(numClust in nClust){
+          }, numeric(1))
+          wcss <- sum(wcss)
+          
+          # Calculate the within-cluster sum of squares using cosine 
+          # similarity
+          wcss_cos <- vapply(1:numClust, function(cl) {
+             idx <- which(memb_best==cl)
+             if(length(idx)>0){
+                dat_memb <- matrix(t(dat[idx,]),ncol=numVar, byrow=TRUE)
+                mu_memb <- matrix(rep(mu_best[cl,], nrow(dat_memb)), 
+                                  ncol=numVar,byrow=TRUE)
                 
-                logLikVec <- rep(-Inf, numInit)
-                numIterPerRun <- rep(-99, numInit)
-                alpha_best <- rep(-99, numClust)
-                rho_best <- rep(-99, numClust)
-                mu_best <- matrix(nrow = numClust, ncol = numVar)
-                normprobMat_best <- matrix(-99,nrow=numData, ncol=numClust)
-                if (initMethod == 'sampleData') {
-                   uniqueData <- unique(dat)
-                   numUniqueObs <- nrow(uniqueData)
-                   if (numUniqueObs < numClust) {
-                      stop(paste('Only', numUniqueObs, 'unique observations.',
-                                 'When initMethod = "sampleData", must have more
-                                 than numClust unique observations.'
+                return(sum(dat_memb * mu_memb))
+             } else {
+                return(0)
+             }
+          }, numeric(1))
+          
+          wcss_cos <- sum(wcss_cos)
+          
+          res_k[[numClust]] <- list(postProbs = normprobMat_best,
+                                    LogLik = max(logLikVec),
+                                    wcss = c(wcss,wcss_cos),
+                                    params = list(mu = mu_best, 
+                                                  rho = rho_best, 
+                                                  alpha = alpha_best),
+                                    finalMemb = memb_best,
+                                    runInfo = list(
+                                       logLikVec = logLikVec,
+                                       numIterPerRun = numIterPerRun
+                                    ))
+          
+       }
+       
+       
+       # Store and return results object.
+       results <- new("pkbc",
+                      res_k = res_k,
+                      input = list(
+                         dat = dat,
+                         nClust = nClust,
+                         maxIter = maxIter,
+                         stoppingRule = stoppingRule,
+                         initMethod = initMethod,
+                         numInit = numInit
                       ))
-                   }
-                }
-                log_w_d <- (numVar / 2) * (log(2) + log(pi)) - lgamma(numVar / 2)
-                
-                # Begin initializations
-                for (init in 1:numInit) {
-                   
-                   # initialize parameters
-                   alpha_current <- rep(1/numClust, numClust)
-                   rho_current <- rep(0.5,numClust)
-                   
-                   # Initializing mu
-                   if (initMethod == 'sampleData') {
-                      # sampling w/o replacement from unique data points
-                      mu_current <- matrix(t(uniqueData[sample(numUniqueObs, 
-                                       size=numClust, replace=FALSE) ,]), 
-                                       ncol=numVar, byrow=TRUE)
-                   }
-                   
-                   currentIter <- 1
-                   membCurrent <- rep.int(0, times = numData)
-                   loglikCurrent <- -Inf
-                   
-                   # Begin EM iterations
-                   while (currentIter <= maxIter) {
-                      v_mat <- dat %*% t(mu_current)
-                      alpha_mat_current <- matrix(
-                         alpha_current,
-                         nrow = numData,
-                         ncol = numClust,
-                         byrow = TRUE
-                      )
-                      rho_mat_current <- matrix(
-                         rho_current,
-                         nrow = numData,
-                         ncol = numClust,
-                         byrow = TRUE
-                      )
-                      log_probMat_denom <- log(1 + rho_mat_current^2 - 
-                                                  2*rho_mat_current*v_mat)
-                      # eq (11) in ICMLD16 paper
-                      log_probMat <- log(1 - (rho_mat_current^2)) - log_w_d - 
-                                          (numVar / 2) * log_probMat_denom
-                      ######### E step done#####################################
-                      ########## M step now#####################################
-                      # Denominator of eq (18) in ICMLD16 paper
-                      probSum <- matrix(
-                         exp(log_probMat) %*% alpha_current,
-                         nrow = numData,
-                         ncol = numClust
-                      )
-                      # eq (18) in ICMLD16 paper
-                      log_normProbMat_current <- log(alpha_mat_current) + 
-                                                   log_probMat - log(probSum)
-                      # denominator of eq (20) in ICMLD16 paper
-                      log_weightMat <- log_normProbMat_current - log_probMat_denom
-                      
-                      # eq (19) in ICMLD16 paper
-                      alpha_current <- colSums(exp(log_normProbMat_current)) / numData
-                      # numerator of fraction in eq (21) of ICMLD16 paper
-                      mu_num_sum_MAT <- t(exp(log_weightMat)) %*% dat
-                      norm_vec <- function(x) sqrt(sum(x^2))
-                      mu_denom <- apply(mu_num_sum_MAT, 1, norm_vec)
-                      # eq (21) of ICMLD16 paper without sign function
-                      mu_current <- mu_num_sum_MAT / mu_denom
-                      for(h in 1:numClust){
-                         # update rho params
-                         sum_h_weightMat <- sum(exp(log_weightMat[,h]))
-                         alpha_current_h <- alpha_current[h]
-                         mu_denom_h <- mu_denom[h]
-                         root_func <- function(x) {
-                            (-2*numData*x*alpha_current_h)/(1 - x^2) + 
-                               numVar*mu_denom_h -numVar*x*sum_h_weightMat
-                         }
-                         rho_current[h] <- (uniroot(
-                            f = root_func,
-                            interval = c(0,1),
-                            f.lower = root_func(0),
-                            f.upper = root_func(1),
-                            tol = 0.001
-                         ))$root
-                      } # for h
-                      
-                      # Terminate iterations if maxIter is reached. Redundant 
-                      # with while condition, but this ensures that the stored 
-                      # numIter below is accurate.
-                      if (currentIter >= maxIter) {
-                         break
-                      }
-                      
-                      # Terminate iterations if membership is unchanged, if applicable
-                      if (checkMembership) {
-                         # calculate and store group membership
-                         membPrevious <- membCurrent
-                         membCurrent <- apply(exp(log_normProbMat_current), 1, which.max)
-                         if (all(membPrevious == membCurrent)) {
-                            break
-                         }
-                      }
-                      # Terminate iterations if log-likelihood is unchanged, if applicable.
-                      if (checkLoglik) {
-                         loglikPrevious <- loglikCurrent
-                         # Calculate log likelihood for the current iteration
-                         loglikCurrent <- sum(log( exp(log_probMat) %*% alpha_current ))
-                         if (abs(loglikPrevious - loglikCurrent) < LL_TOL) {
-                            break
-                         }
-                      }
-                      # Update counter to NEXT iteration number.
-                      currentIter <- currentIter + 1
-                   } # for currentIter
-                   # Compare the current log likelihood to the best stored log 
-                   # likelihood; if it exceeds the stored, then store it and all 
-                   # associated estimates.
-                   # alpha, rho, mu, normprobMat
-                   loglikCurrent <- sum(log( exp(log_probMat) %*% alpha_current ))
-                   if (loglikCurrent > max(logLikVec)) {
-                      alpha_best <- alpha_current
-                      rho_best <- rho_current
-                      mu_best <- mu_current
-                      normprobMat_best <- exp(log_normProbMat_current)
-                   }
-                   logLikVec[init] <- loglikCurrent
-                   numIterPerRun[init] <- currentIter - 1
-                   # Store run info
-                } # for init
-                # Calculate final membership
-                memb_best <- apply(normprobMat_best, 1, which.max)
-                
-                # Calculate the within-cluster sum of squares
-                wcss <- sapply(1:numClust, function(cl) {
-                   idx <- which(memb_best==cl)
-                   
-                   if(length(idx)>0){
-                      
-                      dat_memb <- matrix(t(dat[idx,]),ncol=numVar, byrow=TRUE)
-                      mu_memb <- matrix(rep(as.numeric(mu_best[cl,]), 
-                                            times = nrow(dat_memb)), 
-                                             ncol=numVar, 
-                                             byrow=TRUE)
-                      return(sum(apply(dat_memb - mu_memb, 1, norm, "2")**2))
-                      
-                   } else {
-                      return(0)
-                   }
-                })
-                wcss <- sum(wcss)
-                
-                # Calculate the within-cluster sum of squares using cosine 
-                # similarity
-                wcss_cos <- sapply(1:numClust, function(cl) {
-                   idx <- which(memb_best==cl)
-                   if(length(idx)>0){
-                      dat_memb <- matrix(t(dat[idx,]),ncol=numVar, byrow=TRUE)
-                      mu_memb <- matrix(rep(mu_best[cl,], nrow(dat_memb)), 
-                                        ncol=numVar,byrow=TRUE)
-                      
-                      return(sum(dat_memb * mu_memb))
-                   } else {
-                      return(0)
-                   }
-                })
-                
-                wcss_cos <- sum(wcss_cos)
-                
-                res_k[[numClust]] <- list(postProbs = normprobMat_best,
-                                          LogLik = max(logLikVec),
-                                          wcss = c(wcss,wcss_cos),
-                                          params = list(mu = mu_best, 
-                                                        rho = rho_best, 
-                                                        alpha = alpha_best),
-                                          finalMemb = memb_best,
-                                          runInfo = list(
-                                             logLikVec = logLikVec,
-                                             numIterPerRun = numIterPerRun
-                                          ))
-                
-             }
-             
-             
-             # Store and return results object.
-             results <- new("pkbc",
-                            res_k = res_k,
-                            input = list(
-                               dat = dat,
-                               nClust = nClust,
-                               maxIter = maxIter,
-                               stoppingRule = stoppingRule,
-                               initMethod = initMethod,
-                               numInit = numInit
-                            ))
-             return(results)
-          })
+       return(results)
+    })
 #'
 #' Validation of Poisson kernel-based clustering results
 #'
@@ -364,9 +383,12 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' clustering results.
 #'
 #' @param object Object of class \code{pkbc}
-#' @param true_label Vector of true membership to clusters (if available)
+#' @param true_label factor or vector of true membership to clusters (if 
+#'                   available). It must have the same length of final 
+#'                   memberships.
 #' @param elbow.plot Logical, if TRUE the function returns the elbow plots 
-#' computed with the Euclidean distance and cosine similarity (default: TRUE).
+#'                   computed with the Euclidean distance and cosine similarity
+#'                   (default: TRUE).
 #' @param h Tuning parameter of the k-sample test. (default: 1.5)
 #'
 #' @details The function extracts the within-cluster sum of squares and displays
@@ -378,9 +400,9 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' \itemize{
 #'    \item \code{metrics} Table of computed evaluation measures.
 #'    \item \code{IGP} List of in-group proportions for each value of number of 
-#'    clusters specified.
+#'                     clusters specified.
 #'    \item \code{wcss} Table of collected values of within-cluster sum of 
-#'    squares.
+#'                      squares.
 #' }
 #'
 #' @references
@@ -389,8 +411,8 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' https://doi.org/10.1093/biostatistics/kxj029
 #' 
 #' Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and
-#'  validation of cluster analysis. Journal of Computational and Applied 
-#'  Mathematics, 20, 53–65.
+#' validation of cluster analysis. Journal of Computational and Applied 
+#' Mathematics, 20, 53–65.
 #'
 #' @importFrom mclust adjustedRandIndex
 #' @import clusterRepro
@@ -416,11 +438,24 @@ setMethod("pkbc", signature(dat = "ANY"),
 #' validation(pkbc_res)
 #' }
 #' 
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G2.0, G2.0a, G2.1, G2.1a,G2.2} input true_label
+#' 
 #' @export
 validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
    
    x <- object@input$dat
    x <- x/sqrt(rowSums(x^2))
+   
+   if(!is.null(true_label)){
+      if((is.factor(true_label) | is.vector(true_label)) &!is.list(true_label)){
+         if(length(true_label)!=nrow(x)){
+            stop("true_label must have the same length of finalMemb.")
+         }
+      } else {
+         stop("true_label must be a factor or a vector")
+      }
+   }
    
    if(is.null(true_label)){
       metrics <- matrix(nrow=5)
@@ -436,14 +471,14 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
       # Compute the In-Group Proportion
       if(k>1){
          igp_k[[k]] <- IGP.clusterRepro(as.data.frame(t(x)), 
-                                        as.data.frame(t(object@res_k[[k]]$params$mu)))$IGP
+                            as.data.frame(t(object@res_k[[k]]$params$mu)))$IGP
       }
       
       # Compute the k-sample test
       k_test <- kb.test(x=x, y=object@res_k[[k]]$finalMemb,h=h,K_threshold=k)
       
       # Compute the Average Silhouette Width
-      sil <- mean(silhouette(x = object@res_k[[k]]$finalMemb, dist = dist(x))[,3])
+      sil <- mean(silhouette(x =object@res_k[[k]]$finalMemb, dist =dist(x))[,3])
       
       # If true labels are provided
       if(!is.null(true_label)){
@@ -470,11 +505,12 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
          macroPrecision <- mean(precision,na.rm=T)
          macroRecall <- mean(recall,na.rm=T)
          
-         metrics <- cbind(metrics, c(k, k_test@Dn[1], k_test@CV[1], k_test@H0, sil, 
-                                     ari, macroPrecision, macroRecall))
+         metrics <- cbind(metrics, c(k, k_test@Dn[1], k_test@CV[1], k_test@H0, 
+                                     sil, ari, macroPrecision, macroRecall))
       } else {
          ari <- NA
-         metrics <- cbind(metrics, c(k, k_test@Dn[1], k_test@CV[1], k_test@H0, sil))
+         metrics <- cbind(metrics, c(k, k_test@Dn[1], k_test@CV[1], k_test@H0, 
+                                     sil))
       }
       
       wcss <- rbind(wcss, object@res_k[[k]]$wcss)
@@ -537,8 +573,8 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
 #'
 #' @details The function computes mean, standard deviation, median, 
 #' inter-quantile range, minimum and maximum for each variable in the data set 
-#' given the final membership assigned by the clustering algorithm. If dimension 
-#' is equal to 2 or 3, points are displayed on the circle and sphere, 
+#' given the final membership assigned by the clustering algorithm. If 
+#' dimension is equal to 2 or 3, points are displayed on the circle and sphere,
 #' respectively. If dimension if greater than 3, the spherical Principal 
 #' Component procedure proposed by Locantore et al., (1999) is applied for 
 #' dimensionality reduction and the first three principal components are 
@@ -574,6 +610,8 @@ validation <- function(object, true_label=NULL, elbow.plot=TRUE, h=1.5){
 #' @importFrom grDevices colorRampPalette
 #' @importFrom rrcov PcaLocantore
 #'
+#' @srrstats {G1.4} roxigen2 is used
+#' 
 #' @export
 summary_stat <- function(object, k, true_label=NULL){
    
@@ -608,7 +646,7 @@ summary_stat <- function(object, k, true_label=NULL){
    if (ncol(x) == 2) {
       
       df <- data.frame(V1 = x[,1], V2 = x[,2], clusters = as.factor(y))
-      with(df, {pl <- ggplot(df, aes(x = V1, y = V2, color = as.factor(clusters))) +
+      with(df, {pl <- ggplot(df, aes(x = V1, y = V2, color = clusters)) +
          geom_point() +
          theme_minimal() +
          labs(color = "Cluster") 
@@ -643,7 +681,8 @@ summary_stat <- function(object, k, true_label=NULL){
    } else {
       
       pca_result <- PcaLocantore(x)
-      pca_data <- data.frame(PC1 = pca_result@scores[,1], PC2 = pca_result@scores[,2], 
+      pca_data <- data.frame(PC1 = pca_result@scores[,1], 
+                             PC2 = pca_result@scores[,2], 
                              PC3 = pca_result@scores[,3])
       pca_data <- pca_data/sqrt(rowSums(pca_data^2))
       pca_data <- data.frame(pca_data, Cluster = y)
@@ -671,8 +710,9 @@ summary_stat <- function(object, k, true_label=NULL){
          rgl.spheres(0, col = "transparent", alpha = 0.2)
          
          next3d()
-         plot3d(pca_data$PC1, pca_data$PC2, pca_data$PC3, col = col_pal[true_label+k], 
-                size = 4, xlab="PC1", ylab="PC2", zlab="PC3") 
+         plot3d(pca_data$PC1, pca_data$PC2, pca_data$PC3, 
+                col = col_pal[true_label+k], size = 4, 
+                xlab="PC1", ylab="PC2", zlab="PC3") 
          title3d("True label", line = 7, cex = 3, font=2)
          rgl.spheres(0, col = "transparent", alpha = 0.2)
          

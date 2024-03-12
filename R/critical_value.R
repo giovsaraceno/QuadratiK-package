@@ -6,16 +6,17 @@
 #'
 #' @param B the number of bootstrap/permutation/subsampling samples to generate.
 #' @param Quantile the quantile of the bootstrap/permutation/subsampling 
-#' distribution to use as the critical value.
+#'                 distribution to use as the critical value.
 #' @param data_pool a matrix containing the data to be used in the test.
-#' @param size_x the number of rows in the \code{data_pool} matrix corresponding 
-#' to group X.
-#' @param size_y the number of rows in the \code{data_pool} matrix corresponding 
-#' to group Y.
+#' @param size_x the number of rows in the \code{data_pool} matrix 
+#'               corresponding to group X.
+#' @param size_y the number of rows in the \code{data_pool} matrix 
+#'               corresponding to group Y.
 #' @param h the tuning parameter for the kernel test.
 #' @param method the method to use for computing the critical value 
-#' (one of "bootstrap", "permutation", or "subsampling").
-#' @param b the subsampling block size (only used if \code{method} is "subsampling").
+#'               (one of "bootstrap", "permutation", or "subsampling").
+#' @param b the subsampling block size (only used if \code{method} is 
+#'          "subsampling").
 #'
 #' @return the critical value for the specified method and significance level.
 #' 
@@ -54,8 +55,9 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
          Ind_y<-sample((size_x+1):(size_x+size_y), round(size_y*b), replace = F)
          newind <- c(Ind_x,Ind_y)
          newsample <- sample(newind,length(newind),replace = F)
+         m <- length(newsample)
          data_x_star<-as.matrix(data_pool[newsample[1:round(size_x*b)], ])
-         data_y_star<-as.matrix(data_pool[newsample[(round(size_x*b)+1):length(newsample)], ])
+         data_y_star<-as.matrix(data_pool[newsample[(round(size_x*b)+1):m], ])
       }
       
       Results[i] <-   stat2sample(data_x_star,data_y_star,h,
@@ -74,13 +76,14 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
 #' @param size the number of observations to be generated.
 #' @param rho the concentration parameter for the Poisson kernel.
 #' @param B the number of replications.
-#' @param Quantile the quantile of the distribution use to select the critical value.
+#' @param Quantile the quantile of the distribution use to select the critical 
+#'                 value.
 #'
 #' @return the critical value for the specified dimension, size and level.
 #'
 #' @details 
 #' For each replication, a sample of d-dimensional observations from the uniform
-#' distribution on the Sphere are generated and the Poisson kernel-based 
+#' #' distribution on the Sphere are generated and the Poisson kernel-based 
 #' U-statistic is computed. After B iterations, the critical value is selected 
 #' as the \code{Quantile} of the empirical distribution of the computed test 
 #' statistics.
@@ -123,15 +126,15 @@ poisson_CV<-function(d, size, rho, B, Quantile){
 #' @param mu_hat Mean vector for the reference distribution.
 #' @param Sigma_hat Covariance matrix of the reference distribution.
 #' @param B the number of replications.
-#' @param Quantile the quantile of the distribution use to select the critical value
+#' @param Quantile the quantile of the distribution use to select the critical 
+#'                 value
 #'
 #' @return the critical value for the specified dimension, size and level.
 #' 
 #' @details 
 #' For each replication, a sample from the d-dimensional Normal distribution 
-#' with mean vector
-#' \code{mu_hat} and covariance matrix \code{Sigma_hat} is generated and the 
-#' KBQD test U-statistic for Normality is computed. 
+#' with mean vector \code{mu_hat} and covariance matrix \code{Sigma_hat} is 
+#' generated and the KBQD test U-statistic for Normality is computed. 
 #' After B iterations, the critical value is selected as the \code{Quantile} 
 #' of the empirical distribution of the computed test statistics.
 #' 
@@ -166,11 +169,12 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
 #' @param y vector indicating the sample for each observation
 #' @param h the tuning parameter for the test using the Gaussian kernel
 #' @param B the number of bootstrap/permutation/subsampling samples to generate
-#' @param b the subsampling block size (only used if \code{method} is "subsampling")
+#' @param b the subsampling block size (only used if \code{method} is 
+#'          "subsampling")
 #' @param Quantile the quantile of the bootstrap/permutation/subsampling 
-#' distribution to use as the critical value
+#'                 distribution to use as the critical value
 #' @param method the method to use for computing the critical value 
-#' (one of "bootstrap", "permutation")
+#'               (one of "bootstrap", "permutation")
 #'
 #' @return a vector of two critical values corresponding to different 
 #' formulation of the k-sample test statistics.
@@ -182,7 +186,8 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
 #' @srrstats {G1.4a} roxigen2 is used
 #' 
 #' @keywords internal
-cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, method="subsampling"){
+cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, 
+                       method="subsampling"){
    
    sizes <- as.vector(table(y))
    cum_size <- c(0,cumsum(sizes))
@@ -224,7 +229,7 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, method="subsamplin
                                         sizes_sub, cum_size_sub)
    }
    
-   cv_k <- apply(Results,2,function(x) as.numeric(quantile(x, Quantile,na.rm=T)))
+   cv_k <- apply(Results,2,function(x) as.numeric(quantile(x,Quantile,na.rm=T)))
    
    return(cv_k)
 }

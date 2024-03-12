@@ -2,33 +2,38 @@
 #' 
 #' Clustering on the Sphere
 #' 
+#' @srrstats {G5.1, G5.5} data sets are generated using simple functions with fixed seed
 #' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
-#' @srrstats {G5.5} random seed
-#' @srrstats {G5.6} expected results
-#' @srrstats {G5.8} edge conditions
+#' @srrstats {G5.4,G5.4a} correctness tested on simple cases
+#' @srrstats {G5.8, G5.8a,G5.8b,G5.8c} edge conditions
+#' 
 #' @noRd
 library(testthat)
-
 # Test 1: Verify Error on Invalid inputs
 test_that("Error is thrown for invalid inputs", {
    set.seed(123)
    dat <- matrix(rnorm(100),ncol=2)
    
    #Invalid nClust
-   expect_error(pkbc(dat, nClust = 0), "Values in the input parameter nClust must be 
-                        greater than 0")
-   expect_error(pkbc(dat), "Input parameter nClust is required. Provide one specific 
-                     value or a set of possible values.")
+   expect_error(pkbc(dat, nClust = 0), 
+   "Values in the input parameter nClust must be 
+                  greater than 0", fixed=TRUE)
+   expect_error(pkbc(dat), 
+   "Input parameter nClust is required. Provide one specific 
+               value or a set of possible values.", fixed=TRUE)
    
    #Invalid maxIter
-   expect_error(pkbc(dat, nClust=2,maxIter=0), "Input parameter maxIter must be greater than 0")
+   expect_error(pkbc(dat, nClust=2,maxIter=0), 
+                "Input parameter maxIter must be greater than 0")
    
    #Invalid initMethod
-   expect_error(pkbc(dat, nClust=2,initMethod="Invalid"), 'Unrecognized value "Invalid" in input 
-                parameter initMethod.')
+   expect_error(pkbc(dat, nClust=2,initMethod="Invalid"), 
+   'Unrecognized value "Invalid" in input 
+          parameter initMethod.')
    
    #Invalid numInit
-   expect_error(pkbc(dat, nClust=2,numInit=0), "Input parameter numInit must be greater than 0")
+   expect_error(pkbc(dat, nClust=2,numInit=0), 
+                "Input parameter numInit must be greater than 0")
 })
 
 # Test 2: Verify Error on Invalid data
@@ -37,8 +42,9 @@ test_that("Error is thrown for invalid data", {
    dat <- matrix(rnorm(6),ncol=2)
    
    #Invalid nClust
-   expect_error(pkbc(dat, nClust = 4), 'Only 3 unique observations. When initMethod = "sampleData", must have more
-                                 than numClust unique observations.')
+   expect_error(pkbc(dat, nClust = 4), 
+   'Only 3 unique observations. When initMethod = "sampleData", must have more
+                           than numClust unique observations.', fixed=TRUE)
    
 })
 

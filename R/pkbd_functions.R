@@ -2,11 +2,11 @@
 #' The Poisson kernel-based Distribution (PKBD)
 #' 
 #' Density function and random number generation from the Poisson kernel-based 
-#' Distribution with mean direction vector \code{mu} and concentration parameter 
+#' Distribution with mean direction vector \code{mu} and concentration parameter
 #' \code{rho}.
 #'  
 #' @param x Matrix (or data.frame) with number of columns >=2.
-#' @param mu Location parameter with same length as the rows of x. Normalized to 
+#' @param mu Location parameter with same length as the rows of x. Normalized to
 #' length one.
 #' @param rho Concentration parameter, with 0 <= rho < 1.
 #' @param logdens Logical; if 'TRUE', densities d are given as log(d).
@@ -17,7 +17,7 @@
 #' 
 #' The number of observations generated is determined by \code{n} for 
 #' \code{rpkb}. This function returns a list with the matrix of generated 
-#' observations \code{x}, the number of tries \code{numTries} and the number of 
+#' observations \code{x}, the number of tries \code{numTries} and the number of
 #' acceptances \code{numAccepted}.
 #'
 #' 
@@ -29,8 +29,10 @@
 #' dens_val <- dpkb(pkbd_dat$x, c(0.5,0.5),0.5)
 #'
 #' @srrstats {G1.4} roxigen2 is used
-#' @srrstats {G2.2,G2.3a} check unidimensional inputs 
-#' @srrstats {G5.4a} testes on simple examples
+#' @srrstats {G2.0,G2.0a} check input mu 
+#' @srrstats {G2.7,G2.8} different input x
+#' @srrstats {G2.13,G2.14,G2.14a,G2.15,G2.16} error for NA, Nan, Inf, -Inf
+#' 
 #' @export
 dpkb <- function(x, mu, rho, logdens = FALSE) {
    # validate input
@@ -42,6 +44,11 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
       x <- as.matrix(x)
    } else if(!is.matrix(x)){
       stop("x must be a matrix or a data.frame")
+   }
+   if(any(is.na(x))){
+      stop("There are missing values in x!")
+   } else if(any(is.infinite(x) |is.nan(x))){
+      stop("There are undefined values in x, that is Nan, Inf, -Inf")
    }
    p <- ncol(x)
    if (p < 2) {
@@ -102,7 +109,7 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #'
 #' @srrstats {G1.0} Reference section reports the related literature
 #' @srrstats {G1.4} roxigen2 is used
-#' @srrstats {G5.4a} testes on simple examples
+#' @srrstats {G2.0,G2.0a} check input mu 
 #' 
 #' @export
 rpkb <- function(n, mu, rho, method = 'rejvmf') {
@@ -111,6 +118,9 @@ rpkb <- function(n, mu, rho, method = 'rejvmf') {
       stop('Input argument rho must be within [0,1)')
    }
    # norm input
+   if (length(mu) < 2) {
+      stop('mu must have length >= 2')
+   }
    if (sum(abs(mu)) == 0) {
       stop('Input argument mu cannot be a vector of zeros')
    }
@@ -187,7 +197,7 @@ rpkb <- function(n, mu, rho, method = 'rejvmf') {
       
    } else if (method == 'rejpsaw') {
       
-      retvals <- sapply(1:n, function(x){
+      retvals <- vapply(1:n, function(x){
          lambda <- (2*rho)/(1+rho^2)
          # pSaw: log-density and derivatives
          lpdf <- function(t) {-p*log(1-lambda*t) + (p-3)*(log(1+t) + log(1-t))}
@@ -219,7 +229,7 @@ rpkb <- function(n, mu, rho, method = 'rejvmf') {
          xy <- W*mu + sqrt(1 - W^2)*y
          return(xy)
          
-      })
+      }, numeric(p))
       
       retvals <- t(retvals)
       numAccepted <- NA

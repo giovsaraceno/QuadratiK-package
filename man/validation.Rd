@@ -9,10 +9,13 @@ validation(object, true_label = NULL, elbow.plot = TRUE, h = 1.5)
 \arguments{
 \item{object}{Object of class \code{pkbc}}
 
-\item{true_label}{Vector of true membership to clusters (if available)}
+\item{true_label}{factor or vector of true membership to clusters (if
+available). It must have the same length of final
+memberships.}
 
 \item{elbow.plot}{Logical, if TRUE the function returns the elbow plots
-computed with the Euclidean distance and cosine similarity (default: TRUE).}
+computed with the Euclidean distance and cosine similarity
+(default: TRUE).}
 
 \item{h}{Tuning parameter of the k-sample test. (default: 1.5)}
 }

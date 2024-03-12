@@ -6,8 +6,8 @@
 \title{A S4 class for the clustering algorithm on the sphere based on
 Poisson kernel-based distributions.}
 \description{
-A class to represent the results of Poisson kernel-based clustering
-procedure for spherical observations.
+A class to represent the results of Poisson kernel-based
+clustering procedure for spherical observations.
 }
 \details{
 See the function \code{pkbc} for more details.
@@ -24,6 +24,5 @@ each value of possible number of clusters considered.}
 \examples{
 data("wireless")
 res <- pkbc(as.matrix(wireless[,-8]),4)
-
 
 }

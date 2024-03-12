@@ -1,6 +1,6 @@
 # Collection of Methods Constructed using the Kernel-Based Quadratic Distances
 
-It is implemented in R and Python, providing a comprehensive set of goodness-of-fit tests and clustering technique using kernel-based quadratic distances. This framework aims to bridge the gap between the statistical and machine learning literature. It includes:
+\code{QuadratiK} provides the first implementation, in R and Python, of a comprehensive set of goodness-of-fit tests and a clustering technique for spherical data using kernel-based quadratic distances. This framework aims to bridge the gap between the statistical and machine learning literature. It includes:
 
 - **Goodness-of-Fit Tests**: The software implements one, two, and k-sample tests for goodness of fit, offering an efficient and mathematically sound way to assess the fit of probability distributions. Expanded capabilities include supporting tests for uniformity on the *d*-dimensional Sphere based on Poisson kernel densities.
 

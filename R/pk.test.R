@@ -8,9 +8,9 @@
 #' @param x A numeric d-dim matrix of data points on the Sphere S^(d-1).
 #' @param rho Concentration parameter of the Poisson kernel function.
 #' @param B Number of iterations for critical value estimation of Un 
-#' (default: 300).
+#'          (default: 300).
 #' @param Quantile The quantile to use for critical value estimation, 
-#' 0.95 is the default value.
+#'                 0.95 is the default value.
 #'
 #' @return An S4 object of class \code{pk.test} containing the results of the 
 #' Poisson kernel-based tests. The object contains the following slots:
@@ -21,16 +21,16 @@
 #'   \item \code{Un} The value of the U-statistic.
 #'   \item \code{CV_Un} The empirical critical value for Un.
 #'   \item \code{H0_Vn} A logical value indicating whether or not the null 
-#'   hypothesis is rejected according to Un.
+#'                      hypothesis is rejected according to Un.
 #'   \item \code{Vn} The value of the V-statistic.
 #'   \item \code{CV_Vn} The critical value for Vn computed following the 
-#'   asymptotic distribution.
+#'                      asymptotic distribution.
 #'   \item \code{H0_Vn} A logical value indicating whether or not the null 
-#'   hypothesis is rejected according to Vn.
+#'                      hypothesis is rejected according to Vn.
 #'   \item \code{rho} The value of concentration parameter used for the Poisson 
-#'   kernel function.
+#'                    kernel function.
 #'   \item \code{B} Number of replications for the critical value of the 
-#'   U-statistic.
+#'                  U-statistic.
 #'}
 #'
 #'
@@ -52,15 +52,18 @@
 #'
 #' @srrstats {G1.0} Reference section reports the related literature
 #' @srrstats {G1.3} description of parameter
-#' @srrstats {G2.0, G2.2,G2.3a} The code considers the different types of input 
-#' @srrstats {G2.6,G2.7,G2.8} different types of input are considered
-#' @srrstats {G5.4a} testes on simple examples
+#' @srrstats {G1.4} roxigen2 is used
 #' 
 #' @export
 setGeneric("pk.test",function(x, rho = NULL, B = 300, Quantile = 0.95){
    standardGeneric("pk.test")
 })
 #' @rdname pk.test
+#' 
+#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G2.7,G2.8} different types of input are considered
+#' @srrstats {G2.13,G2.14,G2.14a,G2.15,G2.16} error for NA, Nan, Inf, -Inf
+#' 
 #' @export
 setMethod("pk.test", signature(x = "ANY"),
           function(x,  rho, B = 300, Quantile = 0.95)
@@ -71,7 +74,13 @@ setMethod("pk.test", signature(x = "ANY"),
              } else if(is.data.frame(x)) {
                 x <- as.matrix(x)
              } else if(!is.matrix(x)){
-                stop("x must be a matrix or a data.frame with dimension greater than 1.")
+                stop("x must be a matrix or a data.frame with dimension greater 
+                     than 1.")
+             }
+             if(any(is.na(x))){
+                stop("There are missing values in x!")
+             } else if(any(is.infinite(x) |is.nan(x))){
+                stop("There are undefined values in x, that is Nan, Inf, -Inf")
              }
              
              if(Quantile<=0 | Quantile>1){
@@ -102,7 +111,7 @@ setMethod("pk.test", signature(x = "ANY"),
              CV_Un <- poisson_CV(d=d, size=n, rho=rho, B=B, Quantile=Quantile )
              
              res <- new("pk.test", Un = pk[1]/sqrt(var_Un), CV_Un = CV_Un, 
-                        Vn = pk[2], CV_Vn = CV_Vn, method = METHOD, x = x, B= B, 
+                        Vn = pk[2], CV_Vn = CV_Vn, method = METHOD, x = x, B= B,
                         rho= rho, H0_Un = pk[1]/sqrt(var_Un) > CV_Un, 
                         H0_Vn = pk[2] > CV_Vn)
              return(res)
@@ -110,7 +119,9 @@ setMethod("pk.test", signature(x = "ANY"),
 #' @rdname pk.test
 #'
 #' @param object Object of class \code{pk.test}
-#'
+#' 
+#' @srrstats {G1.4} roxigen2 is used
+#' 
 #' @export
 setMethod("show", "pk.test",
           function(object) {
@@ -142,11 +153,11 @@ setMethod("show", "pk.test",
 #' @return List with the following components:
 #' \itemize{
 #'    \item \code{summary_tables} Table of computed descriptive statistics per 
-#'    variable.
+#'                                variable.
 #'    \item \code{test_results} Data frame with the results of the performed 
-#'    Poisson kernel-based test.
+#'                              Poisson kernel-based test.
 #'    \item \code{qqplots} Figure with qq-plots for each variable against the 
-#'    uniform distribution.
+#'                         uniform distribution.
 #' }
 #'
 #' @import ggpubr
@@ -157,7 +168,9 @@ setMethod("show", "pk.test",
 #' x_sp <- sample_hypersphere(3, n_points=100)
 #' unif_test <- pk.test(x_sp,rho=0.8)
 #' summary(unif_test)
-#'
+#' 
+#' @srrstats {G1.4} roxigen2 is used
+#' 
 #' @export
 #'
 setMethod("summary", "pk.test", function(object) {
@@ -171,9 +184,10 @@ setMethod("summary", "pk.test", function(object) {
    for(i in seq_len(ncol(dat_x))) {
       
       unif_data <- runif(nrow(dat_x),-1,1)
+      probs <- seq(0, 1, length.out = nrow(dat_x))
       qq_df <- data.frame(
          x = quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))), 
-         sample_quantiles = quantile(dat_x[,i], probs = seq(0, 1, length.out = nrow(dat_x))))
+         sample_quantiles = quantile(dat_x[,i], probs = probs))
       
       pl <- ggplot(qq_df, aes(x = qq_df$x, y = qq_df$sample_quantiles)) +
          geom_line(col="blue") +
@@ -195,7 +209,7 @@ setMethod("summary", "pk.test", function(object) {
       
       pl_stat <- ggplot() +
          ggpp::annotate('table', x = 0.5, y = 0.5, 
-                     label = data.frame(Stat = rownames(stats_step),stats_step), 
+                     label = data.frame(Stat = rownames(stats_step),stats_step),
                      hjust = 0.5, vjust = 0.5) +
          theme_void() +
          ggtitle("")+

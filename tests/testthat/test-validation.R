@@ -1,5 +1,4 @@
 library(testthat)
-
 #------------------------------------------------------
 ## Clustering on the Sphere
 ## 

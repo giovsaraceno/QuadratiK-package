@@ -1,20 +1,21 @@
-#' @name Quadratik-package
+#' @docType package
+#' @name QuadratiK-package
 #' @title Collection of Methods Constructed using the Kernel-Based Quadratic 
 #'          Distances
-#' @description It is implemented in R and Python, providing a comprehensive set 
+#' @description It is implemented in R and Python, providing a comprehensive set
 #' of goodness-of-fit tests and clustering technique using kernel-based 
 #' quadratic distances. This framework aims to bridge the gap between the 
 #' statistical and machine learning literature. It includes:
 #' \itemize{
 #'   \item \bold{Goodness-of-Fit Tests}: The software implements one, two, and 
-#'  k-sample tests for goodness of fit, offering an efficient and mathematically 
+#'  k-sample tests for goodness of fit, offering an efficient and mathematically
 #'   sound way to assess the fit of probability distributions. Expanded 
 #'   capabilities include supporting tests for uniformity on the d-dimensional 
 #'   Sphere based on Poisson kernel densities.
 #'   \item \bold{Clustering Algorithm for Spherical Data}: the package 
 #'   incorporates a unique clustering algorithm specifically tailored for 
-#'   spherical data. This algorithm leverages a mixture of Poisson kernel-based 
-#'   densities on the Sphere, enabling effective clustering of spherical data or 
+#'   spherical data. This algorithm leverages a mixture of Poisson kernel-based
+#'   densities on the Sphere, enabling effective clustering of spherical data or
 #'   data that has been spherically transformed. The package also provides the 
 #'   functions for density evaluation and random sampling from the Poisson 
 #'   kernel-based distribution.
@@ -23,16 +24,11 @@
 #'   validating and representing the cluster results as well as enhancing the 
 #'   interpretability and usability of the analysis.
 #' }
-#' 
-#' For the Life Cycle Statement of QuadratiK, see the 'LifeCycleStatement.md'
-#' 
 #' @details The work has been supported by Kaleida Health Foundation, National 
 #' Science Foundation and Department of Biostatistics, University at Buffalo.
-#' 
 #' @author Giovanni Saraceno, Marianthi Markatou, 
 #'          Raktim Mukhopadhyay, Mojgan Golzy
-#' \email{gsaracen@buffalo.edu}
-#' 
+#'          \email{gsaracen@buffalo.edu}
 #' @references
 #' Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan 
 #' (2023). Goodness-of-fit and clustering of spherical data: The QuadratiK 
@@ -53,15 +49,9 @@
 #' University at Buffalo).
 #' 
 #' @srrstats {G1.0} Reference section reports the related literature
-#' @srrstats {G1.1} Reported in the description section
-#' @srrstats {G1.2} see the 'LifeCycleStatement.md'
-#' @srrstats {G1.4} roxigen2 is used
-#' @srrstats {G1.5} the usage is shown here
+#' @srrstats {G1.1, G1.3} First implementation of provided methods
+#' @srrstats {G1.2} see the 'CONTRIBUTING.md' for states of development
 #' @srrstats {G3.0} in all the codes floating point numbers are not compared
-#' @srrstats {G5.7,G5.9} it is showed in the simulation study in the references 
-#' 
-#' @srrstatsTODO {G2.11, G2.12} data.frame
-#' @srrstatsTODO {G2.13, G2.14, G2.15} Missing data
-#' @srrstatsTODO {G2.16, G5.3} Undefined values
-#' 
+#' @srrstats {G5.7, G5.9} Verified through the simulation studies in the 
+#'                        indicated references. 
 NULL

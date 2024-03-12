@@ -344,4 +344,3 @@ Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd
    
    return result;
 }
-

@@ -49,12 +49,14 @@ n \code{x}
 \item if \code{y} is a data matrix, with same dimensions of \code{x}, the
 function performs the two-sample test between \code{x} and \code{y}.
 \item if \code{y} if a numeric or factor vector, indicating the group
-memberships for each observation, the function performs the k-sample test.
+memberships for each observation, the function performs the k-sample
+test.
 }}
 
 \item{h}{Bandwidth for the kernel function. If a value is not provided, the
-algorithm for the selection of an optimal h is performed automatically. See
-the function \code{\link{select_h}} for more details.}
+algorithm for the selection of an optimal h is performed
+automatically. See the function \code{\link{select_h}} for more
+details.}
 
 \item{method}{The method used for critical value estimation ("subsampling",
 "bootstrap", or "permutation")(default: "subsampling").}
@@ -79,7 +81,8 @@ normal kernel ('Param' or 'Nonparam').}
 control parameter. Change in case of more than 10 samples.}
 
 \item{alternative}{Family of alternative chosen for selecting h, between
-"location", "scale" and "skewness" (only if \code{h} is not provided).}
+"location", "scale" and "skewness" (only if \code{h}
+is not provided).}
 
 \item{object}{Object of class \code{kb.test}}
 }

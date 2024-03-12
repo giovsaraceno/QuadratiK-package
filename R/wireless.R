@@ -1,7 +1,7 @@
 #' Wireless Indoor Localization
 #'
 #' The \code{wireless} data frame has 2000 rows and 8 columns. The first 7 
-#' variables report the measurements of the Wi-Fi signal strength received from 
+#' variables report the measurements of the Wi-Fi signal strength received from
 #' 7 Wi-Fi routers in an office location in Pittsburgh (USA). The last column 
 #' indicates the class labels.
 #'
@@ -38,10 +38,11 @@
 #' "User Localization in an Indoor Environment Using Fuzzy Hybrid of Particle 
 #' Swarm Optimization & Gravitational Search Algorithm with Neural Networks". 
 #' In: Deep, K., et al. Proceedings of Sixth International Conference on Soft 
-#' Computing for Problem Solving. Advances in Intelligent Systems and Computing, 
+#' Computing for Problem Solving. Advances in Intelligent Systems and Computing,
 #' vol 546. Springer, Singapore. https://doi.org/10.1007/978-981-10-3322-3_27
 #' 
 #' @srrstats {G1.0} Reference section reports the related literature
 #' @srrstats {G1.4} roxigen2 is used
 #' @srrstats {G5.1} the data set is made available
+#' 
 "wireless"

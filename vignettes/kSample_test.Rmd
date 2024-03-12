@@ -7,7 +7,12 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
-
+```{r srr-tags, eval = FALSE, echo = FALSE}
+#' srr tags
+#' 
+#' 
+#' @srrstats {G1.5} k-sample test example in the associated paper
+```
 ### $k$-sample test
 
 We generated three samples, with $n=200$ observations each, from a 2-dimensional Gaussian distributions with mean vectors $\mu_1 = (0, \frac{\sqrt{3}}{3})$, ${\mu}_2 = (-\frac{1}{2}, -\frac{\sqrt{3}}{6})$ and $\mu_3 = (\frac{1}{2}, -\frac{\sqrt{3}}{6})$, and the Identity matrix as covariance matrix. In this situation, the generated samples are well separated, following different Gaussian distributions, i.e. $X_1 \sim N_2(\mu_1, I)$, $X_2 \sim N_2(\mu_2, I)$ and $X_3 \sim N_2(\mu_3, I)$}. The vector ``y`` indicates the membership to groups.  

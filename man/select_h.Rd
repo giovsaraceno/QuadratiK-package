@@ -23,7 +23,18 @@ select_h(
 \arguments{
 \item{x}{Data set of observations from X.}
 
-\item{y}{Data set of observations from Y.}
+\item{y}{Numeric matrix or vector of data values. Depending on the input
+\code{y}, the selection of h is performed for the corresponding
+test.
+\itemize{
+\item if \code{y} = NULL, the function performs the tests for normality o
+n \code{x}
+\item if \code{y} is a data matrix, with same dimensions of \code{x}, the
+function performs the two-sample test between \code{x} and \code{y}.
+\item if \code{y} if a numeric or factor vector, indicating the group
+memberships for each observation, the function performs the k-sample
+test.
+}}
 
 \item{alternative}{Family of alternative chosen for selecting h, between
 "location", "scale" and "skewness".}

@@ -9,7 +9,12 @@ vignette: >
 ---
 
 ### Uniformity test on the Sphere
-
+```{r srr-tags, eval = FALSE, echo = FALSE}
+#' srr tags
+#' 
+#' 
+#' @srrstats {G1.5} Uniformity test example in the associated paper
+```
 We generated $n=200$ observations from the uniform distribution on $S^{d-1}$, with $d=3$, and $\rho = 0.7$. 
 ```{r}
 library(QuadratiK)

@@ -15,7 +15,8 @@ poisson_CV(d, size, rho, B, Quantile)
 
 \item{B}{the number of replications.}
 
-\item{Quantile}{the quantile of the distribution use to select the critical value.}
+\item{Quantile}{the quantile of the distribution use to select the critical
+value.}
 }
 \value{
 the critical value for the specified dimension, size and level.
@@ -26,7 +27,7 @@ testing uniformity on the sphere based on the centered poisson kernel.
 }
 \details{
 For each replication, a sample of d-dimensional observations from the uniform
-distribution on the Sphere are generated and the Poisson kernel-based
+#' distribution on the Sphere are generated and the Poisson kernel-based
 U-statistic is computed. After B iterations, the critical value is selected
 as the \code{Quantile} of the empirical distribution of the computed test
 statistics.

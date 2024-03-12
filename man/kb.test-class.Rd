@@ -17,7 +17,8 @@ test performed.}
 
 \item{\code{Dn}}{The value of the test statistic.}
 
-\item{\code{H0}}{A logical value indicating whether or not the null hypothesis is rejected.}
+\item{\code{H0}}{A logical value indicating whether or not the null hypothesis is
+rejected.}
 
 \item{\code{data}}{List of samples X (and Y).}
 
@@ -26,9 +27,9 @@ test performed.}
 \item{\code{cv_method}}{The method used to estimate the critical value (one of
 "subsampling", "permutation" or "bootstrap").}
 
-\item{\code{h}}{A list with the value of bandwidth parameter used for the Gaussian kernel.
-If the function \code{select_h} is used, then also the matrix of computed power
-values and the resulting power plot are provided.}
+\item{\code{h}}{A list with the value of bandwidth parameter used for the Gaussian
+kernel. If the function \code{select_h} is used, then also the matrix
+of computed power values and the resulting power plot are provided.}
 
 \item{\code{B}}{Number of bootstrap/permutation/subsampling replications.}
 }}

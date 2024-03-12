@@ -9,7 +9,12 @@ vignette: >
 ---
 
 ### Non-parametric two-sample test
-
+```{r srr-tags, eval = FALSE, echo = FALSE}
+#' srr tags
+#' 
+#' 
+#' @srrstats {G1.5} two-sample test example in the associated paper
+```
 The two-sample test can be additionally performed by providing the two sample to be compared as ``x`` and ``y``. We generate the sample $y = (y_1, \ldots,y_n)$ from a skew-normal distribution $SN_d(0,I_d, \lambda)$, where $d=4$, $n=200$ and $\lambda= (0.5,\ldots,0.5)$.  
 
 ```{r message=FALSE}

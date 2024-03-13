@@ -2,7 +2,8 @@
 #  #' srr tags
 #  #'
 #  #'
-#  #' @srrstats {G1.5} application to the wireless data set in the associated paper
+#  #' @srrstats {G1.5} application to the wireless data set in the
+#  #'                  associated paper
 
 ## -----------------------------------------------------------------------------
 library(QuadratiK)
@@ -22,8 +23,8 @@ res_pk <- pkbc(as.matrix(wire_norm),3:6)
 #  round(res_validation$metrics, 8)
 
 ## ----fig.width=6, fig.height=8------------------------------------------------
-summary_clust <- summary_stat(res_pk,4,true_label=labels)
+summary_clust <- extract_stats(res_pk,4)
 
 ## -----------------------------------------------------------------------------
-summary_clust$metrics
+summary_clust
 

@@ -352,21 +352,29 @@ covariance matrix. In this situation, the generated samples are well
 separated, following different Gaussian distributions, i.e. <span class="math inline">\(X_1 \sim N_2(\mu_1, I)\)</span>, <span class="math inline">\(X_2 \sim N_2(\mu_2, I)\)</span> and <span class="math inline">\(X_3 \sim N_2(\mu_3, I)\)</span>}. The vector
 <code>y</code> indicates the membership to groups.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(QuadratiK)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">200</span>,<span class="dv">3</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>eps <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">1</span>], <span class="at">mean =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">3</span>))</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">2</span>], <span class="at">mean =</span> <span class="fu">c</span>(<span class="sc">-</span>eps<span class="sc">/</span><span class="dv">2</span>,<span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">6</span>))</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">3</span>], <span class="at">mean =</span> <span class="fu">c</span>(eps<span class="sc">/</span><span class="dv">2</span>,<span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">6</span>))</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbind</span>(x1, x2, x3)</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">times=</span>sizes))</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(QuadratiK)</span></code></pre></div>
+<pre><code>## 
+## Caricamento pacchetto: &#39;QuadratiK&#39;</code></pre>
+<pre><code>## Il seguente oggetto è mascherato da &#39;package:graphics&#39;:
+## 
+##     plot</code></pre>
+<pre><code>## Il seguente oggetto è mascherato da &#39;package:base&#39;:
+## 
+##     plot</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">200</span>,<span class="dv">3</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>eps <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">1</span>], <span class="at">mean =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">3</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">2</span>], <span class="at">mean =</span> <span class="fu">c</span>(<span class="sc">-</span>eps<span class="sc">/</span><span class="dv">2</span>,<span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">6</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">3</span>], <span class="at">mean =</span> <span class="fu">c</span>(eps<span class="sc">/</span><span class="dv">2</span>,<span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">6</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbind</span>(x1, x2, x3)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">times=</span>sizes))</span></code></pre></div>
 <p>Recall that the computed test statistics correspond to the omnibus
 tests.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>k_test <span class="ot">&lt;-</span> <span class="fu">kb.test</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">h=</span>h)</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>k_test</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>k_test <span class="ot">&lt;-</span> <span class="fu">kb.test</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">h=</span>h)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>k_test</span></code></pre></div>
 <pre><code>## 
 ##  Kernel-based quadratic distance k-sample test 
 ## 
@@ -381,13 +389,13 @@ performed, the <code>summary</code> method on the <code>kb.test</code>
 object returns the results of the tests together with the standard
 descriptive statistics for each variable computed, overall and with
 respect to the provided groups.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>summary_ktest <span class="ot">&lt;-</span> <span class="fu">summary</span>(k_test)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>summary_ktest <span class="ot">&lt;-</span> <span class="fu">summary</span>(k_test)</span></code></pre></div>
 <pre><code>## 
 ##  Kernel-based quadratic distance k-sample test 
 ##   Test_Statistic Critical_Value Reject_H0
 ## 1     0.02452253   0.0011642795      TRUE
 ## 2     0.01226127   0.0005821397      TRUE</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>summary_ktest<span class="sc">$</span>summary_tables</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>summary_ktest<span class="sc">$</span>summary_tables</span></code></pre></div>
 <pre><code>## [[1]]
 ##             Group 1    Group 2    Group 3       Overall
 ## mean   -0.005959147 -0.5370127  0.5442058  0.0004113282
@@ -410,14 +418,14 @@ respect to the provided groups.</p>
 <p>If a value of <span class="math inline">\(h\)</span> is not provided,
 the function automatically perform the function
 <code>select_h</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#k_test_h &lt;- kb.test(x=x, y=y)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co">#k_test_h &lt;- kb.test(x=x, y=y)</span></span></code></pre></div>
 <p>For a more accurate search of the tuning parameter, the function
 <code>select_h</code> can be used.This function needs the input
 <code>x</code> and <code>y</code> as the function <code>kb.test</code>
 for the <span class="math inline">\(k\)</span>-sample problem.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>h_k <span class="ot">&lt;-</span> <span class="fu">select_h</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">alternative=</span><span class="st">&quot;skewness&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>h_k<span class="sc">$</span>h_sel</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>h_k <span class="ot">&lt;-</span> <span class="fu">select_h</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">alternative=</span><span class="st">&quot;skewness&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>h_k<span class="sc">$</span>h_sel</span></code></pre></div>
 <p>The figure generated by the <code>select_h</code> function on the
 result of the selection of <span class="math inline">\(h\)</span>
 algorithm for the <span class="math inline">\(k\)</span>-sample data set

@@ -8,6 +8,7 @@
 #' @srrstats {G5.4,G5.4a} correctness tested on simple cases
 #' @srrstats {G5.8, G5.8a,G5.8b,G5.8c} edge conditions
 #' @srrstats {UL7.1} test demonstrate appropriate inputs for clustering
+#' @srrstats {UL7.4} test for prediction function for pkbc object
 #' 
 #' @noRd
 library(testthat)

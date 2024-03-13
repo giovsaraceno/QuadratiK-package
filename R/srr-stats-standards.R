@@ -27,10 +27,6 @@
 #' @srrstatsNA {UL2.2} do not accept NA
 #' @srrstatsNA {UL3.0,UL7.2,UL7.3} Labels are not ordered with respect to sizes
 #' @srrstatsNA {UL3.1} not a dimensionality reduction software 
-#' @srrstatsNA {UL3.3, UL7.4} prediction function is not implemented
-#' @srrstatsNA {UL4.3,UL4.3a} there is no a print method
-#' @srrstatsNA {UL4.4} there is no a summary method
-#' @srrstatsNA {UL6.0,UL6.2} there is no a plot method
 #' @srrstatsNA {UL7.5,UL7.5a} there are no batch processes
 #' 
 #' @noRd

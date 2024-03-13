@@ -418,6 +418,8 @@ setMethod("show", "pkbc", function(object) {
 #' 
 #' @param object Object of class \code{pkbc}
 #' 
+#' @return NULL
+#' 
 #' @examples
 #' dat <- rbind(matrix(rnorm(100),2),matrix(rnorm(100,5),2))
 #' res <- pkbc(dat,2:4)
@@ -568,6 +570,13 @@ setMethod("extract_stats", "pkbc", function(object, k){
 #' are returned if pca_res=TRUE.
 #' - elbow plot: the within cluster sum of squares (wcss) is computed using the 
 #' Euclidean distance and the cosine similarity. 
+#' 
+#' #' @examples
+#' \donttest{
+#' dat<-matrix(rnorm(300),ncol=3)
+#' pkbc_res<- pkbc(dat, 3)
+#' extract_stats(pkbc_res, 3)
+#' }
 #' 
 #' @references
 #' Locantore, N., Marron, J.S., Simpson, D.G. et al. (1999) "Robust principal 

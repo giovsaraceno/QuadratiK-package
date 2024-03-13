@@ -40,6 +40,13 @@ are returned if pca_res=TRUE.
 \item elbow plot: the within cluster sum of squares (wcss) is computed using the
 Euclidean distance and the cosine similarity.
 }
+
+#' @examples
+\donttest{
+dat<-matrix(rnorm(300),ncol=3)
+pkbc_res<- pkbc(dat, 3)
+extract_stats(pkbc_res, 3)
+}
 }
 \references{
 Locantore, N., Marron, J.S., Simpson, D.G. et al. (1999) "Robust principal

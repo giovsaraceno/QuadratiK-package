@@ -418,7 +418,10 @@ setMethod("show", "pkbc", function(object) {
 #' 
 #' @param object Object of class \code{pkbc}
 #' 
-#' @return NULL
+#' @return Display the logLikelihood values and within cluster sum of squares (wcss)
+#'         for all the values of number of clusters provided. For each of these value 
+#'         the estimated mixing proportions are showed together with a table with the 
+#'         assigned memberships.
 #' 
 #' @examples
 #' dat <- rbind(matrix(rnorm(100),2),matrix(rnorm(100,5),2))

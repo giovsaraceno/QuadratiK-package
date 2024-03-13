@@ -3,6 +3,7 @@
 \name{pkbc}
 \alias{pkbc}
 \alias{pkbc,ANY-method}
+\alias{show,pkbc-method}
 \title{Poisson kernel-based clustering on the sphere}
 \usage{
 pkbc(
@@ -22,6 +23,8 @@ pkbc(
   initMethod = "sampleData",
   numInit = 10
 )
+
+\S4method{show}{pkbc}(object)
 }
 \arguments{
 \item{dat}{Data matrix or data.frame of data points on the sphere to be
@@ -44,6 +47,8 @@ than a given threshold (1e-7)),
 Currently must be \code{'sampleData'}.}
 
 \item{numInit}{Number of initializations.}
+
+\item{object}{Object of class \code{pkbc}}
 }
 \value{
 An S4 object of class \code{pkbc} containing the results of the

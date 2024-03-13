@@ -812,10 +812,9 @@ elbowMethod <- function(object){
 #' predict(res,k=2)
 #' # predict membership of new data
 #' newdat <- rbind(matrix(rnorm(10),ncol=2),matrix(rnorm(10,5),ncol=2))
-#' pr_res <- predict(res,2,newdat)
-#' pr_res$Memb
+#' 
 #'  
-#' @seealso [pkbc]
+#' @seealso [pkbc()]
 #' 
 #' @srrstats {G1.a} roxygen2 is used
 #' @srrstats {UL3.3} prediction function for pkbc object

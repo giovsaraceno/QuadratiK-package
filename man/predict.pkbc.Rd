@@ -29,17 +29,16 @@ densities estimated by \code{pkbc}
 }
 \examples{
 # generate data
-dat <- rbind(matrix(rnorm(100),2),matrix(rnorm(100,5),2))
+dat <- rbind(matrix(rnorm(100),ncol=2),matrix(rnorm(100,5),ncol=2))
 res <- pkbc(dat,2:4)
 
 # extract membership of dat
 predict(res,k=2)
 # predict membership of new data
-newdat <- rbind(matrix(rnorm(10),2),matrix(rnorm(10,5),2))
-pr_res <- predict(res,2,newdat)
-pr_res$Memb
+newdat <- rbind(matrix(rnorm(10),ncol=2),matrix(rnorm(10,5),ncol=2))
+
  
 }
 \seealso{
-\link{pkbc}
+\code{\link[=pkbc]{pkbc()}}
 }

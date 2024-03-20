@@ -8,7 +8,7 @@ Authors@R: c(
            comment = "ORCID 000-0002-1753-2367"),
     person("Marianthi", "Markatou", role = "aut"),
     person("Raktim", "Mukhopadhyay", role = "aut"),
-    person("Mojgan", "Golzy", role = "ctb")
+    person("Mojgan", "Golzy", role = c("aut"))
   )
 Maintainer: Giovanni Saraceno <gsaracen@buffalo.edu>
 Description: It includes test for multivariate normality, test for

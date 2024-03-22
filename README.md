@@ -19,7 +19,9 @@ Email: [gsaracen@buffalo.edu](mailto:gsaracen@buffalo.edu)
 
 ## References
 
-- Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan (2023). Goodness-of-fit and clustering of spherical data: The QuadratiK package in R and Python. Technical Report, Department of Biostatistics, University at Buffalo.
+- Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan 
+(2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK 
+package in R and Python. arXiv preprint [arXiv:2402.02290](https://arxiv.org/abs/2402.02290).
 
 - Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.” Statistica Sinica. doi: [10.5705/ss.202022.0347](https://doi.org/10.5705/ss.202022.0347).
 

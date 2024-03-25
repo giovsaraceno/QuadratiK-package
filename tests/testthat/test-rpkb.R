@@ -5,6 +5,12 @@
 #' @srrstats {G5.1, G5.5} data sets are generated using simple functions with 
 #'                        fixed seed
 #' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
+#' @srrstats {PD4.0} the numeric output are tested
+#' @srrstats {PD4.2} The function is tested for all the methods (distributions)
+#'                   available
+#' @srrstats {PD4.3} different values of the \code{uniroot} function are tested
+#' @srrstats {PD4.4} The function uniroot satisfies this standard.
+#' 
 #' 
 #' @noRd
 library(testthat)
@@ -41,6 +47,12 @@ test_that("Random Generation from PKBD works", {
    expect_equal(dim(pkbd_dat$x),c(size,length(mu)))
    expect_true(is.matrix(pkbd_dat$x))
    expect_equal(rowSums(pkbd_dat$x^2), rep(1,size))
+   
+   pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejacg", max.iter=20)
+   expect_lt(pkbd_dat$beta$iter, 20)
+   
+   pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejacg", tol.eps=1e-7)
+   expect_lt(pkbd_dat$beta$estim.prec, 1e-7)
    
    ## "rejpsaw"
    size <- 100

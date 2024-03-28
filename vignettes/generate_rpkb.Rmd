@@ -8,15 +8,6 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r srr-tags, eval = FALSE, echo = FALSE}
-#' srr tags
-#' 
-#' 
-#' @srrstats {PD4.2} The results of the random sampling using the different 
-#'                   distributions are compared graphically, by plotting on the 
-#'                   sphere the generated observations.   
-#'                   
-```
 
 ```{r}
 library(QuadratiK)
@@ -61,16 +52,16 @@ the used method.
 ```{r fig.width=6, fig.height=8}
 library(rgl)
 # Legend information
-classes = c("rejvmf", "rejacg", "rejpsaw")
+classes <- c("rejvmf", "rejacg", "rejpsaw")
 # Fix a color for each method
-colors = c("red", "blue", "green")
+colors <- c("red", "blue", "green")
 labels <- factor(rep(colors, each = 1000))
 # Element needed for the Legend position in the following plot
-offset = 0.25
+offset <- 0.25
 # Coordinates for legend placement
-legend_x = max(x[,1]) + offset  
-legend_y = max(x[,2]) + offset
-legend_z = seq(min(x[,3]), length.out = length(classes), by = offset)
+legend_x <- max(x[,1]) + offset  
+legend_y <- max(x[,2]) + offset
+legend_z <- seq(min(x[,3]), length.out = length(classes), by = offset)
 
 open3d()
 # Create the legend

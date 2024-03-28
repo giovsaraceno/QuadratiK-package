@@ -2,3 +2,5 @@
 /Meta/
 /.Rproj.user/
 .Rhistory
+src/RcppExports.o
+src/kernel_function.o

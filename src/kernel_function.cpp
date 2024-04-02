@@ -97,7 +97,7 @@ Eigen::MatrixXd NonparamCentering(const Eigen::MatrixXd& kmat_zz, int n_z)
    Eigen::MatrixXd k_center = kmat_zz.array() -
       kmat_zz.rowwise().sum().replicate(1, n_z).array() / n_z -
       kmat_zz.colwise().sum().replicate(n_z, 1).array() / n_z +
-      kmat_zz.sum()/ (n_z * (n_z-1));
+      (kmat_zz.sum() - kmat_zz.diagonal().sum())/ (n_z * (n_z-1));
    
    return k_center;
 }
@@ -168,7 +168,6 @@ double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
    
    Eigen::MatrixXd H = pow(h, 2) * Eigen::MatrixXd::Identity(k, k);
    Eigen::MatrixXd kmat_zz = computeKernelMatrix(z_mat,z_mat, H);
-   kmat_zz.diagonal().setZero();
    
    Eigen::MatrixXd k_center;
    
@@ -186,7 +185,7 @@ double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
    double Test_NonPar = (k_center.block(0, 0, n_x, n_x).sum() / (n_x * (n_x - 1))) -
       2 * (k_center.block(0, n_x, n_x, n_y).sum() / (n_x * n_y)) +
       (k_center.block(n_x, n_x, n_y, n_y).sum() / (n_y * (n_y - 1)));
-   return Test_NonPar;
+   return n_z * Test_NonPar;
    
 }
 //' Compute kernel-based quadratic distance test for Normality
@@ -213,7 +212,6 @@ double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat
    
    Eigen::MatrixXd H = pow(h, 2) * Eigen::MatrixXd::Identity(k, k);
    Eigen::MatrixXd kmat_zz = computeKernelMatrix(x_mat, x_mat, H);
-   kmat_zz.diagonal().setZero();
    
    Eigen::MatrixXd k_center;
    
@@ -230,7 +228,7 @@ double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat
    
    // Compute your normality test statistic here
    double Test_Normality = k_center.sum() / (n_x * (n_x - 1));
-   return Test_Normality;
+   return n_x * Test_Normality;
    
 }
 //' Poisson kernel-based test for Uniformity on the Sphere
@@ -306,7 +304,6 @@ Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd
    Eigen::MatrixXd H = pow(h, 2) * Eigen::MatrixXd::Identity(d, d);
    
    Eigen::MatrixXd kmat_zz = computeKernelMatrix(x,x, H);
-   kmat_zz.diagonal().setZero();
    
    Eigen::MatrixXd k_center = NonparamCentering(kmat_zz, n);
    
@@ -342,5 +339,5 @@ Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd
    result(0) = (K - 1) * TraceK + Tn;
    result(1) = TraceK + Tn / (K - 1);
    
-   return result;
+   return n * result;
 }

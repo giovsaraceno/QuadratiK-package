@@ -94,10 +94,12 @@ Eigen::MatrixXd computePoissonMatrix(const Eigen::MatrixXd& x_mat, double rho)
 Eigen::MatrixXd NonparamCentering(const Eigen::MatrixXd& kmat_zz, int n_z)
 {
    
+   kmat_zz.diagonal().setZero()
+   
    Eigen::MatrixXd k_center = kmat_zz.array() -
-      kmat_zz.rowwise().sum().replicate(1, n_z).array() / n_z -
-      kmat_zz.colwise().sum().replicate(n_z, 1).array() / n_z +
-      (kmat_zz.sum() - kmat_zz.diagonal().sum())/ (n_z * (n_z-1));
+      kmat_zz.rowwise().sum().replicate(1, n_z).array() / (n_z-1) -
+      kmat_zz.colwise().sum().replicate(n_z, 1).array() / (n_z-1) +
+      kmat_zz.sum()/ (n_z * (n_z-1));
    
    return k_center;
 }
@@ -227,8 +229,8 @@ double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat
    k_center.diagonal().setZero();
    
    // Compute your normality test statistic here
-   double Test_Normality = k_center.sum() / (n_x * (n_x - 1));
-   return n_x * Test_Normality;
+   double Test_Normality = k_center.sum() /(n_x * (n_x - 1));
+   return pow((n_x * (n_x - 1)), 0.5) * Test_Normality;
    
 }
 //' Poisson kernel-based test for Uniformity on the Sphere

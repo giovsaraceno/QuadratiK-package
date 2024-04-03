@@ -94,12 +94,13 @@ Eigen::MatrixXd computePoissonMatrix(const Eigen::MatrixXd& x_mat, double rho)
 Eigen::MatrixXd NonparamCentering(const Eigen::MatrixXd& kmat_zz, int n_z)
 {
    
-   kmat_zz.diagonal().setZero()
+   Eigen::MatrixXd k_mat = kmat_zz;
+   k_mat.diagonal().setZero();
    
    Eigen::MatrixXd k_center = kmat_zz.array() -
-      kmat_zz.rowwise().sum().replicate(1, n_z).array() / (n_z-1) -
-      kmat_zz.colwise().sum().replicate(n_z, 1).array() / (n_z-1) +
-      kmat_zz.sum()/ (n_z * (n_z-1));
+      k_mat.rowwise().sum().replicate(1, n_z).array() / (n_z - 1) -
+      k_mat.colwise().sum().replicate(n_z, 1).array() / (n_z - 1) +
+      k_mat.sum() / (n_z * (n_z - 1));
    
    return k_center;
 }

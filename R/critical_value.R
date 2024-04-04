@@ -147,16 +147,17 @@ poisson_CV<-function(d, size, rho, B, Quantile){
 #' @keywords internal
 normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
    
-   Results <- rep(0,B)
+   Results <- matrix(0,nrow=B,ncol = 2)
    for(i in 1:B) {
       
       dat <- rmvnorm(n = size, mean=mu_hat, sigma=Sigma_hat)
       dat <- matrix(dat, ncol = d, byrow = TRUE)
       
-      Results[i] <- kbNormTest(dat, h, mu_hat, Sigma_hat)
+      Results[i,] <- kbNormTest(dat, h, mu_hat, Sigma_hat)
       
    }
-   return(as.numeric(quantile(Results, Quantile)))
+   cv <- apply(Results, 2, quantile, Quantile)
+   return(as.numeric(cv))
    
 }
 #' Compute the critical value for the KBQD k-sample tests

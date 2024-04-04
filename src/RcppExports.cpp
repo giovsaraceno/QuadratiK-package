@@ -64,7 +64,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // stat2sample
-double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h, const Eigen::MatrixXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, const std::string& centeringType);
+double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h, const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, const std::string& centeringType);
 RcppExport SEXP _QuadratiK_stat2sample(SEXP x_matSEXP, SEXP y_matSEXP, SEXP hSEXP, SEXP mu_hatSEXP, SEXP Sigma_hatSEXP, SEXP centeringTypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -72,7 +72,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type x_mat(x_matSEXP);
     Rcpp::traits::input_parameter< Eigen::MatrixXd& >::type y_mat(y_matSEXP);
     Rcpp::traits::input_parameter< double >::type h(hSEXP);
-    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type mu_hat(mu_hatSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type mu_hat(mu_hatSEXP);
     Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type Sigma_hat(Sigma_hatSEXP);
     Rcpp::traits::input_parameter< const std::string& >::type centeringType(centeringTypeSEXP);
     rcpp_result_gen = Rcpp::wrap(stat2sample(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType));
@@ -80,17 +80,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // kbNormTest
-double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat, const Eigen::MatrixXd Sigma_hat, const std::string& centeringType);
-RcppExport SEXP _QuadratiK_kbNormTest(SEXP x_matSEXP, SEXP hSEXP, SEXP mu_hatSEXP, SEXP Sigma_hatSEXP, SEXP centeringTypeSEXP) {
+Eigen::VectorXd kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd Sigma_hat);
+RcppExport SEXP _QuadratiK_kbNormTest(SEXP x_matSEXP, SEXP hSEXP, SEXP mu_hatSEXP, SEXP Sigma_hatSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Eigen::MatrixXd >::type x_mat(x_matSEXP);
     Rcpp::traits::input_parameter< double >::type h(hSEXP);
-    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type mu_hat(mu_hatSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type mu_hat(mu_hatSEXP);
     Rcpp::traits::input_parameter< const Eigen::MatrixXd >::type Sigma_hat(Sigma_hatSEXP);
-    Rcpp::traits::input_parameter< const std::string& >::type centeringType(centeringTypeSEXP);
-    rcpp_result_gen = Rcpp::wrap(kbNormTest(x_mat, h, mu_hat, Sigma_hat, centeringType));
+    rcpp_result_gen = Rcpp::wrap(kbNormTest(x_mat, h, mu_hat, Sigma_hat));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -128,7 +127,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_QuadratiK_NonparamCentering", (DL_FUNC) &_QuadratiK_NonparamCentering, 2},
     {"_QuadratiK_ParamCentering", (DL_FUNC) &_QuadratiK_ParamCentering, 5},
     {"_QuadratiK_stat2sample", (DL_FUNC) &_QuadratiK_stat2sample, 6},
-    {"_QuadratiK_kbNormTest", (DL_FUNC) &_QuadratiK_kbNormTest, 5},
+    {"_QuadratiK_kbNormTest", (DL_FUNC) &_QuadratiK_kbNormTest, 4},
     {"_QuadratiK_statPoissonUnif", (DL_FUNC) &_QuadratiK_statPoissonUnif, 2},
     {"_QuadratiK_stat_ksample_cpp", (DL_FUNC) &_QuadratiK_stat_ksample_cpp, 5},
     {NULL, NULL, 0}

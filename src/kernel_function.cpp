@@ -24,7 +24,9 @@ using namespace std;
 //' 
 //' @noRd
 // [[Rcpp::export]]
-Eigen::MatrixXd computeKernelMatrix(const Eigen::MatrixXd& x_mat, const Eigen::MatrixXd& y_mat, const Eigen::MatrixXd& H)
+Eigen::MatrixXd computeKernelMatrix(const Eigen::MatrixXd& x_mat, 
+                                    const Eigen::MatrixXd& y_mat, 
+                                    const Eigen::MatrixXd& H)
 {
    int k = x_mat.cols();
    
@@ -158,7 +160,8 @@ Eigen::MatrixXd ParamCentering(const Eigen::MatrixXd& kmat_zz, const Eigen::Matr
 //' @noRd
 // [[Rcpp::export]]
 double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
-                   const Eigen::MatrixXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, const std::string& centeringType = "Nonparam")
+                   const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, 
+                   const std::string& centeringType = "Nonparam")
 {
    int n_x = x_mat.rows();
    int k = x_mat.cols();
@@ -180,7 +183,10 @@ double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
    }
    else if(centeringType == "Param")
    {
-      k_center = ParamCentering( kmat_zz,  z_mat, H, mu_hat, Sigma_hat);
+      Eigen::MatrixXd mu_mat(1, mu_hat.size());
+      mu_mat.row(0) = mu_hat.transpose();
+      
+      k_center = ParamCentering( kmat_zz,  z_mat, H, mu_mat, Sigma_hat);
    }
    
    k_center.diagonal().setZero();
@@ -197,8 +203,7 @@ double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
 //' @param h The bandwidth parameter for the Gaussian kernel function.
 //' @param mu_hat Mean vector for the reference distribution (if available)
 //' @param Sigma_hat Covariance matrix of the reference distribution (if available)
-//' @param centeringType String indicating the method used for centering the normal kernel ('Param' or 'Nonparam').
-//'
+//' 
 //' @return A scalar value representing the test statistic.
 //'
 //' @useDynLib QuadratiK
@@ -207,7 +212,9 @@ double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
 //' 
 //' @noRd
 // [[Rcpp::export]]
-double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat, const Eigen::MatrixXd Sigma_hat, const std::string& centeringType = "Param")
+Eigen::VectorXd kbNormTest(Eigen::MatrixXd x_mat, double h, 
+                           const Eigen::VectorXd& mu_hat, 
+                           const Eigen::MatrixXd Sigma_hat)
 {
    int n_x = x_mat.rows();
    int k = x_mat.cols();
@@ -218,20 +225,21 @@ double kbNormTest(Eigen::MatrixXd x_mat, double h, const Eigen::MatrixXd& mu_hat
    
    Eigen::MatrixXd k_center;
    
-   if (centeringType == "Nonparam")
-   {
-      k_center = NonparamCentering(kmat_zz, n_x);
-   }
-   else if (centeringType == "Param")
-   {
-      k_center = ParamCentering( kmat_zz,  x_mat, H, mu_hat, Sigma_hat);
-   }
+   Eigen::MatrixXd mu_mat(1, mu_hat.size());
+   mu_mat.row(0) = mu_hat.transpose();
    
-   k_center.diagonal().setZero();
+   k_center = ParamCentering( kmat_zz,  x_mat, H, mu_mat, Sigma_hat);
    
-   // Compute your normality test statistic here
-   double Test_Normality = k_center.sum() /(n_x * (n_x - 1));
-   return pow((n_x * (n_x - 1)), 0.5) * Test_Normality;
+   // Compute the normality test V-statistic
+   double Vn = k_center.sum() /(n_x * (n_x));
+   // Compute the normality test U-statistic
+   double Un = (k_center.sum() - k_center.diagonal().sum()) /(n_x * (n_x - 1));
+   
+   Eigen::VectorXd results(2);
+   results(0) = n_x * Un;
+   results(1) = n_x * Vn;
+   
+   return results;
    
 }
 //' Poisson kernel-based test for Uniformity on the Sphere

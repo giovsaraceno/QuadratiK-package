@@ -8,11 +8,15 @@
 #'
 #' @slot method String indicating the normal kernel-based quadratic distance 
 #'              test performed.
-#' @slot Dn The value of the test statistic.
-#' @slot H0 A logical value indicating whether or not the null hypothesis is 
-#'          rejected.
+#' @slot Un The value of the test U-statistic.
+#' @slot Vn The value of the test V-statistic.
+#' @slot H0_Un A logical value indicating whether or not the null hypothesis is 
+#'          rejected according to Un.
+#' @slot H0_Vn A logical value indicating whether or not the null hypothesis is 
+#'          rejected according to Vn.
 #' @slot data List of samples X (and Y).
-#' @slot CV The critical value computed for the test.
+#' @slot CV_Un The critical value computed for the test.
+#' @slot CV_Vn The critical value computed for the test.
 #' @slot cv_method The method used to estimate the critical value (one of 
 #' "subsampling", "permutation" or "bootstrap").
 #' @slot h A list with the value of bandwidth parameter used for the Gaussian 
@@ -36,9 +40,12 @@
 setClass("kb.test",
          slots = list(
             method = "character",
-            Dn = "numeric",
-            CV = "numeric",
-            H0 = "logical",
+            Un = "numeric",
+            Vn = "numeric",
+            CV_Un = "numeric",
+            CV_Vn = "numeric",
+            H0_Un = "logical",
+            H0_Vn = "logical",
             data = "list",
             cv_method = "character",
             B = "numeric",

@@ -75,7 +75,7 @@ test_that("Handle vector x input correctly", {
    # test summary method
    s <- summary(result)
    expect_true("matrix" %in% class(s$summary_tables))
-   expect_equal(nrow(s$test_results), 1)
+   expect_equal(nrow(s$test_results), 2)
    
    # x is not numeric
    expect_error(kb.test(x = "invalid", h=0.5), "x must be numeric", fixed=TRUE)
@@ -96,8 +96,8 @@ test_that("Functionality with valid inputs", {
    result <- kb.test(x, y, h=0.5, method = "subsampling", b = 0.5)
    expect_s4_class(result, "kb.test")
   expect_equal(result@method, "Kernel-based quadratic distance two-sample test")
-   expect_true(is.numeric(result@Dn))
-   expect_false(result@H0)
+   expect_true(is.numeric(result@Un))
+   expect_false(result@H0_Un)
    
    # test summary method
    s <- summary(result)
@@ -137,8 +137,8 @@ test_that("Functionality with valid inputs", {
    result <- kb.test(x, y, h=0.5, method = "subsampling", b = 0.5)
    expect_s4_class(result, "kb.test")
    expect_equal(result@method, "Kernel-based quadratic distance k-sample test")
-   expect_true(is.numeric(result@Dn))
-   expect_false(result@H0)
+   expect_true(is.numeric(result@Un))
+   expect_false(result@H0_Un)
    
    # test show method
    output <- capture.output(show(result))
@@ -170,7 +170,8 @@ test_that("Selection of h from kb.test", {
    x <- matrix(rnorm(100), ncol = 2)
    y <- rep(c(1,2), each=25)
    
-   result <- kb.test(x, method = "subsampling", b = 0.5)
+   result <- kb.test(x, method = "subsampling", mu_hat = c(0,0),
+                     Sigma_hat = diag(2), b = 0.5)
    expect_s4_class(result, "kb.test")
    expect_equal(result@method, "Kernel-based quadratic distance Normality test")
    expect_equal(class(result@h$h_sel), "numeric")

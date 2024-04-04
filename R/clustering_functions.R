@@ -1017,12 +1017,13 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
          macroPrecision <- mean(precision,na.rm=T)
          macroRecall <- mean(recall,na.rm=T)
          
-         metrics <- cbind(metrics, c(k, k_test@Dn[1], k_test@CV[1], k_test@H0, 
-                                     sil, ari, macroPrecision, macroRecall))
+         metrics <- cbind(metrics, c(k, k_test@Un[1], k_test@CV_Un[1], 
+                                     k_test@H0_Un[1], sil, ari, macroPrecision, 
+                                     macroRecall))
       } else {
          ari <- NA
-         metrics <- cbind(metrics, c(k, k_test@Dn[1], k_test@CV[1], k_test@H0, 
-                                     sil))
+         metrics <- cbind(metrics, c(k, k_test@Un[1], k_test@CV_Un[1], 
+                                     k_test@H0_Un[1], sil))
       }
       
    }

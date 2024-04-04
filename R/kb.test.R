@@ -203,20 +203,22 @@ setMethod("kb.test", signature(x = "ANY"),
                 
                 # Compute the estimates of mean and covariance from the data
                 if(is.null(mu_hat)){
-                   mu_hat <- matrix(colMeans(x),nrow=1)
+                   mu_hat <- colMeans(x)
                 }
                 if(is.null(Sigma_hat)){
                    Sigma_hat <- cov(x)
                 }
                 
-                STATISTIC <- kbNormTest(x, h, mu_hat, Sigma_hat, centeringType)
+                STATISTIC <- kbNormTest(x, h, mu_hat, Sigma_hat)
                 
                 CV <- normal_CV(k, size_x, h, mu_hat, Sigma_hat, B, Quantile)
                 
-                H0 <- (STATISTIC > CV)
+                H0_Un <- (STATISTIC[1] > CV[1])
+                H0_Vn <- (STATISTIC[2] > CV[2])
                 
-                res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, 
-                           method = METHOD, data = list(x = x), 
+                res <- new("kb.test", Un = STATISTIC[1], Vn = STATISTIC[2], 
+                           CV_Un = CV[1], CV_Vn = CV[2], H0_Un = H0_Un, 
+                           H0_Vn = H0_Vn, method = METHOD, data = list(x = x), 
                            cv_method = "Empirical", B= B, h= h_best)
                 
              } else {
@@ -243,7 +245,7 @@ setMethod("kb.test", signature(x = "ANY"),
                       # Compute the estimates of mean and covariance from the 
                       # data
                       if(is.null(mu_hat)){
-                         mu_hat <- matrix(colMeans(data_pool),nrow=1)
+                         mu_hat <- colMeans(data_pool)
                       }
                       if(is.null(Sigma_hat)){
                          Sigma_hat <- cov(data_pool)
@@ -254,8 +256,8 @@ setMethod("kb.test", signature(x = "ANY"),
                       
                    } else if(centeringType == "Nonparam"){
                       
-                      STATISTIC <- stat2sample(x, y, h, matrix(0,nrow=1),
-                                               diag(1),"Nonparam")
+                      STATISTIC <- stat2sample(x, y, h, rep(0,k),
+                                               diag(k),"Nonparam")
                    }
                    
                    CV <- compute_CV(B, Quantile, data_pool, size_x, size_y, h, 
@@ -263,7 +265,7 @@ setMethod("kb.test", signature(x = "ANY"),
                    
                    H0 <- (STATISTIC > CV)
                    
-                   res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, 
+                   res <- new("kb.test", Un = STATISTIC, CV_Un = CV, H0_Un = H0, 
                               method = METHOD, data = list(x = x, y = y), 
                               cv_method = method, B= B, h= h_best)
                 } else {
@@ -284,7 +286,7 @@ setMethod("kb.test", signature(x = "ANY"),
                    
                    H0 <- (STATISTIC[1] > CV[1])
                    
-                   res <- new("kb.test", Dn = STATISTIC, CV = CV, H0 = H0, 
+                   res <- new("kb.test", Un = STATISTIC, CV_Un = CV, H0_Un = H0, 
                               method = METHOD, data = list(x = x, y = y), 
                               cv_method = method, B= B, h= h_best)
                 }
@@ -303,12 +305,24 @@ setMethod("show", "kb.test",
           function(object) {
              cat( "\n", object@method, "\n")
              
-             cat("\n")
-             cat("H0 is rejected: ", object@H0, "\n")
-             cat("\n")
+             if(is.null(object@Vn)){
+                
+                cat("\t\t\t U-statistic \n")
+                cat("--------------------------------------------\n")
+                cat("H0 is rejected: ", object@H0_Un, "\n")
+                cat("Test Statistic: ", object@Un, "\n")
+                cat("Critical value (CV):\t", object@CV_Un, "\n")
+                
+             } else {
+                
+                cat("\t\t\t U-statistic \t\t V-statistic \n")
+                cat("--------------------------------------------\n")
+                cat("H0 is rejected: ", object@H0_Un, "\t\t", object@H0_Vn, "\n")
+                cat("Test Statistic: ", object@Un, "\t\t", object@Vn, "\n")
+                cat("Critical value (CV):\t", object@CV_Un, "\t\t", object@CV_Vn, "\n")
+                
+             }
              
-             cat("Test Statistic: ", object@Dn, "\n")
-             cat("Critical value (CV): ", object@CV,"\n")
              cat("CV method: ", object@cv_method, "\n")
              cat("Selected tuning parameter h: ", object@h$h_sel, "\n")
              
@@ -451,11 +465,19 @@ setMethod("summary", "kb.test", function(object) {
    }
    # Print main results of the test
    cat( "\n", object@method, "\n")
-   test_results <- data.frame(
-      Test_Statistic = object@Dn,
-      Critical_Value = object@CV,
-      Reject_H0 = object@H0
-   )
+   if(is.null(object@Vn)){
+      test_results <- data.frame(
+         Test_Statistic = object@Un,
+         Critical_Value = object@CV_Un,
+         Reject_H0 = object@H0_Un
+      )
+   } else {
+      test_results <- data.frame(
+         Test_Statistic = c(object@Un,object@Vn),
+         Critical_Value = c(object@CV_Un,object@CV_Vn),
+         Reject_H0 = c(object@H0_Un,object@H0_Vn)
+      )
+   }
    print(test_results)
    
    return(list(summary_tables = stats, 

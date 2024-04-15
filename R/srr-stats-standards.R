@@ -33,7 +33,6 @@
 #' @srrstatsNA {PD3.0} There is no manipulation of probability distributions in
 #'              the package.
 #' @srrstatsNA {PD3.4, PD3.5, PD3.5a} There are no integration algorithms. 
-#' @srrstatsNA {PD4.1} The tests do not include test for numeric equality.
 #' 
 #' @noRd
 NULL

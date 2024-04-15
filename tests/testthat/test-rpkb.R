@@ -10,6 +10,7 @@
 #'                   available
 #' @srrstats {PD4.3} different values of the \code{uniroot} function are tested
 #' @srrstats {PD4.4} The function uniroot satisfies this standard.
+#' @srrstats {PD4.1} Tests that generated points are in expected range
 #' 
 #' 
 #' @noRd
@@ -76,5 +77,22 @@ test_that("Random Generation from PKBD works", {
    expect_equal(dim(pkbd_dat$x),c(size,length(mu)))
    expect_true(is.matrix(pkbd_dat$x))
    expect_equal(rowSums(pkbd_dat$x^2), rep(1,size))
+   
+   #------------------------------------------------------
+   ## Test numerical values
+   rho <- 0.9
+   mu <- rnorm(3)
+   mu <- mu/sqrt(sum(mu^2))
+   size = 100
+   
+   x <- rpkb(size, mu = mu, rho = rho, method = "rejpsaw")
+   # Test if the mean of generated points is close to the true mean
+   expect_lt(max(abs(colMeans(x$x)-mu)),1e-1)
+   
+   x <- rpkb(size, mu = mu, rho = 0.99, method = "rejpsaw")
+   # Test if the mean of generated points is close to the true mean
+   # higher rho, less variability
+   expect_lt(max(abs(colMeans(x$x)-mu)),1e-2)
+   
    
 })

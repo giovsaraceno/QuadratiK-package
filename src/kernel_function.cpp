@@ -348,7 +348,7 @@ Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd
    
    Eigen::VectorXd result(2);
    result(0) = (K - 1) * TraceK + Tn;
-   result(1) = TraceK + Tn / (K - 1);
+   result(1) = TraceK;
    
    return n * result;
 }

@@ -8,6 +8,8 @@
 #' @srrstats {G5.2,G5.2a,G5.2b} all the error and warning messages are tested
 #' @srrstats {G5.4,G5.4a} correctness tested on simple cases
 #' @srrstats {G5.8, G5.8a,G5.8b,G5.8c} edge conditions
+#' @srrstats {PD4.0} numeric outputs are tested
+#' @srrstats {PD4.1} Tests that density values are as expected for selected inputs
 #' 
 #' @noRd
 library(testthat)
@@ -54,5 +56,17 @@ test_that("Density of PKBD", {
    
    expect_equal(dim(log_den),c(size,1))
    
+   #------------------------------------------------------
+   ## Test numerical values
+   rho <- 0.8
+   mu <- c(1,0,0)
+   d=3
+   x <- matrix(rnorm(3),nrow=1)
+   # For rho=0 the density corresponds to the normalizing constant for d independently of x
+   expect_equal(as.numeric(dpkb(x, mu, rho=0)), 1/(2*pi^(d/2)*gamma(d/2)^(-1)))
+   
+   # For x = mu the product of x*mu =1 in the poisson density. The remaining depends only on rho and d
+   expect_equal(as.numeric(dpkb(matrix(mu,nrow=1), mu, rho=0.5)), 0.47746483)
+   expect_equal(as.numeric(dpkb(matrix(mu,nrow=1), mu, rho=0.5, logdens = TRUE)), log(0.47746483))
    
 })

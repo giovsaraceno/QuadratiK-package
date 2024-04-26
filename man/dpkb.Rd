@@ -7,7 +7,14 @@
 \usage{
 dpkb(x, mu, rho, logdens = FALSE)
 
-rpkb(n, mu, rho, method = "rejvmf")
+rpkb(
+  n,
+  mu,
+  rho,
+  method = "rejvmf",
+  tol.eps = .Machine$double.eps^0.25,
+  max.iter = 1000
+)
 }
 \arguments{
 \item{x}{Matrix (or data.frame) with number of columns >=2.}
@@ -32,6 +39,11 @@ Golzy and Markatou 2020);
 \item \code{'rejpsaw'} using projected Saw distributions
 (Algorithm in Table 2 of Sablica et al. 2023).
 }}
+
+\item{tol.eps}{the desired accuracy of convergence tolerance
+(for 'rejacg' method).}
+
+\item{max.iter}{the maximum number of iterations (for 'rejacg' method).}
 }
 \value{
 \code{dpkb} gives the density value.
@@ -46,6 +58,11 @@ acceptances \code{numAccepted}.
 Density function and random number generation from the Poisson kernel-based
 Distribution with mean direction vector \code{mu} and concentration parameter
 \code{rho}.
+}
+\details{
+If the chosen method is 'rejacg', the function \code{uniroot}, from the
+\code{stat} package, is used to estimate the beta parameter. In this case,
+the complete results are provided as output.
 }
 \examples{
 # Generate some data from pkbd density

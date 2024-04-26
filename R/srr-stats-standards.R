@@ -29,5 +29,10 @@
 #' @srrstatsNA {UL3.1} not a dimensionality reduction software 
 #' @srrstatsNA {UL7.5,UL7.5a} there are no batch processes
 #' 
+#' @srrstatsNA {PD2.0} this is mutually exclusive with PD1.0 
+#' @srrstatsNA {PD3.0} There is no manipulation of probability distributions in
+#'              the package.
+#' @srrstatsNA {PD3.4, PD3.5, PD3.5a} There are no integration algorithms. 
+#' 
 #' @noRd
 NULL

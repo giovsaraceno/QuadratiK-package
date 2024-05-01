@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,11 +117,11 @@ tests.</p>
 <span><span class="va">k_test</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## H0 is rejected:  TRUE </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Test Statistic:  0.02452253 0.01226127 </span></span>
-<span><span class="co">## Critical value (CV):  0.001164279 0.0005821397 </span></span>
+<span><span class="co">##           U-statistic         V-statistic </span></span>
+<span><span class="co">## --------------------------------------------</span></span>
+<span><span class="co">## H0 is rejected:  TRUE TRUE         </span></span>
+<span><span class="co">## Test Statistic:  46.7469 46.73823          </span></span>
+<span><span class="co">## Critical value (CV):  1.997502 1.997502        </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
 <span><span class="co">## Selected tuning parameter h:  1.5</span></span></code></pre>
 <p>When the <span class="math inline">\(k\)</span>-sample test is
@@ -134,8 +134,8 @@ respect to the provided groups.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">##   Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1     0.02452253   0.0011642795      TRUE</span></span>
-<span><span class="co">## 2     0.01226127   0.0005821397      TRUE</span></span></code></pre>
+<span><span class="co">## 1       46.74690       1.997502      TRUE</span></span>
+<span><span class="co">## 2       46.73823       1.997502      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>

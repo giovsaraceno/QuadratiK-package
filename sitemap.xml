@@ -40,6 +40,9 @@
     <loc>/reference/DOF.html</loc>
   </url>
   <url>
+    <loc>/reference/DOF_norm.html</loc>
+  </url>
+  <url>
     <loc>/reference/QuadratiK-package.html</loc>
   </url>
   <url>
@@ -113,6 +116,12 @@
   </url>
   <url>
     <loc>/reference/summary.pkbc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/var_norm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/var_two.html</loc>
   </url>
   <url>
     <loc>/reference/wireless.html</loc>

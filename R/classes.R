@@ -8,17 +8,22 @@
 #'
 #' @slot method String indicating the normal kernel-based quadratic distance 
 #'              test performed.
-#' @slot Dn The value of the test statistic.
-#' @slot H0 A logical value indicating whether or not the null hypothesis is 
-#'          rejected.
+#' @slot Un The value of the test U-statistic.
+#' @slot Vn The value of the test V-statistic.
+#' @slot H0_Un A logical value indicating whether or not the null hypothesis is 
+#'          rejected according to Un.
+#' @slot H0_Vn A logical value indicating whether or not the null hypothesis is 
+#'          rejected according to Vn.
 #' @slot data List of samples X (and Y).
-#' @slot CV The critical value computed for the test.
+#' @slot CV_Un The critical value computed for the test.
+#' @slot CV_Vn The critical value computed for the test.
 #' @slot cv_method The method used to estimate the critical value (one of 
 #' "subsampling", "permutation" or "bootstrap").
 #' @slot h A list with the value of bandwidth parameter used for the Gaussian 
 #'         kernel. If the function \code{select_h} is used, then also the matrix
 #'         of computed power values and the resulting power plot are provided. 
 #' @slot B Number of bootstrap/permutation/subsampling replications.
+#' @slot var_Un exact variance of the kernel-based U-statistic.
 #'
 #' @examples
 #' # create a kb.test object
@@ -36,13 +41,17 @@
 setClass("kb.test",
          slots = list(
             method = "character",
-            Dn = "numeric",
-            CV = "numeric",
-            H0 = "logical",
+            Un = "numeric",
+            Vn = "numeric",
+            CV_Un = "numeric",
+            CV_Vn = "numeric",
+            H0_Un = "logical",
+            H0_Vn = "logical",
             data = "list",
             cv_method = "character",
             B = "numeric",
-            h = "list"
+            h = "list",
+            var_Un = "numeric"
          )
 )
 #' @rdname pk.test-class
@@ -66,6 +75,7 @@ setClass("kb.test",
 #'             rejected according to Vn.
 #' @slot rho The concentration parameter of the Poisson kernel.
 #' @slot B Number of replications.
+#' @slot var_Un exact variance of the kernel-based U-statistic.
 #'
 #' @examples
 #' # create a pk.test object
@@ -88,7 +98,8 @@ setClass("pk.test",
             H0_Vn = "logical",
             x = "matrix",
             B = "numeric",
-            rho = "numeric"
+            rho = "numeric",
+            var_Un = "numeric"
          )
 )
 #' @rdname pkbc-class

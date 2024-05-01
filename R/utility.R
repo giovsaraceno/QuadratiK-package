@@ -21,6 +21,58 @@ DOF <- function(d, rho){
    return(result)
 }
 #'
+#' Degrees of freedom (DOF) for the Normal kernel
+#' 
+#' Compute the Degrees of Freedom (DOF) of the normal Kernel centered with 
+#' respect to the standard normal distribution, given the dimension d and the
+#' bandwidth parameter h.
+#'
+#' @param d the number of dimensions
+#' @param h bandwidth parameter
+#'
+#' @return a list containing the DOF and the coefficient c of the asymptotic
+#' distribution
+#' 
+#' @srrstats {G1.4a} roxigen2 is used
+#' @keywords internal
+DOF_norm <- function(d, h){
+   
+   h2 <- h^2
+   dof_num <- 1 - (h2/(h2+2))^(d/2)
+   dof_den <- ((h2+2)/(h2+4))^(d/2) - 2* (h2/(h2+1))^(d/2)*(h2/(h2+3))^(d/2) +
+      (h2/(h2+2))^(d)
+   dof <- dof_num^2/dof_den
+   
+   c_num <- ((h2+2)/(h2*(h2+4)))^(d/2) - 2* (h2/(h2+1))^(d/2)*(1/(h2+3))^(d/2) +
+      (h/(h2+2))^(d)
+   const <- c_num/dof_num
+   
+   result <- list("DOF"=dof,"Coefficient"=const)
+   return(result)
+}
+#'
+#' Exact variance of normality test 
+#' 
+#' Compute the exact variance of kernel test for normality under the null 
+#' hypothesis that G=N(0,I).
+#'
+#' @param d the number of dimensions
+#' @param h bandwidth parameter
+#' @param n sample size
+#'
+#' @return the value of computed variance
+#' 
+#' @srrstats {G1.4a} roxigen2 is used
+#' @keywords internal
+var_norm <- function(d, h, n){
+   
+   h2 <- h^2
+   h_const <- ((h2+2)/(h2^2*(h2+4)))^(d/2) -2/((h2+1)*(h2+3))^(d/2) + (h2+2)^(-d)
+   res <- 2/(n*(n-1)) * 1/(2*pi)^(d)  * h_const
+   
+   return(res)
+}
+#'
 #' Generate random sample from the hypersphere
 #'
 #' @param d Number of dimensions.

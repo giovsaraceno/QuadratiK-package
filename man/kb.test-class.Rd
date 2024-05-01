@@ -15,14 +15,21 @@ test statistics and the k-sample tests.
 \item{\code{method}}{String indicating the normal kernel-based quadratic distance
 test performed.}
 
-\item{\code{Dn}}{The value of the test statistic.}
+\item{\code{Un}}{The value of the test U-statistic.}
 
-\item{\code{H0}}{A logical value indicating whether or not the null hypothesis is
-rejected.}
+\item{\code{Vn}}{The value of the test V-statistic.}
+
+\item{\code{H0_Un}}{A logical value indicating whether or not the null hypothesis is
+rejected according to Un.}
+
+\item{\code{H0_Vn}}{A logical value indicating whether or not the null hypothesis is
+rejected according to Vn.}
 
 \item{\code{data}}{List of samples X (and Y).}
 
-\item{\code{CV}}{The critical value computed for the test.}
+\item{\code{CV_Un}}{The critical value computed for the test.}
+
+\item{\code{CV_Vn}}{The critical value computed for the test.}
 
 \item{\code{cv_method}}{The method used to estimate the critical value (one of
 "subsampling", "permutation" or "bootstrap").}
@@ -32,6 +39,8 @@ kernel. If the function \code{select_h} is used, then also the matrix
 of computed power values and the resulting power plot are provided.}
 
 \item{\code{B}}{Number of bootstrap/permutation/subsampling replications.}
+
+\item{\code{var_Un}}{exact variance of the kernel-based U-statistic.}
 }}
 
 \examples{

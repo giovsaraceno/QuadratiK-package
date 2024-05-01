@@ -78,6 +78,23 @@ ParamCentering <- function(kmat_zz, z_mat, H, mu_hat, Sigma_hat) {
     .Call('_QuadratiK_ParamCentering', PACKAGE = 'QuadratiK', kmat_zz, z_mat, H, mu_hat, Sigma_hat)
 }
 
+#'
+#' Exact variance of two-sample test 
+#' 
+#' Compute the exact variance of kernel test for the two-sample problem under 
+#' the null hypothesis that F=G.
+#'
+#' @param Kcen the matrix with centered kernel values
+#' @param n_samples vector indicating sample's membership.
+#'
+#' @return the value of computed variance.
+#' 
+#' @srrstats {G1.4a} roxigen2 is used
+#' @keywords internal
+var_two <- function(Kcen, n_samples) {
+    .Call('_QuadratiK_var_two', PACKAGE = 'QuadratiK', Kcen, n_samples)
+}
+
 #' Compute kernel-based quadratic distance two-sample test with Normal kernel
 #'
 #' @param x_mat A matrix containing observations from the first sample
@@ -109,8 +126,7 @@ stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Non
 #' @param h The bandwidth parameter for the Gaussian kernel function.
 #' @param mu_hat Mean vector for the reference distribution (if available)
 #' @param Sigma_hat Covariance matrix of the reference distribution (if available)
-#' @param centeringType String indicating the method used for centering the normal kernel ('Param' or 'Nonparam').
-#'
+#' 
 #' @return A scalar value representing the test statistic.
 #'
 #' @useDynLib QuadratiK
@@ -118,8 +134,8 @@ stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Non
 #' @keywords internal
 #' 
 #' @noRd
-kbNormTest <- function(x_mat, h, mu_hat, Sigma_hat, centeringType = "Param") {
-    .Call('_QuadratiK_kbNormTest', PACKAGE = 'QuadratiK', x_mat, h, mu_hat, Sigma_hat, centeringType)
+kbNormTest <- function(x_mat, h, mu_hat, Sigma_hat) {
+    .Call('_QuadratiK_kbNormTest', PACKAGE = 'QuadratiK', x_mat, h, mu_hat, Sigma_hat)
 }
 
 #' Poisson kernel-based test for Uniformity on the Sphere

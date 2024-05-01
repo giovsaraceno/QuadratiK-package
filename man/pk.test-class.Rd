@@ -34,6 +34,8 @@ rejected according to Vn.}
 \item{\code{rho}}{The concentration parameter of the Poisson kernel.}
 
 \item{\code{B}}{Number of replications.}
+
+\item{\code{var_Un}}{exact variance of the kernel-based U-statistic.}
 }}
 
 \examples{

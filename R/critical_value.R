@@ -36,8 +36,7 @@
 #' @keywords internal
 compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
    
-   
-   Results <- rep(0,B)
+   Results <- matrix(rep(0,2*B),ncol=2)
    for(i in 1:B) {
       
       if(method=="bootstrap"){
@@ -60,10 +59,13 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
          data_y_star<-as.matrix(data_pool[newsample[(round(size_x*b)+1):m], ])
       }
       
-      Results[i] <-   stat2sample(data_x_star,data_y_star,h,
-                                  matrix(0,nrow=1),diag(1),"Nonparam")
+      Results[i,] <-   stat2sample(data_x_star,data_y_star,h,
+                                  rep(0,ncol(data_pool)),diag(1),"Nonparam")[1:2]
    }
-   return(as.numeric(quantile(Results, Quantile)))
+   
+   var_res <- apply(Results,2,function(x) as.numeric(var(x,na.rm=T)))
+   cv_res <- apply(Results,2,function(x) as.numeric(quantile(x,Quantile,na.rm=T)))
+   return(list(cv=cv_res,var=var_res))
    
 }
 #' 
@@ -152,8 +154,8 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
       
       dat <- rmvnorm(n = size, mean=mu_hat, sigma=Sigma_hat)
       dat <- matrix(dat, ncol = d, byrow = TRUE)
-      
-      Results[i] <- kbNormTest(dat, h, mu_hat, Sigma_hat)
+      kbnorm <- kbNormTest(dat, h, mu_hat, Sigma_hat)
+      Results[i] <- kbnorm[1]
       
    }
    return(as.numeric(quantile(Results, Quantile)))
@@ -230,6 +232,7 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95,
    }
    
    cv_k <- apply(Results,2,function(x) as.numeric(quantile(x,Quantile,na.rm=T)))
+   var_k <- apply(Results,2,function(x) as.numeric(var(x,na.rm=T)))
    
-   return(cv_k)
+   return(list(cv=cv_k,var=var_k))
 }

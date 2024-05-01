@@ -71,7 +71,7 @@ test_that("Functionality with valid inputs", {
    expect_s4_class(unif_test, "pk.test")
    expect_true(is.numeric(unif_test@Un))
    expect_true(is.numeric(unif_test@Vn))
-   expect_true(unif_test@H0_Un)
+   expect_false(unif_test@H0_Un)
    
    # test show method
    output <- capture.output(show(unif_test))

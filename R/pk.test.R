@@ -109,11 +109,12 @@ setMethod("pk.test", signature(x = "ANY"),
              var_Un <- (2/(n*(n-1)))*((1+rho^2)/((1-rho^2)^(d-1)) -1)
              
              CV_Un <- poisson_CV(d=d, size=n, rho=rho, B=B, Quantile=Quantile )
+             CV_Un <- CV_Un/sqrt(var_Un)
              
              res <- new("pk.test", Un = pk[1]/sqrt(var_Un), CV_Un = CV_Un, 
                         Vn = pk[2], CV_Vn = CV_Vn, method = METHOD, x = x, B= B,
                         rho= rho, H0_Un = pk[1]/sqrt(var_Un) > CV_Un, 
-                        H0_Vn = pk[2] > CV_Vn)
+                        H0_Vn = pk[2] > CV_Vn, var_Un=var_Un)
              return(res)
           })
 #' @rdname pk.test

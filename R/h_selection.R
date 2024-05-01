@@ -210,11 +210,11 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       #x <- as.matrix(xnew[sample(n, replace = FALSE),])
       #y <- as.matrix(ynew[sample(m, replace = FALSE),])
       
-      STATISTIC <- stat2sample(xnew, ynew, h, matrix(0,nrow=1),
-                               diag(1),"Nonparam")
+      STATISTIC <- stat2sample(xnew, ynew, h, rep(0,d),
+                               diag(d),"Nonparam")
       CV <- compute_CV(B, Quantile, pooled, n, m, h, method, b)
       
-      return(STATISTIC < CV)
+      return(STATISTIC[1:2] < CV$cv)
    }
    # Define the objective function for the alternative k-sample test
    objective_k <- function(h,k) {
@@ -246,7 +246,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       STATISTIC <- stat_ksample_cpp(xnew, ynew, h, sizes_new, cum_size_new)
       CV <- cv_ksample(xnew, ynew, h, B, b, Quantile, method)
       
-      return(c(STATISTIC < CV))
+      return(c(STATISTIC < CV$cv))
    }
    # Define the objective function for the alternative normality test
    objective_norm <- function(h,k) {
@@ -269,11 +269,10 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       
       xnew <- sn::rmsn(n, xi = mean_tilde, Omega = S_tilde, alpha = skew_tilde)
       
-      STATISTIC <- kbNormTest(xnew, h, matrix(mean_dat,nrow = 1), S_dat, 
-                              centeringType = "Param")
-      CV <- normal_CV(d,n,h,matrix(mean_dat,nrow = 1),S_dat,B,Quantile)
+      STATISTIC <- kbNormTest(xnew, h, mean_dat, S_dat)
+      CV <- normal_CV(d,n,h,mean_dat,S_dat,B,Quantile)
       
-      return(c(STATISTIC < CV))
+      return(c(STATISTIC[1] < CV))
    }
    
    num_cores <- as.numeric(n_cores)

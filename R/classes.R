@@ -23,6 +23,7 @@
 #'         kernel. If the function \code{select_h} is used, then also the matrix
 #'         of computed power values and the resulting power plot are provided. 
 #' @slot B Number of bootstrap/permutation/subsampling replications.
+#' @slot var_Un exact variance of the kernel-based U-statistic.
 #'
 #' @examples
 #' # create a kb.test object
@@ -49,7 +50,8 @@ setClass("kb.test",
             data = "list",
             cv_method = "character",
             B = "numeric",
-            h = "list"
+            h = "list",
+            var_Un = "numeric"
          )
 )
 #' @rdname pk.test-class
@@ -73,6 +75,7 @@ setClass("kb.test",
 #'             rejected according to Vn.
 #' @slot rho The concentration parameter of the Poisson kernel.
 #' @slot B Number of replications.
+#' @slot var_Un exact variance of the kernel-based U-statistic.
 #'
 #' @examples
 #' # create a pk.test object
@@ -95,7 +98,8 @@ setClass("pk.test",
             H0_Vn = "logical",
             x = "matrix",
             B = "numeric",
-            rho = "numeric"
+            rho = "numeric",
+            var_Un = "numeric"
          )
 )
 #' @rdname pkbc-class

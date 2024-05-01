@@ -214,7 +214,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
                                diag(d),"Nonparam")
       CV <- compute_CV(B, Quantile, pooled, n, m, h, method, b)
       
-      return(STATISTIC < CV)
+      return(STATISTIC[1:2] < CV$cv)
    }
    # Define the objective function for the alternative k-sample test
    objective_k <- function(h,k) {
@@ -246,7 +246,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       STATISTIC <- stat_ksample_cpp(xnew, ynew, h, sizes_new, cum_size_new)
       CV <- cv_ksample(xnew, ynew, h, B, b, Quantile, method)
       
-      return(c(STATISTIC < CV))
+      return(c(STATISTIC < CV$cv))
    }
    # Define the objective function for the alternative normality test
    objective_norm <- function(h,k) {
@@ -272,7 +272,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       STATISTIC <- kbNormTest(xnew, h, mean_dat, S_dat)
       CV <- normal_CV(d,n,h,mean_dat,S_dat,B,Quantile)
       
-      return(c(STATISTIC < CV))
+      return(c(STATISTIC[1] < CV))
    }
    
    num_cores <- as.numeric(n_cores)

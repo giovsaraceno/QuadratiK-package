@@ -39,6 +39,8 @@ kernel. If the function \code{select_h} is used, then also the matrix
 of computed power values and the resulting power plot are provided.}
 
 \item{\code{B}}{Number of bootstrap/permutation/subsampling replications.}
+
+\item{\code{var_Un}}{exact variance of the kernel-based U-statistic.}
 }}
 
 \examples{

@@ -63,8 +63,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// var_two
+double var_two(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& n_samples);
+RcppExport SEXP _QuadratiK_var_two(SEXP KcenSEXP, SEXP n_samplesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type Kcen(KcenSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type n_samples(n_samplesSEXP);
+    rcpp_result_gen = Rcpp::wrap(var_two(Kcen, n_samples));
+    return rcpp_result_gen;
+END_RCPP
+}
 // stat2sample
-double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h, const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, const std::string& centeringType);
+Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h, const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, const std::string& centeringType);
 RcppExport SEXP _QuadratiK_stat2sample(SEXP x_matSEXP, SEXP y_matSEXP, SEXP hSEXP, SEXP mu_hatSEXP, SEXP Sigma_hatSEXP, SEXP centeringTypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -126,6 +138,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_QuadratiK_computePoissonMatrix", (DL_FUNC) &_QuadratiK_computePoissonMatrix, 2},
     {"_QuadratiK_NonparamCentering", (DL_FUNC) &_QuadratiK_NonparamCentering, 2},
     {"_QuadratiK_ParamCentering", (DL_FUNC) &_QuadratiK_ParamCentering, 5},
+    {"_QuadratiK_var_two", (DL_FUNC) &_QuadratiK_var_two, 2},
     {"_QuadratiK_stat2sample", (DL_FUNC) &_QuadratiK_stat2sample, 6},
     {"_QuadratiK_kbNormTest", (DL_FUNC) &_QuadratiK_kbNormTest, 4},
     {"_QuadratiK_statPoissonUnif", (DL_FUNC) &_QuadratiK_statPoissonUnif, 2},

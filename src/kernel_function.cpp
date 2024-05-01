@@ -8,7 +8,6 @@ using namespace Eigen;
 using namespace Rcpp;
 using namespace std;
 // [[Rcpp::depends(RcppEigen)]]
-
 //'
 //' Compute the Gaussian kernel matrix between two samples
 //'
@@ -137,6 +136,52 @@ Eigen::MatrixXd ParamCentering(const Eigen::MatrixXd& kmat_zz, const Eigen::Matr
    
    return k_center;
 }
+//'
+//' Exact variance of two-sample test 
+//' 
+//' Compute the exact variance of kernel test for the two-sample problem under 
+//' the null hypothesis that F=G.
+//'
+//' @param Kcen the matrix with centered kernel values
+//' @param n_samples vector indicating sample's membership.
+//'
+//' @return the value of computed variance.
+//' 
+//' @srrstats {G1.4a} roxigen2 is used
+//' @keywords internal
+// [[Rcpp::export]]
+double var_two(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& n_samples) 
+   {
+   
+   int n = n_samples(0);
+   int m = n_samples(1);
+   
+   MatrixXd Kcen_copy = Kcen;
+   Kcen_copy.diagonal().setZero(); 
+   
+   MatrixXd K_xx = Kcen_copy.block(0, 0, n, n);
+   MatrixXd K_yy = Kcen_copy.block(n, n, m, m);
+   MatrixXd K_xy = Kcen_copy.block(0, n, n, m);
+   
+   // Factors
+   double n_factor = 1.0 / (n * (n - 1));
+   double m_factor = 1.0 / (m * (m - 1));
+   double cross_factor = 1.0 / (n * m);
+   
+   // Variance estimate calculation
+   double est_var = 2 * n_factor * n_factor * K_xx.array().square().sum() +
+      8 * cross_factor * cross_factor * K_xy.array().square().sum() +
+      2 * m_factor * m_factor * K_yy.array().square().sum();
+   
+   
+   double delta1 = (K_xx * K_xy.transpose()).sum();
+   double delta2 = (K_xy * K_yy.transpose()).sum();
+   
+   est_var -= 8 * n_factor * cross_factor * delta1;
+   est_var -= 8 * m_factor * cross_factor * delta2;
+   
+   return est_var;
+}
 //' Compute kernel-based quadratic distance two-sample test with Normal kernel
 //'
 //' @param x_mat A matrix containing observations from the first sample
@@ -159,7 +204,7 @@ Eigen::MatrixXd ParamCentering(const Eigen::MatrixXd& kmat_zz, const Eigen::Matr
 //' 
 //' @noRd
 // [[Rcpp::export]]
-double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
+Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
                    const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, 
                    const std::string& centeringType = "Nonparam")
 {
@@ -189,13 +234,26 @@ double stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
       k_center = ParamCentering( kmat_zz,  z_mat, H, mu_mat, Sigma_hat);
    }
    
+   Eigen::VectorXd n_sample(2);
+   n_sample(0) = n_x;
+   n_sample(1) = n_y;
+      
+   double var_nonparam = var_two(k_center, n_sample);
+      
    k_center.diagonal().setZero();
    
    double Test_NonPar = (k_center.block(0, 0, n_x, n_x).sum() / (n_x * (n_x - 1))) -
       2 * (k_center.block(0, n_x, n_x, n_y).sum() / (n_x * n_y)) +
       (k_center.block(n_x, n_x, n_y, n_y).sum() / (n_y * (n_y - 1)));
-   return n_z * Test_NonPar;
    
+   double Test_trace = (k_center.block(0, 0, n_x, n_x).sum() / (n_x * (n_x - 1)))  +
+      (k_center.block(n_x, n_x, n_y, n_y).sum() / (n_y * (n_y - 1)));
+   
+   Eigen::VectorXd results(3);
+   results(0) = n_z * Test_NonPar;
+   results(1) = n_z * Test_trace;
+   results(2) = var_nonparam;
+   return results;
 }
 //' Compute kernel-based quadratic distance test for Normality
 //'
@@ -276,10 +334,6 @@ Eigen::VectorXd statPoissonUnif(const Eigen::MatrixXd& x_mat, double rho)
    }
    double Un = 2 * lower_tri_sum / (n_x * (n_x - 1));
    
-   //double Var_Un = (2 / (n_x * (n_x - 1))) * ((1 + pow(rho, 2)) / pow(1 - pow(rho, 2), k - 1) - 1);
-   
-   //Un = Un / sqrt(Var_Un);
-   
    Eigen::VectorXd results(2);
    results(0) = Un;
    results(1) = Vn;
@@ -305,7 +359,8 @@ Eigen::VectorXd statPoissonUnif(const Eigen::MatrixXd& x_mat, double rho)
 //' @noRd
 // [[Rcpp::export]]
 Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd& y,
-                                 double h, const Eigen::VectorXd& sizes, const Eigen::VectorXd& cum_size) {
+                                 double h, const Eigen::VectorXd& sizes, 
+                                 const Eigen::VectorXd& cum_size) {
    int n = x.rows();
    int d = x.cols();
    

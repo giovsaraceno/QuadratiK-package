@@ -114,7 +114,7 @@ setMethod("pk.test", signature(x = "ANY"),
              res <- new("pk.test", Un = pk[1]/sqrt(var_Un), CV_Un = CV_Un, 
                         Vn = pk[2], CV_Vn = CV_Vn, method = METHOD, x = x, B= B,
                         rho= rho, H0_Un = pk[1]/sqrt(var_Un) > CV_Un, 
-                        H0_Vn = pk[2] > CV_Vn)
+                        H0_Vn = pk[2] > CV_Vn, var_Un=var_Un)
              return(res)
           })
 #' @rdname pk.test

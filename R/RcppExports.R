@@ -78,6 +78,23 @@ ParamCentering <- function(kmat_zz, z_mat, H, mu_hat, Sigma_hat) {
     .Call('_QuadratiK_ParamCentering', PACKAGE = 'QuadratiK', kmat_zz, z_mat, H, mu_hat, Sigma_hat)
 }
 
+#'
+#' Exact variance of two-sample test 
+#' 
+#' Compute the exact variance of kernel test for the two-sample problem under 
+#' the null hypothesis that F=G.
+#'
+#' @param Kcen the matrix with centered kernel values
+#' @param n_samples vector indicating sample's membership.
+#'
+#' @return the value of computed variance.
+#' 
+#' @srrstats {G1.4a} roxigen2 is used
+#' @keywords internal
+var_two <- function(Kcen, n_samples) {
+    .Call('_QuadratiK_var_two', PACKAGE = 'QuadratiK', Kcen, n_samples)
+}
+
 #' Compute kernel-based quadratic distance two-sample test with Normal kernel
 #'
 #' @param x_mat A matrix containing observations from the first sample

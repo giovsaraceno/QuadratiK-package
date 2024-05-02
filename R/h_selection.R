@@ -213,8 +213,8 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       STATISTIC <- stat2sample(xnew, ynew, h, rep(0,d),
                                diag(d),"Nonparam")
       CV <- compute_CV(B, Quantile, pooled, n, m, h, method, b)
-      
-      return(STATISTIC[1:2] < CV$cv)
+      cv <- CV$cv
+      return(c(STATISTIC[1] < cv[1]))
    }
    # Define the objective function for the alternative k-sample test
    objective_k <- function(h,k) {
@@ -243,10 +243,11 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       
       sizes_new <- as.vector(table(ynew))
       cum_size_new <- c(0,cumsum(sizes_new))
-      STATISTIC <- stat_ksample_cpp(xnew, ynew, h, sizes_new, cum_size_new)
+      STATISTIC <- stat_ksample_cpp(xnew, ynew, h, sizes_new,
+                                                cum_size_new)
       CV <- cv_ksample(xnew, ynew, h, B, b, Quantile, method)
-      
-      return(c(STATISTIC < CV$cv))
+      cv <- CV$cv
+      return(c(STATISTIC[1] < cv[1]))
    }
    # Define the objective function for the alternative normality test
    objective_norm <- function(h,k) {
@@ -293,8 +294,9 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    for(k in k_values){
       results <- foreach(pars = params, .combine = rbind, 
                          .packages=c("sn", "moments", "stats", 
-                                     "rlecuyer","QuadratiK")) %dopar% {
-         h <- as.numeric(pars$h)
+                                     "rlecuyer", "QuadratiK")) %dopar% {
+         
+         h <- as.numeric(pars[[2]])
          if(is.null(y)){
             
             objective_result <- objective_norm(h,k)
@@ -307,7 +309,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
             
             objective_result <- objective_k(h, k)
          }
-         data.frame(Rep=pars$Rep, delta=delta[k], h=h, score=objective_result)
+         data.frame(Rep=pars[[1]], delta=delta[k], h=h, score=objective_result)
       }
       
       results$score <- 1 - results$score

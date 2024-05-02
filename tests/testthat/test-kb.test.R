@@ -118,7 +118,7 @@ test_that("Functionality with valid inputs", {
    expect_s4_class(result, "kb.test")
    
    # Test if y is a data.frame
-   y <- data.frame(matrix(rnorm(100), ncol = 2))
+   y <- data.frame(matrix(rnorm(200), ncol = 2))
    result <- kb.test(x, y, h=0.5, method = "subsampling", b = 0.5)
    expect_s4_class(result, "kb.test")
    

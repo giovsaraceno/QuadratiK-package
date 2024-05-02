@@ -32,7 +32,6 @@ Imports:
     ggplot2,
     ggpp,
     ggpubr,
-    MASS,
     mclust,
     methods,
     moments,

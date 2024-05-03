@@ -30,5 +30,4 @@ jobs:
       run: R --version
     - uses: ropensci-review-tools/pkgcheck-action@main
       with:
-        r-version: '4.4.0'
-     
+          summary-only: false

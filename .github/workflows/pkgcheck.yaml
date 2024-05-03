@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { os: ubuntu-latest, r: "release"}
+          - { os: ubuntu-latest, r: "4.4.0"}
     permissions:
       issues: write
     env:

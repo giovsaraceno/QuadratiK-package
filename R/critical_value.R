@@ -28,7 +28,6 @@
 #'
 #' @useDynLib QuadratiK
 #' @importFrom stats quantile
-#' @importFrom MASS ginv
 #' @import RcppEigen
 #'
 #' @srrstats {G1.4a} roxigen2 is used

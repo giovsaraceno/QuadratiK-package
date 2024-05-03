@@ -16,12 +16,16 @@ on:
 
 jobs:
   pkgcheck:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: "release"}
     permissions:
       issues: write
     env:
       RGL_USE_NULL: TRUE
     steps:
       - uses: ropensci-review-tools/pkgcheck-action@main
-        with:
-          r-version: "4.4.0"
+

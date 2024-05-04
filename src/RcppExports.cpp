@@ -64,7 +64,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // var_two
-double var_two(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& n_samples);
+Eigen::VectorXd var_two(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& n_samples);
 RcppExport SEXP _QuadratiK_var_two(SEXP KcenSEXP, SEXP n_samplesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -117,6 +117,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// var_k
+Eigen::VectorXd var_k(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& sizes, const Eigen::VectorXd& cum_size);
+RcppExport SEXP _QuadratiK_var_k(SEXP KcenSEXP, SEXP sizesSEXP, SEXP cum_sizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type Kcen(KcenSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type sizes(sizesSEXP);
+    Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type cum_size(cum_sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(var_k(Kcen, sizes, cum_size));
+    return rcpp_result_gen;
+END_RCPP
+}
 // stat_ksample_cpp
 Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd& y, double h, const Eigen::VectorXd& sizes, const Eigen::VectorXd& cum_size);
 RcppExport SEXP _QuadratiK_stat_ksample_cpp(SEXP xSEXP, SEXP ySEXP, SEXP hSEXP, SEXP sizesSEXP, SEXP cum_sizeSEXP) {
@@ -142,6 +155,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_QuadratiK_stat2sample", (DL_FUNC) &_QuadratiK_stat2sample, 6},
     {"_QuadratiK_kbNormTest", (DL_FUNC) &_QuadratiK_kbNormTest, 4},
     {"_QuadratiK_statPoissonUnif", (DL_FUNC) &_QuadratiK_statPoissonUnif, 2},
+    {"_QuadratiK_var_k", (DL_FUNC) &_QuadratiK_var_k, 3},
     {"_QuadratiK_stat_ksample_cpp", (DL_FUNC) &_QuadratiK_stat_ksample_cpp, 5},
     {NULL, NULL, 0}
 };

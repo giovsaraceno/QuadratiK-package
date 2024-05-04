@@ -1,4 +1,3 @@
-#' @docType package
 #' @name QuadratiK-package
 #' @title Collection of Methods Constructed using the Kernel-Based Quadratic 
 #'          Distances

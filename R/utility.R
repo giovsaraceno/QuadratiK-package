@@ -35,18 +35,27 @@ DOF <- function(d, rho){
 #' 
 #' @srrstats {G1.4a} roxigen2 is used
 #' @keywords internal
-DOF_norm <- function(d, h){
+DOF_norm <- function(Sigma_h, V){
    
-   h2 <- h^2
-   dof_num <- 1 - (h2/(h2+2))^(d/2)
-   dof_den <- ((h2+2)/(h2+4))^(d/2) - 2* (h2/(h2+1))^(d/2)*(h2/(h2+3))^(d/2) +
-      (h2/(h2+2))^(d)
-   dof <- dof_num^2/dof_den
+   num_dof <- det(Sigma_h)^(-1/2) - det(Sigma_h + 2*V)^(-1/2)
+   den_dof <- det(Sigma_h)^(-1/2) * det(Sigma_h + 4*V)^(-1/2) 
+               -2 * det(Sigma_h + V)^(-1/2) * det(Sigma_h + 3*V)^(-1/2)
+               + det(Sigma_h + 2*V)^(-1/2)
    
-   c_num <- ((h2+2)/(h2*(h2+4)))^(d/2) - 2* (h2/(h2+1))^(d/2)*(1/(h2+3))^(d/2) +
-      (h/(h2+2))^(d)
-   const <- c_num/dof_num
+   dof <- num_dof^2/den_dof
    
+   const <- den_dof/num_dof
+   
+   # h2 <- h^2
+   # dof_num <- 1 - (h2/(h2+2))^(d/2)
+   # dof_den <- ((h2+2)/(h2+4))^(d/2) - 2* (h2/(h2+1))^(d/2)*(h2/(h2+3))^(d/2) +
+   #    (h2/(h2+2))^(d)
+   # dof <- dof_num^2/dof_den
+   # 
+   # c_num <- ((h2+2)/(h2*(h2+4)))^(d/2) - 2* (h2/(h2+1))^(d/2)*(1/(h2+3))^(d/2) +
+   #    (h/(h2+2))^(d)
+   # const <- c_num/dof_num
+   # 
    result <- list("DOF"=dof,"Coefficient"=const)
    return(result)
 }
@@ -64,12 +73,18 @@ DOF_norm <- function(d, h){
 #' 
 #' @srrstats {G1.4a} roxigen2 is used
 #' @keywords internal
-var_norm <- function(d, h, n){
+var_norm <- function(Sigma_h, V, n){
    
-   h2 <- h^2
-   h_const <- ((h2+2)/(h2^2*(h2+4)))^(d/2) -2/((h2+1)*(h2+3))^(d/2) + (h2+2)^(-d)
-   res <- 2/(n*(n-1)) * 1/(2*pi)^(d)  * h_const
+   d <- nrow(Sigma_h)
    
+   res <- det(Sigma_h)^(-1/2) * det(Sigma_h + 4*V)^(-1/2) -2 * det(Sigma_h + V)^(-1/2) * det(Sigma_h + 3*V)^(-1/2) + det(Sigma_h + 2*V)^(-1)
+   
+   res <- 2/(n*(n-1)) * 1/(2*pi)^(d) * res
+   
+   # h2 <- h^2
+   # h_const <- ((h2+2)/(h2^2*(h2+4)))^(d/2) -2/((h2+1)*(h2+3))^(d/2) + (h2+2)^(-d)
+   # res <- 2/(n*(n-1)) * 1/(2*pi)^(d)  * h_const
+   # 
    return(res)
 }
 #'

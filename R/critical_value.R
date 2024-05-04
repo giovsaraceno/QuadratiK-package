@@ -62,10 +62,8 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
                                   rep(0,ncol(data_pool)),diag(1),"Nonparam")[1:2]
    }
    
-   var_res <- apply(Results,2,function(x) as.numeric(var(x,na.rm=T)))
    cv_res <- apply(Results,2,function(x) as.numeric(quantile(x,Quantile,na.rm=T)))
-   return(list(cv=cv_res,var=var_res))
-   
+   return(list(cv=cv_res))
 }
 #' 
 #' Compute the critical value for the Poisson KBQD tests for Uniformity
@@ -205,18 +203,15 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95,
          ind_k <- unlist(lapply(1:K, function(k) sample(1:sizes[k], sizes[k], 
                                                       replace=T) + cum_size[k]))
          ind_k <- sample(ind_k,length(ind_k),replace = F)
-         #y_ind <- y
          
       } else if(method=="permutation"){
          
          ind_k <- sample(1:n, n, replace=F)
-         #y_ind <- y
          
       } else if(method=="subsampling"){
          
          ind_k <- unlist(lapply(1:K, function(j) {
             sample(1:sizes[j], round(sizes[j]*b), replace=F) + cum_size[j]}))
-         #y_ind <- y[ind_k]
          ind_k <- sample(ind_k,length(ind_k),replace = F)
       }
       
@@ -227,11 +222,9 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95,
       cum_size_sub <- c(0,cumsum(sizes_sub))
       
       Results[i,] <-   stat_ksample_cpp(as.matrix(data_k), c(y_ind), h, 
-                                        sizes_sub, cum_size_sub)
+                                        sizes_sub, cum_size_sub)[1:2]
    }
    
    cv_k <- apply(Results,2,function(x) as.numeric(quantile(x,Quantile,na.rm=T)))
-   var_k <- apply(Results,2,function(x) as.numeric(var(x,na.rm=T)))
-   
-   return(list(cv=cv_k,var=var_k))
+   return(list(cv=cv_k))
 }

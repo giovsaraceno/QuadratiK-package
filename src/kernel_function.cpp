@@ -150,7 +150,7 @@ Eigen::MatrixXd ParamCentering(const Eigen::MatrixXd& kmat_zz, const Eigen::Matr
 //' @srrstats {G1.4a} roxigen2 is used
 //' @keywords internal
 // [[Rcpp::export]]
-double var_two(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& n_samples) 
+Eigen::VectorXd var_two(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& n_samples) 
    {
    
    int n = n_samples(0);
@@ -168,19 +168,26 @@ double var_two(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& n_samples)
    double m_factor = 1.0 / (m * (m - 1));
    double cross_factor = 1.0 / (n * m);
    
-   // Variance estimate calculation
-   double est_var = 2 * n_factor * n_factor * K_xx.array().square().sum() +
-      8 * cross_factor * cross_factor * K_xy.array().square().sum() +
-      2 * m_factor * m_factor * K_yy.array().square().sum();
+   // Variance estimate calculation - Dn
+   double est_varD = 2 * n_factor * n_factor * pow(K_xx.array(),2).sum() +
+      8 * cross_factor * cross_factor * pow(K_xy.array(),2).sum() +
+      2 * m_factor * m_factor * pow(K_yy.array(),2).sum();
    
+   // Variance estimate calculation - trace
+   double est_var_Tr = 2 * n_factor * n_factor * pow(K_xx.array(),2).sum() +
+      2 * m_factor * m_factor * pow(K_yy.array(),2).sum();
    
    double delta1 = (K_xx * K_xy.transpose()).sum();
    double delta2 = (K_xy * K_yy.transpose()).sum();
    
-   est_var -= 8 * n_factor * cross_factor * delta1;
-   est_var -= 8 * m_factor * cross_factor * delta2;
+   est_varD -= 8 * n_factor * cross_factor * delta1;
+   est_varD -= 8 * m_factor * cross_factor * delta2;
    
-   return est_var;
+   Eigen::VectorXd results(2);
+   results(0) = est_varD;
+   results(1) = est_var_Tr;
+   
+   return results;
 }
 //' Compute kernel-based quadratic distance two-sample test with Normal kernel
 //'
@@ -238,7 +245,7 @@ Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, doub
    n_sample(0) = n_x;
    n_sample(1) = n_y;
       
-   double var_nonparam = var_two(k_center, n_sample);
+   Eigen::VectorXd var_nonparam = var_two(k_center, n_sample);
       
    k_center.diagonal().setZero();
    
@@ -249,10 +256,11 @@ Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, doub
    double Test_trace = (k_center.block(0, 0, n_x, n_x).sum() / (n_x * (n_x - 1)))  +
       (k_center.block(n_x, n_x, n_y, n_y).sum() / (n_y * (n_y - 1)));
    
-   Eigen::VectorXd results(3);
+   Eigen::VectorXd results(4);
    results(0) = n_z * Test_NonPar;
    results(1) = n_z * Test_trace;
-   results(2) = var_nonparam;
+   results(2) = var_nonparam(0);
+   results(3) = var_nonparam(1);
    return results;
 }
 //' Compute kernel-based quadratic distance test for Normality
@@ -340,6 +348,69 @@ Eigen::VectorXd statPoissonUnif(const Eigen::MatrixXd& x_mat, double rho)
    
    return results;
 }
+//'
+ //' Exact variance of k-sample test 
+ //' 
+ //' Compute the exact variance of kernel test for the k-sample problem under 
+ //' the null hypothesis that F_1=...=F_k.
+ //'
+ //' @param Kcen the matrix with centered kernel values
+ //' @param n_samples vector indicating sample's membership.
+ //'
+ //' @return the value of computed variance.
+ //' 
+ //' @srrstats {G1.4a} roxigen2 is used
+ //' @keywords internal
+ // [[Rcpp::export]]
+ Eigen::VectorXd var_k(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& sizes,
+                       const Eigen::VectorXd& cum_size) 
+ {
+    int n = Kcen.rows();
+    int K = sizes.size();
+    
+    Eigen::MatrixXd Kcen_copy = Kcen;
+    Kcen_copy.diagonal().setZero();
+    
+    double C1 = 0.0;
+    double C2 = 0.0;
+    double C3 = 0.0;
+    for (int l = 1; l <= K; ++l) {
+       
+       double ni_factor = 1.0 / (sizes[l-1] * (sizes[l-1] - 1));
+       Eigen::MatrixXd K_ll = Kcen_copy.block(cum_size[l - 1], cum_size[l - 1], sizes[l - 1], sizes[l - 1]);
+       
+       C1 += 2 * ni_factor * ni_factor * pow(K_ll.array(),2).sum();
+          
+       for (int r = 1; r <= K; ++r) {
+          
+          double n_lr_factor = 1.0 / (sizes[l-1] * sizes[r-1]);
+          Eigen::MatrixXd K_lr = Kcen_copy.block(cum_size[l - 1], cum_size[r - 1], sizes[l - 1], sizes[r - 1]);
+          
+          if (r > l) 
+             {
+             
+             C2 += 8 * n_lr_factor * n_lr_factor * pow(K_lr.array(),2).sum();
+             C3 -= 8 * n_lr_factor * ni_factor * (K_ll * K_lr.transpose()).sum();
+      
+          } 
+          else if (r < l)
+             {
+             
+             C3 -= 8 * n_lr_factor * ni_factor * (K_ll * K_lr.transpose()).sum();
+             
+          }
+       }
+    }
+    
+    double est_varD = pow(K-1,2) * C1 + C2 + C3;
+    double est_var_Tr = C1;
+       
+    Eigen::VectorXd results(2);
+    results(0) = est_varD;
+    results(1) = est_var_Tr;
+    
+    return results;
+ }
 //' Kernel-based quadratic distance k-sample tests
 //' 
 //' Compute the kernel-based quadratic distance k-sample tests with the Normal kernel and bandwidth parameter h.
@@ -401,9 +472,13 @@ Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd
       }
    }
    
-   Eigen::VectorXd result(2);
-   result(0) = (K - 1) * TraceK + Tn;
-   result(1) = TraceK;
+   Eigen::VectorXd var = var_k(k_center, sizes, cum_size);
    
-   return n * result;
+   Eigen::VectorXd result(4);
+   result(0) = n * (K - 1) * TraceK + Tn;
+   result(1) = n * TraceK;
+   result(2) = var(0);
+   result(3) = var(1);
+   
+   return result;
 }

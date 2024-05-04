@@ -2,6 +2,9 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #'
+NULL
+
+#'
 #' Compute the Gaussian kernel matrix between two samples
 #'
 #' @param x_mat A matrix containing the observations of X
@@ -154,6 +157,10 @@ kbNormTest <- function(x_mat, h, mu_hat, Sigma_hat) {
 #' @noRd
 statPoissonUnif <- function(x_mat, rho) {
     .Call('_QuadratiK_statPoissonUnif', PACKAGE = 'QuadratiK', x_mat, rho)
+}
+
+var_k <- function(Kcen, sizes, cum_size) {
+    .Call('_QuadratiK_var_k', PACKAGE = 'QuadratiK', Kcen, sizes, cum_size)
 }
 
 #' Kernel-based quadratic distance k-sample tests

@@ -204,6 +204,9 @@ setMethod("kb.test", signature(x = "ANY"),
                 # Compute the estimates of mean and covariance from the data
                 if(is.null(mu_hat)){
                    mu_hat <- rep(0,k)
+                } else {
+                   x <- x - mu_hat
+                   mu_hat <- rep(0,k)
                 }
                 if(is.null(Sigma_hat)){
                    Sigma_hat <- diag(k)
@@ -211,12 +214,12 @@ setMethod("kb.test", signature(x = "ANY"),
                 
                 STATISTIC <- kbNormTest(x, h, mu_hat, Sigma_hat)
                 CV_Un <- normal_CV(k, size_x, h, mu_hat, Sigma_hat, B, Quantile)
-                
-                dof <- DOF_norm(k, h)
+                Sigma_h <- h^2*diag(k)
+                dof <- DOF_norm(Sigma_h, Sigma_hat)
                 qu_q <- qchisq(Quantile,df=dof$DOF)
                 CV_Vn <- dof$Coefficient*qu_q
                 
-                var_Un <- var_norm(k, h, size_x)
+                var_Un <- var_norm(Sigma_h, Sigma_hat, size_x)
                 CV_Un <- CV_Un/sqrt(var_Un)
                 
                 H0_Un <- (STATISTIC[1]/sqrt(var_Un) > CV_Un)
@@ -269,15 +272,16 @@ setMethod("kb.test", signature(x = "ANY"),
                    CV <- compute_CV(B, Quantile, data_pool, size_x, size_y, h, 
                                     method, b)
                    STATISTIC[1] <- STATISTIC[1]/sqrt(STATISTIC[3])
+                   STATISTIC[2] <- STATISTIC[2]/sqrt(STATISTIC[4])
                    CV$cv[1] <- CV$cv[1]/sqrt(STATISTIC[3])
-                   CV$cv[2] <- CV$cv[2]/sqrt(CV$var[2])
+                   CV$cv[2] <- CV$cv[2]/sqrt(STATISTIC[4])
                    
                    H0 <- (STATISTIC[1:2] > CV$cv)
                    
                    res <- new("kb.test", Un = STATISTIC[1:2], CV_Un = CV$cv, 
                               H0_Un = H0, method = METHOD, 
                               data = list(x = x, y = y), cv_method = method, 
-                              B= B, h= h_best, var_Un= c(STATISTIC[3],CV$var[2]))
+                              B= B, h= h_best, var_Un= STATISTIC[3:4])
                 } else {
                    
                    
@@ -294,15 +298,17 @@ setMethod("kb.test", signature(x = "ANY"),
                    
                    CV <- cv_ksample(x, y, h, B, b, Quantile, method)
                    
-                   STATISTIC <- STATISTIC/sqrt(CV$var)
-                   CV$cv <- CV$cv/sqrt(CV$var)
+                   STATISTIC[1] <- STATISTIC[1]/sqrt(STATISTIC[3])
+                   STATISTIC[2] <- STATISTIC[2]/sqrt(STATISTIC[4])
+                   CV$cv[1] <- CV$cv[1]/sqrt(STATISTIC[3])
+                   CV$cv[2] <- CV$cv[2]/sqrt(STATISTIC[4])
                    
-                   H0 <- (STATISTIC > CV$cv)
+                   H0 <- (STATISTIC[1:2] > CV$cv)
                    
-                   res <- new("kb.test", Un = STATISTIC, CV_Un = CV$cv, 
+                   res <- new("kb.test", Un = STATISTIC[1:2], CV_Un = CV$cv, 
                               H0_Un = H0, method = METHOD, 
                               data = list(x = x, y = y), cv_method = method, 
-                              B= B, h= h_best, var_Un = CV$var)
+                              B= B, h= h_best, var_Un = STATISTIC[3:4])
                 }
              }
              
@@ -331,8 +337,8 @@ setMethod("show", "kb.test",
                 
                 cat("\t\t\t U-statistic \t\t V-statistic \n")
                 cat("--------------------------------------------\n")
-                cat("H0 is rejected: ", object@H0_Un, "\t\t", object@H0_Vn, "\n")
-                cat("Test Statistic: ", object@Un, "\t\t", object@Vn, "\n")
+                cat("H0 is rejected: \t", object@H0_Un, "\t\t", object@H0_Vn, "\n")
+                cat("Test Statistic: \t", object@Un, "\t\t", object@Vn, "\n")
                 cat("Critical value (CV):\t", object@CV_Un, "\t\t", object@CV_Vn, "\n")
                 
              }

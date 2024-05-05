@@ -23,7 +23,7 @@ License: GPL (>= 3)
 URL: https://cran.r-project.org/web/packages/QuadratiK/index.html, https://github.com/giovsaraceno/QuadratiK-package, https://giovsaraceno.github.io/QuadratiK-package/
 BugReports: https://github.com/giovsaraceno/QuadratiK-package/issues
 Depends: 
-    R (>= 4.4.0)
+    R (>= 4.0.0)
 Imports: 
     cluster,
     clusterRepro,
@@ -59,4 +59,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list (markdown = TRUE, roclets = c ("namespace", "rd", "srr::srr_stats_roclet"))
-RoxygenNote: 7.3.1
+RoxygenNote: 7.2.3

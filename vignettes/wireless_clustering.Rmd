@@ -46,7 +46,7 @@ round(res_validation$metrics, 8)
 The Elbow plots and the reported metrics suggest $K=4$ as number of clusters. This is in accordance with the know ground truth. 
 Once the number of clusters is selected, the function ``summary_stat`` in the ``QuadratiK`` package can be used to obtain additional summary information with respect to the clustering results. In particular, the function provides mean, standard deviation, median, inter-quantile range, minimum and maximum computed for each variable, overall and by the assigned membership, as well as a representation of data points. For $d=2$ and $d=3$, observations are displayed on the unit circle and unit sphere, respectively. If $d>3$, the spherical PCA is applied on the data set, and the first 3 principal components are used for visualizing data points on the sphere, after application of  $L_2$ normalization. 
 ```{r fig.width=6, fig.height=8}
-summary_clust <- extract_stats(res_pk,4)
+summary_clust <- stats_clusters(res_pk,4)
 ```
 
 ```{r}

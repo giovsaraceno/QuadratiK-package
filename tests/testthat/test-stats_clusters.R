@@ -13,10 +13,10 @@ test_that("extract_stat test", {
    y <- rep(c(1,2,3),each=25)
    pkbd_res<- pkbc(dat, c(2,3))
    
-   expect_error(extract_stats(pkbd_res, 4), 
+   expect_error(stats_clusters(pkbd_res, 4), 
    "The provided pkbc object does not contain results for the requested
            number of clusters")
-   res1 <- extract_stats(pkbd_res, 3)
+   res1 <- stats_clusters(pkbd_res, 3)
    expect_equal(length(res1), 2)
    
    # dimension = 3
@@ -26,8 +26,8 @@ test_that("extract_stat test", {
    y <- rep(c(1,2,3),each=20)
    pkbd_res<- pkbc(dat, c(2,3))
    
-   res1 <- extract_stats(pkbd_res, 2)
-   res2 <- extract_stats(pkbd_res, 3)
+   res1 <- stats_clusters(pkbd_res, 2)
+   res2 <- stats_clusters(pkbd_res, 3)
    expect_equal(length(res1), 3)
    expect_equal(length(res2), 3)
    
@@ -38,8 +38,8 @@ test_that("extract_stat test", {
    y <- rep(c(1,2,3),each=15)
    pkbd_res<- pkbc(dat, c(2,3))
    
-   res1 <- extract_stats(pkbd_res, 2)
-   res2 <- extract_stats(pkbd_res, 3)
+   res1 <- stats_clusters(pkbd_res, 2)
+   res2 <- stats_clusters(pkbd_res, 3)
    expect_equal(length(res1), 4)
    expect_equal(length(res2), 4)
    

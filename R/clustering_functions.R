@@ -478,9 +478,9 @@ setMethod("summary", "pkbc", function(object) {
 #' @param ... possible additional inputs
 #' 
 #' @export
-setGeneric("extract_stats",function(object,...){
+setGeneric("stats_clusters",function(object,...){
    
-   standardGeneric("extract_stats")
+   standardGeneric("stats_clusters")
 })
 #' 
 #' @title Descriptive statistics for the clusters identified by the Poisson 
@@ -504,7 +504,7 @@ setGeneric("extract_stats",function(object,...){
 #'
 #' #Perform the clustering algorithm
 #' pkbc_res<- pkbc(dat, 3)
-#' extract_stats(pkbc_res, 3)
+#' stats_clusters(pkbc_res, 3)
 #' 
 #'
 #' @return List with computed descriptive statistics for each variable. 
@@ -514,9 +514,9 @@ setGeneric("extract_stats",function(object,...){
 #' @srrstats {UL3.2} true label can be provided as a separate input
 #' @srrstats {UL3.4} the function computes summary statistics with respect to 
 #'                   the identified clusters.
-#' @rdname extract_stats                  
+#' @rdname stats_clusters                  
 #' @export
-setMethod("extract_stats", "pkbc", function(object, k){
+setMethod("stats_clusters", "pkbc", function(object, k){
    
    if(!(k %in% object@input$nClust)){
       stop("The provided pkbc object does not contain results for the requested
@@ -578,7 +578,7 @@ setMethod("extract_stats", "pkbc", function(object, k){
 #' \donttest{
 #' dat<-matrix(rnorm(300),ncol=3)
 #' pkbc_res<- pkbc(dat, 3)
-#' extract_stats(pkbc_res, 3)
+#' stats_clusters(pkbc_res, 3)
 #' }
 #' 
 #' @references
@@ -970,10 +970,11 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
       }
    }
    
+   test_res <- matrix(nrow = 4)
    if(is.null(true_label)){
-      metrics <- matrix(nrow=5)
+      metrics <- matrix(nrow=2)
    } else {
-      metrics <- matrix(nrow=8)
+      metrics <- matrix(nrow=4)
    }
    igp_k <- list()
    
@@ -991,6 +992,9 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
       
       # Compute the Average Silhouette Width
       sil <- mean(silhouette(x =object@res_k[[k]]$finalMemb, dist =dist(x))[,3])
+      
+      test_res <- cbind(test_res, c(k, k_test@Un[1], k_test@CV_Un[1], 
+                                  k_test@H0_Un[1]))
       
       # If true labels are provided
       if(!is.null(true_label)){
@@ -1017,30 +1021,30 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
          macroPrecision <- mean(precision,na.rm=T)
          macroRecall <- mean(recall,na.rm=T)
          
-         metrics <- cbind(metrics, c(k, k_test@Un[1], k_test@CV_Un[1], 
-                                     k_test@H0_Un[1], sil, ari, macroPrecision, 
+         metrics <- cbind(metrics, c(k, sil, ari, macroPrecision, 
                                      macroRecall))
       } else {
          ari <- NA
-         metrics <- cbind(metrics, c(k, k_test@Un[1], k_test@CV_Un[1], 
-                                     k_test@H0_Un[1], sil))
+         metrics <- cbind(metrics, c(k, sil))
       }
       
    }
    metrics <- metrics[,-1]
+   test_res <- test_res[,-1]
    metrics <- as.data.frame(metrics,colnames=NULL)
-   colnames(metrics) <- paste0("k=",object@input$nClust)
+   test_res <- as.data.frame(test_res, colnames=NULL)
+   #colnames(metrics) <- paste0("k=",object@input$nClust)
+   rownames(test_res) <- c("k","Test statistic", "Critical value", 
+                          "Reject_H0")
    if(!is.null(true_label)){
-      rownames(metrics) <- c("k","Test statistic", "Critical value", 
-                             "Reject_H0", "ASW", "ARI","Macro_Precision", 
+      rownames(metrics) <- c("k","ASW", "ARI","Macro_Precision", 
                              "Macro_Recall")
    } else {
-      rownames(metrics) <- c("k","Test statistic", "Critical value", 
-                             "Reject_H0", "ASW")
+      rownames(metrics) <- c("k","ASW")
    }
    
 
-   results <- list(metrics = metrics, IGP = igp_k)
+   results <- list(metrics = metrics, IGP = igp_k, tests = test_res)
    
    return(results)
 }

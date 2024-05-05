@@ -8,15 +8,15 @@
 #'
 #' @slot method String indicating the normal kernel-based quadratic distance 
 #'              test performed.
-#' @slot Un The value of the test U-statistic.
+#' @slot Un The value of the test U-statistics.
 #' @slot Vn The value of the test V-statistic.
 #' @slot H0_Un A logical value indicating whether or not the null hypothesis is 
-#'          rejected according to Un.
+#'          rejected according to U-statistics.
 #' @slot H0_Vn A logical value indicating whether or not the null hypothesis is 
 #'          rejected according to Vn.
 #' @slot data List of samples X (and Y).
-#' @slot CV_Un The critical value computed for the test.
-#' @slot CV_Vn The critical value computed for the test.
+#' @slot CV_Un The critical value computed for the tests.
+#' @slot CV_Vn The critical value computed for the tests.
 #' @slot cv_method The method used to estimate the critical value (one of 
 #' "subsampling", "permutation" or "bootstrap").
 #' @slot h A list with the value of bandwidth parameter used for the Gaussian 

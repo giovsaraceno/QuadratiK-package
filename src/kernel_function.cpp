@@ -355,7 +355,8 @@ Eigen::VectorXd statPoissonUnif(const Eigen::MatrixXd& x_mat, double rho)
  //' the null hypothesis that F_1=...=F_k.
  //'
  //' @param Kcen the matrix with centered kernel values
- //' @param n_samples vector indicating sample's membership.
+ //' @param sizes vector indicating sample's size.
+ //' @param cum_size vector indicating sample's cumulative sizes.
  //'
  //' @return the value of computed variance.
  //' 

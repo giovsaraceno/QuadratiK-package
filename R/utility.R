@@ -27,8 +27,8 @@ DOF <- function(d, rho){
 #' respect to the standard normal distribution, given the dimension d and the
 #' bandwidth parameter h.
 #'
-#' @param d the number of dimensions
-#' @param h bandwidth parameter
+#' @param Sigma_h covariance matrix of the gaussian kernel 
+#' @param V Covariance matrix of the tested distribution G
 #'
 #' @return a list containing the DOF and the coefficient c of the asymptotic
 #' distribution
@@ -65,8 +65,8 @@ DOF_norm <- function(Sigma_h, V){
 #' Compute the exact variance of kernel test for normality under the null 
 #' hypothesis that G=N(0,I).
 #'
-#' @param d the number of dimensions
-#' @param h bandwidth parameter
+#' @param Sigma_h covariance matrix of the gaussian kernel 
+#' @param V Covariance matrix of the tested distribution G
 #' @param n sample size
 #'
 #' @return the value of computed variance

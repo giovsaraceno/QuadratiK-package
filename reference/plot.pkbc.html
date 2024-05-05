@@ -115,33 +115,33 @@ https://doi.org/10.1007/BF02595862</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">300</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">pkbc_res</span><span class="op">&lt;-</span> <span class="fu"><a href="pkbc.html">pkbc</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="extract_stats.html">extract_stats</a></span><span class="op">(</span><span class="va">pkbc_res</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="stats_clusters.html">stats_clusters</a></span><span class="op">(</span><span class="va">pkbc_res</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Group 1     Group 2    Group 3     Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean   0.3798465 -0.08300973 0.42227642 -0.05311686</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd            NA  0.58121806 0.08362478  0.57600297</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median 0.3798465 -0.16837972 0.43238560 -0.10048516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR    0.0000000  0.92909074 0.11969364  0.93584445</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    0.3798465 -0.95600593 0.31641264 -0.95600593</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max    0.3798465  0.97209228 0.51973585  0.97209228</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            Group 1    Group 2   Group 3       Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.11423666  0.3590187 0.5147192  0.0009016251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.59540850  0.3076964        NA  0.5764088492</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.08317254  0.3416886 0.5147192  0.0529415862</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     1.08582765  0.4552225 0.0000000  0.9657622803</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.99815567 -0.2498777 0.5147192 -0.9981556667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.92996966  0.8834617 0.5147192  0.9299696565</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Group 1     Group 2    Group 3    Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean   0.1686492  0.07469644 0.77263791  0.1105330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd            NA  0.57152439 0.08200756  0.5748996</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median 0.1686492  0.07167659 0.78111508  0.1541122</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR    0.0000000  1.04082693 0.15125253  1.0627470</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    0.1686492 -0.98306557 0.68324187 -0.9830656</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max    0.1686492  0.97514555 0.85858070  0.9751455</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1     Group 2    Group 3     Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.0746302  0.02798259 -0.6126422  0.05702852</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.5898005  0.44361604         NA  0.55877530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median  0.1263663  0.04841560 -0.6126422  0.07707060</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.9728322  0.67595429  0.0000000  0.86676405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.9993915 -0.71110682 -0.6126422 -0.99939152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.9987495  0.75635249 -0.6126422  0.99874954</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1     Group 2    Group 3     Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.9095461 -0.05262558 0.45878857 -0.03562408</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd             NA  0.57523441 0.06375399  0.57562077</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.9095461 -0.02797779 0.45044637  0.02212368</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.0000000  0.96240436 0.10950063  0.99164218</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.9095461 -0.99102657 0.39238389 -0.99102657</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max    -0.9095461  0.93401852 0.53483508  0.93401852</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1    Group 2   Group 3      Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.1984374 -0.7452149 -0.599778 -0.026584810</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.5021823  0.1944794        NA  0.601351973</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median  0.1485244 -0.7525265 -0.599778 -0.006964457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.7709032  0.3395141  0.000000  1.063345824</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.7126606 -0.9970685 -0.599778 -0.997068462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.9813179 -0.3946371 -0.599778  0.981317913</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>

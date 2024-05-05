@@ -73,7 +73,7 @@ test performed.</p></dd>
 
 
 <dt><code>Un</code></dt>
-<dd><p>The value of the test U-statistic.</p></dd>
+<dd><p>The value of the test U-statistics.</p></dd>
 
 
 <dt><code>Vn</code></dt>
@@ -82,7 +82,7 @@ test performed.</p></dd>
 
 <dt><code>H0_Un</code></dt>
 <dd><p>A logical value indicating whether or not the null hypothesis is
-rejected according to Un.</p></dd>
+rejected according to U-statistics.</p></dd>
 
 
 <dt><code>H0_Vn</code></dt>
@@ -95,11 +95,11 @@ rejected according to Vn.</p></dd>
 
 
 <dt><code>CV_Un</code></dt>
-<dd><p>The critical value computed for the test.</p></dd>
+<dd><p>The critical value computed for the tests.</p></dd>
 
 
 <dt><code>CV_Vn</code></dt>
-<dd><p>The critical value computed for the test.</p></dd>
+<dd><p>The critical value computed for the tests.</p></dd>
 
 
 <dt><code>cv_method</code></dt>
@@ -135,8 +135,8 @@ of computed power values and the resulting power plot are provided.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 			 U-statistic 		 V-statistic </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> H0 is rejected: 	 FALSE 		 FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic: 	 -15.88073 		 0.5138871 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Critical value (CV):	 93.59674 		 6.071062 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic: 	 66.71432 		 0.7995836 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Critical value (CV):	 126.8078 		 6.071062 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CV method:   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Selected tuning parameter h:  0.5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -145,11 +145,11 @@ of computed power values and the resulting power plot are provided.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="kb.test.html">kb.test</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,h<span class="op">=</span><span class="fl">0.5</span>, method<span class="op">=</span><span class="st">"subsampling"</span>,b<span class="op">=</span><span class="fl">0.9</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Kernel-based quadratic distance two-sample test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 			 U-statistic 		 V-statistic </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 			 U-statistic </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> H0 is rejected: 	 FALSE FALSE 		  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic: 	 -16.87559 -15.64977 		  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Critical value (CV):	 141.4268 131.3011 		  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H0 is rejected:  TRUE TRUE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic:  104.956 123.9398 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Critical value (CV):	 102.3877 121.0429 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CV method:  subsampling </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Selected tuning parameter h:  0.5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

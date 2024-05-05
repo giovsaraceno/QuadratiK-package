@@ -61,9 +61,6 @@
     <loc>/reference/dpkb.html</loc>
   </url>
   <url>
-    <loc>/reference/extract_stats.html</loc>
-  </url>
-  <url>
     <loc>/reference/generate_SN.html</loc>
   </url>
   <url>
@@ -109,6 +106,9 @@
     <loc>/reference/select_h.html</loc>
   </url>
   <url>
+    <loc>/reference/stats_clusters.html</loc>
+  </url>
+  <url>
     <loc>/reference/summary-kb.test-method.html</loc>
   </url>
   <url>
@@ -116,6 +116,9 @@
   </url>
   <url>
     <loc>/reference/summary.pkbc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/var_k.html</loc>
   </url>
   <url>
     <loc>/reference/var_norm.html</loc>

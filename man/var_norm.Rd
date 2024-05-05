@@ -4,12 +4,12 @@
 \alias{var_norm}
 \title{Exact variance of normality test}
 \usage{
-var_norm(d, h, n)
+var_norm(Sigma_h, V, n)
 }
 \arguments{
-\item{d}{the number of dimensions}
+\item{Sigma_h}{covariance matrix of the gaussian kernel}
 
-\item{h}{bandwidth parameter}
+\item{V}{Covariance matrix of the tested distribution G}
 
 \item{n}{sample size}
 }

@@ -4,12 +4,12 @@
 \alias{var_two}
 \title{Exact variance of two-sample test}
 \usage{
-var_two(Kcen, n_samples)
+var_two(Kcen, nsamples)
 }
 \arguments{
 \item{Kcen}{the matrix with centered kernel values}
 
-\item{n_samples}{vector indicating sample's membership.}
+\item{nsamples}{vector indicating sample's membership.}
 }
 \value{
 the value of computed variance.

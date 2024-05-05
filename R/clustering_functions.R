@@ -970,11 +970,11 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
       }
    }
    
-   test_res <- matrix(nrow = 4)
+   #test_res <- matrix(nrow = 4)
    if(is.null(true_label)){
       metrics <- matrix(nrow=2)
    } else {
-      metrics <- matrix(nrow=4)
+      metrics <- matrix(nrow=5)
    }
    igp_k <- list()
    
@@ -986,15 +986,15 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
          igp_k[[k]] <- IGP.clusterRepro(as.data.frame(t(x)), 
                                         as.data.frame(t(object@res_k[[k]]$params$mu)))$IGP
       }
-      
       # Compute the k-sample test
-      k_test <- kb.test(x=x, y=object@res_k[[k]]$finalMemb,h=h,K_threshold=k)
+      #y_k <- as.numeric(object@res_k[[k]]$finalMemb)
+      #k_test <- kb.test(x=x, y=y_k,h=h)
       
       # Compute the Average Silhouette Width
       sil <- mean(silhouette(x =object@res_k[[k]]$finalMemb, dist =dist(x))[,3])
       
-      test_res <- cbind(test_res, c(k, k_test@Un[1], k_test@CV_Un[1], 
-                                  k_test@H0_Un[1]))
+     # test_res <- cbind(test_res, c(k, k_test@Un[1], k_test@CV_Un[1], 
+                               #   k_test@H0_Un[1]))
       
       # If true labels are provided
       if(!is.null(true_label)){
@@ -1030,12 +1030,12 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
       
    }
    metrics <- metrics[,-1]
-   test_res <- test_res[,-1]
+   #test_res <- test_res[,-1]
    metrics <- as.data.frame(metrics,colnames=NULL)
-   test_res <- as.data.frame(test_res, colnames=NULL)
+   #test_res <- as.data.frame(test_res, colnames=NULL)
    #colnames(metrics) <- paste0("k=",object@input$nClust)
-   rownames(test_res) <- c("k","Test statistic", "Critical value", 
-                          "Reject_H0")
+   #rownames(test_res) <- c("k","Test statistic", "Critical value", 
+                        #  "Reject_H0")
    if(!is.null(true_label)){
       rownames(metrics) <- c("k","ASW", "ARI","Macro_Precision", 
                              "Macro_Recall")
@@ -1044,7 +1044,8 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
    }
    
 
-   results <- list(metrics = metrics, IGP = igp_k, tests = test_res)
+   results <- list(metrics = metrics, IGP = igp_k)
+   #results <- list(metrics = metrics, IGP = igp_k, tests = test_res)
    
    return(results)
 }

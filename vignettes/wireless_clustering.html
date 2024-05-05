@@ -406,7 +406,7 @@ the assigned membership, as well as a representation of data points. For
 unit circle and unit sphere, respectively. If <span class="math inline">\(d&gt;3\)</span>, the spherical PCA is applied on
 the data set, and the first 3 principal components are used for
 visualizing data points on the sphere, after application of <span class="math inline">\(L_2\)</span> normalization.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>summary_clust <span class="ot">&lt;-</span> <span class="fu">extract_stats</span>(res_pk,<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>summary_clust <span class="ot">&lt;-</span> <span class="fu">stats_clusters</span>(res_pk,<span class="dv">4</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>summary_clust</span></code></pre></div>
 <pre><code>## [[1]]
 ##            Group 1     Group 2     Group 3     Group 4     Overall

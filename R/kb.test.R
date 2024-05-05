@@ -306,7 +306,7 @@ setMethod("kb.test", signature(x = "ANY"),
                    H0 <- (STATISTIC[1:2] > CV$cv)
                    
                    res <- new("kb.test", Un = STATISTIC[1:2], CV_Un = CV$cv, 
-                              H0_Un = H0, method = METHOD, 
+                              H0_Un = H0, method = METHOD,
                               data = list(x = x, y = y), cv_method = method, 
                               B= B, h= h_best, var_Un = STATISTIC[3:4])
                 }
@@ -325,7 +325,7 @@ setMethod("show", "kb.test",
           function(object) {
              cat( "\n", object@method, "\n")
              
-             if(is.null(object@Vn)){
+             if(length(object@Vn)==0){
                 
                 cat("\t\t\t U-statistic \n")
                 cat("--------------------------------------------\n")

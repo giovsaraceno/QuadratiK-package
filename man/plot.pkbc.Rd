@@ -45,7 +45,7 @@ Euclidean distance and the cosine similarity.
 \donttest{
 dat<-matrix(rnorm(300),ncol=3)
 pkbc_res<- pkbc(dat, 3)
-extract_stats(pkbc_res, 3)
+stats_clusters(pkbc_res, 3)
 }
 
 }

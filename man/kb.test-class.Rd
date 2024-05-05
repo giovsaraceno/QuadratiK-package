@@ -15,21 +15,21 @@ test statistics and the k-sample tests.
 \item{\code{method}}{String indicating the normal kernel-based quadratic distance
 test performed.}
 
-\item{\code{Un}}{The value of the test U-statistic.}
+\item{\code{Un}}{The value of the test U-statistics.}
 
 \item{\code{Vn}}{The value of the test V-statistic.}
 
 \item{\code{H0_Un}}{A logical value indicating whether or not the null hypothesis is
-rejected according to Un.}
+rejected according to U-statistics.}
 
 \item{\code{H0_Vn}}{A logical value indicating whether or not the null hypothesis is
 rejected according to Vn.}
 
 \item{\code{data}}{List of samples X (and Y).}
 
-\item{\code{CV_Un}}{The critical value computed for the test.}
+\item{\code{CV_Un}}{The critical value computed for the tests.}
 
-\item{\code{CV_Vn}}{The critical value computed for the test.}
+\item{\code{CV_Vn}}{The critical value computed for the tests.}
 
 \item{\code{cv_method}}{The method used to estimate the critical value (one of
 "subsampling", "permutation" or "bootstrap").}

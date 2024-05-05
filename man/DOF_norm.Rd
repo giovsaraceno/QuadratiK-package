@@ -4,12 +4,12 @@
 \alias{DOF_norm}
 \title{Degrees of freedom (DOF) for the Normal kernel}
 \usage{
-DOF_norm(d, h)
+DOF_norm(Sigma_h, V)
 }
 \arguments{
-\item{d}{the number of dimensions}
+\item{Sigma_h}{covariance matrix of the gaussian kernel}
 
-\item{h}{bandwidth parameter}
+\item{V}{Covariance matrix of the tested distribution G}
 }
 \value{
 a list containing the DOF and the coefficient c of the asymptotic

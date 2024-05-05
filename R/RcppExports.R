@@ -2,9 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #'
-NULL
-
-#'
 #' Compute the Gaussian kernel matrix between two samples
 #'
 #' @param x_mat A matrix containing the observations of X
@@ -81,48 +78,6 @@ ParamCentering <- function(kmat_zz, z_mat, H, mu_hat, Sigma_hat) {
     .Call('_QuadratiK_ParamCentering', PACKAGE = 'QuadratiK', kmat_zz, z_mat, H, mu_hat, Sigma_hat)
 }
 
-#'
-#' Exact variance of two-sample test 
-#' 
-#' Compute the exact variance of kernel test for the two-sample problem under 
-#' the null hypothesis that F=G.
-#'
-#' @param Kcen the matrix with centered kernel values
-#' @param n_samples vector indicating sample's membership.
-#'
-#' @return the value of computed variance.
-#' 
-#' @srrstats {G1.4a} roxigen2 is used
-#' @keywords internal
-var_two <- function(Kcen, n_samples) {
-    .Call('_QuadratiK_var_two', PACKAGE = 'QuadratiK', Kcen, n_samples)
-}
-
-#' Compute kernel-based quadratic distance two-sample test with Normal kernel
-#'
-#' @param x_mat A matrix containing observations from the first sample
-#' @param y_mat A matrix containing observations from the second sample
-#' @param h The bandwidth parameter for the kernel function
-#' @param centeringType String indicating the method used for centering the normal kernel
-#' @param mu_hat Mean vector for the reference distribution 
-#' @param Sigma_hat Covariance matrix of the reference distribution
-#'
-#' @return A scalar value representing the test statistic
-#'
-#' @details 
-#' \code{mu_hat} and \code{Sigma_hat} need to be provided even if they are used 
-#' only in case of "Param" \code{centeringType}.
-#' 
-#'
-#' @useDynLib QuadratiK
-#' @rdname stat2sample
-#' @keywords internal
-#' 
-#' @noRd
-stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Nonparam") {
-    .Call('_QuadratiK_stat2sample', PACKAGE = 'QuadratiK', x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType)
-}
-
 #' Compute kernel-based quadratic distance test for Normality
 #'
 #' @param x_mat A matrix containing the observations.
@@ -159,6 +114,60 @@ statPoissonUnif <- function(x_mat, rho) {
     .Call('_QuadratiK_statPoissonUnif', PACKAGE = 'QuadratiK', x_mat, rho)
 }
 
+#'
+#' Exact variance of two-sample test 
+#' 
+#' Compute the exact variance of kernel test for the two-sample problem under 
+#' the null hypothesis that F=G.
+#'
+#' @param Kcen the matrix with centered kernel values
+#' @param nsamples vector indicating sample's membership.
+#'
+#' @return the value of computed variance.
+#' 
+#' @keywords internal
+var_two <- function(Kcen, nsamples) {
+    .Call('_QuadratiK_var_two', PACKAGE = 'QuadratiK', Kcen, nsamples)
+}
+
+#' Compute kernel-based quadratic distance two-sample test with Normal kernel
+#'
+#' @param x_mat A matrix containing observations from the first sample
+#' @param y_mat A matrix containing observations from the second sample
+#' @param h The bandwidth parameter for the kernel function
+#' @param centeringType String indicating the method used for centering the normal kernel
+#' @param mu_hat Mean vector for the reference distribution 
+#' @param Sigma_hat Covariance matrix of the reference distribution
+#'
+#' @return A scalar value representing the test statistic
+#'
+#' @details 
+#' \code{mu_hat} and \code{Sigma_hat} need to be provided even if they are used 
+#' only in case of "Param" \code{centeringType}.
+#' 
+#'
+#' @useDynLib QuadratiK
+#' @rdname stat2sample
+#' @keywords internal
+#' 
+#' @noRd
+stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Nonparam") {
+    .Call('_QuadratiK_stat2sample', PACKAGE = 'QuadratiK', x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType)
+}
+
+#'
+#' Exact variance of k-sample test 
+#' 
+#' Compute the exact variance of kernel test for the k-sample problem under 
+#' the null hypothesis that F1=...=Fk.
+#'
+#' @param Kcen the matrix with centered kernel values
+#' @param sizes vector indicating sample's size.
+#' @param cum_size vector indicating sample's cumulative sizes.
+#'
+#' @return the value of computed variance.
+#' 
+#' @keywords internal
 var_k <- function(Kcen, sizes, cum_size) {
     .Call('_QuadratiK_var_k', PACKAGE = 'QuadratiK', Kcen, sizes, cum_size)
 }

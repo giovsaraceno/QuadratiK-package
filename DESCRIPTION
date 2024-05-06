@@ -31,8 +31,6 @@ Imports:
     foreach,
     grDevices,
     graphics,
-    MASS (<= 7.3-58),
-    Matrix (<= 1.6-4),
     mclust,
     methods,
     moments,

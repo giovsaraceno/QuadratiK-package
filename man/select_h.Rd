@@ -66,12 +66,12 @@ the default value.}
 values in h_values and delta.}
 }
 \value{
-A list with the following attributes:
+Power plots (if \code{power.plot} is \code{TRUE}) and a list with the
+following attributes:
 \itemize{
 \item \code{h_sel} the selected value of tuning parameter h;
 \item \code{power} matrix of power values computed for the considered
 values of \code{delta} and \code{h_values};
-\item \code{power.plot} power plots (if \code{power.plot} is \code{TRUE}).
 }
 }
 \description{

@@ -657,9 +657,12 @@ repeat {
 #' pca_res=TRUE.
 #' 
 #' @import rgl
-#' @import ggplot2
 #' @importFrom grDevices colorRampPalette
 #' @importFrom rrcov PcaLocantore
+#' @importFrom grDevices rainbow
+#' @importFrom graphics legend
+#' @importFrom graphics par
+#' @importFrom graphics points
 #' 
 #' @srrstats {G1.4} roxigen2 is used
 #' 
@@ -670,12 +673,26 @@ scatterplotMethod <- function(object, k, true_label=NULL, pca_res=FALSE) {
    y <- as.factor(object@res_k[[k]]$finalMemb)
    if (ncol(x) == 2) {
       
-      df <- data.frame(V1 = x[,1], V2 = x[,2], clusters = as.factor(y))
-      with(df, {pl <- ggplot(df, aes(x = V1, y = V2, color = clusters)) +
-         geom_point() +
-         theme_minimal() +
-         labs(color = "Cluster") 
-      print(pl)})
+      df <- data.frame(V1 = x[, 1], V2 = x[, 2], clusters = as.factor(y))
+      
+      par(mar = c(5, 4, 4, 8), oma = c(0, 0, 0, 0), xpd = NA)
+      # Setup the plotting area
+      plot(df$V1, df$V2, xlab = "V1", ylab = "V2", 
+           xlim = range(df$V1), ylim = range(df$V2))
+      
+      # Colors for each cluster
+      colors <- rainbow(length(unique(df$clusters)))
+      
+      # Add points to the plot with different colors for each cluster
+      cl_levels <- levels(df$clusters)
+      for (i in seq_along(cl_levels)) {
+         cl_subset <- df[df$clusters == cl_levels[i], ]
+         points(cl_subset$V1, cl_subset$V2, col = colors[i], pch = 19)
+      }
+      
+      # Add legend
+      legend("topright", inset = c(-0.3, 0), legend = cl_levels, 
+             col = colors, pch = 19, title = "Cluster")
       
    } else if (ncol(x) == 3) {
       
@@ -758,10 +775,11 @@ scatterplotMethod <- function(object, k, true_label=NULL, pca_res=FALSE) {
 #'         within sum of squares computed with the Euclidean distance and the 
 #'         cosine similarity.
 #' 
-#' @import ggplot2
-#' @import ggpubr
-#' 
 #' @srrstats {G1.4} roxigen2 is used
+#' 
+#' @importFrom graphics lines
+#' @importFrom graphics par
+#' @importFrom graphics points
 #' 
 #' @keywords internal
 #' @noRd
@@ -777,24 +795,26 @@ elbowMethod <- function(object){
    colnames(wcss) <- c("Euclidean","cosine_similarity")
    rownames(wcss) <- paste0("k=",object@input$nClust)
    
-   wcss_values <- data.frame(k = object@input$nClust, wcss = wcss[,1])
-   pl <- ggplot(wcss_values, aes(x = k, y = wcss)) +
-      geom_line() +
-      geom_point() +
-      labs(title = "Elbow Plot", x = "Number of clusters", 
-           y = "Within-cluster sum of squares (WCSS)") +
-      theme_minimal()
+   par(mfrow=c(1, 2))  
    
-   wcss_values <- data.frame(k = object@input$nClust, wcss = wcss[,2])
-   pl_cos <- ggplot(wcss_values, aes(x = k, y = wcss)) +
-      geom_line() +
-      geom_point() +
-      labs(title = "Elbow Plot", x = "Number of clusters", 
-           y = "Within-cluster sum of squares (WCSS)") +
-      theme_minimal()
+   # Plot for Euclidean distance
+   plot(object@input$nClust, wcss[, "Euclidean"], type = 'b', pch = 19, col = "blue",
+        xlab = "Number of clusters", ylab = "Within-cluster sum of squares (WCSS)",
+        main = "Euclidean distance")
+   # Adding lines and points
+   lines(object@input$nClust, wcss[, "Euclidean"], col = "blue")
+   points(object@input$nClust, wcss[, "Euclidean"], col = "blue", pch = 19)
    
-   fig <- ggarrange(plotlist = list(pl, pl_cos), nrow=1)
-   print(fig)
+   # Plot for Cosine Similarity
+   plot(object@input$nClust, wcss[, "cosine_similarity"], type = 'b', pch = 19, col = "red",
+        xlab = "Number of clusters", ylab = "Within-cluster sum of squares (WCSS)",
+        main = "Cosine Similarity")
+   # Adding lines and points
+   lines(object@input$nClust, wcss[, "cosine_similarity"], col = "red")
+   points(object@input$nClust, wcss[, "cosine_similarity"], col = "red", pch = 19)
+   
+   # Resetting the plotting layout
+   par(mfrow=c(1, 1))
 
 }
 #' Cluster spherical observations by mixture of Poisson kernel-based densities

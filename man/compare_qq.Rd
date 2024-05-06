@@ -2,7 +2,7 @@
 % Please edit documentation in R/utility.R
 \name{compare_qq}
 \alias{compare_qq}
-\title{QQ-plot of given two samples using ggplot2}
+\title{QQ-plot of given two samples}
 \usage{
 compare_qq(sample1, sample2, main_title)
 }
@@ -17,6 +17,6 @@ compare_qq(sample1, sample2, main_title)
 QQ-plot of given samples
 }
 \description{
-QQ-plot of given two samples using ggplot2
+QQ-plot of given two samples
 }
 \keyword{internal}

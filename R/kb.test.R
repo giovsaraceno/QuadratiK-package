@@ -364,9 +364,6 @@ setMethod("show", "kb.test",
 #'    \item \code{qqplots} Figure with qq-plots for each variable.
 #' }
 #'
-#' @import ggpubr
-#' @import ggplot2
-#'
 #'@examples
 #' # create a kb.test object
 #' x <- matrix(rnorm(100),ncol=2)
@@ -374,6 +371,11 @@ setMethod("show", "kb.test",
 #' # Normality test
 #' my_test <- kb.test(x, h=0.5)
 #' summary(my_test)
+#' # Two-sample test
+#' my_test <- kb.test(x,y, h=0.5)
+#' summary(my_test)
+#' 
+#' @importFrom graphics par
 #' 
 #' @srrstats {G1.4} roxigen2 is used
 #' 
@@ -413,22 +415,21 @@ setMethod("summary", "kb.test", function(object) {
       sample1 <- as.data.frame(object@data$x)
       sample2 <- as.data.frame(object@data$y)
       colnames(sample2) <- colnames(sample1)
+      par(mfrow = c(1, length(names(sample1))))
       plot_list <- lapply(names(sample1), function(name) {
          list(
-            compare_qq(sample1[[name]], sample2[[name]], name),
-            compute_stats(sample1[[name]], sample2[[name]], name)$plots
+            compare_qq(sample1[[name]], sample2[[name]], name)
          )
       })
-      plot_list <- do.call(c, plot_list)
-      figure <- ggarrange(plotlist = plot_list, ncol = 2, 
-                          nrow = length(plot_list) / 2, widths=c(1,1.3))
+      # Reset to default layout
+      par(mfrow = c(1, 1))
       
       stats <- lapply(names(sample1), function(name) {
          
          compute_stats(sample1[[name]], sample2[[name]], name)$stats
          
       })
-      print(figure)
+      figure <- plot_list
       
    }
    
@@ -436,21 +437,39 @@ setMethod("summary", "kb.test", function(object) {
       
       dat_x <- as.data.frame(object@data$x)
       
-      plot_list <- list()
-      stats <- list()
-      for(i in seq_len(ncol(dat_x))) {
+      par(mfrow = c(1, ncol(dat_x)))
+      
+      plot_list <- lapply(1:ncol(dat_x), function(i) {
          
          qq_df <- data.frame(x = sort(qqnorm(dat_x[,i], plot = FALSE)$x), 
-                     sample_quantiles = quantile(dat_x[,i], 
-                                 probs = seq(0, 1, length.out = nrow(dat_x))))
+                             sample_quantiles = quantile(dat_x[,i], 
+                             probs = seq(0, 1, length.out = nrow(dat_x))))
          
-         pl <- ggplot(qq_df, aes(x = qq_df$x, y = qq_df$sample_quantiles)) +
-            geom_line(col="blue") +
-            theme_minimal()+
-            geom_abline(slope = 1, intercept = 0,col="red") +
-            ggtitle(paste("QQ Plot against Normal - ",names(dat_x)[i])) +
-            xlab("Theoretical Quantiles") +
-            ylab("Sample Quantiles")
+         with(qq_df, {
+            plot(x, sample_quantiles, type = "l", col = "blue", lwd = 0.9, 
+                 main = paste("QQ Plot against Uniform - ",names(dat_x)[i]), 
+                 xlab = "Theoretical Quantiles", ylab = "Sample Quantiles", 
+                 xlim = range(x), ylim = range(sample_quantiles),
+                 xaxt = 'n', yaxt = 'n')  # Remove default axes to customize
+            
+            # Adding a 1:1 line
+            abline(a = 0, b = 1, col = "red")
+            
+            # Customizing axes and text
+            axis(1, at = seq(min(x), max(x), 
+                  by = (max(x) - min(x)) / 5), las = 1, cex.axis = 0.85)
+            axis(2, at = seq(min(sample_quantiles), max(sample_quantiles), 
+                  by = (max(sample_quantiles) - min(sample_quantiles)) / 5), 
+                 las = 1, cex.axis = 0.85)
+            
+            # Customizing font sizes for axes and main title
+            par(cex.main = 1.4, cex.lab = 1.2, cex.axis = 0.85)})
+      })
+      par(mfrow = c(1, 1))
+      figure <- plot_list
+      
+      stats <- list()
+      for(i in seq_len(ncol(dat_x))) {
          
          stats_step <- data.frame(matrix(c(mean(dat_x[,i]),sd(dat_x[,i]),
                                            median(dat_x[,i]),IQR(dat_x[,i]),
@@ -460,23 +479,7 @@ setMethod("summary", "kb.test", function(object) {
          rownames(stats_step) <- c("mean", "sd", "median", "IQR", "min", "max")
          
          stats[length(stats) +1] <- stats_step
-         
-         pl_stat <- ggplot() +
-            ggpp::annotate('table', x = 0.5, y = 0.5, 
-                     label = data.frame(Stat = rownames(stats_step),stats_step),
-                     hjust = 0.5, vjust = 0.5) +
-            theme_void() +
-            ggtitle("")+
-            scale_color_brewer(palette='Set1')
-         
-         plot_list[[length(plot_list) + 1]] <- list(pl,pl_stat)
-         
       }
-      plot_list <- do.call(c, plot_list)
-      figure <- ggarrange(plotlist = plot_list,
-                          nrow = length(plot_list)/2, ncol = 2)
-      print(figure)
-      
       stats <- do.call(cbind, stats)
       colnames(stats) <- c(names(dat_x))
       rownames(stats) <- c("mean", "sd", "median", "IQR", "min", "max")
@@ -501,6 +504,6 @@ setMethod("summary", "kb.test", function(object) {
    print(test_results)
    
    return(list(summary_tables = stats, 
-               test_results = test_results, 
-               qqplots = figure))
+               test_results = test_results,
+               qq_plots = figure))
 })

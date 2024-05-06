@@ -369,11 +369,11 @@ tests.</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>k_test</span></code></pre></div>
 <pre><code>## 
 ##  Kernel-based quadratic distance k-sample test 
-##           U-statistic         V-statistic 
+##           U-statistic 
 ## --------------------------------------------
-## H0 is rejected:  TRUE TRUE         
-## Test Statistic:  46.7469 46.73823          
-## Critical value (CV):  1.997502 1.997502        
+## H0 is rejected:  TRUE TRUE 
+## Test Statistic:  11.844 38.6817 
+## Critical value (CV):  0.5623288 1.836868 
 ## CV method:  subsampling 
 ## Selected tuning parameter h:  1.5</code></pre>
 <p>When the <span class="math inline">\(k\)</span>-sample test is
@@ -385,8 +385,8 @@ respect to the provided groups.</p>
 <pre><code>## 
 ##  Kernel-based quadratic distance k-sample test 
 ##   Test_Statistic Critical_Value Reject_H0
-## 1       46.74690       1.997502      TRUE
-## 2       46.73823       1.997502      TRUE</code></pre>
+## 1        11.8440      0.5623288      TRUE
+## 2        38.6817      1.8368685      TRUE</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>summary_ktest<span class="sc">$</span>summary_tables</span></code></pre></div>
 <pre><code>## [[1]]
 ##             Group 1    Group 2    Group 3       Overall

@@ -160,9 +160,8 @@ setMethod("show", "pk.test",
 #'    \item \code{qqplots} Figure with qq-plots for each variable against the 
 #'                         uniform distribution.
 #' }
-#'
-#' @import ggpubr
-#' @import ggplot2
+#' 
+#' @importFrom graphics par
 #' 
 #' @examples
 #' # create a pk.test object
@@ -178,11 +177,9 @@ setMethod("summary", "pk.test", function(object) {
    
    dat_x <- as.data.frame(object@x)
    
-   figure <- NA
+   par(mfrow = c(1, ncol(dat_x)))
    
-   plot_list <- list()
-   stats <- list()
-   for(i in seq_len(ncol(dat_x))) {
+   plot_list <- lapply(1:ncol(dat_x), function(i) {
       
       unif_data <- runif(nrow(dat_x),-1,1)
       probs <- seq(0, 1, length.out = nrow(dat_x))
@@ -190,15 +187,30 @@ setMethod("summary", "pk.test", function(object) {
          x = quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))), 
          sample_quantiles = quantile(dat_x[,i], probs = probs))
       
-      pl <- ggplot(qq_df, aes(x = qq_df$x, y = qq_df$sample_quantiles)) +
-         geom_line(col="blue") +
-         theme_minimal()+
-         geom_abline(slope = 1, intercept = 0,col="red") +
-         ggtitle(paste("QQ Plot against Uniform - ",names(dat_x)[i])) +
-         xlab("Theoretical Quantiles") +
-         ylab("Sample Quantiles")
-      
-      
+      with(qq_df, {
+         plot(x, sample_quantiles, type = "l", col = "blue", lwd = 0.9, 
+              main = paste("QQ Plot against Uniform - ",names(dat_x)[i]), 
+              xlab = "Theoretical Quantiles", ylab = "Sample Quantiles", 
+              xlim = range(x), ylim = range(sample_quantiles),
+              xaxt = 'n', yaxt = 'n')  # Remove default axes to customize
+         
+         # Adding a 1:1 line
+         abline(a = 0, b = 1, col = "red")
+         
+         # Customizing axes and text
+         axis(1, at = seq(min(x), max(x), 
+                  by = (max(x) - min(x)) / 5), las = 1, cex.axis = 0.85)
+         axis(2, at = seq(min(sample_quantiles), max(sample_quantiles), 
+                  by = (max(sample_quantiles) - min(sample_quantiles)) / 5), 
+                  las = 1, cex.axis = 0.85)
+         
+         # Customizing font sizes for axes and main title
+         par(cex.main = 1.4, cex.lab = 1.2, cex.axis = 0.85)})
+   })
+   par(mfrow = c(1, 1))
+   
+   stats <- list()
+   for (i in seq_len(ncol(dat_x))){   
       stats_step <- data.frame(matrix(c(mean(dat_x[,i]),sd(dat_x[,i]),
                                         median(dat_x[,i]),IQR(dat_x[,i]),
                                         min(dat_x[,i]),max(dat_x[,i])),
@@ -207,26 +219,12 @@ setMethod("summary", "pk.test", function(object) {
       rownames(stats_step) <- c("mean", "sd", "median", "IQR", "min", "max")
       
       stats[[i]] <- stats_step
-      
-      pl_stat <- ggplot() +
-         ggpp::annotate('table', x = 0.5, y = 0.5, 
-                     label = data.frame(Stat = rownames(stats_step),stats_step),
-                     hjust = 0.5, vjust = 0.5) +
-         theme_void() +
-         ggtitle("")+
-         scale_color_brewer(palette='Set1')
-      
-      plot_list[[length(plot_list) + 1]] <- list(pl,pl_stat)
-      
-      
    }
+   
    stats <- do.call(cbind, stats)
    colnames(stats) <- c(names(dat_x))
    rownames(stats) <- c("mean", "sd", "median", "IQR", "min", "max")
    
-   plot_list <- do.call(c, plot_list)
-   figure <- ggarrange(plotlist = plot_list, 
-                       nrow = length(plot_list)/2, ncol = 2)
    
    # Print main results of the test
    cat( "\n", object@method, "\n")
@@ -236,8 +234,8 @@ setMethod("summary", "pk.test", function(object) {
       Reject_H0 = c(object@H0_Un, object@H0_Vn)
    )
    print(test_results)
-   print(figure)
+   
    return(list(summary_tables = stats, 
-               test_results = test_results, 
-               qqplots = figure))
+               test_results = test_results,
+               qq_plots = plot_list))
 })

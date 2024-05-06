@@ -35,12 +35,12 @@
 #' @param power.plot Logical. If TRUE, it is displayed the plot of power for 
 #'                   values in h_values and delta.
 #' 
-#' @return A list with the following attributes:
+#' @return Power plots (if \code{power.plot} is \code{TRUE}) and a list with the
+#'  following attributes:
 #' \itemize{
 #'    \item \code{h_sel} the selected value of tuning parameter h;
 #'    \item \code{power} matrix of power values computed for the considered 
 #'                       values of \code{delta} and \code{h_values};
-#'    \item \code{power.plot} power plots (if \code{power.plot} is \code{TRUE}).
 #' }
 #' @details
 #' The function performs the selection of the optimal value for the tuning 
@@ -69,8 +69,11 @@
 #' @import foreach
 #' @import stats
 #' @import rlecuyer
-#' @import ggplot2
 #' @import RcppEigen
+#' @importFrom grDevices rainbow
+#' @importFrom graphics legend
+#' @importFrom graphics lines
+#' @importFrom graphics par
 #'
 #' @useDynLib QuadratiK
 #'
@@ -337,26 +340,21 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    stopImplicitCluster()
    results <- list(h_sel = min_h, power = res)
    
-   pl <- ggplot(res, aes(x = h, y = power)) +
-      geom_line(aes(col = as.factor(delta)), linewidth = 0.9, alpha=.9) +
-      labs(y="Power")+
-      theme_minimal()+
-      theme_light()+
-      labs(color=expression(delta))+
-      theme(legend.title = element_text(size=16),
-            legend.text = element_text(size = 18),
-            plot.title = element_text(size = 16),
-            axis.title.x = element_text(size = 16),
-            axis.title.y = element_text(size = 16),
-            axis.text.x = element_text(size = 11),
-            axis.text.y = element_text(size = 11),
-            strip.text = element_text(size = 14)) +
-      scale_color_brewer(palette='Set1')
-
-   results$power.plot <- pl
-   
    if(power.plot){
-      print(pl)
+      unique_deltas <- unique(res$delta)
+      colors <- rainbow(length(unique_deltas))
+      
+      par(mar = c(5, 4, 4, 8), oma = c(0, 0, 0, 0), xpd = NA)
+      plot(res$h, res$power, 
+           xlab = "h", ylab = "Power", ylim = c(0,1))
+      for (i in seq_along(unique_deltas)) {
+         delta_subset <- res[res$delta == unique_deltas[i], ]
+         lines(delta_subset$h, delta_subset$power, type = "b", 
+               col = colors[i], lwd = 0.9, lty = 1)
+      }
+      legend("topright", legend = unique_deltas, col = colors, lwd = 0.9,
+             title = expression(delta), inset = c(-0.5, 0), horiz = FALSE)
+      
    }
    return(results)
 }

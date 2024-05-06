@@ -144,15 +144,13 @@ generate_SN<-function(d, size_x, size_y, mu_x, mu_y,
    return(list("X"=data_x, "Y"=data_y))
 }
 #'
-#' QQ-plot of given two samples using ggplot2
+#' QQ-plot of given two samples
 #'
 #' @param sample1 matrix of observations in sample 1
 #' @param sample2 matrix of observations in sample 2
 #' @param main_title title of the generated plot
 #'
 #' @return QQ-plot of given samples
-#'
-#' @import ggplot2
 #' 
 #' @srrstats {G1.4a} roxigen2 is used
 #' 
@@ -165,39 +163,39 @@ compare_qq <- function(sample1, sample2, main_title) {
                           probs = seq(0, 1, length.out = length(sample2)))
    df <- data.frame(q1 = quantiles1, q2 = quantiles2)
    
-   with(df, {pl <- ggplot(df, aes(x=q1,y=q2))+
-      geom_abline(slope=1, col="red") +
-      geom_line(col="blue", linewidth=0.9)+
-      ggtitle(main_title) +
-      theme_minimal()+
-      theme(legend.title = element_text(size=14),
-            legend.text = element_text(size = 16),
-            plot.title = element_text(size = 14),
-            axis.title.x = element_text(size = 14),
-            axis.title.y = element_text(size = 14),
-            axis.text.x = element_text(size = 11),
-            axis.text.y = element_text(size = 11),
-            strip.text = element_text(size = 14)) +
-      scale_color_brewer(palette='Set1')
-   
-      return(pl)})
+   with(df, {
+      plot(q1, q2, type = "l", col = "blue", lwd = 0.9,  # 'type="l"' for line plot
+            main = main_title, xlab = "Q1", ylab = "Q2", 
+            xlim = range(q1), ylim = range(q2),
+            xaxt = 'n', yaxt = 'n')  # Remove default axes to customize
+      
+      # Adding a 1:1 line
+      abline(a = 0, b = 1, col = "red")
+      
+      # Customizing axes and text
+      axis(1, at = seq(min(q1), max(q1), 
+                       by = (max(q1) - min(q1)) / 5), las = 1, cex.axis = 0.85)
+      axis(2, at = seq(min(q2), max(q2), 
+                       by = (max(q2) - min(q2)) / 5), las = 1, cex.axis = 0.85)
+      title(xlab = "Q1", ylab = "Q2", cex.lab = 1.2)
+      title(main = main_title, cex.main = 1.4)
+      
+      # Customizing font sizes for axes and main title
+      par(cex.main = 1.4, cex.lab = 1.2, cex.axis = 0.85)})
 }
 #'
-#' Compute and display some descriptive statistics for the two sample tests
+#' Compute some descriptive statistics for the two sample tests
 #'
 #' @param var1 vector of observations of a given variable from sample 1
 #' @param var2 vector of observations of a given variable from sample 2
-#' @param var_name Name of the variable displayed
 #' @param eps precision of displayed statistics
 #'
-#' @import ggplot2
-#'
-#' @return Computed statistics with a plot
+#' @return Computed statistics
 #' 
 #' @srrstats {G1.4a} roxigen2 is used
 #' 
 #' @keywords internal
-compute_stats <- function(var1, var2, var_name,eps=3) {
+compute_stats <- function(var1, var2,eps=3) {
    
    overall <- c(var1, var2)
    stats <- data.frame(matrix(c(mean(var1),mean(var2),mean(overall),sd(var1),
@@ -209,14 +207,5 @@ compute_stats <- function(var1, var2, var_name,eps=3) {
    colnames(stats) <- c("Group 1", "Group 2", "Overall")
    rownames(stats) <- c("mean", "sd", "median", "IQR", "min", "max")
    
-   pl <- ggplot() +
-      ggpp::annotate('table', x = 0.5, y = 0.5, 
-                     label = data.frame(Stat = rownames(stats),stats), 
-                     hjust = 0.5, vjust = 0.5) +
-      theme_void() +
-      ggtitle(paste(var_name))+
-      scale_color_brewer(palette='Set1')
-   
-   
-   return(list(plots=pl,stats=stats))
+   return(list(stats=stats))
 }

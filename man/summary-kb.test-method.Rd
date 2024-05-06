@@ -29,5 +29,8 @@ y <- matrix(rnorm(100),ncol=2)
 # Normality test
 my_test <- kb.test(x, h=0.5)
 summary(my_test)
+# Two-sample test
+my_test <- kb.test(x,y, h=0.5)
+summary(my_test)
 
 }

@@ -13,9 +13,6 @@ on:
     branches:
       - main
       - master
-
-env:
-  R_VERSION: '4.4.0'
   
 jobs:
   pkgcheck:
@@ -23,6 +20,9 @@ jobs:
     permissions:
       issues: write
     steps:
+    - uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: '4.3.0'
     - name: Check R version
       run: R --version
     - uses: ropensci-review-tools/pkgcheck-action@main

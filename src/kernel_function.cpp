@@ -262,9 +262,27 @@ Eigen::VectorXd var_two(const Eigen::MatrixXd& Kcen,
  double est_var_Tr = 2 * n_factor * n_factor * pow(K_xx.array(),2).sum() +
     2 * m_factor * m_factor * pow(K_yy.array(),2).sum();
  
- double delta1 = (K_xx * K_xy.transpose()).sum();
- double delta2 = (K_xy * K_yy.transpose()).sum();
- 
+ double delta1 = 0.0;
+ for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < n; ++j) {
+       if (i != j) {  
+          for (int l = 0; l < m; ++l) {
+             delta1 += K_xx(i, j) * K_xy(i, l);
+          }
+       }
+    }
+ }
+ double delta2 = 0.0;
+ for (int i = 0; i < m; ++i) {
+    for (int j = 0; j < m; ++j) {
+       if (i != j) {  
+          for (int l = 0; l < n; ++l) {
+             delta2 += K_yy(i, j) * K_xy(l, i);
+          }
+       }
+    }
+ }
+
  est_varD -= 8 * n_factor * cross_factor * delta1;
  est_varD -= 8 * m_factor * cross_factor * delta2;
  
@@ -342,8 +360,8 @@ Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, doub
     (k_center.block(n_x, n_x, n_y, n_y).sum() / (n_y * (n_y - 1)));
  
  Eigen::VectorXd results(4);
- results(0) = n_z * Test_NonPar;
- results(1) = n_z * Test_trace;
+ results(0) = Test_NonPar;
+ results(1) = Test_trace;
  results(2) = var_nonparam(0);
  results(3) = var_nonparam(1);
  return results;
@@ -363,53 +381,56 @@ Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, doub
 //' @keywords internal
 // [[Rcpp::export]]
 Eigen::VectorXd var_k(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& sizes,
-                    const Eigen::VectorXd& cum_size) 
+                      const Eigen::VectorXd& cum_size) 
 {
- int n = Kcen.rows();
- int K = sizes.size();
- 
- Eigen::MatrixXd Kcen_copy = Kcen;
- Kcen_copy.diagonal().setZero();
- 
- double C1 = 0.0;
- double C2 = 0.0;
- double C3 = 0.0;
- for (int l = 1; l <= K; ++l) {
-    
-    double ni_factor = 1.0 / (sizes[l-1] * (sizes[l-1] - 1));
-    Eigen::MatrixXd K_ll = Kcen_copy.block(cum_size[l - 1], cum_size[l - 1], sizes[l - 1], sizes[l - 1]);
-    
-    C1 += 2 * ni_factor * ni_factor * pow(K_ll.array(),2).sum();
-       
-    for (int r = 1; r <= K; ++r) {
-       
-       double n_lr_factor = 1.0 / (sizes[l-1] * sizes[r-1]);
-       Eigen::MatrixXd K_lr = Kcen_copy.block(cum_size[l - 1], cum_size[r - 1], sizes[l - 1], sizes[r - 1]);
-       
-       if (r > l) 
-          {
-          
-          C2 += 8 * n_lr_factor * n_lr_factor * pow(K_lr.array(),2).sum();
-          C3 -= 8 * n_lr_factor * ni_factor * (K_ll * K_lr.transpose()).sum();
+   int n = Kcen.rows();
+   int K = sizes.size();
    
-       } 
-       else if (r < l)
-          {
-          
-          C3 -= 8 * n_lr_factor * ni_factor * (K_ll * K_lr.transpose()).sum();
-          
-       }
-    }
- }
- 
- double est_varD = pow(K-1,2) * C1 + C2 + C3;
- double est_var_Tr = C1;
-    
- Eigen::VectorXd results(2);
- results(0) = est_varD;
- results(1) = est_var_Tr;
- 
- return results;
+   Eigen::MatrixXd Kcen_copy = Kcen;
+   Kcen_copy.diagonal().setZero();
+   
+   double C1 = 0.0;
+   double C2 = 0.0;
+   double C3 = 0.0;
+   for (int l = 1; l <= K; ++l) {
+      
+      double ni_factor = 1.0 / (sizes[l-1] * (sizes[l-1] - 1));
+      Eigen::MatrixXd K_ll = Kcen_copy.block(cum_size[l - 1], cum_size[l - 1], sizes[l - 1], sizes[l - 1]);
+      
+      C1 += 2 * ni_factor * ni_factor * pow(K_ll.array(),2).sum();
+      
+      for (int r = 1; r <= K; ++r) {
+         
+         double n_lr_factor = 1.0 / (sizes[l-1] * sizes[r-1]);
+         Eigen::MatrixXd K_lr = Kcen_copy.block(cum_size[l - 1], cum_size[r - 1], sizes[l - 1], sizes[r - 1]);
+         
+         if (r != l) 
+         {
+            for (int i = 0; i < sizes[l-1]; ++i) {
+               for (int j = 0; j < sizes[l-1]; ++j) {
+                  if (i != j) {
+                     for (int s = 0; s < sizes[r-1]; ++s){
+                        C3 -= 8 * n_lr_factor * ni_factor * K_ll(i, j) * K_lr(i, s); 
+                     }
+                  }
+               }
+            }
+         } 
+         if (r > l)
+         {
+            C2 += 8 * n_lr_factor * n_lr_factor * pow(K_lr.array(),2).sum();
+         }
+      }
+   }
+
+   double est_varD = pow(K-1,2) * C1 + C2 + C3;
+   double est_var_Tr = C1;
+   
+   Eigen::VectorXd results(2);
+   results(0) = est_varD;
+   results(1) = est_var_Tr;
+   
+   return results;
 }
 //' Kernel-based quadratic distance k-sample tests
 //' 
@@ -449,6 +470,7 @@ Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd
    for (int l = 1; l <= K; ++l) {
       
       Eigen::MatrixXd K_ll = k_center.block(cum_size[l - 1], cum_size[l - 1], sizes[l - 1], sizes[l - 1]);
+      K_ll.diagonal().setZero();
       if (sizes[l-1] > 1) {
          TraceK += K_ll.array().sum() / (sizes[l-1] * (sizes[l-1] - 1));
       }
@@ -462,30 +484,6 @@ Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd
          
       }
    }
-   //for (int l = 1; l <= K; ++l) {
-   //   for (int r = l; r <= K; ++r) {
-   //      if (l == r) {
-   //         
-   //         double sumVal=0;
-   //         for (int i = cum_size[l - 1]; i < cum_size[l]; ++i) {
-   //            for (int j = cum_size[r - 1]; j < cum_size[r]; ++j) {
-   //               if (i != j) {
-   //                  sumVal += k_center(i, j);
-   //               }
-   //            }
-   //         }
-   //         TraceK += sumVal / (sizes[l-1] * (sizes[l-1] - 1));
-   //      } else {
-   //         double meanVal = 0;
-   //         for (int i = cum_size[l - 1]; i < cum_size[l]; ++i) {
-   //            for (int j = cum_size[r - 1]; j < cum_size[r]; ++j) {
-   //               meanVal += k_center(i, j);
-   //            }
-   //         }
-   //         Tn -= 2 * meanVal / (sizes[l-1] * sizes[r-1]);
-   //      }
-   //   }
-   //}
    
    Eigen::VectorXd var = var_k(k_center, sizes, cum_size);
    

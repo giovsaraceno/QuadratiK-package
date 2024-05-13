@@ -1,3 +1,7 @@
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/QuadratiK)](https://cran.r-project.org/package=QuadratiK)
+
 # Collection of Methods Constructed using the Kernel-Based Quadratic Distances
 
 \code{QuadratiK} provides the first implementation, in R and Python, of a comprehensive set of goodness-of-fit tests and a clustering technique for spherical data using kernel-based quadratic distances. This framework aims to bridge the gap between the statistical and machine learning literature. It includes:

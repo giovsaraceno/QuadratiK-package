@@ -87,6 +87,14 @@ kernel-based quadratic distance test.</p></li>
 <span class="r-in"><span><span class="co"># Normality test</span></span></span>
 <span class="r-in"><span><span class="va">my_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="kb.test.html">kb.test</a></span><span class="op">(</span><span class="va">x</span>, h<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">my_test</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 methods overwritten by 'ggpp':</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   method                  from   </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   heightDetails.titleGrob ggplot2</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   widthDetails.titleGrob  ggplot2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Use of `qq_df$x` is discouraged.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `x` instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Use of `qq_df$sample_quantiles` is discouraged.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `sample_quantiles` instead.</span>
 <span class="r-plt img"><img src="summary-kb.test-method-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Kernel-based quadratic distance Normality test </span>
@@ -107,91 +115,8 @@ kernel-based quadratic distance test.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     42.3937532      99.371069     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2      0.7147332       6.071062     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]]$cex.main</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]]$cex.lab</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]]$cex.axis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]]$cex.main</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]]$cex.lab</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]]$cex.axis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.85</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="co"># Two-sample test</span></span></span>
-<span class="r-in"><span><span class="va">my_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="kb.test.html">kb.test</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, h<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">my_test</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $qqplots</span>
 <span class="r-plt img"><img src="summary-kb.test-method-2.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Kernel-based quadratic distance two-sample test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Test_Statistic Critical_Value Reject_H0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     -0.1473526       1.136561     FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     -0.1686060       1.301954     FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $summary_tables</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $summary_tables[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1    Group 2    Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.3002459 -0.2311793 -0.2657126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.8891055  0.9603253  0.9213691</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.3673583 -0.3333738 -0.3529065</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     1.3629645  1.2609877  1.3285394</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -2.1733040 -2.1818388 -2.1818388</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max     1.5443743  1.7027833  1.7027833</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $summary_tables[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1    Group 2     Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.2163796 -0.1300423  0.04316863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.9300922  0.9062068  0.93001594</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median  0.2719677 -0.2125651  0.00820531</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     1.4253195  1.3655101  1.25274047</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -1.7352956 -2.2791474 -2.27914740</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max     2.0447543  2.0255029  2.04475431</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $test_results</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Test_Statistic Critical_Value Reject_H0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     -0.1473526       1.136561     FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     -0.1686060       1.301954     FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]][[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]][[1]]$cex.main</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]][[1]]$cex.lab</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[1]][[1]]$cex.axis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.85</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]][[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]][[1]]$cex.main</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]][[1]]$cex.lab</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $qq_plots[[2]][[1]]$cex.axis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.85</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

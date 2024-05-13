@@ -29,7 +29,7 @@ for clustering results.
 }
 \details{
 The following evaluation measures are computed:
-k-sample test, In-Group Proportion. If true label are provided, ARI, Average
+In-Group Proportion. If true label are provided, ARI, Average
 Silhouette Width, Macro-Precision and Macro-Recall are computed.
 }
 \examples{

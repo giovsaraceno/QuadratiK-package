@@ -93,17 +93,24 @@ contains the following slots:
 \itemize{
 \item \code{method}: String indicating the normal kernel-based quadratic
 distance test performed.
-\item \code{Dn} The value of the test statistic.
-\item \code{H0} A logical value indicating whether or not the null
-hypothesis is rejected.
-\item \code{data} Data list of samples X (and Y).
-\item \code{CV} The critical value computed for the test.
-\item \code{cv_method} The method used to estimate the critical value
-(one of "subsampling", "permutation" or "bootstrap").
+\item \code{x} Data list of samples X (and Y).
+\item \code{Un} The value of the U-statistics.
+\item \code{H0_Un} A logical value indicating whether or not the null
+hypothesis is rejected according to Un.
+\item \code{CV_Un} The critical value computed for the test Un.
+\item \code{Vn} The value of the V-statistic (if available).
+\item \code{H0_Vn} A logical value indicating whether or not the null
+hypothesis is rejected according to Vn (if available).
+\item \code{CV_Vn} The critical value computed for the test Vn
+(if available).
 \item \code{h} List with the value of bandwidth parameter used for the
 normal kernel function. If \code{select_h} is used, the matrix of computed
 power values and the corresponding power plot are also provided.
 \item \code{B} Number of bootstrap/permutation/subsampling replications.
+\item \code{var_Un} exact variance of the kernel-based U-statistic.
+\item \code{cv_method} The method used to estimate the critical value
+(one of "subsampling", "permutation" or "bootstrap").
+
 }
 }
 \description{

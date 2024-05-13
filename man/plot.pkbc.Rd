@@ -4,12 +4,10 @@
 \alias{plot,pkbc,ANY-method}
 \title{Plotting method for Poisson kernel-based clustering}
 \usage{
-\S4method{plot}{pkbc,ANY}(x, y = NULL, true_label = NULL, pca_res = FALSE)
+\S4method{plot}{pkbc,ANY}(x, true_label = NULL, pca_res = FALSE)
 }
 \arguments{
 \item{x}{Object of class \code{pkbc}}
-
-\item{y}{formal input}
 
 \item{true_label}{factor or vector of true membership to clusters (if
 available). It must have the same length of final
@@ -34,7 +32,7 @@ Plots for a pkbc object.
 circle and sphere, respectively. If dimension if greater than 3, the
 spherical Principal Component procedure proposed by Locantore et al., (1999)
 is applied for dimensionality reduction and the first three principal
-components are normalized and displayed on the sphere. For d > 3, the ù
+components are normalized and displayed on the sphere. For d > 3, the
 complete results from the \code{PcaLocantore} function (package \code{rrcov})
 are returned if pca_res=TRUE.
 \item elbow plot: the within cluster sum of squares (wcss) is computed using the

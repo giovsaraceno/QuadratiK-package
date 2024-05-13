@@ -1,7 +1,7 @@
 #' Select the value of the kernel tuning parameter
 #'
 #' This function computes the kernel bandwidth of the Gaussian kernel for the 
-#' two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
+#' normality, two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
 #'
 #' @param x Data set of observations from X.
 #' @param y Numeric matrix or vector of data values. Depending on the input 
@@ -44,10 +44,10 @@
 #' }
 #' @details
 #' The function performs the selection of the optimal value for the tuning 
-#' parameter \eqn{h} of the normal kernel function, for the two-sample and 
-#' k-sample KBQD tests. It performs a small simulation study, generating sample 
-#' according to the family of \code{alternative} specified, for the chosen 
-#' values of \code{h_values} and \code{delta}.
+#' parameter \eqn{h} of the normal kernel function, for normality test, the 
+#' two-sample and k-sample KBQD tests. It performs a small simulation study,
+#' generating sample according to the family of \code{alternative} specified, 
+#' for the chosen values of \code{h_values} and \code{delta}.
 #' 
 #' @references
 #' Markatou, M., Saraceno, G., Chen, Y. (2023). “Two- and k-Sample Tests Based 

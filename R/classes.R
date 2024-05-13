@@ -15,8 +15,8 @@
 #' @slot H0_Vn A logical value indicating whether or not the null hypothesis is 
 #'          rejected according to Vn.
 #' @slot data List of samples X (and Y).
-#' @slot CV_Un The critical value computed for the tests.
-#' @slot CV_Vn The critical value computed for the tests.
+#' @slot CV_Un The critical value computed for the test Un.
+#' @slot CV_Vn The critical value computed for the test Vn.
 #' @slot cv_method The method used to estimate the critical value (one of 
 #' "subsampling", "permutation" or "bootstrap").
 #' @slot h A list with the value of bandwidth parameter used for the Gaussian 

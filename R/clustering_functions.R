@@ -483,10 +483,8 @@ setGeneric("stats_clusters",function(object,...){
    standardGeneric("stats_clusters")
 })
 #' 
-#' @title Descriptive statistics for the clusters identified by the Poisson 
-#' kernel-based clustering.
+#' Descriptive statistics for the identified clusters
 #'
-#' @description
 #' Method for objects of class \code{pkbc} which computes some 
 #' descriptive for each variable with respect to the detected groups. 
 #'
@@ -556,7 +554,6 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' Plots for a pkbc object.
 #'  
 #' @param x Object of class \code{pkbc}
-#' @param y formal input
 #' @param true_label factor or vector of true membership to clusters (if 
 #'                   available). It must have the same length of final 
 #'                   memberships.
@@ -568,7 +565,7 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' circle and sphere, respectively. If dimension if greater than 3, the 
 #' spherical Principal Component procedure proposed by Locantore et al., (1999)
 #' is applied for dimensionality reduction and the first three principal
-#' components are normalized and displayed on the sphere. For d > 3, the ù
+#' components are normalized and displayed on the sphere. For d > 3, the
 #' complete results from the \code{PcaLocantore} function (package \code{rrcov})
 #' are returned if pca_res=TRUE.
 #' - elbow plot: the within cluster sum of squares (wcss) is computed using the 
@@ -595,7 +592,7 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' 
 #' @export
 setMethod("plot", signature(x="pkbc"), 
-          function(x, y=NULL, true_label=NULL, pca_res=FALSE) {
+          function(x, true_label=NULL, pca_res=FALSE) {
 repeat {
    # Display plot options
    cat("Select a plot option:\n")
@@ -812,7 +809,7 @@ elbowMethod <- function(object){
 #' \itemize{
 #'    \item Memb: vector of predicted memberships of \code{newdata}
 #'    \item Probs: matrix where entry (i,j) denotes the probability that
-#'                 observation $i$ belongs to the $k$th cluster. 
+#'                 observation i belongs to the k-th cluster. 
 #' }
 #' 
 #' @examples
@@ -909,7 +906,7 @@ setMethod("predict", signature(object="pkbc"),
 #' @param h Tuning parameter of the k-sample test. (default: 1.5)
 #'
 #' @details The following evaluation measures are computed: 
-#'  k-sample test, In-Group Proportion. If true label are provided, ARI, Average
+#'  In-Group Proportion. If true label are provided, ARI, Average
 #'  Silhouette Width, Macro-Precision and Macro-Recall are computed.
 #'
 #' @return List with the following components:

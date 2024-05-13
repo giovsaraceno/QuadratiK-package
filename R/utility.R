@@ -90,6 +90,8 @@ var_norm <- function(Sigma_h, V, n){
 #'
 #' Generate random sample from the hypersphere
 #'
+#' Generate random sample from the uniform distribution on the hypersphere
+#' 
 #' @param d Number of dimensions.
 #' @param n_points Number of sampled observations.
 #'

@@ -20,7 +20,7 @@ Returns a list with the following components
 \itemize{
 \item Memb: vector of predicted memberships of \code{newdata}
 \item Probs: matrix where entry (i,j) denotes the probability that
-observation $i$ belongs to the $k$th cluster.
+observation i belongs to the k-th cluster.
 }
 }
 \description{

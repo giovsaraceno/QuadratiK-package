@@ -27,9 +27,9 @@ rejected according to Vn.}
 
 \item{\code{data}}{List of samples X (and Y).}
 
-\item{\code{CV_Un}}{The critical value computed for the tests.}
+\item{\code{CV_Un}}{The critical value computed for the test Un.}
 
-\item{\code{CV_Vn}}{The critical value computed for the tests.}
+\item{\code{CV_Vn}}{The critical value computed for the test Vn.}
 
 \item{\code{cv_method}}{The method used to estimate the critical value (one of
 "subsampling", "permutation" or "bootstrap").}

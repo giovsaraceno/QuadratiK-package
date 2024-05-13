@@ -177,17 +177,23 @@ is not provided).</p></dd>
 kernel-based quadratic distance tests, based on the normal kernel. The object
 contains the following slots:</p><ul><li><p><code>method</code>: String indicating the normal kernel-based quadratic
 distance test performed.</p></li>
-<li><p><code>Dn</code> The value of the test statistic.</p></li>
-<li><p><code>H0</code> A logical value indicating whether or not the null
-hypothesis is rejected.</p></li>
-<li><p><code>data</code> Data list of samples X (and Y).</p></li>
-<li><p><code>CV</code> The critical value computed for the test.</p></li>
-<li><p><code>cv_method</code> The method used to estimate the critical value
-(one of "subsampling", "permutation" or "bootstrap").</p></li>
+<li><p><code>x</code> Data list of samples X (and Y).</p></li>
+<li><p><code>Un</code> The value of the U-statistics.</p></li>
+<li><p><code>H0_Un</code> A logical value indicating whether or not the null
+hypothesis is rejected according to Un.</p></li>
+<li><p><code>CV_Un</code> The critical value computed for the test Un.</p></li>
+<li><p><code>Vn</code> The value of the V-statistic (if available).</p></li>
+<li><p><code>H0_Vn</code> A logical value indicating whether or not the null
+hypothesis is rejected according to Vn (if available).</p></li>
+<li><p><code>CV_Vn</code> The critical value computed for the test Vn
+(if available).</p></li>
 <li><p><code>h</code> List with the value of bandwidth parameter used for the
 normal kernel function. If <code>select_h</code> is used, the matrix of computed
 power values and the corresponding power plot are also provided.</p></li>
 <li><p><code>B</code> Number of bootstrap/permutation/subsampling replications.</p></li>
+<li><p><code>var_Un</code> exact variance of the kernel-based U-statistic.</p></li>
+<li><p><code>cv_method</code> The method used to estimate the critical value
+(one of "subsampling", "permutation" or "bootstrap").</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

@@ -170,13 +170,13 @@ Eigen::VectorXd kbNormTest(Eigen::MatrixXd x_mat, double h,
    k_center = ParamCentering( kmat_zz,  x_mat, H, mu_mat, Sigma_hat);
    
    // Compute the normality test V-statistic
-   double Vn = k_center.sum() /(n_x * (n_x));
+   double Vn = k_center.sum() /(n_x);
    // Compute the normality test U-statistic
    double Un = (k_center.sum() - k_center.diagonal().sum()) /(n_x * (n_x - 1));
    
    Eigen::VectorXd results(2);
-   results(0) = n_x * Un;
-   results(1) = n_x * Vn;
+   results(0) = Un;
+   results(1) = Vn;
    
    return results;
    

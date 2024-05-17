@@ -19,6 +19,7 @@ y_2 <- rmsn(n=n, xi=0, Omega = diag(d), alpha=rep(skewness_y,d))
 h <- 2
 set.seed(2468)
 two_test <- kb.test(x=x_2, y=y_2, h=h)
+two_test
 
 ## ----fig.width=6, fig.height=8------------------------------------------------
 summary_two <- summary(two_test)

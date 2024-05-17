@@ -5,3 +5,4 @@
 src/RcppExports.o
 src/kernel_function.o
 /tests/testthat/Rplots.pdf
+.vscode

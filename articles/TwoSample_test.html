@@ -110,11 +110,11 @@ generate the sample <span class="math inline">\(y = (y_1,
 <span><span class="va">two_test</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
-<span><span class="co">##           U-statistic </span></span>
-<span><span class="co">## --------------------------------------------</span></span>
-<span><span class="co">## H0 is rejected:  TRUE TRUE </span></span>
-<span><span class="co">## Test Statistic:  4.276823 9.843008 </span></span>
-<span><span class="co">## Critical value (CV):  0.7745576 1.783123 </span></span>
+<span><span class="co">## U-statistics  Dn          Trace </span></span>
+<span><span class="co">## ------------------------------------------------</span></span>
+<span><span class="co">## Test Statistic:   4.276823    9.843008 </span></span>
+<span><span class="co">## Critical Value:   0.7745576   1.783123 </span></span>
+<span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
 <span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
 <p>For the two-sample case, the <code>summary</code> function provides
@@ -131,9 +131,9 @@ variable.</p>
 <p><img src="TwoSample_test_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
-<span><span class="co">##   Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1       4.276823      0.7745576      TRUE</span></span>
-<span><span class="co">## 2       9.843008      1.7831227      TRUE</span></span></code></pre>
+<span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
+<span><span class="co">## 1        Dn       4.276823      0.7745576      TRUE</span></span>
+<span><span class="co">## 2     Trace       9.843008      1.7831227      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_two</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>

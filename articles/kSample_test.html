@@ -117,11 +117,11 @@ tests.</p>
 <span><span class="va">k_test</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">##           U-statistic </span></span>
-<span><span class="co">## --------------------------------------------</span></span>
-<span><span class="co">## H0 is rejected:  TRUE TRUE </span></span>
-<span><span class="co">## Test Statistic:  11.844 38.6817 </span></span>
-<span><span class="co">## Critical value (CV):  0.5623288 1.836868 </span></span>
+<span><span class="co">## U-statistics  Dn          Trace </span></span>
+<span><span class="co">## ------------------------------------------------</span></span>
+<span><span class="co">## Test Statistic:   11.844      38.6817 </span></span>
+<span><span class="co">## Critical Value:   0.5623288   1.836868 </span></span>
+<span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
 <span><span class="co">## Selected tuning parameter h:  1.5</span></span></code></pre>
 <p>When the <span class="math inline">\(k\)</span>-sample test is
@@ -133,9 +133,9 @@ respect to the provided groups.</p>
 <code class="sourceCode R"><span><span class="va">summary_ktest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">k_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">##   Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        11.8440      0.5623288      TRUE</span></span>
-<span><span class="co">## 2        38.6817      1.8368685      TRUE</span></span></code></pre>
+<span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
+<span><span class="co">## 1        Dn        11.8440      0.5623288      TRUE</span></span>
+<span><span class="co">## 2     Trace        38.6817      1.8368685      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>

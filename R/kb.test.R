@@ -334,23 +334,23 @@ setMethod("show", "kb.test",
              
              if(length(object@Vn)==0){
                 
-                cat("\t\t\t U-statistic \n")
-                cat("--------------------------------------------\n")
-                cat("H0 is rejected: ", object@H0_Un, "\n")
-                cat("Test Statistic: ", object@Un, "\n")
-                cat("Critical value (CV):\t", object@CV_Un, "\n")
+                cat("U-statistics\t Dn \t\t Trace \n")
+                cat("------------------------------------------------\n")
+                cat("Test Statistic:\t", object@Un[1], "\t", object@Un[2], "\n")
+                cat("Critical Value:\t", object@CV_Un[1], "\t", object@CV_Un[2], "\n")
+                cat("H0 is rejected:\t", object@H0_Un[1], "\t\t", object@H0_Un[2], "\n")
                 
+                cat("CV method: ", object@cv_method, "\n")
              } else {
                 
-                cat("\t\t\t U-statistic \t\t V-statistic \n")
-                cat("--------------------------------------------\n")
-                cat("H0 is rejected: \t", object@H0_Un, "\t\t", object@H0_Vn, "\n")
-                cat("Test Statistic: \t", object@Un, "\t\t", object@Vn, "\n")
-                cat("Critical value (CV):\t", object@CV_Un, "\t\t", object@CV_Vn, "\n")
+                cat("\t\tU-statistic\tV-statistic\n")
+                cat("------------------------------------------------\n")
+                cat("Test Statistic:\t", object@Un, "\t", object@Vn, "\n")
+                cat("Critical Value:\t", object@CV_Un, "\t", object@CV_Vn, "\n")
+                cat("H0 is rejected:\t", object@H0_Un, "\t\t", object@H0_Vn, "\n")
                 
              }
              
-             cat("CV method: ", object@cv_method, "\n")
              cat("Selected tuning parameter h: ", object@h$h_sel, "\n")
              
              cat("\n")
@@ -492,14 +492,16 @@ setMethod("summary", "kb.test", function(object) {
    }
    # Print main results of the test
    cat( "\n", object@method, "\n")
-   if(is.null(object@Vn)){
+   if(length(object@Vn)==0){
       test_results <- data.frame(
+         Statistic = c("Dn", "Trace"),
          Test_Statistic = object@Un,
          Critical_Value = object@CV_Un,
          Reject_H0 = object@H0_Un
       )
    } else {
       test_results <- data.frame(
+         Statistic = c("Un", "Vn"),
          Test_Statistic = c(object@Un,object@Vn),
          Critical_Value = c(object@CV_Un,object@CV_Vn),
          Reject_H0 = c(object@H0_Un,object@H0_Vn)

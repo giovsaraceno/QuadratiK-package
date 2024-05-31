@@ -8,8 +8,8 @@
 #' @param y Numeric matrix or vector of data values. Depending on the input 
 #'          \code{y}, the corresponding test is performed.
 #' \itemize{
-#'    \item if \code{y} = NULL, the function performs the tests for normality o
-#'          n \code{x}
+#'    \item if \code{y} = NULL, the function performs the tests for normality on
+#'          \code{x}
 #'    \item if \code{y} is a data matrix, with same dimensions of \code{x}, the 
 #'          function performs the two-sample test between \code{x} and \code{y}.
 #'    \item if \code{y} if a numeric or factor vector, indicating the group 
@@ -72,7 +72,7 @@
 #' }
 #'
 #' @references
-#' Markatou, M., Saraceno, G., Chen Y (2023). “Two- and k-Sample Tests Based on 
+#' Markatou, M., Saraceno, G., Chen Y (2024). “Two- and k-Sample Tests Based on 
 #' Quadratic Distances.” Manuscript, (Department of Biostatistics, University at
 #' Buffalo)
 #'

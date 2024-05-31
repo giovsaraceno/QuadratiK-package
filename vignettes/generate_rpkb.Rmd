@@ -1,6 +1,5 @@
 ---
 title: "Random sampling from the Poisson kernel-based density"
-author: "Giovanni Saraceno"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Random sampling from the Poisson kernel-based density}

@@ -12,7 +12,7 @@ densities estimated by pkbc"><!-- mathjax --><script src="https://cdnjs.cloudfla
     
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +87,7 @@ classified.</p></dd>
 
 <p>Returns a list with the following components</p><ul><li><p>Memb: vector of predicted memberships of <code>newdata</code></p></li>
 <li><p>Probs: matrix where entry (i,j) denotes the probability that
-observation $i$ belongs to the $k$th cluster.</p></li>
+observation i belongs to the k-th cluster.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -98,16 +98,32 @@ observation $i$ belongs to the $k$th cluster.</p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># generate data</span></span></span>
 <span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">5</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="pkbc.html">pkbc</a></span><span class="op">(</span><span class="va">dat</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="pkbc.html">pkbc</a></span><span class="op">(</span><span class="va">dat</span>,<span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># extract membership of dat</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">res</span>,k<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 2 2 1 2 1 2 2 1 1 1 1 2 1 1 1 1 1 1 2 1 2 1 1 1 2 1 1 1 1 1 2 1 1 2 1 1 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [38] 1 1 1 1 2 1 1 2 2 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 2 2 2 2 2 1 2 1 1 2 2 2 1 1 1 1 2 2 2 1 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [38] 2 2 1 2 2 2 2 2 2 2 1 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
 <span class="r-in"><span><span class="co"># predict membership of new data</span></span></span>
 <span class="r-in"><span><span class="va">newdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">5</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">res</span>, k<span class="op">=</span><span class="fl">2</span>, <span class="va">newdat</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Memb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 2 2 2 2 1 1 1 1 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Probs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.6042890 0.39571099</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.1437831 0.85621692</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] 0.4521276 0.54787245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] 0.1352363 0.86476365</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] 0.2291724 0.77082761</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] 0.9622912 0.03770876</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] 0.9631280 0.03687200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] 0.9330659 0.06693408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] 0.9748027 0.02519728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] 0.9731583 0.02684166</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span> </span></span>
 </code></pre></div>
     </div>

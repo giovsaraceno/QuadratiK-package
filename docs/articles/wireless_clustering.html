@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +73,6 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Clustering algorithm on the Wireless data</h1>
-                        <h4 data-toc-skip class="author">Giovanni
-Saraceno</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/giovsaraceno/QuadratiK-package/blob/HEAD/vignettes/wireless_clustering.Rmd" class="external-link"><code>vignettes/wireless_clustering.Rmd</code></a></small>
@@ -92,7 +90,7 @@ set is used to study the performance of different indoor localization
 algorithms. It is available within the <code>QuadratiK</code> package as
 <code>wireless</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/web/packages/QuadratiK/index.html" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">wireless</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    V1  V2  V3  V4  V5  V6  V7 V8</span></span>
 <span><span class="co">## 1 -64 -56 -61 -66 -71 -82 -81  1</span></span>
@@ -151,7 +149,7 @@ unit circle and unit sphere, respectively. If <span class="math inline">\(d&gt;3
 the data set, and the first 3 principal components are used for
 visualizing data points on the sphere, after application of <span class="math inline">\(L_2\)</span> normalization.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">summary_clust</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_stats.html">extract_stats</a></span><span class="op">(</span><span class="va">res_pk</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">summary_clust</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stats_clusters.html">stats_clusters</a></span><span class="op">(</span><span class="va">res_pk</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_clust</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
@@ -223,8 +221,7 @@ ARI, Macro Precision and Macro Recall. The plot of points using the
 principal components also shows that the identified cluster follows the
 initial labels.</p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
-    </nav></aside>
+  </main>
 </div>
 
 

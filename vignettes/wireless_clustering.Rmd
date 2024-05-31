@@ -1,6 +1,5 @@
 ---
 title: "Clustering algorithm on the Wireless data"
-author: "Giovanni Saraceno"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Clustering algorithm on the Wireless data}

@@ -43,7 +43,7 @@
 #' Sampling, Journal of Computational and Graphical Statistics, 29:4, 758-770, 
 #' DOI: 10.1080/10618600.2020.1740713.
 #' 
-#' Markatou M, Saraceno G, Chen Y (2023). “Two- and k-Sample Tests Based on 
+#' Markatou M, Saraceno G, Chen Y (2024). “Two- and k-Sample Tests Based on 
 #' Quadratic Distances.” Manuscript, (Department of Biostatistics, 
 #' University at Buffalo).
 #' 

@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +73,6 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>k-sample test</h1>
-                        <h4 data-toc-skip class="author">Giovanni
-Saraceno</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/giovsaraceno/QuadratiK-package/blob/HEAD/vignettes/kSample_test.Rmd" class="external-link"><code>vignettes/kSample_test.Rmd</code></a></small>
@@ -96,7 +94,7 @@ separated, following different Gaussian distributions, i.e. <span class="math i
 <code>y</code> indicates the membership to groups.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org" class="external-link">mvtnorm</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/web/packages/QuadratiK/index.html" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
 <span><span class="va">sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">200</span>,<span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
@@ -114,11 +112,11 @@ tests.</p>
 <span><span class="va">k_test</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## H0 is rejected:  TRUE </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Test Statistic:  0.02452253 0.01226127 </span></span>
-<span><span class="co">## Critical value (CV):  0.001164279 0.0005821397 </span></span>
+<span><span class="co">## U-statistics  Dn          Trace </span></span>
+<span><span class="co">## ------------------------------------------------</span></span>
+<span><span class="co">## Test Statistic:   11.844      38.6817 </span></span>
+<span><span class="co">## Critical Value:   0.5623288   1.836868 </span></span>
+<span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
 <span><span class="co">## Selected tuning parameter h:  1.5</span></span></code></pre>
 <p>When the <span class="math inline">\(k\)</span>-sample test is
@@ -130,9 +128,9 @@ respect to the provided groups.</p>
 <code class="sourceCode R"><span><span class="va">summary_ktest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">k_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">##   Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1     0.02452253   0.0011642795      TRUE</span></span>
-<span><span class="co">## 2     0.01226127   0.0005821397      TRUE</span></span></code></pre>
+<span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
+<span><span class="co">## 1        Dn        11.8440      0.5623288      TRUE</span></span>
+<span><span class="co">## 2     Trace        38.6817      1.8368685      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
@@ -174,12 +172,6 @@ result of the selection of <span class="math inline">\(h\)</span>
 algorithm for the <span class="math inline">\(k\)</span>-sample data set
 displays the obtained power versus the considered <span class="math inline">\(h\)</span>, for each value of skewness alternative
 <span class="math inline">\(\delta\)</span> considered.</p>
-<p>As it is possible to see from the figure, when the alternative
-distribution <span class="math inline">\(F_\delta\)</span> with <span class="math inline">\(\delta=0.2\)</span> is considered, there are no
-values of <span class="math inline">\(h\)</span> which achieve power
-greater than or equal to 0.5. Then, the second value of <span class="math inline">\(\delta=0.3\)</span> is take into account and <span class="math inline">\(h=1.6\)</span> is chosen as optimal value since it
-is the smallest value with power greater than 0.5. Additionally, it
-gives a possible set of values with high power performance.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

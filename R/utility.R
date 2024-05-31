@@ -162,9 +162,9 @@ generate_SN<-function(d, size_x, size_y, mu_x, mu_y,
 compare_qq <- function(sample1, sample2, main_title) {
    # Compute quantiles
    quantiles1 <- quantile(sample1, 
-                          probs = seq(0, 1, length.out = length(sample1)))
+                          probs = seq(0, 1, length.out = 100))
    quantiles2 <- quantile(sample2, 
-                          probs = seq(0, 1, length.out = length(sample2)))
+                          probs = seq(0, 1, length.out = 100))
    df <- data.frame(q1 = quantiles1, q2 = quantiles2)
    
    with(df, {pl <- ggplot(df, aes(x=q1,y=q2))+

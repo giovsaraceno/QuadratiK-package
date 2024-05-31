@@ -12,7 +12,7 @@ for clustering results."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
     
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,7 +91,7 @@ clusters specified.</p></li>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The following evaluation measures are computed:
-k-sample test, In-Group Proportion. If true label are provided, ARI, Average
+In-Group Proportion. If true label are provided, ARI, Average
 Silhouette Width, Macro-Precision and Macro-Recall are computed.</p>
     </div>
     <div class="section level2">
@@ -122,12 +122,9 @@ Mathematics, 20, 53–65.</p>
 <span class="r-in"><span><span class="va">pkbc_res</span><span class="op">&lt;-</span> <span class="fu"><a href="pkbc.html">pkbc</a></span><span class="op">(</span><span class="va">data</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">pkbc_validation</span><span class="op">(</span><span class="va">pkbc_res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metrics</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         k=2         k=3         k=4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> k              2.0000000000 3.000000000 4.000000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Test statistic 0.0019753882 0.001051829         NaN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Critical value 0.0007208731 0.011865445 0.011013178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Reject_H0      1.0000000000 0.000000000          NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ASW            0.5196525296 0.036024506 0.006235573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            V1         V2          V3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> k   2.0000000 3.00000000 4.000000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ASW 0.5196525 0.03602451 0.006235573</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $IGP</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $IGP[[1]]</span>

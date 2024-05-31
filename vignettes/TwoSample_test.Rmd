@@ -1,6 +1,5 @@
 ---
 title: "Non-parametric Two-sample test"
-author: "Giovanni Saraceno"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Non-parametric Two-sample test}

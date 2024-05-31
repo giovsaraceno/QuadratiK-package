@@ -37,6 +37,9 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/reference/breast_cancer.html</loc>
+  </url>
+  <url>
     <loc>/reference/compare_qq.html</loc>
   </url>
   <url>
@@ -50,6 +53,9 @@
   </url>
   <url>
     <loc>/reference/DOF.html</loc>
+  </url>
+  <url>
+    <loc>/reference/DOF_norm.html</loc>
   </url>
   <url>
     <loc>/reference/dpkb.html</loc>
@@ -106,6 +112,9 @@
     <loc>/reference/select_h.html</loc>
   </url>
   <url>
+    <loc>/reference/stats_clusters.html</loc>
+  </url>
+  <url>
     <loc>/reference/summary-kb.test-method.html</loc>
   </url>
   <url>
@@ -113,6 +122,18 @@
   </url>
   <url>
     <loc>/reference/summary.pkbc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/var_k.html</loc>
+  </url>
+  <url>
+    <loc>/reference/var_norm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/var_two.html</loc>
+  </url>
+  <url>
+    <loc>/reference/wine.html</loc>
   </url>
   <url>
     <loc>/reference/wireless.html</loc>

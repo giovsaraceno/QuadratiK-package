@@ -144,8 +144,8 @@ test_that("Functionality with valid inputs", {
    
    # test show method
    output <- capture.output(show(result))
-   expect_true(any(grepl("H0 is rejected: ", output)))
-   expect_true(any(grepl("Test Statistic: ", output)))
+   expect_true(any(grepl("U-statistics\t Dn \t\t Trace", output)))
+   expect_true(any(grepl("CV method:  subsampling ", output)))
    
    # test summary method
    s <- summary(result)

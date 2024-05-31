@@ -1,6 +1,5 @@
 ---
 title: "Uniformity test on the Sphere"
-author: "Giovanni Saraceno"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Uniformity test on the Sphere}

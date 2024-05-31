@@ -2,6 +2,7 @@
 % Please edit documentation in R/QuadratiK-package.R
 \docType{package}
 \name{QuadratiK-package}
+\alias{QuadratiK}
 \alias{QuadratiK-package}
 \title{Collection of Methods Constructed using the Kernel-Based Quadratic
 Distances}
@@ -51,8 +52,19 @@ Markatou M, Saraceno G, Chen Y (2024). “Two- and k-Sample Tests Based on
 Quadratic Distances.” Manuscript, (Department of Biostatistics,
 University at Buffalo).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://cran.r-project.org/package=QuadratiK}
+  \item \url{https://github.com/giovsaraceno/QuadratiK-package}
+  \item \url{https://giovsaraceno.github.io/QuadratiK-package/}
+  \item Report bugs at \url{https://github.com/giovsaraceno/QuadratiK-package/issues}
+}
+
+}
 \author{
 Giovanni Saraceno, Marianthi Markatou,
 Raktim Mukhopadhyay, Mojgan Golzy
 \email{gsaracen@buffalo.edu}
 }
+\keyword{internal}

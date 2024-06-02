@@ -193,6 +193,7 @@ compare_qq <- function(sample1, sample2, main_title) {
 #' @param eps precision of displayed statistics
 #'
 #' @import ggplot2
+#' @importFrom ggpp geom_table_npc
 #' @importFrom stats IQR
 #' @importFrom stats median
 #' @importFrom stats sd
@@ -215,9 +216,13 @@ compute_stats <- function(var1, var2, var_name,eps=3) {
    rownames(stats) <- c("mean", "sd", "median", "IQR", "min", "max")
    
    pl <- ggplot() +
-      ggpp::annotate('table', x = 0.5, y = 0.5, 
-                     label = data.frame(Stat = rownames(stats),stats), 
+      geom_table_npc(data = data.frame(Stat = rownames(stats), stats),
+                     aes(npcx = 0.5, npcy = 0.5, 
+             label = list(data.frame(Stat = rownames(stats), stats))),
                      hjust = 0.5, vjust = 0.5) +
+      # ggpp::annotate('table', x = 0.5, y = 0.5, 
+      #                label = data.frame(Stat = rownames(stats),stats), 
+      #                hjust = 0.5, vjust = 0.5) +
       theme_void() +
       ggtitle(paste(var_name))+
       scale_color_brewer(palette='Set1')

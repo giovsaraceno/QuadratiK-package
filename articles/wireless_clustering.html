@@ -91,9 +91,11 @@ algorithms. It is available within the <code>QuadratiK</code> package as
 <code>wireless</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in rgl.init(initValue, onlyNULL): RGL: unable to open X11 display</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: 'rgl.init' failed, running with 'rgl.useNULL = TRUE'.</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## Registered S3 methods overwritten by 'ggpp':</span></span>
+<span><span class="co">##   method                  from   </span></span>
+<span><span class="co">##   heightDetails.titleGrob ggplot2</span></span>
+<span><span class="co">##   widthDetails.titleGrob  ggplot2</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">wireless</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    V1  V2  V3  V4  V5  V6  V7 V8</span></span>
 <span><span class="co">## 1 -64 -56 -61 -66 -71 -82 -81  1</span></span>
@@ -119,7 +121,7 @@ sphere.</p>
 <p>We perform the clustering algorithm on the <code>wireless</code> data
 set. We consider the <span class="math inline">\(K= 3, 4, 5, 6\)</span>
 as possible values for the number of clusters.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wire</span> <span class="op">&lt;-</span> <span class="va">wireless</span><span class="op">[</span>,<span class="op">-</span><span class="fl">8</span><span class="op">]</span></span>
 <span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="va">wireless</span><span class="op">[</span>,<span class="fl">8</span><span class="op">]</span></span>
 <span><span class="va">wire_norm</span> <span class="op">&lt;-</span> <span class="va">wire</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">wire</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
@@ -134,7 +136,7 @@ a table of computed evaluation measures. This include the <span class="math inli
 corresponding critical value and, if the true labels are provided, the
 measures of adjusted rand index (ARI), Macro-Precision and
 Macro-Recall.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">res_validation</span> <span class="op">&lt;-</span> <span class="fu">validation</span><span class="op">(</span><span class="va">res_pk</span>, true_label <span class="op">=</span> <span class="va">labels</span><span class="op">)</span></span>
 <span><span class="va">res_validation</span><span class="op">$</span><span class="va">IGP</span></span>
@@ -151,9 +153,9 @@ the assigned membership, as well as a representation of data points. For
 unit circle and unit sphere, respectively. If <span class="math inline">\(d&gt;3\)</span>, the spherical PCA is applied on
 the data set, and the first 3 principal components are used for
 visualizing data points on the sphere, after application of <span class="math inline">\(L_2\)</span> normalization.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_clust</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stats_clusters.html">stats_clusters</a></span><span class="op">(</span><span class="va">res_pk</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_clust</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">##            Group 1     Group 2     Group 3     Group 4     Overall</span></span>

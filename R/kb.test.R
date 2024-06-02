@@ -371,7 +371,7 @@ setMethod("show", "kb.test",
 #' }
 #'
 #' @importFrom ggpubr ggarrange
-#' @importFrom ggpp annotate
+#' @importFrom ggpp geom_table_npc
 #' @import ggplot2
 #'
 #'@examples
@@ -388,6 +388,7 @@ setMethod("show", "kb.test",
 #' @importFrom stats median
 #' @importFrom stats sd
 #' @importFrom stats qqnorm
+#' @importFrom ggpp geom_table_npc
 #' 
 #' @export
 setMethod("summary", "kb.test", function(object) {
@@ -474,9 +475,13 @@ setMethod("summary", "kb.test", function(object) {
          stats[length(stats) +1] <- stats_step
          
          pl_stat <- ggplot() +
-            annotate('table', x = 0.5, y = 0.5, 
-                     label = data.frame(Stat = rownames(stats_step),stats_step),
-                     hjust = 0.5, vjust = 0.5) +
+      geom_table_npc(data = data.frame(Stat = rownames(stats_step), stats_step),
+                           aes(npcx = 0.5, npcy = 0.5, 
+             label = list(data.frame(Stat = rownames(stats_step), stats_step))),
+                           hjust = 0.5, vjust = 0.5) +
+            # annotate('table', x = 0.5, y = 0.5, 
+            #          label = data.frame(Stat = rownames(stats_step),stats_step),
+            #          hjust = 0.5, vjust = 0.5) +
             theme_void() +
             ggtitle("")+
             scale_color_brewer(palette='Set1')

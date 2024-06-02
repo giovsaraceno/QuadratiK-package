@@ -172,7 +172,7 @@ setMethod("show", "pk.test",
 #' 
 #' @srrstats {G1.4} roxigen2 is used
 #' 
-#' @importFrom ggpp annotate
+#' @importFrom ggpp geom_table_npc
 #' @importFrom stats IQR
 #' @importFrom stats median
 #' @importFrom stats sd
@@ -215,9 +215,13 @@ setMethod("summary", "pk.test", function(object) {
       stats[[i]] <- stats_step
       
       pl_stat <- ggplot() +
-         annotate('table', x = 0.5, y = 0.5, 
-                     label = data.frame(Stat = rownames(stats_step),stats_step),
-                     hjust = 0.5, vjust = 0.5) +
+      geom_table_npc(data = data.frame(Stat = rownames(stats_step), stats_step),
+                     aes(npcx = 0.5, npcy = 0.5, 
+            label = list(data.frame(Stat = rownames(stats_step), stats_step))),
+                        hjust = 0.5, vjust = 0.5) +
+        #annotate('table', x = 0.5, y = 0.5, 
+                 #   label = data.frame(Stat = rownames(stats_step),stats_step),
+                    # hjust = 0.5, vjust = 0.5) +
          theme_void() +
          ggtitle("")+
          scale_color_brewer(palette='Set1')

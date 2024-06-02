@@ -138,7 +138,7 @@ poisson_CV<-function(d, size, rho, B, Quantile){
 #' of the empirical distribution of the computed test statistics.
 #' 
 #' @useDynLib QuadratiK
-#' @import mvtnorm
+#' @importFrom mvtnorm rmvnorm
 #' @import RcppEigen
 #'
 #' @srrstats {G1.4a} roxigen2 is used

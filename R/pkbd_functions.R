@@ -112,9 +112,6 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #' Sablica L., Hornik K., Leydold J. (2023) "Efficient sampling from the PKBD 
 #' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 #'
-#' @import movMF
-#' @import Tinflex
-#'
 #' @srrstats {G1.0} Reference section reports the related literature.
 #' @srrstats {G1.4} roxigen2 is used.
 #' @srrstats {G2.0,G2.0a} check input mu. 
@@ -184,7 +181,8 @@ rpkb <- function(n, mu, rho, method = 'rejvmf',
 #' Computational and Graphical Statistics, 29:4, 758-770, 
 #' DOI: 10.1080/10618600.2020.1740713.
 #'
-#' @import movMF
+#' @importFrom movMF rmovMF
+#' @importFrom stats runif
 #' 
 #' @noRd
 #' @keywords internal
@@ -224,6 +222,10 @@ rejvmf <- function(n, rho, mu, p) {
 #' @references
 #' Sablica L., Hornik K., Leydold J. (2023) "Efficient sampling from the PKBD 
 #' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
+#' 
+#' @importFrom stats runif
+#' @importFrom stats rnorm
+#' @importFrom stats uniroot
 #' 
 #' @noRd
 #' @keywords internal
@@ -289,7 +291,8 @@ rejacg <- function(n, rho, mu, p, tol.eps, max.iter){
 #' Sablica L., Hornik K., Leydold J. (2023) "Efficient sampling from the PKBD 
 #' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 #' 
-#' @import Tinflex
+#' @importFrom Tinflex Tinflex.setup.C
+#' @importFrom Tinflex Tinflex.sample
 #' 
 #' @noRd
 #' @keywords internal

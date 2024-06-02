@@ -70,13 +70,6 @@
 #' data3<-rpkb(size, c(0,0,1),rho,method="rejvmf")
 #' dat<-rbind(data1$x,data2$x, data3$x)
 #'
-#' #The following code can be used for plotting
-#' \donttest{
-#' library("rgl")
-#' plot3d(dat,col = groups, size=4,xlab = "", ylab = "",zlab = "")
-#' legend3d("right", legend = c("Class 1", "Class 2", "Class 3"), 
-#'             col = 1:3, pch = 20)
-#' }
 #' #Perform the clustering algorithm with number od clusters k=3.
 #' pkbd<- pkbc(dat, 3)
 #'
@@ -107,6 +100,10 @@ setGeneric("pkbc",function(dat,
 #' @srrstats {UL2.1} normalization of input dat
 #' @srrstats {UL2.3} inputs are all checked
 #' @srrstats {UL7.0} error messages are inserted for inappropriate inputs
+#' 
+#' @importFrom methods new
+#' @importFrom stats uniroot
+#' 
 #' 
 #' @export
 setMethod("pkbc", signature(dat = "ANY"),
@@ -512,6 +509,11 @@ setGeneric("stats_clusters",function(object,...){
 #' @srrstats {UL3.2} true label can be provided as a separate input
 #' @srrstats {UL3.4} the function computes summary statistics with respect to 
 #'                   the identified clusters.
+#'                   
+#' @importFrom stats sd
+#' @importFrom stats median
+#' @importFrom stats IQR 
+#' 
 #' @rdname stats_clusters                  
 #' @export
 setMethod("stats_clusters", "pkbc", function(object, k){
@@ -653,7 +655,12 @@ repeat {
 #' the \code{PcaLocantore} function (package \code{rrcov}) are returned if 
 #' pca_res=TRUE.
 #' 
-#' @import rgl
+#' @importFrom rgl plot3d
+#' @importFrom rgl layout3d
+#' @importFrom rgl title3d
+#' @importFrom rgl next3d
+#' @importFrom rgl rgl.spheres
+#' @importFrom rgl open3d
 #' @import ggplot2
 #' @importFrom grDevices colorRampPalette
 #' @importFrom rrcov PcaLocantore
@@ -756,7 +763,7 @@ scatterplotMethod <- function(object, k, true_label=NULL, pca_res=FALSE) {
 #'         cosine similarity.
 #' 
 #' @import ggplot2
-#' @import ggpubr
+#' @importFrom ggpubr ggarrange
 #' 
 #' @srrstats {G1.4} roxigen2 is used
 #' 
@@ -926,8 +933,9 @@ setMethod("predict", signature(object="pkbc"),
 #' Mathematics, 20, 53–65.
 #'
 #' @importFrom mclust adjustedRandIndex
-#' @import clusterRepro
+#' @importFrom clusterRepro IGP.clusterRepro
 #' @importFrom cluster silhouette
+#' @importFrom stats dist
 #'
 #' @examples
 #' #We generate three sample of 100 observations from 3-dimensional
@@ -1045,4 +1053,9 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
    #results <- list(metrics = metrics, IGP = igp_k, tests = test_res)
    
    return(results)
+}
+.onLoad <- function(libname, pkgname) {
+   if (Sys.getenv("RGL_USE_NULL") == "") {
+      Sys.setenv(RGL_USE_NULL = "TRUE")
+   }
 }

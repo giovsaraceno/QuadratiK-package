@@ -193,6 +193,9 @@ compare_qq <- function(sample1, sample2, main_title) {
 #' @param eps precision of displayed statistics
 #'
 #' @import ggplot2
+#' @importFrom stats IQR
+#' @importFrom stats median
+#' @importFrom stats sd
 #'
 #' @return Computed statistics with a plot
 #' 

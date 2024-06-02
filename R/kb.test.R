@@ -100,7 +100,6 @@
 #' my_test <- kb.test(x=dat,y=group,h=0.5, method="subsampling",b=0.9)
 #' my_test
 #'
-#' @import methods
 #' @import Rcpp
 #' @import RcppEigen
 #'
@@ -371,7 +370,8 @@ setMethod("show", "kb.test",
 #'    \item \code{qqplots} Figure with qq-plots for each variable.
 #' }
 #'
-#' @import ggpubr
+#' @importFrom ggpubr ggarrange
+#' @importFrom ggpp annotate
 #' @import ggplot2
 #'
 #'@examples
@@ -383,6 +383,11 @@ setMethod("show", "kb.test",
 #' summary(my_test)
 #' 
 #' @srrstats {G1.4} roxigen2 is used
+#' 
+#' @importFrom stats IQR
+#' @importFrom stats median
+#' @importFrom stats sd
+#' @importFrom stats qqnorm
 #' 
 #' @export
 setMethod("summary", "kb.test", function(object) {
@@ -469,7 +474,7 @@ setMethod("summary", "kb.test", function(object) {
          stats[length(stats) +1] <- stats_step
          
          pl_stat <- ggplot() +
-            ggpp::annotate('table', x = 0.5, y = 0.5, 
+            annotate('table', x = 0.5, y = 0.5, 
                      label = data.frame(Stat = rownames(stats_step),stats_step),
                      hjust = 0.5, vjust = 0.5) +
             theme_void() +

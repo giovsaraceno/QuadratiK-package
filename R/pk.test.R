@@ -161,7 +161,7 @@ setMethod("show", "pk.test",
 #'                         uniform distribution.
 #' }
 #'
-#' @import ggpubr
+#' @importFrom ggpubr ggarrange
 #' @import ggplot2
 #' 
 #' @examples
@@ -171,6 +171,12 @@ setMethod("show", "pk.test",
 #' summary(unif_test)
 #' 
 #' @srrstats {G1.4} roxigen2 is used
+#' 
+#' @importFrom ggpp annotate
+#' @importFrom stats IQR
+#' @importFrom stats median
+#' @importFrom stats sd
+#' @importFrom stats runif
 #' 
 #' @export
 #'
@@ -209,7 +215,7 @@ setMethod("summary", "pk.test", function(object) {
       stats[[i]] <- stats_step
       
       pl_stat <- ggplot() +
-         ggpp::annotate('table', x = 0.5, y = 0.5, 
+         annotate('table', x = 0.5, y = 0.5, 
                      label = data.frame(Stat = rownames(stats_step),stats_step),
                      hjust = 0.5, vjust = 0.5) +
          theme_void() +

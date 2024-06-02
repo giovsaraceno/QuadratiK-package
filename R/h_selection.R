@@ -67,7 +67,9 @@
 #' @importFrom sn rmsn
 #' @import doParallel
 #' @import foreach
-#' @import stats
+#' @importFrom stats cov
+#' @importFrom stats aggregate
+#' @importFrom stats power
 #' @import rlecuyer
 #' @import ggplot2
 #' @import RcppEigen
@@ -195,16 +197,16 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       dk <- delta_dim*delta[k]
       
       if(alternative=='location'){
-         xnew <- sn::rmsn(n, xi = mean_dat, Omega = S_dat, alpha = skew_data)
-         ynew <- sn::rmsn(m, xi = mean_dat + dk, Omega = S_dat, 
+         xnew <- rmsn(n, xi = mean_dat, Omega = S_dat, alpha = skew_data)
+         ynew <- rmsn(m, xi = mean_dat + dk, Omega = S_dat, 
                           alpha = skew_data)
       } else if(alternative=='scale'){
-         xnew <- sn::rmsn(n, xi = mean_dat, Omega = S_dat, alpha = skew_data)
-         ynew <- sn::rmsn(m, xi = mean_dat , Omega = dk*S_dat, 
+         xnew <- rmsn(n, xi = mean_dat, Omega = S_dat, alpha = skew_data)
+         ynew <- rmsn(m, xi = mean_dat , Omega = dk*S_dat, 
                           alpha = skew_data)
       } else if(alternative=='skewness'){
-         xnew <- sn::rmsn(n, xi = mean_dat, Omega = S_dat, alpha = skew_data)
-         ynew <- sn::rmsn(m, xi = mean_dat, Omega = S_dat, alpha = skew_data+dk)
+         xnew <- rmsn(n, xi = mean_dat, Omega = S_dat, alpha = skew_data)
+         ynew <- rmsn(m, xi = mean_dat, Omega = S_dat, alpha = skew_data+dk)
       }
       
       #x <- as.matrix(xnew[sample(n, replace = FALSE),])
@@ -236,8 +238,8 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       }
       
       xnew <- rbind(
-         sn::rmsn(nk*(K-1), xi = mean_dat, Omega = S_dat, alpha = skew_data),
-         sn::rmsn(nk, xi = mean_tilde, Omega = S_tilde, alpha = skew_tilde))
+         rmsn(nk*(K-1), xi = mean_dat, Omega = S_dat, alpha = skew_data),
+         rmsn(nk, xi = mean_tilde, Omega = S_tilde, alpha = skew_tilde))
       ynew <- matrix(rep(1:K, each=nk),ncol=1)
       
       

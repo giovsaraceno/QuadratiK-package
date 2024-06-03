@@ -83,7 +83,7 @@ test_that("Random Generation from PKBD works", {
    rho <- 0.9
    mu <- rnorm(3)
    mu <- mu/sqrt(sum(mu^2))
-   size = 100
+   size <- 100
    
    x <- rpkb(size, mu = mu, rho = rho, method = "rejpsaw")
    # Test if the mean of generated points is close to the true mean

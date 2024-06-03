@@ -415,10 +415,10 @@ setMethod("show", "pkbc", function(object) {
 #' 
 #' @param object Object of class \code{pkbc}
 #' 
-#' @return Display the logLikelihood values and within cluster sum of squares (wcss)
-#'         for all the values of number of clusters provided. For each of these value 
-#'         the estimated mixing proportions are showed together with a table with the 
-#'         assigned memberships.
+#' @return Display the logLikelihood values and within cluster sum of squares 
+#'         (wcss) for all the values of number of clusters provided. For each of
+#'         these value the estimated mixing proportions are showed together with
+#'         a table with the assigned memberships.
 #' 
 #' @examples
 #' dat <- rbind(matrix(rnorm(100),2),matrix(rnorm(100,5),2))
@@ -989,7 +989,7 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
       # Compute the In-Group Proportion
       if(k>1){
          igp_k[[k]] <- IGP.clusterRepro(as.data.frame(t(x)), 
-                                        as.data.frame(t(object@res_k[[k]]$params$mu)))$IGP
+                              as.data.frame(t(object@res_k[[k]]$params$mu)))$IGP
       }
       # Compute the k-sample test
       #y_k <- as.numeric(object@res_k[[k]]$finalMemb)

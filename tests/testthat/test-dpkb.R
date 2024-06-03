@@ -60,7 +60,7 @@ test_that("Density of PKBD", {
    ## Test numerical values
    rho <- 0.8
    mu <- c(1,0,0)
-   d=3
+   d <- 3
    x <- matrix(rnorm(3),nrow=1)
    # For rho=0 the density corresponds to the normalizing constant for d independently of x
    expect_equal(as.numeric(dpkb(x, mu, rho=0)), 1/(2*pi^(d/2)*gamma(d/2)^(-1)))

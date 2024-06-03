@@ -328,32 +328,32 @@ setMethod("kb.test", signature(x = "ANY"),
 #' 
 #' @export
 setMethod("show", "kb.test",
-          function(object) {
-             cat( "\n", object@method, "\n")
-             
-             if(length(object@Vn)==0){
-                
-                cat("U-statistics\t Dn \t\t Trace \n")
-                cat("------------------------------------------------\n")
-                cat("Test Statistic:\t", object@Un[1], "\t", object@Un[2], "\n")
-                cat("Critical Value:\t", object@CV_Un[1], "\t", object@CV_Un[2], "\n")
-                cat("H0 is rejected:\t", object@H0_Un[1], "\t\t", object@H0_Un[2], "\n")
-                
-                cat("CV method: ", object@cv_method, "\n")
-             } else {
-                
-                cat("\t\tU-statistic\tV-statistic\n")
-                cat("------------------------------------------------\n")
-                cat("Test Statistic:\t", object@Un, "\t", object@Vn, "\n")
-                cat("Critical Value:\t", object@CV_Un, "\t", object@CV_Vn, "\n")
-                cat("H0 is rejected:\t", object@H0_Un, "\t\t", object@H0_Vn, "\n")
-                
-             }
-             
-             cat("Selected tuning parameter h: ", object@h$h_sel, "\n")
-             
-             cat("\n")
-          })
+ function(object) {
+    cat( "\n", object@method, "\n")
+    
+    if(length(object@Vn)==0){
+       
+       cat("U-statistics\t Dn \t\t Trace \n")
+       cat("------------------------------------------------\n")
+       cat("Test Statistic:\t", object@Un[1], "\t", object@Un[2], "\n")
+       cat("Critical Value:\t", object@CV_Un[1], "\t", object@CV_Un[2], "\n")
+       cat("H0 is rejected:\t", object@H0_Un[1], "\t\t", object@H0_Un[2], "\n")
+       
+       cat("CV method: ", object@cv_method, "\n")
+    } else {
+       
+       cat("\t\tU-statistic\tV-statistic\n")
+       cat("------------------------------------------------\n")
+       cat("Test Statistic:\t", object@Un, "\t", object@Vn, "\n")
+       cat("Critical Value:\t", object@CV_Un, "\t", object@CV_Vn, "\n")
+       cat("H0 is rejected:\t", object@H0_Un, "\t\t", object@H0_Vn, "\n")
+       
+    }
+    
+    cat("Selected tuning parameter h: ", object@h$h_sel, "\n")
+    
+    cat("\n")
+ })
 #'
 #' Summarizing kernel-based quadratic distance results
 #'
@@ -479,9 +479,9 @@ setMethod("summary", "kb.test", function(object) {
                            aes(npcx = 0.5, npcy = 0.5, 
              label = list(data.frame(Stat = rownames(stats_step), stats_step))),
                            hjust = 0.5, vjust = 0.5) +
-            # annotate('table', x = 0.5, y = 0.5, 
-            #          label = data.frame(Stat = rownames(stats_step),stats_step),
-            #          hjust = 0.5, vjust = 0.5) +
+         # annotate('table', x = 0.5, y = 0.5, 
+         #          label = data.frame(Stat = rownames(stats_step),stats_step),
+         #          hjust = 0.5, vjust = 0.5) +
             theme_void() +
             ggtitle("")+
             scale_color_brewer(palette='Set1')

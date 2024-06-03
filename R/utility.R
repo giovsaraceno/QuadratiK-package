@@ -52,7 +52,8 @@ DOF_norm <- function(Sigma_h, V){
    #    (h2/(h2+2))^(d)
    # dof <- dof_num^2/dof_den
    # 
-   # c_num <- ((h2+2)/(h2*(h2+4)))^(d/2) - 2* (h2/(h2+1))^(d/2)*(1/(h2+3))^(d/2) +
+   # c_num <- ((h2+2)/(h2*(h2+4)))^(d/2) - 
+   # 2* (h2/(h2+1))^(d/2)*(1/(h2+3))^(d/2) +
    #    (h/(h2+2))^(d)
    # const <- c_num/dof_num
    # 
@@ -77,7 +78,9 @@ var_norm <- function(Sigma_h, V, n){
    
    d <- nrow(Sigma_h)
    
-   res <- det(Sigma_h)^(-1/2) * det(Sigma_h + 4*V)^(-1/2) -2 * det(Sigma_h + V)^(-1/2) * det(Sigma_h + 3*V)^(-1/2) + det(Sigma_h + 2*V)^(-1)
+   res <- det(Sigma_h)^(-1/2) * det(Sigma_h + 4*V)^(-1/2) -
+      2 * det(Sigma_h + V)^(-1/2) * det(Sigma_h + 3*V)^(-1/2) + 
+      det(Sigma_h + 2*V)^(-1)
    
    res <- 2/(n*(n-1)) * 1/(2*pi)^(d) * res
    

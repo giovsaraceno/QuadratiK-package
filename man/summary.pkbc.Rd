@@ -10,10 +10,10 @@
 \item{object}{Object of class \code{pkbc}}
 }
 \value{
-Display the logLikelihood values and within cluster sum of squares (wcss)
-for all the values of number of clusters provided. For each of these value
-the estimated mixing proportions are showed together with a table with the
-assigned memberships.
+Display the logLikelihood values and within cluster sum of squares
+(wcss) for all the values of number of clusters provided. For each of
+these value the estimated mixing proportions are showed together with
+a table with the assigned memberships.
 }
 \description{
 Summary method for class "pkbc"

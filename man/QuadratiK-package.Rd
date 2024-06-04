@@ -8,7 +8,7 @@
 Distances}
 \description{
 It is implemented in R and Python, providing a comprehensive set
-of goodness-of-fit tests and clustering technique using kernel-based
+of goodness-of-fit tests and a clustering technique using kernel-based
 quadratic distances. This framework aims to bridge the gap between the
 statistical and machine learning literature. It includes:
 \itemize{
@@ -67,4 +67,3 @@ Giovanni Saraceno, Marianthi Markatou,
 Raktim Mukhopadhyay, Mojgan Golzy
 \email{gsaracen@buffalo.edu}
 }
-\keyword{internal}

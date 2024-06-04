@@ -33,7 +33,7 @@ In-Group Proportion. If true label are provided, ARI, Average
 Silhouette Width, Macro-Precision and Macro-Recall are computed.
 }
 \examples{
-#We generate three sample of 100 observations from 3-dimensional
+#We generate three samples of 100 observations from 3-dimensional
 #Poisson kernel-based densities with rho=0.8 and different mean directions
 \donttest{
 size<-20

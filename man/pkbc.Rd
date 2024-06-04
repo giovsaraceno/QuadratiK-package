@@ -100,7 +100,7 @@ data2<-rpkb(size, c(0,1,0),rho,method="rejvmf")
 data3<-rpkb(size, c(0,0,1),rho,method="rejvmf")
 dat<-rbind(data1$x,data2$x, data3$x)
 
-#Perform the clustering algorithm with number od clusters k=3.
+#Perform the clustering algorithm with number of clusters k=3.
 pkbd<- pkbc(dat, 3)
 
 }

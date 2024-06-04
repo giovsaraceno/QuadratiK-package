@@ -381,29 +381,31 @@ as possible values for the number of clusters.</p>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>res_pk <span class="ot">&lt;-</span> <span class="fu">pkbc</span>(<span class="fu">as.matrix</span>(wire_norm),<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>)</span></code></pre></div>
 <p>To guide the choice of the number of clusters, the function
 <code>validation</code> provides cluster validation measures and
-graphical tools. Specifically, it displays the Elbow plot from the
-computed within-cluster sum of squares values and returns an object with
+graphical tools. Specifically, it returns an object with
 <code>IGP</code> the InGroup Proportion (IGP), and <code>metrics</code>
-a table of computed evaluation measures. This include the <span class="math inline">\(k\)</span>-sample test statistics with
-corresponding critical value and, if the true labels are provided, the
-measures of adjusted rand index (ARI), Macro-Precision and
-Macro-Recall.</p>
+a table of computed evaluation measures. This table includes the Average
+Siluoette Width (ASW) and, if the true labels are provided, the measures
+of adjusted rand index (ARI), Macro-Precision and Macro-Recall.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>res_validation <span class="ot">&lt;-</span> <span class="fu">validation</span>(res_pk, <span class="at">true_label =</span> labels)</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>res_validation<span class="sc">$</span>IGP</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">round</span>(res_validation<span class="sc">$</span>metrics, <span class="dv">8</span>)</span></code></pre></div>
+<p>The plot method can be used to display the scatter plot of data
+points and the Elbow plot from the computed within-cluster sum of
+squares values. For the scatter plot, for <span class="math inline">\(d=2\)</span> and <span class="math inline">\(d=3\)</span>, observations are displayed on the
+unit circle and unit sphere, respectively. If <span class="math inline">\(d&gt;3\)</span>, the spherical PCA is applied on
+the data set, and the first 3 principal components are used for
+visualizing data points on the sphere, after application of <span class="math inline">\(L_2\)</span> normalization. In the generated
+figure, data points are colored by the true labels and the assigned
+membership.</p>
 <p>The Elbow plots and the reported metrics suggest <span class="math inline">\(K=4\)</span> as number of clusters. This is in
-accordance with the know ground truth. Once the number of clusters is
+accordance with the known ground truth. Once the number of clusters is
 selected, the function <code>summary_stat</code> in the
 <code>QuadratiK</code> package can be used to obtain additional summary
 information with respect to the clustering results. In particular, the
 function provides mean, standard deviation, median, inter-quantile
 range, minimum and maximum computed for each variable, overall and by
-the assigned membership, as well as a representation of data points. For
-<span class="math inline">\(d=2\)</span> and <span class="math inline">\(d=3\)</span>, observations are displayed on the
-unit circle and unit sphere, respectively. If <span class="math inline">\(d&gt;3\)</span>, the spherical PCA is applied on
-the data set, and the first 3 principal components are used for
-visualizing data points on the sphere, after application of <span class="math inline">\(L_2\)</span> normalization.</p>
+the assigned membership.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>summary_clust <span class="ot">&lt;-</span> <span class="fu">stats_clusters</span>(res_pk,<span class="dv">4</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>summary_clust</span></code></pre></div>
 <pre><code>## [[1]]
@@ -468,12 +470,10 @@ visualizing data points on the sphere, after application of <span class="math in
 ## IQR     0.02311965  0.03050579  0.02784124  0.02030659  0.03643335
 ## min    -0.50728615 -0.56835661 -0.54571977 -0.53648350 -0.56835661
 ## max    -0.41326597 -0.38995633 -0.43815927 -0.44423198 -0.38995633</code></pre>
-<p>The figure shows the data points according to the first three
-spherical principal components, colored by the true labels and the
-assigned membership. The clusters identified with <span class="math inline">\(k=4\)</span> achieve high performance in terms of
-ARI, Macro Precision and Macro Recall. The plot of points using the
-principal components also shows that the identified cluster follows the
-initial labels.</p>
+<p>The clusters identified with <span class="math inline">\(k=4\)</span>
+achieve high values of ARI, Macro Precision and Macro Recall. The plot
+of points using the principal components also shows that the identified
+cluster follows the initial labels.</p>
 </div>
 
 

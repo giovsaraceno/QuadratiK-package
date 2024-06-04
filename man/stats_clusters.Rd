@@ -24,8 +24,8 @@ List with computed descriptive statistics for each variable.
 Method for objects of class \code{pkbc} which computes some
 descriptive for each variable with respect to the detected groups.
 
-Method for objects of class \code{pkbc} which computes some
-descriptive for each variable with respect to the detected groups.
+Method for objects of class \code{pkbc} which computes descriptive
+statistics for each variable with respect to the detected groups.
 }
 \details{
 The function computes mean, standard deviation, median,

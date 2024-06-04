@@ -48,7 +48,7 @@ kb.test(
 \code{x}
 \item if \code{y} is a data matrix, with same dimensions of \code{x}, the
 function performs the two-sample test between \code{x} and \code{y}.
-\item if \code{y} if a numeric or factor vector, indicating the group
+\item if \code{y} is a numeric or factor vector, indicating the group
 memberships for each observation, the function performs the k-sample
 test.
 }}

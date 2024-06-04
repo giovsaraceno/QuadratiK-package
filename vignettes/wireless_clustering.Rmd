@@ -34,7 +34,7 @@ set.seed(2468)
 res_pk <- pkbc(as.matrix(wire_norm),3:6)
 ```
 
-To guide the choice of the number of clusters, the function ``validation`` provides cluster validation measures and graphical tools. Specifically, it displays the Elbow plot from the computed within-cluster sum of squares values and returns an object with ``IGP`` the InGroup Proportion (IGP), and ``metrics`` a table of computed evaluation measures.  This include the $k$-sample test statistics with corresponding critical value and, if the true labels are provided, the measures of adjusted rand index (ARI), Macro-Precision and Macro-Recall. 
+To guide the choice of the number of clusters, the function ``validation`` provides cluster validation measures and graphical tools. Specifically, it returns an object with ``IGP`` the InGroup Proportion (IGP), and ``metrics`` a table of computed evaluation measures.  This table includes the Average Siluoette Width (ASW) and, if the true labels are provided, the measures of adjusted rand index (ARI), Macro-Precision and Macro-Recall. 
 ```{r eval=FALSE}
 set.seed(2468)
 res_validation <- validation(res_pk, true_label = labels)
@@ -42,8 +42,10 @@ res_validation$IGP
 round(res_validation$metrics, 8)
 ```
 
-The Elbow plots and the reported metrics suggest $K=4$ as number of clusters. This is in accordance with the know ground truth. 
-Once the number of clusters is selected, the function ``summary_stat`` in the ``QuadratiK`` package can be used to obtain additional summary information with respect to the clustering results. In particular, the function provides mean, standard deviation, median, inter-quantile range, minimum and maximum computed for each variable, overall and by the assigned membership, as well as a representation of data points. For $d=2$ and $d=3$, observations are displayed on the unit circle and unit sphere, respectively. If $d>3$, the spherical PCA is applied on the data set, and the first 3 principal components are used for visualizing data points on the sphere, after application of  $L_2$ normalization. 
+The plot method can be used to display the scatter plot of data points and the Elbow plot from the computed within-cluster sum of squares values. For the scatter plot, for $d=2$ and $d=3$, observations are displayed on the unit circle and unit sphere, respectively. If $d>3$, the spherical PCA is applied on the data set, and the first 3 principal components are used for visualizing data points on the sphere, after application of  $L_2$ normalization. In the generated figure, data points are colored by the true labels and the assigned membership.
+
+The Elbow plots and the reported metrics suggest $K=4$ as number of clusters. This is in accordance with the known ground truth. 
+Once the number of clusters is selected, the function ``summary_stat`` in the ``QuadratiK`` package can be used to obtain additional summary information with respect to the clustering results. In particular, the function provides mean, standard deviation, median, inter-quantile range, minimum and maximum computed for each variable, overall and by the assigned membership.  
 ```{r fig.width=6, fig.height=8}
 summary_clust <- stats_clusters(res_pk,4)
 ```
@@ -52,5 +54,4 @@ summary_clust <- stats_clusters(res_pk,4)
 summary_clust
 ```
 
-The figure shows the data points according to the first three spherical principal components, colored by the true labels and the assigned membership. 
-The clusters identified with $k=4$ achieve high performance in terms of ARI, Macro Precision and Macro Recall. The plot of points using the principal components also shows that the identified cluster follows the initial labels.
+The clusters identified with $k=4$ achieve high values of ARI, Macro Precision and Macro Recall. The plot of points using the principal components also shows that the identified cluster follows the initial labels.

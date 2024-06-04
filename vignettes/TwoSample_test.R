@@ -4,6 +4,9 @@
 #  #'
 #  #' @srrstats {G1.5} two-sample test example in the associated paper
 
+## ----setup, include=FALSE-----------------------------------------------------
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
 ## ----message=FALSE------------------------------------------------------------
 library(sn)
 library(mvtnorm)

@@ -27,11 +27,11 @@ select_h(
 \code{y}, the selection of h is performed for the corresponding
 test.
 \itemize{
-\item if \code{y} = NULL, the function performs the tests for normality o
-n \code{x}
+\item if \code{y} = NULL, the function performs the tests for normality on
+\code{x}.
 \item if \code{y} is a data matrix, with same dimensions of \code{x}, the
 function performs the two-sample test between \code{x} and \code{y}.
-\item if \code{y} if a numeric or factor vector, indicating the group
+\item if \code{y} is a numeric or factor vector, indicating the group
 memberships for each observation, the function performs the k-sample
 test.
 }}
@@ -82,7 +82,7 @@ normality, two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
 The function performs the selection of the optimal value for the tuning
 parameter \eqn{h} of the normal kernel function, for normality test, the
 two-sample and k-sample KBQD tests. It performs a small simulation study,
-generating sample according to the family of \code{alternative} specified,
+generating samples according to the family of \code{alternative} specified,
 for the chosen values of \code{h_values} and \code{delta}.
 }
 \examples{

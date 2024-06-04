@@ -70,7 +70,7 @@
 #' data3<-rpkb(size, c(0,0,1),rho,method="rejvmf")
 #' dat<-rbind(data1$x,data2$x, data3$x)
 #'
-#' #Perform the clustering algorithm with number od clusters k=3.
+#' #Perform the clustering algorithm with number of clusters k=3.
 #' pkbd<- pkbc(dat, 3)
 #'
 #' @srrstats {G2.0a} Documentation of input nClust
@@ -417,8 +417,8 @@ setMethod("show", "pkbc", function(object) {
 #' 
 #' @return Display the logLikelihood values and within cluster sum of squares 
 #'         (wcss) for all the values of number of clusters provided. For each of
-#'         these value the estimated mixing proportions are showed together with
-#'         a table with the assigned memberships.
+#'         these values the estimated mixing proportions are showed together 
+#'         with a table with the assigned memberships.
 #' 
 #' @examples
 #' dat <- rbind(matrix(rnorm(100),2),matrix(rnorm(100,5),2))
@@ -482,8 +482,8 @@ setGeneric("stats_clusters",function(object,...){
 #' 
 #' Descriptive statistics for the identified clusters
 #'
-#' Method for objects of class \code{pkbc} which computes some 
-#' descriptive for each variable with respect to the detected groups. 
+#' Method for objects of class \code{pkbc} which computes descriptive 
+#' statistics for each variable with respect to the detected groups. 
 #'
 #' @param object Object of class \code{pkbc}.
 #' @param k Number of clusters to be used.
@@ -938,7 +938,7 @@ setMethod("predict", signature(object="pkbc"),
 #' @importFrom stats dist
 #'
 #' @examples
-#' #We generate three sample of 100 observations from 3-dimensional
+#' #We generate three samples of 100 observations from 3-dimensional
 #' #Poisson kernel-based densities with rho=0.8 and different mean directions
 #' \donttest{
 #' size<-20

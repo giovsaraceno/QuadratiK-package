@@ -94,8 +94,13 @@ separated, following different Gaussian distributions, i.e. <span class="math i
 <code>y</code> indicates the membership to groups.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org" class="external-link">mvtnorm</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
-<span><span class="va">sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">200</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Registered S3 methods overwritten by 'ggpp':</span></span>
+<span><span class="co">##   method                  from   </span></span>
+<span><span class="co">##   heightDetails.titleGrob ggplot2</span></span>
+<span><span class="co">##   widthDetails.titleGrob  ggplot2</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">200</span>,<span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html" class="external-link">rmvnorm</a></span><span class="op">(</span><span class="va">sizes</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">*</span><span class="va">eps</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
@@ -105,7 +110,7 @@ separated, following different Gaussian distributions, i.e. <span class="math i
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, times<span class="op">=</span><span class="va">sizes</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Recall that the computed test statistics correspond to the omnibus
 tests.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fl">1.5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">k_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span>, h<span class="op">=</span><span class="va">h</span><span class="op">)</span></span>
@@ -122,16 +127,16 @@ tests.</p>
 <p>When the <span class="math inline">\(k\)</span>-sample test is
 performed, the <code>summary</code> method on the <code>kb.test</code>
 object returns the results of the tests together with the standard
-descriptive statistics for each variable computed, overall and with
+descriptive statistics for each variable computed, overall, and with
 respect to the provided groups.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">k_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
 <span><span class="co">## 1        Dn        11.8440      0.5623288      TRUE</span></span>
 <span><span class="co">## 2     Trace        38.6817      1.8368685      TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">##             Group 1    Group 2    Group 3       Overall</span></span>
@@ -154,23 +159,21 @@ respect to the provided groups.</p>
 <h4 id="selection-of-h">Selection of h<a class="anchor" aria-label="anchor" href="#selection-of-h"></a>
 </h4>
 <p>If a value of <span class="math inline">\(h\)</span> is not provided,
-the function automatically perform the function
+the function automatically performs the function
 <code>select_h</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#k_test_h &lt;- kb.test(x=x, y=y)</span></span></code></pre></div>
 <p>For a more accurate search of the tuning parameter, the function
 <code>select_h</code> can be used.This function needs the input
 <code>x</code> and <code>y</code> as the function <code>kb.test</code>
 for the <span class="math inline">\(k\)</span>-sample problem.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">h_k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_h.html">select_h</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span>, alternative<span class="op">=</span><span class="st">"skewness"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h_k</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<p>The figure generated by the <code>select_h</code> function on the
-result of the selection of <span class="math inline">\(h\)</span>
-algorithm for the <span class="math inline">\(k\)</span>-sample data set
-displays the obtained power versus the considered <span class="math inline">\(h\)</span>, for each value of skewness alternative
+<p>The <code>select_h</code> function will also generate a figure
+displaying the obtained power versus the considered <span class="math inline">\(h\)</span>, for each value of skewness alternative
 <span class="math inline">\(\delta\)</span> considered.</p>
 </div>
 </div>

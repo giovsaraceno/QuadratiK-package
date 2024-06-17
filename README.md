@@ -1,6 +1,7 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/QuadratiK)](https://cran.r-project.org/package=QuadratiK)
+
+[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632)
 
 # Collection of Methods Constructed using the Kernel-Based Quadratic Distances
 

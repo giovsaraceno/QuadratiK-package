@@ -6,7 +6,7 @@ QuadratiK (Next Release)
   * Added NEWS.md file
   * Added badge for rOpenSci review status
 
-=========================
+
 QuadratiK 1.1.1 (2024-06-05)
 =========================
 
@@ -27,7 +27,7 @@ QuadratiK 1.1.1 (2024-06-05)
 
   * Correction of typos
   
-=========================
+
 QuadratiK 1.1.0 (2024-05-14)
 =========================
 
@@ -76,7 +76,7 @@ QuadratiK 1.1.0 (2024-05-14)
   * Remove Date from DESCRIPTION
   * Update References in the DESCRIPTION file
 
-=========================
+
 QuadratiK 1.0.0 (2024-02-23)
 =========================
 

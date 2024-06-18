@@ -54,7 +54,90 @@
       <small>Source: <a href="https://github.com/giovsaraceno/QuadratiK-package/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-  </main></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.1" id="quadratik-111-2024-06-05">QuadratiK 1.1.1 (2024-06-05)<a class="anchor" aria-label="anchor" href="#quadratik-111-2024-06-05"></a></h2><p class="text-muted">CRAN release: 2024-06-05</p>
+<div class="section level4">
+<h4 id="new-features-1-1-1">NEW FEATURES<a class="anchor" aria-label="anchor" href="#new-features-1-1-1"></a></h4>
+<ul><li>Improve computation of variance for k-sample test</li>
+<li>Add <code>breast_cancer</code> and <code>wine</code> data sets</li>
+</ul></div>
+<div class="section level4">
+<h4 id="minor-improvements-1-1-1">MINOR IMPROVEMENTS<a class="anchor" aria-label="anchor" href="#minor-improvements-1-1-1"></a></h4>
+<ul><li>
+<code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> and <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> methods of the <code>kb.test</code> object for the two and k-sample tests</li>
+</ul></div>
+<div class="section level4">
+<h4 id="bug-fixes-1-1-1">BUG FIXES<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-1"></a></h4>
+<ul><li>Computation of test statistics for normality test</li>
+</ul></div>
+<div class="section level4">
+<h4 id="documentation-fixes-1-1-1">DOCUMENTATION FIXES<a class="anchor" aria-label="anchor" href="#documentation-fixes-1-1-1"></a></h4>
+<ul><li>Correction of typos</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="quadratik-110-2024-05-14">QuadratiK 1.1.0 (2024-05-14)<a class="anchor" aria-label="anchor" href="#quadratik-110-2024-05-14"></a></h2><p class="text-muted">CRAN release: 2024-05-14</p>
+<div class="section level4">
+<h4 id="new-features-1-1-0">NEW FEATURES<a class="anchor" aria-label="anchor" href="#new-features-1-1-0"></a></h4>
+<ul><li>Add GitHub links to the DESCRIPTION file</li>
+<li>Add unit tests<br></li>
+<li>Add CONTRIBUTING.md</li>
+<li>Add srr standards for the categories: General, Clustering and Probability Distributions</li>
+<li>Add methods for the clustering object <code>pkbc</code>: <code><a href="https://rdrr.io/r/methods/show.html" class="external-link">show()</a></code>, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, <code>estract_stats()</code>, <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>
+</li>
+<li>Add vignette <code>generate_rpkb.Rmd</code>
+</li>
+<li>Add CODE_OF_CONDUCT.md</li>
+<li>Create the GitHub page using pkgdown</li>
+<li>Add V-statistic for Normality test, with corresponding Critical Value and Degrees of Freedom with the function <code><a href="../reference/DOF_norm.html">DOF_norm()</a></code>
+</li>
+<li>Update <code>kb.test</code> S4 class slots, <code><a href="../reference/kb.test.html">kb.test()</a></code> function, unit-test codes, <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> and <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method for including the V-statistic</li>
+<li>Add Trace statistic for two and k-sample tests</li>
+<li>Add computation of the Variance for two and k-sample tests</li>
+</ul></div>
+<div class="section level4">
+<h4 id="minor-improvements-1-1-0">MINOR IMPROVEMENTS<a class="anchor" aria-label="anchor" href="#minor-improvements-1-1-0"></a></h4>
+<ul><li>Addition of GitHub workflows for R-CMD-check, test-coverage and pkgcheck</li>
+<li>Update codes to check arguments of function <code><a href="../reference/pk.test.html">pk.test()</a></code>
+</li>
+<li>Update codes to check arguments of function <code><a href="../reference/kb.test.html">kb.test()</a></code> and <code><a href="../reference/select_h.html">select_h()</a></code>
+</li>
+<li>Modify indentation and assignments (using ‘&lt;-’) following <code>goodpractice</code> standards</li>
+<li>Update references in README.md file</li>
+</ul></div>
+<div class="section level4">
+<h4 id="bug-fixes-1-1-0">BUG FIXES<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-0"></a></h4>
+<ul><li><p>Add codemeta.json to .Rbuildignore</p></li>
+<li><p>Add CONTRIBUTING.md to .Rbuildignore</p></li>
+<li><p>Fix warning from internal function <code><a href="../reference/compare_qq.html">compare_qq()</a></code></p></li>
+<li><p>Add <code>doc</code> folder to .gitignore</p></li>
+<li><p>Modify returned test statistics multiplying them by the sample size</p></li>
+<li><p>Remove “Nonparam” centering option for the Normality test</p></li>
+<li><p>Critical value of the V-statistic divided by the variance in the function <code><a href="../reference/pk.test.html">pk.test()</a></code></p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="deprecated-and-defunct-1-1-0">DEPRECATED AND DEFUNCT<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-1-1-0"></a></h4>
+<ul><li>
+<code>summary_stat()</code> and <code>validation()</code> substituted by <code>estract_stats()</code> and <code><a href="../reference/pkbc_validation.html">pkbc_validation()</a></code>
+</li>
+</ul></div>
+<div class="section level4">
+<h4 id="documentation-fixes-1-1-0">DOCUMENTATION FIXES<a class="anchor" aria-label="anchor" href="#documentation-fixes-1-1-0"></a></h4>
+<ul><li>C++ functions are set as internal functions</li>
+<li>Correction of typos</li>
+<li>Remove Date from DESCRIPTION</li>
+<li>Update References in the DESCRIPTION file</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.0" id="quadratik-100-2024-02-23">QuadratiK 1.0.0 (2024-02-23)<a class="anchor" aria-label="anchor" href="#quadratik-100-2024-02-23"></a></h2><p class="text-muted">CRAN release: 2024-02-23</p>
+<div class="section level4">
+<h4 id="new-features-1-0-0">NEW FEATURES<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h4>
+<ul><li>released to CRAN</li>
+</ul></div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

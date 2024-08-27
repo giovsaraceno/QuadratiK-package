@@ -1,28 +1,66 @@
 #'
 #' Poisson kernel-based clustering on the sphere
 #'
-#' The function \code{pkbc} performs the Poisson kernel-based clustering 
-#' algorithm on the sphere based on the Poisson kernel-based densities.
-#'
+#' @description
+#' The function \code{pkbc()} performs the Poisson kernel-based clustering 
+#' algorithm on the sphere proposed by Golzy and Markatou (2020). 
+#' The proposed algorithm is based on a mixture, with \eqn{M} components, of 
+#' Poisson kernel-based densities on the hypersphere \eqn{\mathcal{S}^{d-1}}
+#' given by
+#' \deqn{f(x|\Theta) = \sum_{j=1}^M \alpha_j f_j(x|\rho_j, \mu_j)}
+#' where \eqn{\alpha_j}'s are the mixing proportions and \eqn{f_j(x|\rho_j, 
+#' \mu_j)}'s denote the probability density function of a \eqn{d}-variate 
+#' Poisson kernel-based density given as
+#' \deqn{f(\mathbf{x}|\rho, \mathbf{\mu}) = \frac{1-\rho^2}{\omega_d 
+#' ||\mathbf{x} - \rho \mathbf{\mu}||^d}.}
+#' The parameters \eqn{\alpha_j, \mu_j, \rho_j} are estimated through a 
+#' iterative reweighted EM algorithm. \cr
+#' The proposed clustering algorithm exhibits excellent results when 
+#' (1) the clusters are not well separated; (2) the data points
+#' are fairly well concentrated around the vectors \eqn{\mu_j} of each cluster;
+#' (3) the percentage of noise in the data increases.
+#' 
 #' @param dat Data matrix or data.frame of data points on the sphere to be 
-#'            clustered. The observations in dat are normalized to ensure that
-#'            they lie on the d-simensional sphere. Note that d > 1.
+#'            clustered. The observations in \code{dat} are normalized to ensure
+#'            that they lie on the \eqn{d}-dimensional sphere. Note that 
+#'            \eqn{d > 1}.
 #' @param nClust Number of clusters. It can be a single value or a numeric 
 #'               vector.
 #' @param maxIter The maximum number of iterations before a run is terminated.
 #' @param stoppingRule String describing the stopping rule to be used within 
-#'                     each run. Currently must be either: 
-#'                \code{'max'} (until the change in the log-likelihood is less 
-#'                than a given threshold (1e-7)), 
-#'                \code{'membership'} (until the membership is unchanged), or 
-#'                \code{'loglik'} (based on a maximum number of iterations).
+#'                     each run. Currently must be either \code{'max'}, 
+#'                     \code{'membership'}, or \code{'loglik'}.
 #' @param initMethod String describing the initialization method to be used.
 #'                   Currently must be \code{'sampleData'}.
-#' @param numInit Number of initializations.
+#' @param numInit Number of initialization.
 #'
-#' @details The function estimates the parameter of a mixture of Poisson
-#' kernel-based densities. The obtained estimates are used for assigning final 
-#' memberships, identifying the \code{nClust} clusters.
+#' @details 
+#' We set all concentration parameters equal to 0.5 and all mixing proportions
+#' to be equal. \cr
+#' The initialization method \code{'sampleData'} indicates that observation 
+#' points are randomly chosen as initializers of the centroids \eqn{\mu_j}.
+#' This random starts strategy has a chance of not obtaining initial 
+#' representatives from the underlying clusters, then the clustering is 
+#' performed \code{numInit} times and the random start with the highest
+#' likelihood is chosen as the final estimate of the parameters.
+#' 
+#' The possible \code{stoppingRule} for each iteration are: \cr
+#' - \code{'loglik'} run the algorithm until the change in log-likelihood from 
+#' one iteration to the next is less than a given threshold (1e-7) \cr
+#' - \code{'membership'} run the algorithm until the membership is unchanged for
+#' all points from one iteration to the next \cr
+#' - \code{'max'} reach a maximum number of iterations \code{maxIter}
+#' 
+#' The obtained estimates are used for assigning final memberships, identifying
+#' the \code{nClust} clusters, according to the following rule
+#' \deqn{P(x_i, \Theta) = \argmax_{j \in \{1, \ldots, k\}} \{ \frac{\alpha_j 
+#' f_j(x_i|\mu_j, \rho_j)}{f(x_i, \Theta)}\}.}
+#' The number of clusters \code{nClust} must be provided as input to the
+#' clustering algorithm.
+#' 
+#' @seealso [dpkb()] and [rpkb()] for more information on the Poisson 
+#'          kernel-based distribution. \cr
+#'          \linkS4class{pkbc} for the class definition.
 #'
 #' @return An S4 object of class \code{pkbc} containing the results of the 
 #' clustering procedure based on Poisson kernel-based distributions. The object 
@@ -65,13 +103,14 @@
 #' groups<-c(rep(1, size), rep(2, size),rep(3,size))
 #' rho<-0.8
 #' set.seed(081423)
-#' data1<-rpkb(size, c(1,0,0),rho,method="rejvmf")
-#' data2<-rpkb(size, c(0,1,0),rho,method="rejvmf")
-#' data3<-rpkb(size, c(0,0,1),rho,method="rejvmf")
+#' data1<-rpkb(size, c(1,0,0),rho)
+#' data2<-rpkb(size, c(0,1,0),rho)
+#' data3<-rpkb(size, c(0,0,1),rho)
 #' dat<-rbind(data1$x,data2$x, data3$x)
 #'
 #' #Perform the clustering algorithm with number of clusters k=3.
-#' pkbd<- pkbc(dat, 3)
+#' pkbd<- pkbc(dat=dat, nClust=3)
+#' show(pkbd)
 #'
 #' @srrstats {G2.0a} Documentation of input nClust
 #' @srrstats {G1.3} description of parameter
@@ -425,7 +464,8 @@ setMethod("show", "pkbc", function(object) {
 #' res <- pkbc(dat,2:4)
 #' summary(res)
 #' 
-#' @seealso [pkbc()]
+#' @seealso [pkbc()] for the clustering algorithm \cr
+#'          \linkS4class{pkbc} for the class object definition. 
 #'
 #' @srrstats {G1.4} roxigen2 is used
 #' @srrstats {UL4.4} summary method for pkbc object
@@ -474,6 +514,9 @@ setMethod("summary", "pkbc", function(object) {
 #' @param object Object 
 #' @param ... possible additional inputs
 #' 
+#' @seealso [pkbc()] for the clustering algorithm \cr
+#'          \linkS4class{pkbc} for the class object definition.
+#'          
 #' @export
 setGeneric("stats_clusters",function(object,...){
    
@@ -488,7 +531,8 @@ setGeneric("stats_clusters",function(object,...){
 #' @param object Object of class \code{pkbc}.
 #' @param k Number of clusters to be used.
 #'
-#' @details The function computes mean, standard deviation, median, 
+#' @details 
+#' The function computes mean, standard deviation, median, 
 #' inter-quantile range, minimum and maximum for each variable in the data set 
 #' given the final membership assigned by the clustering algorithm. 
 #' 
@@ -502,7 +546,7 @@ setGeneric("stats_clusters",function(object,...){
 #' stats_clusters(pkbc_res, 3)
 #' 
 #'
-#' @return List with computed descriptive statistics for each variable. 
+#' @return List with computed descriptive statistics for each dimension. 
 #'
 #'
 #' @srrstats {G1.4} roxigen2 is used
@@ -562,33 +606,34 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' @param true_label factor or vector of true membership to clusters (if 
 #'                   available). It must have the same length of final 
 #'                   memberships.
-#' @param pca_res Logical. If TRUE the results from PCALocantore when dimension
-#'                is greater than 3 are also reported. 
+#' @param pca_res Logical. If TRUE the results from PCALocantore are also 
+#'                reported (when dimension is greater than 3). 
 #'
 #' @details 
 #' - scatterplot: If dimension is equal to 2 or 3, points are displayed on the 
 #' circle and sphere, respectively. If dimension if greater than 3, the 
-#' spherical Principal Component procedure proposed by Locantore et al., (1999)
+#' spherical Principal Component procedure proposed by Locantore et al. (1999),
 #' is applied for dimensionality reduction and the first three principal
 #' components are normalized and displayed on the sphere. For d > 3, the
 #' complete results from the \code{PcaLocantore} function (package \code{rrcov})
-#' are returned if pca_res=TRUE.
+#' are returned if \code{pca_res=TRUE}.
 #' - elbow plot: the within cluster sum of squares (wcss) is computed using the 
 #' Euclidean distance (left) and the cosine similarity (right). 
 #' 
+#' @seealso [pkbc()] for the clustering algorithm \cr
+#'          \linkS4class{pkbc} for the class object definition.
+#' 
 #' @examples
-#' \donttest{
 #' dat<-matrix(rnorm(300),ncol=3)
 #' pkbc_res<- pkbc(dat, 3)
 #' stats_clusters(pkbc_res, 3)
-#' }
 #' 
 #' @references
 #' Locantore, N., Marron, J.S., Simpson, D.G. et al. (1999) "Robust principal 
 #' component analysis for functional data." Test 8, 1–73. 
 #' https://doi.org/10.1007/BF02595862
 #' 
-#' @return One of the following plot:
+#' @return 
 #' - scatterplot of data points colored by final membership
 #' - elbow plot
 #' 
@@ -786,8 +831,9 @@ elbowMethod <- function(object){
 }
 #' Cluster spherical observations by mixture of Poisson kernel-based densities
 #' 
-#' Cluster spherical observations based on mixture of Poisson kernel-based 
-#' densities estimated by \code{pkbc}
+#' @description
+#' Obtain predictions of membership for spherical observations based on a 
+#' mixture of Poisson kernel-based densities estimated by \code{pkbc}
 #' 
 #' @param object Object of class \code{pkbc}
 #' @param k Number of clusters to be used.
@@ -813,7 +859,8 @@ elbowMethod <- function(object){
 #' newdat <- rbind(matrix(rnorm(10),ncol=2),matrix(rnorm(10,5),ncol=2))
 #' predict(res, k=2, newdat)
 #'  
-#' @seealso [pkbc()]
+#' @seealso [pkbc()] for the clustering algorithm \cr
+#'          \linkS4class{pkbc} for the class object definition.
 #' 
 #' @srrstats {G1.a} roxygen2 is used
 #' @srrstats {UL3.3} prediction function for pkbc object
@@ -937,6 +984,9 @@ setMethod("predict", signature(object="pkbc"),
 #'    \item \code{IGP} List of in-group proportions for each value of number of 
 #'                     clusters specified.
 #' }
+#' 
+#' @seealso [pkbc()] for the clustering algorithm \cr
+#'          \linkS4class{pkbc} for the class object definition.
 #'
 #' @references
 #' Kapp, A.V., Tibshirani, R. (2007) "Are clusters found in one dataset present 

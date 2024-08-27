@@ -1,13 +1,49 @@
 #' 
 #' Poisson kernel-based quadratic distance test of Uniformity on the sphere
 #' 
-#' This function performs the kernel-based quadratic distance goodness-of-fit 
-#' tests for Uniformity for spherical data using the Poisson kernel with 
-#' concentration parameter \code{rho}.
+#' @description
+#'  This function performs the kernel-based quadratic distance goodness-of-fit 
+#' tests for Uniformity for spherical data \code{x} using the Poisson kernel 
+#' with concentration parameter \code{rho}. 
+#' 
+#' @details
+#' The quadratic distance between two probability distributions \eqn{F} and
+#' \eqn{G} is
+#' then defined as \deqn{d_{K}(F,G)=\int\int K(x,y)d(F-G)(x)d(F-G)(y),}
+#' where \eqn{G} is a distribution whose goodness of fit we wish to assess, that
+#' is the uniform distribution on the sphere \eqn{\mathcal{S}^{d-1}}, and 
+#' \eqn{K} denotes the Poisson kernel defined as 
+#' \deqn{ K(\mathbf{u}, \mathbf{v})= \frac{1-\rho^{2}}{\left ( 1+\rho^{2}-2\rho
+#' (\mathbf{u}\cdot \mathbf{v})\right )^{d/2}},}
+#' for every \eqn{\mathbf{u}, \mathbf{v} \in \mathcal{S}^{d-1} \times 
+#' \mathcal{S}^{d-1}}.
+#' Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical distribution
+#' function \eqn{\hat F}. 
+#' We test the null hypothesis of uniformity on the 
+#' \eqn{d}-dimensional sphere, i.e. \eqn{H_0:F=G}, we consider the U-statistic 
+#' estimate and the V-statistic estimate of the sample KBQD.
+#' 
+#' The asymptotic distribution of the V-statistic is an infinite combination
+#' of independent chi-squared random variables with one degree of freedom. 
+#' The cutoff value is obtained using the 
+#' Satterthwaite approximation 
+#' \eqn{c \cdot \chi_{DOF}^2}, where \deqn{c=\frac{(1+\rho^{2})-
+#' (1-\rho^{2})^{d-1}}{(1+\rho)^{d}-(1-\rho^{2})^{d-1}}} and \deqn{DOF(K_{cen}
+#' )=\left(\frac{1+\rho}{1-\rho} \right)^{d-1}\left\{ 
+#' \frac{\left(1+\rho-(1-\rho)^{d-1} \right )^{2}}
+#' {1+\rho^{2}-(1-\rho^{2})^{d-1}}\right \}.}.
+#' For the \eqn{T_n} statistic the cutoff is determined empirically:
+#' -  Generate data from a Uniform distribution on the d-dimensional sphere;
+#' - Compute the test statistics for \code{B} Monte Carlo(MC) replications;
+#' - Compute the 95th quantile of the empirical distribution of the test
+#'   statistic.
+#' 
+#' @seealso \linkS4class{pk.test}
+#' 
 #'
 #' @param x A numeric d-dim matrix of data points on the Sphere S^(d-1).
 #' @param rho Concentration parameter of the Poisson kernel function.
-#' @param B Number of iterations for critical value estimation of Un 
+#' @param B Number of Monte Carlo iterations for critical value estimation of Un 
 #'          (default: 300).
 #' @param Quantile The quantile to use for critical value estimation, 
 #'                 0.95 is the default value.
@@ -15,29 +51,28 @@
 #' @return An S4 object of class \code{pk.test} containing the results of the 
 #' Poisson kernel-based tests. The object contains the following slots:
 #'\itemize{
-#'   \item \code{method}: String indicating that the Poisson Kernel-based test 
-#'   is performed.
+#'   \item \code{method}: Description of the test performed.
 #'   \item \code{x} Data matrix.
-#'   \item \code{Un} The value of the U-statistic.
-#'   \item \code{CV_Un} The empirical critical value for Un.
+#'   \item \code{Un} The value of the U-statistic \eqn{T_n}.
+#'   \item \code{CV_Un} The empirical critical value for \eqn{T_n}.
 #'   \item \code{H0_Vn} A logical value indicating whether or not the null 
-#'                      hypothesis is rejected according to Un.
-#'   \item \code{Vn} The value of the V-statistic.
-#'   \item \code{CV_Vn} The critical value for Vn computed following the 
+#'                      hypothesis is rejected according to \eqn{T_n}.
+#'   \item \code{Vn} The value of the V-statistic \eqn{S_n}.
+#'   \item \code{CV_Vn} The critical value for \eqn{S_n} computed following the 
 #'                      asymptotic distribution.
 #'   \item \code{H0_Vn} A logical value indicating whether or not the null 
-#'                      hypothesis is rejected according to Vn.
+#'                      hypothesis is rejected according to \eqn{S_n}.
 #'   \item \code{rho} The value of concentration parameter used for the Poisson 
 #'                    kernel function.
 #'   \item \code{B} Number of replications for the critical value of the 
-#'                  U-statistic.
+#'                  U-statistic \eqn{T_n}.
 #'}
 #'
 #'
 #' @references
 #' Ding, Y., Markatou, M., Saraceno, G. (2023). “Poisson Kernel-Based Tests for
 #' Uniformity on the d-Dimensional Sphere.” Statistica Sinica. 
-#' doi: doi:10.5705/ss.202022.0347
+#' doi:10.5705/ss.202022.0347
 #' 
 #' @examples
 #' # create a pk.test object
@@ -160,6 +195,8 @@ setMethod("show", "pk.test",
 #'    \item \code{qqplots} Figure with qq-plots for each variable against the 
 #'                         uniform distribution.
 #' }
+#' 
+#' @seealso [pk.test()] and \linkS4class{pk.test} for additional details.
 #'
 #' @importFrom ggpubr ggarrange
 #' @import ggplot2

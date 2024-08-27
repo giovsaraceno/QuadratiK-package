@@ -17,11 +17,10 @@ the \code{x} object}
 available). It must have the same length of final
 memberships.}
 
-\item{pca_res}{Logical. If TRUE the results from PCALocantore when dimension
-is greater than 3 are also reported.}
+\item{pca_res}{Logical. If TRUE the results from PCALocantore are also
+reported (when dimension is greater than 3).}
 }
 \value{
-One of the following plot:
 \itemize{
 \item scatterplot of data points colored by final membership
 \item elbow plot
@@ -34,25 +33,27 @@ Plots for a pkbc object.
 \itemize{
 \item scatterplot: If dimension is equal to 2 or 3, points are displayed on the
 circle and sphere, respectively. If dimension if greater than 3, the
-spherical Principal Component procedure proposed by Locantore et al., (1999)
+spherical Principal Component procedure proposed by Locantore et al. (1999),
 is applied for dimensionality reduction and the first three principal
 components are normalized and displayed on the sphere. For d > 3, the
 complete results from the \code{PcaLocantore} function (package \code{rrcov})
-are returned if pca_res=TRUE.
+are returned if \code{pca_res=TRUE}.
 \item elbow plot: the within cluster sum of squares (wcss) is computed using the
 Euclidean distance (left) and the cosine similarity (right).
 }
 }
 \examples{
-\donttest{
 dat<-matrix(rnorm(300),ncol=3)
 pkbc_res<- pkbc(dat, 3)
 stats_clusters(pkbc_res, 3)
-}
 
 }
 \references{
 Locantore, N., Marron, J.S., Simpson, D.G. et al. (1999) "Robust principal
 component analysis for functional data." Test 8, 1–73.
 https://doi.org/10.1007/BF02595862
+}
+\seealso{
+\code{\link[=pkbc]{pkbc()}} for the clustering algorithm \cr
+\linkS4class{pkbc} for the class object definition.
 }

@@ -91,3 +91,7 @@ Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and
 validation of cluster analysis. Journal of Computational and Applied
 Mathematics, 20, 53–65.
 }
+\seealso{
+\code{\link[=pkbc]{pkbc()}} for the clustering algorithm \cr
+\linkS4class{pkbc} for the class object definition.
+}

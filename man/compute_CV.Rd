@@ -50,8 +50,9 @@ centered Gaussian kernel
 using one of three methods: bootstrap, permutation, or subsampling.
 }
 \references{
-Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample
-Tests Based on Quadratic Distances.” Manuscript, (Department of
-Biostatistics, University at Buffalo)
+Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for
+Multivariate Two- and k-Sample Kernel-based Quadratic Distance
+Goodness-of-Fit Tests.”
+https://doi.org/10.48550/arXiv.2407.16374
 }
 \keyword{internal}

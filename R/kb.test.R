@@ -1,8 +1,12 @@
 #'
-#' Kernel-based quadratic distance Goodness-of-Fit tests
+#' @title 
+#' Kernel-based quadratic distance (KBQD) Goodness-of-Fit tests
 #'
+#' @description
 #' This function performs the kernel-based quadratic distance goodness-of-fit 
-#' tests using the Gaussian kernel with tuning parameter h.
+#' tests. It includes tests for multivariate normality, two-sample tests and
+#' \eqn{k}-sample tests.
+#' 
 #'
 #' @param x Numeric matrix or vector of data values.
 #' @param y Numeric matrix or vector of data values. Depending on the input 
@@ -39,26 +43,90 @@
 #'                    "location", "scale" and "skewness" (only if \code{h} 
 #'                    is not provided).
 #'
-#' @details The function \code{kb.test} performs the kernel-based quadratic
+#' @details 
+#' The function \code{kb.test} performs the kernel-based quadratic
 #' distance tests using the Gaussian kernel with bandwidth parameter \code{h}.
 #' Depending on the shape of the input \code{y} the function performs the tests 
 #' of multivariate normality, the non-parametric two-sample tests or the 
 #' k-sample tests.
 #' 
+#' The quadratic distance between two probability distributions \eqn{F} and
+#' \eqn{G} is
+#' defined as \deqn{d_{K}(F,G)=\int\int K(x,y)d(F-G)(x)d(F-G)(y),}
+#' where \eqn{G} is a distribution whose goodness of fit we wish to assess and 
+#' \eqn{K} denotes the Normal kernel defined as 
+#' \deqn{ K_{{h}}(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2} 
+#' \left(\det{\mathbf{\Sigma}_h}\right)^{-\frac{1}{2}}  
+#' \exp\left\{-\frac{1}{2}(\mathbf{s} - \mathbf{t})^\top 
+#' \mathbf{\Sigma}_h^{-1}(\mathbf{s} - \mathbf{t})\right\},}
+#' for every \eqn{\mathbf{s}, \mathbf{t} \in \mathbb{R}^d \times 
+#' \mathbb{R}^d}, with covariance matrix \eqn{\mathbf{\Sigma}_h=h^2 I} and
+#' tuning parameter \eqn{h}. \cr
+#' \itemize{
+#'    \item **Test for Normality**: \cr
+#'    Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical distribution
+#'    function \eqn{\hat F}. To test the null hypothesis of normality, i.e.
+#'    \eqn{H_0:F=\mathcal{N}_d(\mu, \Sigma)}, we consider the U-statistic 
+#'    estimate and the V-statistic estimate of the sample KBQD.
+#'    
+#'    \item **Two-sample test**: \cr
+#'    Let \eqn{x_1, x_2, ..., x_{n_1} \sim F} and 
+#'    \eqn{y_1, y_2, ..., y_{n_2} \sim G} be
+#'    random samples from the distributions \eqn{F} and \eqn{G}, respectively.
+#'    We test the null hypothesis that the two samples are generated from 
+#'    the same distribution, that is \eqn{H_0: F=G} vs \eqn{H_1:F\not=G}.
+#'     
+#'    \item **k-sample test**: \cr
+#'    Consider \eqn{k} random samples of i.i.d. observations 
+#'    \eqn{\mathbf{x}^{(i)}_1,
+#'    \mathbf{x}^{(i)}_{2},\ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i}, 
+#'    \eqn{i = 1, \ldots, k}.  
+#'    We test if the samples are generated from the same distribution, that is 
+#'    \eqn{H_0: F_1 = F_2 = \ldots = F_k} versus \eqn{H_1: F_i \not = F_j}, for
+#'    some \eqn{1 \le i \not = j \le k}
+#'    
+#' }
+#' 
 #' The arguments \code{mu_hat} and \code{Sigma_hat} indicate the normal model 
-#' considered for the normality test, that is\eqn{H_0: F = N(}\code{mu_hat},\code{Sigma_hat}) 
-#' If the two-sample test is performed, \code{mu_hat} and \code{Sigma_hat} can 
+#' considered for the normality test, that is\eqn{H_0: F = N(}\code{mu_hat},
+#' \code{Sigma_hat}). 
+#' For the two-sample and \eqn{k}-sample tests, \code{mu_hat} and 
+#' \code{Sigma_hat} can 
 #' be used for the parametric centering of the kernel, in the case we want to 
 #' specify the reference distribution. 
-#' These arguments are not used for the k-sample test.
+#' The normal kernel centered with respect to 
+#'  \eqn{G \sim N_d(\mathbf{\mu}, \mathbf{V})} can be computed as
+#'  \deqn{K_{cen(G)}(\mathbf{s}, \mathbf{t}) = 
+#'  K_{\mathbf{\Sigma_h}}(\mathbf{s}, \mathbf{t}) - 
+#'  K_{\mathbf{\Sigma_h} + \mathbf{V}}(\mathbf{\mu}, \mathbf{t}) 
+#' -  K_{\mathbf{\Sigma_h} + \mathbf{V}}(\mathbf{s}, \mathbf{\mu}) +
+#'  K_{\mathbf{\Sigma_h} + 2\mathbf{V}}(\mathbf{\mu}, \mathbf{\mu}).} 
+#' We consider the non-parametric centering of the kernel with respect to 
+#' \eqn{\bar{F}=(n_1 F_1 + \ldots n_k F_k)/n} where \eqn{n=\sum_{i=1}^k n_i}. 
+#' Let \eqn{\mathbf{z}_1,\ldots, \mathbf{z}_n} denote the pooled sample. For any
+#' \eqn{s,t \in \{\mathbf{z}_1,\ldots, \mathbf{z}_n\}}, it is given by
+#' \deqn{K_{cen(\bar{F})}(\mathbf{s},\mathbf{t}) =    K(\mathbf{s},\mathbf{t}) -
+#'  \frac{1}{n}\sum_{i=1}^{n} K(\mathbf{s},\mathbf{z}_i) - 
+#'  \frac{1}{n}\sum_{i=1}^{n} K(\mathbf{z}_i,\mathbf{t}) + 
+#'  \frac{1}{n(n-1)}\sum_{i=1}^{n} \sum_{j \not=i}^{n} 
+#'  K(\mathbf{z}_i,\mathbf{z}_j).}
+#'  
+#'  
+#'  We compute the empirical critical value by employing numerical techniques 
+#'  such as the bootstrap, permutation and subsampling algorithms.
+#'  - Generate k-tuples, of total size \eqn{n_B}, from the pooled sample 
+#'  following one of sampling method;
+#'  - Compute the k-sample test statistic;
+#'  - Repeat \code{B} times;
+#'  - Select the \eqn{95^{th}} quantile of the obtained values. 
 #'
-#' @seealso \linkS4class{kb.test-class} for the class definition.
+#' @seealso \linkS4class{kb.test} for the class definition.
 #' 
 #' @return An S4 object of class \code{kb.test} containing the results of the 
 #' kernel-based quadratic distance tests, based on the normal kernel. The object
 #' contains the following slots:
 #' \itemize{
-#'   \item \code{method}: String indicating the normal kernel-based quadratic 
+#'   \item \code{method}: Description of the kernel-based quadratic 
 #'   distance test performed.
 #'   \item \code{x} Data list of samples X (and Y).
 #'   \item \code{Un} The value of the U-statistics.
@@ -79,6 +147,14 @@
 #'   (one of "subsampling", "permutation" or "bootstrap").
 #'   
 #' }
+#' 
+#' @note
+#' The test statistics for the two-sample test coincide with the k-sample test
+#' statistics for \eqn{k=2}.
+#' 
+#' For the two- and \eqn{k}-sample tests, the slots \code{Vn}, \code{H0_Vn} and 
+#' \code{CV_Vn} are empty, while the computed statistics are both reported in
+#' slots \code{Un}, \code{H0_Un} and \code{CV_Un}.
 #'
 #' @references
 #' Markatou, M., Saraceno, G., Chen Y (2024). “Two- and k-Sample Tests Based on 
@@ -95,13 +171,16 @@
 #' # create a kb.test object
 #' x <- matrix(rnorm(100),ncol=2)
 #' y <- matrix(rnorm(100),ncol=2)
+#' 
 #' # Normality test
 #' my_test <- kb.test(x, h=0.5)
 #' my_test
+#' 
 #' # Two-sample test
 #' my_test <- kb.test(x,y,h=0.5, method="subsampling",b=0.9,
 #'                      centeringType = "Nonparam")
 #' my_test
+#' 
 #' # k-sample test
 #' z <- matrix(rnorm(100,2),ncol=2)
 #' dat <- rbind(x,y,z)
@@ -382,6 +461,7 @@ setMethod("show", "kb.test",
 #'    kernel-based quadratic distance test.
 #'    \item \code{qqplots} Figure with qq-plots for each variable.
 #' }
+#' @seealso [kb.test()] and \linkS4class{kb.test} for more details.
 #'
 #' @importFrom ggpubr ggarrange
 #' @importFrom ggpp geom_table_npc

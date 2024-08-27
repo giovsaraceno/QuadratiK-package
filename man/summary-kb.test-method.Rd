@@ -31,3 +31,6 @@ my_test <- kb.test(x, h=0.5)
 summary(my_test)
 
 }
+\seealso{
+\code{\link[=kb.test]{kb.test()}} and \linkS4class{kb.test} for more details.
+}

@@ -24,8 +24,8 @@ observation i belongs to the k-th cluster.
 }
 }
 \description{
-Cluster spherical observations based on mixture of Poisson kernel-based
-densities estimated by \code{pkbc}
+Obtain predictions of membership for spherical observations based on a
+mixture of Poisson kernel-based densities estimated by \code{pkbc}
 }
 \examples{
 # generate data
@@ -40,5 +40,6 @@ predict(res, k=2, newdat)
  
 }
 \seealso{
-\code{\link[=pkbc]{pkbc()}}
+\code{\link[=pkbc]{pkbc()}} for the clustering algorithm \cr
+\linkS4class{pkbc} for the class object definition.
 }

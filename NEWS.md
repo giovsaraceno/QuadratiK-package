@@ -5,6 +5,7 @@ QuadratiK (Next Release)
 
   * Added NEWS.md file
   * Added badge for rOpenSci review status
+  * More detailed documentation
 
 
 QuadratiK 1.1.1 (2024-06-05)

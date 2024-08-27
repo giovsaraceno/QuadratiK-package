@@ -49,6 +49,11 @@
 #' generating samples according to the family of \code{alternative} specified, 
 #' for the chosen values of \code{h_values} and \code{delta}.
 #' 
+#' @note Please be aware that the `select_h()` function may take a significant 
+#' amount of time to run, especially with larger datasets or when using an 
+#' larger number of parameters in \code{h_values} and \code{delta}. Consider 
+#' this when applying the function to large or complex data.
+#' 
 #' @references
 #' Markatou, M., Saraceno, G., Chen, Y. (2023). “Two- and k-Sample Tests Based 
 #' on Quadratic Distances.” Manuscript, (Department of Biostatistics, University
@@ -213,8 +218,9 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       #y <- as.matrix(ynew[sample(m, replace = FALSE),])
       
       STATISTIC <- stat2sample(xnew, ynew, h, rep(0,d),
-                               diag(d),"Nonparam")
-      CV <- compute_CV(B, Quantile, pooled, n, m, h, method, b)
+                               diag(d),"Nonparam",compute_variance=FALSE)
+      CV <- compute_CV(B, Quantile, pooled, n, m, h, method, b,
+                       compute_variance=FALSE)
       cv <- CV$cv
       return(c(STATISTIC[1] < cv[1]))
    }
@@ -246,8 +252,9 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       sizes_new <- as.vector(table(ynew))
       cum_size_new <- c(0,cumsum(sizes_new))
       STATISTIC <- stat_ksample_cpp(xnew, ynew, h, sizes_new,
-                                                cum_size_new)
-      CV <- cv_ksample(xnew, ynew, h, B, b, Quantile, method)
+                                    cum_size_new,compute_variance=FALSE)
+      CV <- cv_ksample(xnew, ynew, h, B, b, Quantile, method,
+                       compute_variance=FALSE)
       cv <- CV$cv
       return(c(STATISTIC[1] < cv[1]))
    }

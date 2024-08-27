@@ -85,6 +85,12 @@ two-sample and k-sample KBQD tests. It performs a small simulation study,
 generating samples according to the family of \code{alternative} specified,
 for the chosen values of \code{h_values} and \code{delta}.
 }
+\note{
+Please be aware that the \code{select_h()} function may take a significant
+amount of time to run, especially with larger datasets or when using an
+larger number of parameters in \code{h_values} and \code{delta}. Consider
+this when applying the function to large or complex data.
+}
 \examples{
 # Select the value of h using the mid-power algorithm
 \donttest{

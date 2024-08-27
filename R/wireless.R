@@ -28,9 +28,8 @@
 #' summary(wireless)
 #'
 #' @source
-#' Bhatt,Rajen (2017). Wireless Indoor Localization. 
+#' Bhatt, Rajen (2017). Wireless Indoor Localization. 
 #' UCI Machine Learning Repository. 
-#' 
 #' https://doi.org/10.24432/C51880.
 #'
 #' @references

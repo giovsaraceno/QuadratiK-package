@@ -37,6 +37,8 @@
 #' 
 #' @srrstats {G1.4} roxigen2 is used
 #' 
+#' @seealso [kb.test()] for the function that generates this class.
+#' 
 #' @export
 setClass("kb.test",
          slots = list(

@@ -17,6 +17,8 @@
 #'               (one of "bootstrap", "permutation", or "subsampling").
 #' @param b the subsampling block size (only used if \code{method} is 
 #'          "subsampling").
+#' @param compute_variance indicates if the nonparametric variance is computed.
+#'                         Default is TRUE. 
 #'
 #' @return the critical value for the specified method and significance level.
 #' 
@@ -33,7 +35,8 @@
 #' @srrstats {G1.4a} roxigen2 is used
 #' 
 #' @keywords internal
-compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
+compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1,
+                     compute_variance){
    
    Results <- matrix(rep(0,2*B),ncol=2)
    for(i in 1:B) {
@@ -59,7 +62,8 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1){
       }
       
       Results[i,] <-   stat2sample(data_x_star,data_y_star,h,
-                                  rep(0,ncol(data_pool)),diag(1),"Nonparam")[1:2]
+                                   rep(0,ncol(data_pool)),diag(1),
+                                   "Nonparam", compute_variance)[1:2]
    }
    
    cv_res <- apply(Results,2,function(x) as.numeric(quantile(x,Quantile,na.rm=T)))
@@ -174,6 +178,8 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
 #'                 distribution to use as the critical value
 #' @param method the method to use for computing the critical value 
 #'               (one of "bootstrap", "permutation")
+#' @param compute_variance indicates if the nonparametric variance is computed.
+#'                         Default is TRUE. 
 #'
 #' @return a vector of two critical values corresponding to different 
 #' formulation of the k-sample test statistics.
@@ -186,7 +192,7 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
 #' 
 #' @keywords internal
 cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, 
-                       method="subsampling"){
+                       method="subsampling",compute_variance=TRUE){
    
    sizes <- as.vector(table(y))
    cum_size <- c(0,cumsum(sizes))
@@ -222,7 +228,7 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95,
       cum_size_sub <- c(0,cumsum(sizes_sub))
       
       Results[i,] <-   stat_ksample_cpp(as.matrix(data_k), c(y_ind), h, 
-                                        sizes_sub, cum_size_sub)[1:2]
+                                 sizes_sub, cum_size_sub,compute_variance)[1:2]
    }
    
    cv_k <- apply(Results,2,function(x) as.numeric(quantile(x,Quantile,na.rm=T)))

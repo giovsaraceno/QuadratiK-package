@@ -4,10 +4,14 @@
 \alias{plot,pkbc,ANY-method}
 \title{Plotting method for Poisson kernel-based clustering}
 \usage{
-\S4method{plot}{pkbc,ANY}(x, true_label = NULL, pca_res = FALSE)
+\S4method{plot}{pkbc,ANY}(x, k = NULL, true_label = NULL, pca_res = FALSE)
 }
 \arguments{
 \item{x}{Object of class \code{pkbc}}
+
+\item{k}{number of considered clusters. If it is not provided the scatter
+plot is displayed for each value of number of clusters present in
+the \code{x} object}
 
 \item{true_label}{factor or vector of true membership to clusters (if
 available). It must have the same length of final
@@ -36,7 +40,7 @@ components are normalized and displayed on the sphere. For d > 3, the
 complete results from the \code{PcaLocantore} function (package \code{rrcov})
 are returned if pca_res=TRUE.
 \item elbow plot: the within cluster sum of squares (wcss) is computed using the
-Euclidean distance and the cosine similarity.
+Euclidean distance (left) and the cosine similarity (right).
 }
 }
 \examples{

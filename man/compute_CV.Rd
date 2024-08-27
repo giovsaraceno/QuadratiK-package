@@ -4,7 +4,17 @@
 \alias{compute_CV}
 \title{Compute the critical value for two-sample KBQD tests}
 \usage{
-compute_CV(B, Quantile, data_pool, size_x, size_y, h, method, b = 1)
+compute_CV(
+  B,
+  Quantile,
+  data_pool,
+  size_x,
+  size_y,
+  h,
+  method,
+  b = 1,
+  compute_variance
+)
 }
 \arguments{
 \item{B}{the number of bootstrap/permutation/subsampling samples to generate.}
@@ -27,6 +37,9 @@ corresponding to group Y.}
 
 \item{b}{the subsampling block size (only used if \code{method} is
 "subsampling").}
+
+\item{compute_variance}{indicates if the nonparametric variance is computed.
+Default is TRUE.}
 }
 \value{
 the critical value for the specified method and significance level.

@@ -102,8 +102,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // stat2sample
-Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h, const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, const std::string& centeringType);
-RcppExport SEXP _QuadratiK_stat2sample(SEXP x_matSEXP, SEXP y_matSEXP, SEXP hSEXP, SEXP mu_hatSEXP, SEXP Sigma_hatSEXP, SEXP centeringTypeSEXP) {
+Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h, const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, const std::string& centeringType, bool compute_variance);
+RcppExport SEXP _QuadratiK_stat2sample(SEXP x_matSEXP, SEXP y_matSEXP, SEXP hSEXP, SEXP mu_hatSEXP, SEXP Sigma_hatSEXP, SEXP centeringTypeSEXP, SEXP compute_varianceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -113,7 +113,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type mu_hat(mu_hatSEXP);
     Rcpp::traits::input_parameter< const Eigen::MatrixXd& >::type Sigma_hat(Sigma_hatSEXP);
     Rcpp::traits::input_parameter< const std::string& >::type centeringType(centeringTypeSEXP);
-    rcpp_result_gen = Rcpp::wrap(stat2sample(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType));
+    Rcpp::traits::input_parameter< bool >::type compute_variance(compute_varianceSEXP);
+    rcpp_result_gen = Rcpp::wrap(stat2sample(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType, compute_variance));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -131,8 +132,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // stat_ksample_cpp
-Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd& y, double h, const Eigen::VectorXd& sizes, const Eigen::VectorXd& cum_size);
-RcppExport SEXP _QuadratiK_stat_ksample_cpp(SEXP xSEXP, SEXP ySEXP, SEXP hSEXP, SEXP sizesSEXP, SEXP cum_sizeSEXP) {
+Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd& y, double h, const Eigen::VectorXd& sizes, const Eigen::VectorXd& cum_size, bool compute_variance);
+RcppExport SEXP _QuadratiK_stat_ksample_cpp(SEXP xSEXP, SEXP ySEXP, SEXP hSEXP, SEXP sizesSEXP, SEXP cum_sizeSEXP, SEXP compute_varianceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -141,7 +142,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type h(hSEXP);
     Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type sizes(sizesSEXP);
     Rcpp::traits::input_parameter< const Eigen::VectorXd& >::type cum_size(cum_sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(stat_ksample_cpp(x, y, h, sizes, cum_size));
+    Rcpp::traits::input_parameter< bool >::type compute_variance(compute_varianceSEXP);
+    rcpp_result_gen = Rcpp::wrap(stat_ksample_cpp(x, y, h, sizes, cum_size, compute_variance));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -154,9 +156,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_QuadratiK_kbNormTest", (DL_FUNC) &_QuadratiK_kbNormTest, 4},
     {"_QuadratiK_statPoissonUnif", (DL_FUNC) &_QuadratiK_statPoissonUnif, 2},
     {"_QuadratiK_var_two", (DL_FUNC) &_QuadratiK_var_two, 2},
-    {"_QuadratiK_stat2sample", (DL_FUNC) &_QuadratiK_stat2sample, 6},
+    {"_QuadratiK_stat2sample", (DL_FUNC) &_QuadratiK_stat2sample, 7},
     {"_QuadratiK_var_k", (DL_FUNC) &_QuadratiK_var_k, 3},
-    {"_QuadratiK_stat_ksample_cpp", (DL_FUNC) &_QuadratiK_stat_ksample_cpp, 5},
+    {"_QuadratiK_stat_ksample_cpp", (DL_FUNC) &_QuadratiK_stat_ksample_cpp, 6},
     {NULL, NULL, 0}
 };
 

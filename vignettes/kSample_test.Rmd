@@ -14,11 +14,11 @@ vignette: >
 ```
 ### $k$-sample test
 
-We generated three samples, with $n=200$ observations each, from a 2-dimensional Gaussian distributions with mean vectors $\mu_1 = (0, \frac{\sqrt{3}}{3})$, ${\mu}_2 = (-\frac{1}{2}, -\frac{\sqrt{3}}{6})$ and $\mu_3 = (\frac{1}{2}, -\frac{\sqrt{3}}{6})$, and the Identity matrix as covariance matrix. In this situation, the generated samples are well separated, following different Gaussian distributions, i.e. $X_1 \sim N_2(\mu_1, I)$, $X_2 \sim N_2(\mu_2, I)$ and $X_3 \sim N_2(\mu_3, I)$}. The vector ``y`` indicates the membership to groups.  
+We generated three samples, with $n=100$ observations each, from a 2-dimensional Gaussian distributions with mean vectors $\mu_1 = (0, \frac{\sqrt{3}}{3})$, ${\mu}_2 = (-\frac{1}{2}, -\frac{\sqrt{3}}{6})$ and $\mu_3 = (\frac{1}{2}, -\frac{\sqrt{3}}{6})$, and the Identity matrix as covariance matrix. In this situation, the generated samples are well separated, following different Gaussian distributions, i.e. $X_1 \sim N_2(\mu_1, I)$, $X_2 \sim N_2(\mu_2, I)$ and $X_3 \sim N_2(\mu_3, I)$}. The vector ``y`` indicates the membership to groups.  
 ```{r}
 library(mvtnorm)
 library(QuadratiK)
-sizes <- rep(200,3)
+sizes <- rep(100,3)
 eps <- 1
 set.seed(2468)
 x1 <- rmvnorm(sizes[1], mean = c(0,sqrt(3)*eps/3))
@@ -44,16 +44,16 @@ summary_ktest$summary_tables
 #### Selection of h
 
 If a value of $h$ is not provided, the function automatically performs the function ``select_h``.
-```{r}
-#k_test_h <- kb.test(x=x, y=y)
+```{r eval=FALSE}
+k_test_h <- kb.test(x=x, y=y)
 ```
 
 For a more accurate search of the tuning parameter, the function ``select_h`` can be used.This function needs the input ``x`` and ``y`` as the function ``kb.test`` for the $k$-sample problem. 
-```{r eval=FALSE, fig.width=6, fig.height=4}
+```{r fig.width=6, fig.height=4}
 set.seed(2468)
 h_k <- select_h(x=x, y=y, alternative="skewness")
 ```
-```{r eval=FALSE}
+```{r}
 h_k$h_sel
 ```
 The ``select_h`` function will also generate a figure displaying the obtained power versus the considered $h$, for each value of skewness alternative $\delta$ considered.

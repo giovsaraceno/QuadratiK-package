@@ -4,7 +4,16 @@
 \alias{cv_ksample}
 \title{Compute the critical value for the KBQD k-sample tests}
 \usage{
-cv_ksample(x, y, h, B = 150, b = 0.9, Quantile = 0.95, method = "subsampling")
+cv_ksample(
+  x,
+  y,
+  h,
+  B = 150,
+  b = 0.9,
+  Quantile = 0.95,
+  method = "subsampling",
+  compute_variance = TRUE
+)
 }
 \arguments{
 \item{x}{matrix containing the observations to be used in the k-sample test}
@@ -23,6 +32,9 @@ distribution to use as the critical value}
 
 \item{method}{the method to use for computing the critical value
 (one of "bootstrap", "permutation")}
+
+\item{compute_variance}{indicates if the nonparametric variance is computed.
+Default is TRUE.}
 }
 \value{
 a vector of two critical values corresponding to different

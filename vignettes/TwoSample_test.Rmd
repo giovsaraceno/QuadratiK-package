@@ -30,7 +30,7 @@ x_2 <- rmvnorm(n, mean = rep(0,d))
 y_2 <- rmsn(n=n, xi=0, Omega = diag(d), alpha=rep(skewness_y,d))
 ```
 
-```{r}
+```{r eval=FALSE}
 h <- 2
 set.seed(2468)
 two_test <- kb.test(x=x_2, y=y_2, h=h)
@@ -38,11 +38,11 @@ two_test
 ```
 
 For the two-sample case, the ``summary`` function provides the results from the test and the descriptive statistics per variable and per group, as similarly described for the $k$-sample test. Additionally, it generates the qq-plots comparing the quantiles of the two groups for each variable. 
-```{r fig.width=6, fig.height=8}
+```{r eval=FALSE, fig.width=6, fig.height=8}
 summary_two <- summary(two_test)
 ```
 
-```{r}
+```{r eval=FALSE}
 summary_two$summary_tables
 ```
 

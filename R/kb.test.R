@@ -29,6 +29,7 @@
 #' @param Quantile The quantile to use for critical value estimation, 0.95 is 
 #'                 the default value.
 #' @param mu_hat Mean vector for the reference distribution.
+#'                
 #' @param Sigma_hat Covariance matrix of the reference distribution.
 #' @param centeringType String indicating the method used for centering the 
 #'                      normal kernel ('Param' or 'Nonparam').
@@ -43,8 +44,16 @@
 #' Depending on the shape of the input \code{y} the function performs the tests 
 #' of multivariate normality, the non-parametric two-sample tests or the 
 #' k-sample tests.
+#' 
+#' The arguments \code{mu_hat} and \code{Sigma_hat} indicate the normal model 
+#' considered for the normality test, that is\eqn{H_0: F = N(}\code{mu_hat},\code{Sigma_hat}) 
+#' If the two-sample test is performed, \code{mu_hat} and \code{Sigma_hat} can 
+#' be used for the parametric centering of the kernel, in the case we want to 
+#' specify the reference distribution. 
+#' These arguments are not used for the k-sample test.
 #'
-#'
+#' @seealso \linkS4class{kb.test-class} for the class definition.
+#' 
 #' @return An S4 object of class \code{kb.test} containing the results of the 
 #' kernel-based quadratic distance tests, based on the normal kernel. The object
 #' contains the following slots:
@@ -267,16 +276,18 @@ setMethod("kb.test", signature(x = "ANY"),
                       }
                       
                       STATISTIC <- stat2sample(x, y, h, mu_hat, 
-                                               Sigma_hat, "Param")
+                                               Sigma_hat, "Param",
+                                               compute_variance = TRUE)
                       
                    } else if(centeringType == "Nonparam"){
                       
                       STATISTIC <- stat2sample(x, y, h, rep(0,k),
-                                               diag(k),"Nonparam")
+                                               diag(k),"Nonparam",
+                                               compute_variance = TRUE)
                    }
                    
                    CV <- compute_CV(B, Quantile, data_pool, size_x, size_y, h, 
-                                    method, b)
+                                    method, b, compute_variance = TRUE)
                    STATISTIC[1] <- STATISTIC[1]/sqrt(STATISTIC[3])
                    STATISTIC[2] <- STATISTIC[2]/sqrt(STATISTIC[4])
                    CV$cv[1] <- CV$cv[1]/sqrt(STATISTIC[3])
@@ -300,9 +311,11 @@ setMethod("kb.test", signature(x = "ANY"),
                    
                    sizes <- as.vector(table(y))
                    cum_size <- c(0,cumsum(sizes))
-                   STATISTIC <- stat_ksample_cpp(x, c(y), h, sizes, cum_size)
+                   STATISTIC <- stat_ksample_cpp(x, c(y), h, sizes, cum_size,
+                                                 compute_variance = TRUE)
                    
-                   CV <- cv_ksample(x, y, h, B, b, Quantile, method)
+                   CV <- cv_ksample(x, y, h, B, b, Quantile, method,
+                                    compute_variance = TRUE)
                    
                    STATISTIC[1] <- STATISTIC[1]/sqrt(STATISTIC[3])
                    STATISTIC[2] <- STATISTIC[2]/sqrt(STATISTIC[4])

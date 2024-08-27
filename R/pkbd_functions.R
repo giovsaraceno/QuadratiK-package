@@ -1,20 +1,47 @@
 #'
 #' The Poisson kernel-based Distribution (PKBD)
 #' 
-#' Density function and random number generation from the Poisson kernel-based 
-#' Distribution with mean direction vector \code{mu} and concentration parameter
-#' \code{rho}.
+#' @description 
+#' The Poisson kernel-based densities are based on the normalized Poisson kernel
+#' and are defined on the \eqn{d}-dimensional unit sphere. Given a vector 
+#' \eqn{\mathbf{\mu} \in \mathcal{S}^{d-1}}, and a parameter \eqn{\rho} such that 
+#' \eqn{0 < \rho < 1}, the probability density function of a \eqn{d}-variate 
+#' Poisson kernel-based density is defined by:
+#' \deqn{f(\mathbf{x}|\rho, \mathbf{\mu}) = \frac{1-\rho^2}{\omega_d 
+#' ||\mathbf{x} - \rho \mathbf{\mu}||^d},}
+#' where \eqn{\mu} is a vetcor orienting the center of the distribution, 
+#' \eqn{\rho} is a parameter to control the concentration of the distribution 
+#' around the vector \eqn{\mu} and it is related to the variance of the 
+#' distribution. Furthermore, \eqn{\omega_d = 2\pi^{d/2} [\Gamma(d/2)]^{-1}} 
+#' is the surface area of the unit sphere in \eqn{\mathbb{R}^d} (see Golzy and 
+#' Markatou, 2020).
+#' Connection of the PKBDs to other distributions are discussed in detail in 
+#' Golzy and Markatou (2020). Here we note that when \eqn{d=2}, PKBDs reduce to 
+#' the wrapped Cauchy distribution. Additionally, with precise choice of the 
+#' parameters \eqn{\rho} and \eqn{\mu} the two-dimensional PKBD becomes a 
+#' two-dimensional projected normal distribution. However, the connection with 
+#' the \eqn{d}-dimensional projected normal distributions does not carry beyond 
+#' is \eqn{d=2}.  
+#' Golzy and Markatou (2020) proposed an acceptance-rejection method for 
+#' simulating data from a PKBD using von Mises-Fisher envelops (\code{rejvmf} 
+#' method). Furthermore Sablica, Hornik and Leydold (2023) proposed new ways for
+#' simulating from the PKBD, using angular central Gaussian envelops 
+#' (\code{rejacg}) or using the projected Saw distributions (\code{rejpsaw}).
 #'  
 #' @param x Matrix (or data.frame) with number of columns >=2.
 #' @param mu Location parameter with same length as the rows of x. Normalized to
 #' length one.
-#' @param rho Concentration parameter, with 0 <= rho < 1.
+#' @param rho Concentration parameter, with 0 <= \code{rho} < 1.
 #' @param logdens Logical; if 'TRUE', densities d are given as log(d).
 #'
 #' @return 
 #' \code{dpkb} gives the density value.
 #' \code{rpkb} generates random observations from the PKBD. 
 #' 
+#' @details
+#' This function computes the density and generates random numbers from the Poisson 
+#' kernel-based distribution with mean direction vector \code{mu} and 
+#' concentration parameter \code{rho}.
 #' The number of observations generated is determined by \code{n} for 
 #' \code{rpkb}. This function returns a list with the matrix of generated 
 #' observations \code{x}, the number of tries \code{numTries} and the number of

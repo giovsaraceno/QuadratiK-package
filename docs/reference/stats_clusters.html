@@ -18,7 +18,7 @@ statistics for each variable with respect to the detected groups."><!-- mathjax 
     
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,9 @@ statistics for each variable with respect to the detected groups."><!-- mathjax 
     <a class="dropdown-item" href="../articles/uniformity.html">Uniformity test on the Sphere</a>
     <a class="dropdown-item" href="../articles/wireless_clustering.html">Clustering algorithm on the Wireless data</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -94,13 +97,17 @@ statistics for each variable with respect to the detected groups.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>List with computed descriptive statistics for each variable.</p>
+<p>List with computed descriptive statistics for each dimension.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The function computes mean, standard deviation, median,
 inter-quantile range, minimum and maximum for each variable in the data set
 given the final membership assigned by the clustering algorithm.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="pkbc.html">pkbc()</a></code> for the clustering algorithm <br><a href="pkbc-class.html">pkbc</a> for the class object definition.</p></div>
     </div>
 
     <div class="section level2">
@@ -113,31 +120,31 @@ given the final membership assigned by the clustering algorithm.</p>
 <span class="r-in"><span><span class="va">pkbc_res</span><span class="op">&lt;-</span> <span class="fu"><a href="pkbc.html">pkbc</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">stats_clusters</span><span class="op">(</span><span class="va">pkbc_res</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1     Group 2      Group 3     Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.3821843  0.08282479 -0.002103442 -0.04261745</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.1909313  0.15433216  0.567670473  0.53404310</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.3871139  0.12091003  0.043346085 -0.07143280</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.3066889  0.15035395  0.991817872  0.78616924</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.7093754 -0.19391451 -0.986649621 -0.98664962</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max    -0.1099137  0.22089075  0.997175034  0.99717503</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            Group 1    Group 2     Group 3     Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.53360502  0.2185515 0.007405148  0.04344402</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.34258917  0.5269849          NA  0.58084656</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.55364837  0.2151044 0.007405148  0.07318718</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.53206272  0.9127813 0.000000000  0.93759633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.99487956 -0.9642025 0.007405148 -0.99487956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.07466077  0.9873736 0.007405148  0.98737364</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Group 1     Group 2     Group 3     Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.01395699 -0.88601465 -0.05481256 -0.09643234</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.22081313  0.06606977  0.61604194  0.59736122</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.02881121 -0.89266575 -0.11281334 -0.14435102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.30870888  0.05016114  1.16339565  1.08607439</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.26200571 -0.97630519 -0.99080627 -0.99080627</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.43189401 -0.77852191  0.99289949  0.99289949</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1    Group 2   Group 3    Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.1608868 -0.1893987 0.8593866 -0.0983452</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.3330494  0.6198886        NA  0.5890662</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median  0.1009154 -0.3009186 0.8593866 -0.1183249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.5036676  0.9810143 0.0000000  1.0017535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.4511650 -0.9888086 0.8593866 -0.9888086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.7908170  0.9928995 0.8593866  0.9928995</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Group 1    Group 2    Group 3     Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.87756935 -0.4087893  0.1127116 -0.03741216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.07746196  0.1450092  0.5428458  0.59616862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.90249140 -0.4290443  0.1324318 -0.04415450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.10918975  0.1295993  0.8400709  0.96124638</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.95435628 -0.5874614 -0.9896503 -0.98965028</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max    -0.70194289 -0.1684086  0.9632128  0.96321275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            Group 1     Group 2    Group 3    Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.62082799  0.09072061 -0.5112727 -0.0789555</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.29913303  0.50819936         NA  0.5547490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.65141402  0.08038502 -0.5112727 -0.1405382</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.47845791  0.77660008  0.0000000  0.8655454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.95185464 -0.99561644 -0.5112727 -0.9956164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max    -0.09110684  0.96905979 -0.5112727  0.9690598</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>

@@ -143,11 +143,13 @@ h_sel
 \references{
 Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for
 Multivariate Two- and k-Sample Kernel-based Quadratic Distance
-Goodness-of-Fit Tests.” https://doi.org/10.48550/arXiv.2407.16374
+Goodness-of-Fit Tests.” \cr
+https://doi.org/10.48550/arXiv.2407.16374
 
 Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan
 (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK
-package in R and Python. https://arxiv.org/abs/2402.02290.
+package in R and Python. \cr
+https://arxiv.org/abs/2402.02290.
 }
 \seealso{
 The function \code{select_h} is used in the \code{\link[=kb.test]{kb.test()}} function.

@@ -31,19 +31,19 @@ Poisson kernel-based tests. The object contains the following slots:
 \itemize{
 \item \code{method}: Description of the test performed.
 \item \code{x} Data matrix.
-\item \code{Un} The value of the U-statistic \eqn{T_n}.
-\item \code{CV_Un} The empirical critical value for \eqn{T_n}.
+\item \code{Un} The value of the U-statistic.
+\item \code{CV_Un} The empirical critical value for Un.
 \item \code{H0_Vn} A logical value indicating whether or not the null
-hypothesis is rejected according to \eqn{T_n}.
-\item \code{Vn} The value of the V-statistic \eqn{S_n}.
-\item \code{CV_Vn} The critical value for \eqn{S_n} computed following the
+hypothesis is rejected according to Un.
+\item \code{Vn} The value of the V-statistic Vn.
+\item \code{CV_Vn} The critical value for Vn computed following the
 asymptotic distribution.
 \item \code{H0_Vn} A logical value indicating whether or not the null
-hypothesis is rejected according to \eqn{S_n}.
+hypothesis is rejected according to Vn.
 \item \code{rho} The value of concentration parameter used for the Poisson
 kernel function.
 \item \code{B} Number of replications for the critical value of the
-U-statistic \eqn{T_n}.
+U-statistic Un.
 }
 }
 \description{
@@ -77,13 +77,21 @@ Satterthwaite approximation
 )=\left(\frac{1+\rho}{1-\rho} \right)^{d-1}\left\{ 
 \frac{\left(1+\rho-(1-\rho)^{d-1} \right )^{2}}
 {1+\rho^{2}-(1-\rho^{2})^{d-1}}\right \}.}.
-For the \eqn{T_n} statistic the cutoff is determined empirically:
+For the \eqn{U}-statistic the cutoff is determined empirically:
 \itemize{
 \item Generate data from a Uniform distribution on the d-dimensional sphere;
 \item Compute the test statistics for \code{B} Monte Carlo(MC) replications;
 \item Compute the 95th quantile of the empirical distribution of the test
 statistic.
 }
+}
+\note{
+A U-statistic is a type of statistic that is used to estimate a population
+parameter. It is based on the idea of averaging over all possible \emph{distinct}
+combinations of a fixed size from a sample.
+A V-statistic considers all possible tuples of a certain size, not just
+distinct combinations and can be used in contexts where unbiasedness is not
+required.
 }
 \examples{
 # create a pk.test object

@@ -19,14 +19,14 @@ vignette: >
 
 We consider the Wireless Indoor Localization Data Set, publicly available in the UCI Machine Learning Repository’s website. This data set is used to study the performance of different indoor localization algorithms. It is available within the `QuadratiK` package as `wireless`.
 
-```{r}
+```{r, message=FALSE}
 library(QuadratiK)
 head(wireless)
 ```
 
 The Wireless Indoor Localization data set contains the measurements of the Wi-Fi signal strength in different indoor rooms. It consists of a data frame with 2000 rows and 8 columns. The first 7 variables report the values of the Wi-Fi signal strength received from 7 different Wi-Fi routers in an office location in Pittsburgh (USA). The last column indicates the class labels, from 1 to 4, indicating the different rooms. Notice that, the Wi-Fi signal strength is measured in dBm, decibel milliwatts, which is expressed as a negative value ranging from -100 to 0. In total, we have 500 observations for each room.
 
-Given that the Wi-Fi signal strength takes values in a limited range, it is appropriate to consider the spherically transformed observations, by $L_2$ normalization, and consequently perform the clustering algorithm on the 7-dimensional sphere.
+Given that Wi-Fi signal strength values are inherently bounded within a certain range, it is possible to consider the spherically transformed data points using $L_2$ normalization. This transformation maps the data onto the surface of a 7-dimensional sphere, ensuring that each observation has a uniform length. By projecting the data onto this high-dimensional sphere, we can take advantage of spherical geometry, and consequently perform the proposed clustering algorithm.
 
 We perform the clustering algorithm on the `wireless` data set. We consider the $K= 3, 4, 5$ as possible values for the number of clusters.
 
@@ -37,29 +37,41 @@ wire_norm <- wire/sqrt(rowSums(wire^2))
 set.seed(2468)
 res_pk <- pkbc(as.matrix(wire_norm),3:5)
 ```
+The `pkbc` function create an object of class `pkbc` containing the clustering results for each value of number of clusters considered. 
 
-To guide the choice of the number of clusters, the function `validation` provides cluster validation measures and graphical tools. Specifically, it returns an object with InGroup Proportion (IGP), and `metrics` a table of computed evaluation measures. This table includes the Average Siluoette Width (ASW) and, if the true labels are provided, the measures of adjusted rand index (ARI), Macro-Precision and Macro-Recall.
+To guide the choice of the number of clusters, the function `pkbc_validation` provides cluster validation measures and graphical tools. Specifically, it returns an object with InGroup Proportion (IGP), and `metrics` a table of computed evaluation measures. This table includes the Average Silhouette Width (ASW) and, if the true labels are provided, the measures of adjusted rand index (ARI), Macro-Precision and Macro-Recall.
 
 ```{r}
 set.seed(2468)
 res_validation <- pkbc_validation(res_pk, true_label = labels)
 res_validation$IGP
-round(res_validation$metrics, 8)
+round(res_validation$metrics, 5)
 ```
 
-The plot method can be used to display the scatter plot of data points and the Elbow plot from the computed within-cluster sum of squares values. For the scatter plot, for $d=2$ and $d=3$, observations are displayed on the unit circle and unit sphere, respectively. If $d>3$, the spherical PCA is applied on the data set, and the first 3 principal components are used for visualizing data points on the sphere, after application of $L_2$ normalization. In the generated figure, data points are colored by the true labels and the assigned membership.
+The clusters identified with $k=4$ achieve high values of ARI, Macro Precision and Macro Recall.
 
-```{r , fig.show = "hold"}
+For a brief description of the reported evaluation measures, with the corresponding references, please visit the help documentation of the `pkbc_validation` function.
+```{r, eval=FALSE}
+help(pkbc_validation)
+```
+
+The `plot` method of the `pkbc` class can be used to display the scatter plot of data points and the Elbow plot from the computed within-cluster sum of squares values. For the scatter plot, for $d=2$ and $d=3$, observations are displayed on the unit circle and unit sphere, respectively. If $d>3$, the spherical PCA is applied on the data set, and the first 3 principal components are used for visualizing data points on the sphere. In the generated figure, data points are colored by the assigned membership.
+
+```{r , fig.show = "hold", fig.width=6, fig.height=6}
 plot(res_pk)
 ```
 
 The Elbow plots and the reported metrics suggest $K=4$ as number of clusters. This is in accordance with the known ground truth.
 
-```{r, fig.show = "hold"}
+We can also request the scatter plot only for a specified value of number of clusters. Additionally, if true labels are available and are provided to the ``plot`` method, the scatter plot will display the data points colored with respect to the true labels and assigned memberships in two adjacent plots.   
+
+```{r, fig.show = "hold", fig.width=8, fig.height=5}
 plot(res_pk, k=4, true_label = labels)
 ```
 
-Once the number of clusters is selected, the function `summary_stat` in the `QuadratiK` package can be used to obtain additional summary information with respect to the clustering results. In particular, the function provides mean, standard deviation, median, inter-quantile range, minimum and maximum computed for each variable, overall and by the assigned membership.
+The plot of points using the principal components also shows that the identified cluster follows the initial labels.
+
+Once the number of clusters is selected, the method `summary_stat` can be used to obtain additional summary information with respect to the clustering results. In particular, the function provides mean, standard deviation, median, inter-quantile range, minimum and maximum computed for each variable, overall and by the assigned membership.
 
 ```{r }
 summary_clust <- stats_clusters(res_pk,4)
@@ -69,4 +81,9 @@ summary_clust <- stats_clusters(res_pk,4)
 summary_clust
 ```
 
-The clusters identified with $k=4$ achieve high values of ARI, Macro Precision and Macro Recall. The plot of points using the principal components also shows that the identified cluster follows the initial labels.
+## References
+
+Golzy, M., Markatou, M. (2020). "Poisson Kernel-Based Clustering on the Sphere:
+Convergence Properties, Identifiability, and a Method of Sampling," *Journal of
+Computational and Graphical Statistics*, 29(4), 758-770. 
+[DOI: 10.1080/10618600.2020.1740713](https://doi.org/10.1080/10618600.2020.1740713).

@@ -39,7 +39,7 @@ observations within a group that belong to the same predefined category or
 class. It is often used to assess the homogeneity of a group by evaluating
 how many of its members share the same label. A higher IGP indicates that the
 group is more cohesive, while a lower proportion suggests greater diversity
-or misclassification within the group (Kapp and Tibshiran 2007).
+or misclassification within the group (Kapp and Tibshirani 2007).
 
 The Adjusted Rand Index (ARI) is a statistical measure used in data
 clustering analysis. It quantifies the similarity between two partitions of
@@ -51,7 +51,7 @@ of data points to clusters.
 Each cluster can represented by a so-called silhouette which is based on the
 comparison of its tightness and separation. The average silhouette width
 provides an evaluation of clustering validity, and might be used to select
-an ‘appropriate’ number of clusters (Rousseeuw 1987).
+an \emph{appropriate} number of clusters (Rousseeuw 1987).
 
 Macro Precision is a metric used in multi-class classification that
 calculates the precision for each class independently and then takes the

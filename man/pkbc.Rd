@@ -117,10 +117,17 @@ all points from one iteration to the next \cr
 
 The obtained estimates are used for assigning final memberships, identifying
 the \code{nClust} clusters, according to the following rule
-\deqn{P(x_i, \Theta) = \argmax_{j \in \{1, \ldots, k\}} \{ \frac{\alpha_j 
+\deqn{P(x_i, \Theta) = \arg\max_{j \in \{1, \ldots, k\}} \{ \frac{\alpha_j 
 f_j(x_i|\mu_j, \rho_j)}{f(x_i, \Theta)}\}.}
 The number of clusters \code{nClust} must be provided as input to the
 clustering algorithm.
+}
+\note{
+The clustering algorithm is tailored for data points on the sphere
+\eqn{\mathcal{S}^{d-1}}, but it can be also performed on spherically
+transformed observations, i.e. data points on the Euclidean space
+\eqn{\mathbb{R}^d} that are normalized such that they lie on the
+corresponding $d$-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
 }
 \examples{
 #We generate three samples of 100 observations from 3-dimensional

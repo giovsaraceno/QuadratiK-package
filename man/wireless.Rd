@@ -19,7 +19,7 @@ A data frame containing the following columns:
 }
 \source{
 Bhatt, Rajen (2017). Wireless Indoor Localization.
-UCI Machine Learning Repository.
+UCI Machine Learning Repository. \cr
 https://doi.org/10.24432/C51880.
 }
 \usage{

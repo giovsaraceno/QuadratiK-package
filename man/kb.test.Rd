@@ -203,6 +203,13 @@ statistics for \eqn{k=2}.
 For the two- and \eqn{k}-sample tests, the slots \code{Vn}, \code{H0_Vn} and
 \code{CV_Vn} are empty, while the computed statistics are both reported in
 slots \code{Un}, \code{H0_Un} and \code{CV_Un}.
+
+A U-statistic is a type of statistic that is used to estimate a population
+parameter. It is based on the idea of averaging over all possible \emph{distinct}
+combinations of a fixed size from a sample.
+A V-statistic considers all possible tuples of a certain size, not just
+distinct combinations and can be used in contexts where unbiasedness is not
+required.
 }
 \examples{
 # create a kb.test object
@@ -227,9 +234,10 @@ my_test
 
 }
 \references{
-Markatou, M., Saraceno, G., Chen Y (2024). “Two- and k-Sample Tests Based on
-Quadratic Distances.” Manuscript, (Department of Biostatistics, University at
-Buffalo)
+Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for
+Multivariate Two- and k-Sample Kernel-based Quadratic Distance
+Goodness-of-Fit Tests.” \cr
+https://doi.org/10.48550/arXiv.2407.16374
 
 Lindsay, B.G., Markatou, M. & Ray, S. (2014) "Kernels, Degrees of Freedom,
 and Power Properties of Quadratic Distance Goodness-of-Fit Tests", Journal

@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +47,9 @@
     <a class="dropdown-item" href="../articles/uniformity.html">Uniformity test on the Sphere</a>
     <a class="dropdown-item" href="../articles/wireless_clustering.html">Clustering algorithm on the Wireless data</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -84,29 +87,45 @@
 <div class="section level3">
 <h3 id="uniformity-test-on-the-sphere">Uniformity test on the Sphere<a class="anchor" aria-label="anchor" href="#uniformity-test-on-the-sphere"></a>
 </h3>
+<p>The quadratic distance between two probability distributions <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> is then defined as:</p>
+<p><span class="math display">\[
+d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+\]</span></p>
+<p>where <span class="math inline">\(G\)</span> is a distribution whose
+goodness of fit we wish to assess, that is the uniform distribution on
+the sphere <span class="math inline">\(\mathcal{S}^{d-1}\)</span>, and
+<span class="math inline">\(K\)</span> denotes the Poisson kernel
+defined as:</p>
+<p><span class="math display">\[
+K(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
+(\mathbf{u}\cdot \mathbf{v})\right)^{d/2}},
+\]</span></p>
+<p>for every <span class="math inline">\(\mathbf{u}, \mathbf{v} \in
+\mathcal{S}^{d-1} \times \mathcal{S}^{d-1}\)</span>.</p>
+<p>Let <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> be a
+random sample with empirical distribution function <span class="math inline">\(\hat{F}\)</span>.</p>
+<p>We test the null hypothesis of uniformity on the <span class="math inline">\(d\)</span>-dimensional sphere, i.e., <span class="math inline">\(H_0: F = G\)</span>, by considering the
+U-statistic estimate and the V-statistic estimate of the sample KBQD
+(Kernel-Based Quadratic Distance).</p>
 <p>We generated <span class="math inline">\(n=200\)</span> observations
 from the uniform distribution on <span class="math inline">\(S^{d-1}\)</span>, with <span class="math inline">\(d=3\)</span>, and <span class="math inline">\(\rho
 = 0.7\)</span>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Registered S3 methods overwritten by 'ggpp':</span></span>
-<span><span class="co">##   method                  from   </span></span>
-<span><span class="co">##   heightDetails.titleGrob ggplot2</span></span>
-<span><span class="co">##   widthDetails.titleGrob  ggplot2</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="va">d</span><span class="op">)</span>, <span class="va">n</span>, <span class="va">d</span><span class="op">)</span></span>
 <span><span class="va">dat_sphere</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">z</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>pk.test</code> is used for testing uniformity of the
-generated sample.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+generated sample, providing the data matrix as <code>x</code> and the
+value of the concentration parameter <code>rho</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.7</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">res_unif</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pk.test.html">pk.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">dat_sphere</span>, rho<span class="op">=</span><span class="va">rho</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">res_unif</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">res_unif</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Poisson Kernel-based quadratic distance test of </span></span>
 <span><span class="co">##                         Uniformity on the Sphere </span></span>
@@ -123,11 +142,16 @@ generated sample.</p>
 <span><span class="co">## H0 is rejected:  FALSE </span></span>
 <span><span class="co">## Statistic Vn:  14.89598 </span></span>
 <span><span class="co">## Critical value:  23.22949</span></span></code></pre>
+<p>The <code><a href="../reference/pk.test.html">pk.test()</a></code> function returns an object of class
+<code>pk.test</code>. The <code>show</code> method displays the computed
+statistics and the corresponding critical values.</p>
+<p>The test correctly does not reject the null hypothesis of
+uniformity.</p>
 <p>The <code>summary</code> method for the <code>pk.test</code> output
 object provides the results of the performed test, and generates a
 figure showing the qq-plots against the uniform distribution of each
 variable with a table of standard descriptive statistics.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_unif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res_unif</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Poisson Kernel-based quadratic distance test of </span></span>
@@ -140,8 +164,90 @@ variable with a table of standard descriptive statistics.</p>
 function on the result of the test for uniformity displays the qq-plots
 between the given samples and the uniform distribution with a table of
 the standard descriptive statistics for each variable.</p>
+<div class="section level4">
+<h4 id="multimodal-example">Multimodal example<a class="anchor" aria-label="anchor" href="#multimodal-example"></a>
+</h4>
+<p>The Poisson kernel-based test for uniformity exhibits excellent
+results especially in the case of multimodal distributions.</p>
+<p>In this example, we generate data points from a mixture of 4 von
+Mises-Fisher distributions in 2 dimensions. The direction of the mean
+vectors for the distributions are set as (1, 0), (0, 1), (-1, 0), and
+(0, -1), with a concentration parameter <span class="math inline">\(\kappa=5\)</span>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load necessary libraries</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">movMF</span><span class="op">)</span>        </span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/egarpor/sphunif" class="external-link">sphunif</a></span><span class="op">)</span>      </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
+<span><span class="co"># Define the mean directions of the 4 von Mises-Fisher distributions</span></span>
+<span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,    </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,    </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span>,   </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>    </span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Define the concentration parameter (kappa)</span></span>
+<span><span class="va">kappa</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span><span class="co"># Generate 100 samples from a mixture of 4 von Mises-Fisher distributions</span></span>
+<span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/movMF/man/movMF_distribution.html" class="external-link">rmovMF</a></span><span class="op">(</span><span class="fl">100</span>, theta <span class="op">=</span> <span class="va">kappa</span> <span class="op">*</span> <span class="va">means</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p>We now compare the results of the <code>pk.test</code> function with
+the Ajne and Bingham tests using the <code>sphunif</code> package.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Run the pk.test from the QuadratiK package to test the data</span></span>
+<span><span class="va">pk_test_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pk.test.html">pk.test</a></span><span class="op">(</span><span class="va">samples</span>, rho<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run the Bingham and Ajne tests from the sphunif package</span></span>
+<span><span class="va">other_test_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sphunif/man/unif_test.html" class="external-link">unif_test</a></span><span class="op">(</span><span class="va">samples</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Bingham"</span>, <span class="st">"Ajne"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pk_test_result</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">##  Poisson Kernel-based quadratic distance test of </span></span>
+<span><span class="co">##                         Uniformity on the Sphere </span></span>
+<span><span class="co">## Selected consentration parameter rho:  0.8 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## U-statistic:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## H0 is rejected:  TRUE </span></span>
+<span><span class="co">## Statistic Un:  2.692594 </span></span>
+<span><span class="co">## Critical value:  1.612663 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## V-statistic:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## H0 is rejected:  TRUE </span></span>
+<span><span class="co">## Statistic Vn:  15.14426 </span></span>
+<span><span class="co">## Critical value:  12.8308</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">other_test_result</span></span></code></pre></div>
+<pre><code><span><span class="co">## $Bingham</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Bingham test of circular uniformity</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## data:  samples</span></span>
+<span><span class="co">## statistic = 5.8674, p-value = 0.0532</span></span>
+<span><span class="co">## alternative hypothesis: scatter matrix different from constant</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $Ajne</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Ajne test of circular uniformity</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## data:  samples</span></span>
+<span><span class="co">## statistic = 0.28268, p-value = 0.3156</span></span>
+<span><span class="co">## alternative hypothesis: any non-axial alternative to circular uniformity</span></span></code></pre>
+<p>In this example, the Poisson kernel-based test statistics reject the
+null hypothesis, while the Bingham test and Ajne test obtain p-values
+equal to 0.0532 and 0.3156, respectively.</p>
 </div>
-  </main>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Ding, Y., Markatou, M., Saraceno, G. (2023). “Poisson Kernel-Based
+Tests for Uniformity on the d-Dimensional Sphere.” <em>Statistica
+Sinica</em>. <a href="https://doi.org/10.5705/ss.202022.0347" class="external-link">doi:10.5705/ss.202022.0347</a>.</p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

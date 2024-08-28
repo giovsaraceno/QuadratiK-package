@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>k-sample test</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">k-sample test</h1>
+
+
+
+<p>The quadratic distance between two probability distributions <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> is defined as:</p>
+<p><span class="math display">\[
+d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+\]</span></p>
+<p>where <span class="math inline">\(G\)</span> is a distribution whose
+goodness of fit we wish to assess, and <span class="math inline">\(K\)</span> denotes the Normal kernel defined
+as:</p>
+<p><span class="math display">\[
+K(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2}
+\left(\det{\mathbf{\Sigma}_h}\right)^{-\frac{1}{2}}  
+\exp\left\{-\frac{1}{2}(\mathbf{s} - \mathbf{t})^\top
+\mathbf{\Sigma}_h^{-1}(\mathbf{s} - \mathbf{t})\right\},
+\]</span></p>
+<p>for every <span class="math inline">\(\mathbf{s}, \mathbf{t} \in
+\mathbb{R}^d \times \mathbb{R}^d\)</span>, with covariance matrix <span class="math inline">\(\mathbf{\Sigma}_h = h^2 I\)</span> and tuning
+parameter.</p>
+<p>Consider <span class="math inline">\(k\)</span> random samples of
+i.i.d. observations <span class="math inline">\(\mathbf{x}^{(i)}_1,
+\mathbf{x}^{(i)}_{2}, \ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i\)</span>,
+for <span class="math inline">\(i = 1, \ldots, k\)</span>.</p>
+<p>We test if the samples are generated from the same distribution, that
+is: <span class="math display">\[
+H_0: F_1 = F_2 = \ldots = F_k
+\]</span> versus <span class="math display">\[
+H_1: F_i \not = F_j,
+\]</span> for some <span class="math inline">\(1 \le i \not = j \le
+k\)</span>.</p>
+<p>We generated three samples, with <span class="math inline">\(n=50\)</span> observations each, from a
+2-dimensional Gaussian distributions with mean vectors <span class="math inline">\(\mu_1 = (0, \frac{\sqrt{3}}{3})\)</span>, <span class="math inline">\({\mu}_2 = (-\frac{1}{2},
+-\frac{\sqrt{3}}{6})\)</span> and <span class="math inline">\(\mu_3 =
+(\frac{1}{2}, -\frac{\sqrt{3}}{6})\)</span>, and the Identity matrix as
+covariance matrix. In this situation, the generated samples are well
+separated, following different Gaussian distributions, i.e. <span class="math inline">\(X_1 \sim N_2(\mu_1, I)\)</span>, <span class="math inline">\(X_2 \sim N_2(\mu_2, I)\)</span> and <span class="math inline">\(X_3 \sim N_2(\mu_3, I)\)</span>}. In order to
+perform the <span class="math inline">\(k\)</span>-sample tests, we need
+to define the vector <code>y</code> which indicates the membership to
+groups.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(QuadratiK)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">50</span>,<span class="dv">3</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>eps <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">1</span>], <span class="at">mean =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">3</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">2</span>], <span class="at">mean =</span> <span class="fu">c</span>(<span class="sc">-</span>eps<span class="sc">/</span><span class="dv">2</span>,<span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">6</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(sizes[<span class="dv">3</span>], <span class="at">mean =</span> <span class="fu">c</span>(eps<span class="sc">/</span><span class="dv">2</span>,<span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">3</span>)<span class="sc">*</span>eps<span class="sc">/</span><span class="dv">6</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbind</span>(x1, x2, x3)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">times=</span>sizes))</span></code></pre></div>
+<p>To use the <code>kb.test()</code> function, we need to provide the
+value for the tuning parameter <span class="math inline">\(h\)</span>.
+The function <code>select_h</code> can be used for identifying on
+<em>optimal</em> value of <span class="math inline">\(h\)</span>. This
+function needs the input <code>x</code> and <code>y</code> as the
+function <code>kb.test</code>, and the selection of the family of
+alternatives. Here we consider the location alternatives.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>h_k <span class="ot">&lt;-</span> <span class="fu">select_h</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">alternative=</span><span class="st">&quot;location&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAGACAMAAAByRC0tAAABKVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrY6AAA6ADo6OgA6Ojo6OmY6ZmY6ZpA6ZrY6kLY6kNtHh7xIdqtLi79NTU1NTW5NTY5Nbm5NbqtNjshbtFlet1xmAABmADpmOgBmOjpmZjpmZmZmZpBmkJBmkLZmtttmtv9uTW5uTY5uq+SOTU2OTW6OyP+QOgCQOjqQOmaQZjqQZmaQkGaQtpCQttuQtv+Q2/+rbk2r5P+zs7O2ZgC2Zjq2kDq2kGa2kJC2tpC2tra2ttu229u22/+2///Ijk3I5KvI///bkDrbkGbbtmbbtpDbtrbb27bb29vb2//b/7bb///e3t7jLS/kq27k///nMDL/tmb/yI7/25D/27b/29v/5Kv//7b//8j//9v//+T///9CTUwfAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAZ+klEQVR4nO2dDZscxXHH94wJF5RAELsQ3a0iDLGNJUsJtgknhE3sOBddUGLi0wmdhKS7+f4fIvO2uzPT3dNVXdXTNdv1fx7Q3r78t2bqt909/TaLQqUiaJE6ANW8pQCpSFKAVCQpQCqSFCAVSQqQiqRwgL5WiRYjJGMiAOR5/TzYmdVjf8LAWShATB77E4YChJeMzAkJQwHCS0bmhIShAOElI3NCwlCA8JKROSFhKEB4ycickDAUILxkZE5IGAoQXjIyJyQMBQgvGZkTEoYChJeMzAkJQwHCS0bmhIShAOElI3NCwlCA8JKROSFhKEB4ychccbxeCwhDAcJLBkDrEiAqQQqQoWwAWq/Py/+ICClAhnIBqCTnvKgJoiCkABnKBqDWg4aQAmQoE4DW660HhaB8ATpdrW49szzOBKAamfPdX6EIZQvQxa1n1ydHzePTu+V/W4KyAKjh5bzzdyBCuQL05t79orj8+HH1+NXnD9v/1coDIMMjEKFcAap5qSkqOdpVX5VyAGhtAhRYj+UKUF34tABdHF2uVk1hVK9cO997HR+7nne9IkeyALpbPT5dHXWLof0vgbYFjeGBr8e0BGrbz+3jIguARjywCOUKULcNdFFdjGUE0HoMIGxTKFeAuldhTWn061yuwjp4ODwwCOUKUFVvbfqBrk/u1v1C7St7D5DfA1GPZQtQ1ft81MJzfZJRT/QaABACoXwBcmq/AephMeYBJEgBMrTXAPWhGPcAIaQAGdpvgDAekHpMATK0zwCtUQBBEFKADCUGKOblz9Ab4OEjSAEylBYg8AV0QBiGM8hjPCIFyFBigIp418+GL8xjtB5TgAwlBajKVKzrZ9MW6jGCkAJkKC1A9f8gBKHDsJjCPZwEKUCGUgLUZilGB4zNEuPhQEgBMpQUoM2/foLQAFE97PWYAmQoIUC7BLH34HEUHzaEFCBDKQHqPPQRhAvD7hbQjgroSvJJAcLLD5CXIGT1Q/fYOGGG00BSgPCye/RTw9kFzHgNPqjHFCBDCQEa/DlKEO4Kiu7RdfNPasRIAcLLMRnZeIJnDMFpEz4pzb2wAy8FCC87QOYzLGMIEcYhdvWYAmQoFUC2PI8QhAAIFQbUdD1cXh8sBQgvK0DWd9IHoUbqQdKhNAgpQIYSAeTKM3UQKt5cjLoeU4AMpQLI9V4HQWCAcGGgVIZ2TLRAR6EA2T1GCgrSKCZbV4DDfvKdghUgu8dYGqwEQSeD4cJA65i8z6sCFCDDYzwJwcPgU8yIn3inYAXI6uFJgSVHMICQYeBVWUy6U7ACZPPwJiBsHgXviL7bYsqdghUgm4f/7IfMo5hwVeB0OwUrQBYPyMkfZsgfBv+sxjGLqXYKVoAsHqAzj56IM/HC9mCCFCC8QgAaEOQNY/qdEQIRUoDw6ntATztqJleUpUEei7DGtAKE1wAg6McQM7kSbe4TQpAChNfgdwv+XCc9PoDQYYTJ0iWKRUgBwqsPEOKD0KmACfenQ9djChBe/aYn5pPb5IyGEW+HD4hF1K2mFaChB7LAh8wlTb7FKgohBQivjge60QmYSwq1jDcbDFOPKUB4dQFCf7hJzUgYkVKHs4i11bQC1PcI6XrzTEaWss18nK2mFaC+R1Dvf5WZkZ9+QBjBGm+KRdjpSAHqeQQOH43NZkc4Rp8RDyJIAcJrB1CggXs2OwbJCZZUABBSgPDaeIRPonHNZo/YAxNm4a/HFCC8tgCFWxzb8xKxDzjUwkeQAoQXA0Dn1qn2MQcRwi3Wozp2v2TxmgFA091AlniLW/MWuVLvmXscKIvVDADyvM5YAlHXMgx/o3HHwWVYKEA7D/pimAFBWD8FyK1ZAMRg0SUIDaQC5NYMAKIt6Nytp9k8E3suoAwLBWjrwbMgeEtQ9NnIMiwUoI0H14ryDUEBdgqQWzMAiG7RqCEohEcFyC3xADFuilIRNMGKLBkWClDrQd2XqT+tOgxHBcgt6QCRN/YKXRnk9GAIg9tiaXlOAWo8Jt4YLppHXIAsBClAtcfUOwtG81CADE0DEN2CIwzZFksFyKVjBQhgYeNHAao1+e7K0TwiWlgLIAWolgIEsLDyowBVmn5/92geCpChKQCSkTnZANlrMAWoqLr9ZGROOkDWpxWgahRDRuaEhGG3cBRAClA97iAjc0LCcAFkf7cCVIzujACWAhRXcgFKcp+/aB6xLFw1mAJUeDb3gWrvAXK8O3uAfLtDQbXfADkLIAXIuz8dUPsOkOvduQOU6GbZ0TwUIEORAWLw4LIQEobFwl2D5Q4QYI9eoPYcIOe7cweIwYPNQkgYpsVIAZQ5QKBt5mHab4Dc784cIAYPPgshYShAcClAEIuxGixvgIC32gFprwEaeXfeADF4MFoICWNoMVoAZQ0Q+G5xEO0zQGPvzhogBg9OCyFhKEBAwW94CtHeAjReg2UNEIMHq4WQMAyARt/tSs/LTxaLxXt/pofTSh5AmHt2A7SvAHkKIFd6rv71q+LqweIn/0mPp5FAgBg8eC2EhDEEaPzdjvS8/uyvJUXf7DFAawUIZBEIUHH2/l/poXQkDyAGD2YLIWH0LHw1mDs93/3tzzkRkgbQWgECWfj4GUnPizsHv6BHs5E4gBg8uC2EhMED0ItPfvGX3y/ep4fTShhAawUIZOGtwVzpeV43n88WH9DjaSQNIAYPdgshYfQB8r3bnp7Xt2tyrh6wXYZ5ATpdrW492/716vOHm4cKUDoLfwHkSM+Lw6boeTQZQBe3nl2fHG3+uj75KCpAwz01ZWROSBg9gLzv9gD0NteVmAegN/fuF8Xlx4/bPy/+MW4JNNwSUUbmhITBAdDr2zU5bU3GIQ9AdZVVU1T/9av/igqQsamvjMwJCWNnAajBnI3oxd98X7x88A5bV5AHoLrw2QB0fXK/bQN9XSnCLUP5LfdSN2/63+P6fT+5s1i8NV0/UAvQ3fqPi6O4jWhzV3EZP30hYWwtIAVQmukc5tVdtwR69avHkQFi8IhhISSMDkCAdycB6PXtIUDdNtDFqlbbHuIHyHJbAxmZExLGDAC6enDwVf/lwVVY1BLIsiu9jMwJCWNjAarBEs1IvPri4L0/1vpT20w/7fUDxQTIdl8VGZkTEsYOIMi7E1Vhi422ddnpanVUXYA17eiYADF4xLEQEkZrASuAElVhv/l0o8+8HQXMAFlv7CQjc0LC2AIEend2k+qt9+WRkTkhYShAY7LfWU5G5oSE0VgAa7BkAF19W9ZeV38C9HQzA8TgEctCSBgbgGDvTgTQd4dV+7kdchsXK0COW1vKyJyQMGoLaAGUCKDni4PfVZ2JjwAz1ngBYvCIZiEkjBYg4LsTdSQufln3Rr849BdBClAKC9kAVfDUAJljGqY4AXLdnFlG5oSEUVmAa7DcAGLwiGchJIwGIOi7k42F1ew8X0xahTnvDi8jc0LCOMcUQIka0WeLt/+vBOjJ4bSNaOfNvWVkTkgY55gCiALQyy/MDTyefLJYHNg29Rhcxn/TDoW9Q48QfsqcBZCQzAkJYyqA2hHR3sSMlouDXxrvHnYkVqQtbkCmPDICxOAR00JIGOeYGiwcoPJS/O0/Fy8fdFsxzxfVauiXtm1hBAxluAsgIZkTEsY5pgAKB+jFYU1JWQ5ti5uSqbpJ031uo/5V2D/9M3zrKi6ARvgRkrkwj362OY4EUwCFA3TWtl86y59f327rM0sHszEf6OC9/+CJEHjK1vsJ0HLZTzcPQIh3BwP0qC1lbFfiPoDKau63h1UL/EvAF/EANMrPfAGq8ekmXA5APxjqvVyNRtQPLKMR25KoI7MNdPXtnZKhqfqBRvmZLUBt6dPJOEMYNycBaAtJ2xbq6syCha0R/eO3h4BdGFkAGudnrgBtay9mgDDvDq3CRgB6vjALIAOgH/+9uo5f/J1/GzQOgMYrsJkC1Gn97MoMehjL1AA9P7R0Aw2GMv6lgQfUjGYAyMfPLAHqtZ63DzkAQr09FCBnG+jMVv6YV2FvfQlddk8HyMvPHAEaXGvPDiDHVdjVN3Z+BiXQH94tS6C3JiqB/PzMD6DlsK9m8yc5jOVUAFn6gepy6af2VrHRiP7f3747URvIz8/sADL42RLEABDOgrMnurh65Lwstw5lPLkzwVUYgJ+5AWTtKm6emw9AVWEzHAuzXb+3MgH6cZp+IEAFNjeAHEMNLAAtJwOoLII6o/GPqgqts2LZmKYxWBv/pJoKMkVPNIifWQFkqb42LzCEUZpMBVBvPlAN0PMFEKBmLAw4nkoCCMbPnABy8tMQRAxjOSVAKPUB+uTn34M/SQEIyM+MABodKecACGux10ubofzMBqCR4qd5OR+AXv7mxo0bn0FqMRJAAH+PB1RTAOThB38JZfmCmQB01raVANsIhwME5mcmAAEmeiF7Ac1v8EcxUKqlzYt/+L748fcLc+qioWCAwBXYTAACTRQkAbScC0Cbua/b7uwxhQKE4GcOAHmrr0a4oXTjO3xRmOJe1nOnvEC3DU/Yd2mNuDIVw88MAALyg5xOaHyJJwqLeJf1tE0by3jY1ACh+JEPEHie+3kRDtByUoBsy3peHNbLem5bKiZjd476QbylzSh+pAMELX4K7Jqc4deMRmEX62BqO5neMsvVWNr8k6rqK1GLtLQZx49wgBD8VBahBC2nBcg6naORrWIajIU9WCzeuvEuZCw1CCBcBSYcINQyrfMimKCwKUUxlvXYKqZBP9DVH6qhWGtzGxuh5Xix/IgGCMVPYyECoKWh3ssjy3q+O7T07liGMv5CjLCVebxofgQDhKm+thZBRdByWoCck+oflQXLv5l2E46F4fmRCxCWn9YihKDAefncqzKuvrhxuLDccL4DUNV/dPA++FZ2AQBBrd0eeEUBCIvP1gIP0FIIQJWeWOqwHUBV/9G71r6isAiHxxvAj1CA0MXPzgL/wdClZezLeipZprbuAKrnTW8HM+gRDo43oAITClAIP1sL9EenBmh0cwVLqbQFqL1XGKQLERZh/3iD+BEJUAg+HQvkp5eTA2TpB+qUSm6A2k4iyCBGGyHmNrHHx8w31L3ZiNcU+MVEA+TXBX4Nc0/0O71/eQDyvN79wYSVPyM/OvdlKNgiKIyg6mtogfhY9+sSLut5cbgor66sq1MnASiUn7FBqO0DD0asAAXz0w0DYxG+xRDnsp6i+K7dZHPkMj4uQDDLMY+uhuvPxyjiBCgYn34YwgEyl/VUz3m3+Y0IUDA/qEEoB0V8AIUXP4Mw4DbLJACh1AHo4O8//fTTnx3W/3De8jK4AgsYhDILIzaASPwML+SAnyJss5gAoEVXfBPKCPxYz5k/jz2KuAAi4WN2JYE+tJwTQFf/88eu/PcsBAJE4ccxign7bIvQTWLm2zCoLsPObNCHKDsF78vCQhI/9lFMjEEDkP9i3xMG8fOFZTQE8iEFiNKA3nl0FDaKac5gwImhFBseCcRwqQAR+bGc9tBRTBJFpDU59iOBVGKk60nmZT2VrPexjAsQrQKzDYNTLTjCYLEAHEoigGzLeipdPbCNk0YFiMqPOQxOteAIg8kCcjFJiIJ1WU+tM+tU+ZgAkflhHQbnCoPNwnc4w9cTLutpnp8aIDo/g/7boJaIXIA8zSDjeNMu63l9++B307aBjun89IcgqcPgLGFwWowfkfFq2glljxYfTNyIPqbz059HQbXgCIPXwrcrFSUKZ3rWhnovO6a0VjhNC9D6ONh5p+41ONWCIwxui7Ft8RIBZJ9UXz87KUBrVoAIHXmyARobFqZFwbsqo14cPyVAJdeMmaN0BIsGyE2Q5ZATAtQ0rCcEqCoXWSfiUC04wohi4To0y/PplvW0LE0HUF2vck7EoVpwhBHJQhpAtquws900n5F1YViNAlQInYiTzGNkeYD92WQAWfqBpgaoadczZY46EC4dIDtB9Nnd7D3R01Vha06AyBMpxANkq8SsR51wWU+jiQDadCywZI5/Ik4ijzGAzEO0HnXKZT3tC1MAtO2YYjjrS9ydrq2SD5AFl6QAWZf1VJoEoF3HJv2sx5nJlcZj1GLIi73czWNG4q5jnHzWl9Q7TPCEweMxbmEARI9ipgB1BlaoZ736GWYD0HClLT2KeQK05gNoybSoaxYA9QlyNPwyAKg3sks7682vMBuACgWoUm9mAOmst6V4RgAtOw+zBagnylnfnMN8AOoQ5Oq6UIDA2v4GMwJoy42z71QBgmp3CnMCqNgCxBJFxgB1foJ5AbTs/kONIl+AukV4VgA16LhH/xQgkHonMC+AigYgnihyBaj/A8wNoOXY9BUFCCDSjiZ8YfB7wCyWY9NXFCC/aPsJsIURwQNooQDtFHDWicvBucKI4QG1UIC2wp916mJMpjCieExukSFA5LV0PGHE8VCADHEDRF/JwhJGJA8FyBAzQAwLETjCiOWhABniBYhjGjBDGNE8FCBDrACxzOKkhxHPI1+ATlerW8+ah2/urVYfP968wAkQzxyqWBZCwpgnQBe3nl2fHNUP39wr/z3d0MQJENMUmFgWQsKYJUBv7t0visum2Ln86GFRvPr8YfsSH0BcA9CxLISEMUuAal5qirpP1GIDiG38MJaFkDBmCVBd+HQBaqqwrysF3g3WvK1sglvn7r9kAXR38/fFR5sCiKsEGt0+QcZPX0gY+1ACXax2ZREPQOPbb8jInJAwZglQvw10uit/mADybN8iI3NCwpglQN2rsOJi1wlU8ADk2/5HRuaEhDFLgKpG86YfaHcBVosBIO/2UTIyJySMeQJU9USX/Fyf3C0bQLU2rSA6QP7tx2RkTkgYMwXIKTJAgO3rZGROSBgKUF+Q7Q9lZE5IGApQT6DtM2VkTkgYClBXsO1XZWROSBgKUEfA7XtlZE5IGArQVqPr54AeUClAcZUCIDA/QjInJAwFqBVi93kZmRMShgLUCHP3AhmZExKGAlQLdfcLGZkTEoYCVAl39xQZmRMShgJUoO/+JSNzQsJQgPB3j5OROSFhKED4u8fJyJyQMBQg/N3jZGROSBjZAxRw90EZmRMSRu4Ahdy9UkbmhISROUBBdz+VkTkhYeQNUNjdc2VkTkgYWQMUePdlGZkTEkbOAIXevVtG5oSEkTFAwXd/l5E5IWHkC1AwP0IyJySMbAEK50dI5oqnPwSJOYwMAOqdtM3xEvgRAVB5UIEAdU+HAmTIDpBxyij8CACoxuBp+Ec350MBMmSN0DhlJH5SA7RBINhjx5ACZMge4e5XVx8vjZ+0ALFkn8zgTnkAtCuEquMl8pMQIMb6h1AL9pQLQBuEzun8JAOIuQXctMOJJhkB1Jz/czo/aQCKcg3+1DBFKyOA6iR8SOcnAUCWLhymMGzGSAuMZg5QUXxYKth7o6kBciSZKwwaQ3kBtFx+SC6zJwbInV6+MCgIZQVQWX2dF1NX+ySLsdSyhhHMUE4AVc2f6nipBE0FkCepzGEEIpQRQHXzuTleGkLTAORNKH8YIQzlA1Bz+dWt9UO/YwKAIKmMEQYeoWwAai/ft8dLICg2QNaL9snCQDKUC0Cb7p/O8QYjFBcgcAKjhYFCKBOAtt2HRrMx4DsiAoTJXUyO4XHkAdCu+7l/vGEEyfjpCykIswCoM3wxPN4QhOJkDt1+jd6WB0WUA0Dd4S/7dQfuO2Rc/gi5GMwAoN7wqeOnj/oO9syF9eHJ6I7aO4DM+3T67376tFSMO4SC9LRRsu/36iljhDMAyPP6SOsV/B2cP33COObkQ3LWSPeuBPK8Pnb9DP0OtswR6OEMAyg7RQrQRpN3wNDwSToxshO4ArRVpL4zuwWVHqYwwj7WpUgB6ihK35n1i56S8Um8umhLEW5e/p4DBKzHiJlrTjvNgyEMFovdAmvY+/ceIBBCDL9bhuSLAKi2GLlGGyoDgAD1WPhp357mvQKoFoyiHADyF0KkpifJgiOMmBZeivIAyIdQ0Gnvn9c9BajWGES5AFSM/pBCe09IFhxhTGiRO0Dd0tg4EdjTbnHZe4AcygigRlaMAgYAiGFYpQC5JQagWkOK4B7OilABiitZADXaUYQbw2YOg9VDATIUD6BaNRKgTVHG+0QUoLgSC1Ctzvaorrf4utQUoLiSDVB3Mo8NFH+HrAIUWXMAqJaFIgA+ClBszQagRj8MFGDBEcYMLBQgtwcCHwUotuYI0NQWQsJQgPCSkTkhYShAeMnInJAwFCC8ZGROSBgKEF4yMickDAUILxmZExKGAoSXjMwJCUMBwktG5oSEoQDhJSNzQsJQgPCSkTkhYShAeMnInJAwFCC8ZGROSBgKEF4yMickDAUILxmZExLG3gGkEi1GSMYUDtAUmuoseCQjDBlRDKUAASQjDBlRDKUAASQjDBlRDCUbIJV4KUAqkhQgFUkKkIokBUhFkmiA3vz6YeoQyiDurVYfP04dxfXJanU3dRA2iQbo9KP0AL25d1QGcutZ4jBOj8pIJBIkGKDypy8AoMsqhlefJw6kDuAiOcYWCQbo8ih53jaSEYgChJWMvBUSqrCiKpHvpw7BIgUIoAsBVWnZipZAsSEFyK+LlYyf/mX6i0FTCpBXEq4Fa4mswxQgny4k/O7rwkcBwkoCQBJiqFpAJTuXEhtBCpBHF6taqX/7VU+0RH5kA6SSLwVIRZICpCJJAVKRpACpSFKAVCQpQCqSFKBSjw6+Sh3CbKUAFQoQRQpQoQBRpAAVChBFClBRA/Tfh4uffpk6jjlKASoqgH62KKXlUIAUoFKPFgdfFlcPFh+kDmSGUoCKCqAKneeLd1IHMkMpQMWmEf3iUAHCSwEqFCCKFKBCAaJIASoUIIoUoEIBokgBKhQgihSgQgGiSAFSkaQAqUhSgFQkKUAqkhQgFUkKkIokBUhFkgKkIkkBUpGkAKlIUoBUJP0/iZqpDG0wgcEAAAAASUVORK5CYII=" /><!-- --></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>h_k<span class="sc">$</span>h_sel</span></code></pre></div>
+<pre><code>## [1] 1.2</code></pre>
+<p>The <code>select_h</code> function has also generated a figure
+displaying the obtained power versus the considered <span class="math inline">\(h\)</span>, for each value of skewness alternative
+<span class="math inline">\(\delta\)</span> considered.</p>
+<p>We can now perform the <span class="math inline">\(k\)</span>-sample
+tests with the <em>optimal</em> value of <span class="math inline">\(h\)</span>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>k_test <span class="ot">&lt;-</span> <span class="fu">kb.test</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">h=</span>h_k<span class="sc">$</span>h_sel)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">show</span>(k_test)</span></code></pre></div>
+<pre><code>## 
+##  Kernel-based quadratic distance k-sample test 
+## U-statistics  Dn          Trace 
+## ------------------------------------------------
+## Test Statistic:   3.76127     5.552056 
+## Critical Value:   1.270525    1.876836 
+## H0 is rejected:   TRUE        TRUE 
+## CV method:  subsampling 
+## Selected tuning parameter h:  1.2</code></pre>
+<p>The function returns an object of class . The method for the object
+shows the computed statistics with corresponding critical values, and
+the logical indicating if the null hypothesis is rejected. The test
+correctly rejects the null hypothesis, in fact the values of the
+statistics are greater than the computed critical values. The package
+provides also the <code>summary</code> method which returns the results
+of the tests together with the standard descriptive statistics for each
+variable computed, overall, and with respect to the provided groups.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>summary_ktest <span class="ot">&lt;-</span> <span class="fu">summary</span>(k_test)</span></code></pre></div>
+<pre><code>## 
+##  Kernel-based quadratic distance k-sample test 
+##   Statistic Test_Statistic Critical_Value Reject_H0
+## 1        Dn       3.761270       1.270525      TRUE
+## 2     Trace       5.552056       1.876836      TRUE</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>summary_ktest<span class="sc">$</span>summary_tables</span></code></pre></div>
+<pre><code>## [[1]]
+##            Group 1    Group 2    Group 3      Overall
+## mean   -0.05208816 -0.3961768  0.5318161  0.027850399
+## sd      0.96223294  0.8169982  1.1147943  1.039422979
+## median -0.07433374 -0.4171737  0.4466713  0.003313025
+## IQR     1.34379740  1.1499518  1.4976634  1.507024820
+## min    -2.86000669 -2.1929616 -2.1754778 -2.860006689
+## max     1.88750642  1.0851059  2.6517848  2.651784802
+## 
+## [[2]]
+##           Group 1    Group 2    Group 3     Overall
+## mean    0.3928294 -0.2851004 -0.4028292 -0.09836674
+## sd      0.9612003  1.1243216  0.9603282  1.07079458
+## median  0.2303015 -0.1667130 -0.3676814 -0.14246592
+## IQR     1.1269249  1.2443774  1.3256384  1.24637078
+## min    -1.1662595 -3.5108957 -2.6488286 -3.51089574
+## max     3.0792766  2.1192756  1.5225887  3.07927659</code></pre>
+<div id="note" class="section level4">
+<h4>Note</h4>
+<p>If a value of <span class="math inline">\(h\)</span> is not provided
+to the , this function performs the function <code>select_h</code> for
+automatic search of an <em>optimal</em> value of <span class="math inline">\(h\)</span> to use. . The following code shows its
+usage, but it is not executed since we would obtain the same
+results.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>k_test_h <span class="ot">&lt;-</span> <span class="fu">kb.test</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)</span></code></pre></div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Markatou Marianthi &amp; Saraceno Giovanni (2024). “A Unified
+Framework for Multivariate Two- and k-Sample Kernel-based Quadratic
+Distance Goodness-of-Fit Tests.”<br />
+<a href="https://doi.org/10.48550/arXiv.2407.16374">https://doi.org/10.48550/arXiv.2407.16374</a></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

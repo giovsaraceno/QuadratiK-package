@@ -50,7 +50,8 @@ Suggests:
     rmarkdown,
     roxygen2,
     testthat (>= 3.0.0),
-    rgl
+    rgl,
+    sphunif
 LinkingTo: 
     Rcpp,
     RcppEigen
@@ -61,3 +62,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list (markdown = TRUE, roclets = c ("namespace", "rd", "srr::srr_stats_roclet"))
 RoxygenNote: 7.3.1
+Language: en-US

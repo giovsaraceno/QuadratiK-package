@@ -10,7 +10,7 @@
 #' Poisson kernel-based density is defined by:
 #' \deqn{f(\mathbf{x}|\rho, \mathbf{\mu}) = \frac{1-\rho^2}{\omega_d 
 #' ||\mathbf{x} - \rho \mathbf{\mu}||^d},}
-#' where \eqn{\mu} is a vetcor orienting the center of the distribution, 
+#' where \eqn{\mu} is a vector orienting the center of the distribution, 
 #' \eqn{\rho} is a parameter to control the concentration of the distribution 
 #' around the vector \eqn{\mu} and it is related to the variance of the 
 #' distribution. Recall that, for \eqn{x = (x_1, \ldots, x_d) \in \mathbb{R}^d},

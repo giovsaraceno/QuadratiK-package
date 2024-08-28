@@ -53,7 +53,7 @@
 #' 
 #' The obtained estimates are used for assigning final memberships, identifying
 #' the \code{nClust} clusters, according to the following rule
-#' \deqn{P(x_i, \Theta) = \argmax_{j \in \{1, \ldots, k\}} \{ \frac{\alpha_j 
+#' \deqn{P(x_i, \Theta) = \arg\max_{j \in \{1, \ldots, k\}} \{ \frac{\alpha_j 
 #' f_j(x_i|\mu_j, \rho_j)}{f(x_i, \Theta)}\}.}
 #' The number of clusters \code{nClust} must be provided as input to the
 #' clustering algorithm.
@@ -61,6 +61,13 @@
 #' @seealso [dpkb()] and [rpkb()] for more information on the Poisson 
 #'          kernel-based distribution. \cr
 #'          \linkS4class{pkbc} for the class definition.
+#'          
+#' @note
+#' The clustering algorithm is tailored for data points on the sphere
+#' \eqn{\mathcal{S}^{d-1}}, but it can be also performed on spherically
+#' transformed observations, i.e. data points on the Euclidean space 
+#' \eqn{\mathbb{R}^d} that are normalized such that they lie on the 
+#' corresponding $d$-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
 #'
 #' @return An S4 object of class \code{pkbc} containing the results of the 
 #' clustering procedure based on Poisson kernel-based distributions. The object 
@@ -952,7 +959,7 @@ setMethod("predict", signature(object="pkbc"),
 #' class. It is often used to assess the homogeneity of a group by evaluating 
 #' how many of its members share the same label. A higher IGP indicates that the
 #' group is more cohesive, while a lower proportion suggests greater diversity 
-#' or misclassification within the group (Kapp and Tibshiran 2007).
+#' or misclassification within the group (Kapp and Tibshirani 2007).
 #' 
 #' The Adjusted Rand Index (ARI) is a statistical measure used in data 
 #' clustering analysis. It quantifies the similarity between two partitions of 
@@ -964,7 +971,7 @@ setMethod("predict", signature(object="pkbc"),
 #' Each cluster can represented by a so-called silhouette which is based on the
 #' comparison of its tightness and separation. The average silhouette width 
 #' provides an evaluation of clustering validity, and might be used to select 
-#' an ‘appropriate’ number of clusters (Rousseeuw 1987). 
+#' an *appropriate* number of clusters (Rousseeuw 1987). 
 #' 
 #' Macro Precision is a metric used in multi-class classification that 
 #' calculates the precision for each class independently and then takes the 

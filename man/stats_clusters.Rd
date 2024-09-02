@@ -18,7 +18,7 @@ stats_clusters(object, ...)
 \item{k}{Number of clusters to be used.}
 }
 \value{
-List with computed descriptive statistics for each variable.
+List with computed descriptive statistics for each dimension.
 }
 \description{
 Method for objects of class \code{pkbc} which computes some
@@ -42,4 +42,8 @@ pkbc_res<- pkbc(dat, 3)
 stats_clusters(pkbc_res, 3)
 
 
+}
+\seealso{
+\code{\link[=pkbc]{pkbc()}} for the clustering algorithm \cr
+\linkS4class{pkbc} for the class object definition.
 }

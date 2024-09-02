@@ -4,7 +4,17 @@
 \alias{compute_CV}
 \title{Compute the critical value for two-sample KBQD tests}
 \usage{
-compute_CV(B, Quantile, data_pool, size_x, size_y, h, method, b = 1)
+compute_CV(
+  B,
+  Quantile,
+  data_pool,
+  size_x,
+  size_y,
+  h,
+  method,
+  b = 1,
+  compute_variance
+)
 }
 \arguments{
 \item{B}{the number of bootstrap/permutation/subsampling samples to generate.}
@@ -27,6 +37,9 @@ corresponding to group Y.}
 
 \item{b}{the subsampling block size (only used if \code{method} is
 "subsampling").}
+
+\item{compute_variance}{indicates if the nonparametric variance is computed.
+Default is TRUE.}
 }
 \value{
 the critical value for the specified method and significance level.
@@ -37,8 +50,9 @@ centered Gaussian kernel
 using one of three methods: bootstrap, permutation, or subsampling.
 }
 \references{
-Markatou Marianthi, Saraceno Giovanni, Chen Yang (2023). “Two- and k-Sample
-Tests Based on Quadratic Distances.” Manuscript, (Department of
-Biostatistics, University at Buffalo)
+Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for
+Multivariate Two- and k-Sample Kernel-based Quadratic Distance
+Goodness-of-Fit Tests.”
+https://doi.org/10.48550/arXiv.2407.16374
 }
 \keyword{internal}

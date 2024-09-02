@@ -11,14 +11,48 @@ vignette: >
 #' 
 #' 
 #' @srrstats {G1.5} k-sample test example in the associated paper
-```
-### $k$-sample test
+```            
 
-We generated three samples, with $n=200$ observations each, from a 2-dimensional Gaussian distributions with mean vectors $\mu_1 = (0, \frac{\sqrt{3}}{3})$, ${\mu}_2 = (-\frac{1}{2}, -\frac{\sqrt{3}}{6})$ and $\mu_3 = (\frac{1}{2}, -\frac{\sqrt{3}}{6})$, and the Identity matrix as covariance matrix. In this situation, the generated samples are well separated, following different Gaussian distributions, i.e. $X_1 \sim N_2(\mu_1, I)$, $X_2 \sim N_2(\mu_2, I)$ and $X_3 \sim N_2(\mu_3, I)$}. The vector ``y`` indicates the membership to groups.  
-```{r}
+The quadratic distance between two probability distributions $F$ and $G$ is
+defined as:
+
+$$
+d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+$$
+
+where $G$ is a distribution whose goodness of fit we wish to assess, and $K$ denotes the Normal kernel defined as:
+
+$$
+K(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2} 
+\left(\det{\mathbf{\Sigma}_h}\right)^{-\frac{1}{2}}  
+\exp\left\{-\frac{1}{2}(\mathbf{s} - \mathbf{t})^\top 
+\mathbf{\Sigma}_h^{-1}(\mathbf{s} - \mathbf{t})\right\},
+$$
+
+for every $\mathbf{s}, \mathbf{t} \in \mathbb{R}^d \times 
+\mathbb{R}^d$, with covariance matrix $\mathbf{\Sigma}_h = h^2 I$ and
+tuning parameter.
+
+Consider $k$ random samples of i.i.d. observations 
+$\mathbf{x}^{(i)}_1, \mathbf{x}^{(i)}_{2}, \ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i$, 
+for $i = 1, \ldots, k$. 
+
+We test if the samples are generated from the same distribution, that is:
+$$
+H_0: F_1 = F_2 = \ldots = F_k
+$$
+versus
+$$
+H_1: F_i \not = F_j,
+$$
+for some $1 \le i \not = j \le k$.
+
+We generated three samples, with $n=50$ observations each, from a 2-dimensional Gaussian distributions with mean vectors $\mu_1 = (0, \frac{\sqrt{3}}{3})$, ${\mu}_2 = (-\frac{1}{2}, -\frac{\sqrt{3}}{6})$ and $\mu_3 = (\frac{1}{2}, -\frac{\sqrt{3}}{6})$, and the Identity matrix as covariance matrix. In this situation, the generated samples are well separated, following different Gaussian distributions, i.e. $X_1 \sim N_2(\mu_1, I)$, $X_2 \sim N_2(\mu_2, I)$ and $X_3 \sim N_2(\mu_3, I)$}. 
+In order to perform the $k$-sample tests, we need to define the vector ``y`` which  indicates the membership to groups.  
+```{r, message=FALSE}
 library(mvtnorm)
 library(QuadratiK)
-sizes <- rep(200,3)
+sizes <- rep(50,3)
 eps <- 1
 set.seed(2468)
 x1 <- rmvnorm(sizes[1], mean = c(0,sqrt(3)*eps/3))
@@ -27,33 +61,41 @@ x3 <- rmvnorm(sizes[3], mean = c(eps/2,-sqrt(3)*eps/6))
 x <- rbind(x1, x2, x3)
 y <- as.factor(rep(c(1,2,3), times=sizes))
 ```
-Recall that the computed test statistics correspond to the omnibus tests.
-```{r}
-h <- 1.5
+To use the ``kb.test()`` function, we need to provide the value for the tuning parameter $h$. The function ``select_h`` can be used for identifying on *optimal* value of $h$. This function needs the input ``x`` and ``y`` as the function ``kb.test``, and the selection of the family of alternatives. Here we consider the location alternatives. 
+```{r fig.width=6, fig.height=4}
 set.seed(2468)
-k_test <- kb.test(x=x, y=y, h=h)
-k_test
+h_k <- select_h(x=x, y=y, alternative="location")
 ```
+```{r}
+h_k$h_sel
+```
+The ``select_h`` function has also generated a figure displaying the obtained power versus the considered $h$, for each value of skewness alternative $\delta$ considered.
 
-When the $k$-sample test is performed, the ``summary`` method on the ``kb.test`` object returns the results of the tests together with the standard descriptive statistics for each variable computed, overall, and with respect to the provided groups. 
+We can now perform the $k$-sample tests with the *optimal* value of $h$. 
+```{r}
+set.seed(2468)
+k_test <- kb.test(x=x, y=y, h=h_k$h_sel)
+show(k_test)
+```
+The function \texttt{kb.test()} returns an object of class \texttt{kb.test}.
+The \texttt{show} method for the \texttt{kb.test} object shows the computed statistics with corresponding critical values, and the logical indicating if the null hypothesis is rejected. 
+The test correctly rejects the null hypothesis, in fact the values of the statistics are greater than the computed critical values. 
+The package provides also the ``summary`` method which returns the results of the tests together with the standard descriptive statistics for each variable computed, overall, and with respect to the provided groups. 
 ```{r}
 summary_ktest <- summary(k_test)
 summary_ktest$summary_tables
 ```
 
-#### Selection of h
+#### Note
 
-If a value of $h$ is not provided, the function automatically performs the function ``select_h``.
-```{r}
-#k_test_h <- kb.test(x=x, y=y)
-```
-
-For a more accurate search of the tuning parameter, the function ``select_h`` can be used.This function needs the input ``x`` and ``y`` as the function ``kb.test`` for the $k$-sample problem. 
-```{r eval=FALSE, fig.width=6, fig.height=4}
-set.seed(2468)
-h_k <- select_h(x=x, y=y, alternative="skewness")
-```
+If a value of $h$ is not provided to the \texttt{kb.test()}, this function performs the function ``select_h`` for automatic search of an *optimal* value of $h$ to use. . The following code shows its usage, but it is not executed since we would obtain the same results.
 ```{r eval=FALSE}
-h_k$h_sel
+k_test_h <- kb.test(x=x, y=y)
 ```
-The ``select_h`` function will also generate a figure displaying the obtained power versus the considered $h$, for each value of skewness alternative $\delta$ considered.
+
+## References
+
+Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for 
+Multivariate Two- and k-Sample Kernel-based Quadratic Distance 
+Goodness-of-Fit Tests.”  
+[https://doi.org/10.48550/arXiv.2407.16374](https://doi.org/10.48550/arXiv.2407.16374)

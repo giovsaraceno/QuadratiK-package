@@ -30,3 +30,6 @@ unif_test <- pk.test(x_sp,rho=0.8)
 summary(unif_test)
 
 }
+\seealso{
+\code{\link[=pk.test]{pk.test()}} and \linkS4class{pk.test} for additional details.
+}

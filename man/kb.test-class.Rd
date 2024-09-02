@@ -12,7 +12,7 @@ test statistics and the k-sample tests.
 \section{Slots}{
 
 \describe{
-\item{\code{method}}{String indicating the normal kernel-based quadratic distance
+\item{\code{method}}{String indicating the kernel-based quadratic distance
 test performed.}
 
 \item{\code{Un}}{The value of the test U-statistics.}
@@ -53,4 +53,7 @@ kb.test(x, h=0.5)
 # Two-sample test
 kb.test(x,y,h=0.5, method="subsampling",b=0.9)
 
+}
+\seealso{
+\code{\link[=kb.test]{kb.test()}} for the function that generates this class.
 }

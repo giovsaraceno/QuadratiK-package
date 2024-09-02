@@ -9,9 +9,6 @@ Poisson kernel-based distributions.}
 A class to represent the results of Poisson kernel-based
 clustering procedure for spherical observations.
 }
-\details{
-See the function \code{pkbc} for more details.
-}
 \section{Slots}{
 
 \describe{
@@ -25,4 +22,7 @@ each value of possible number of clusters considered.}
 data("wireless")
 res <- pkbc(as.matrix(wireless[,-8]),4)
 
+}
+\seealso{
+\code{\link[=pkbc]{pkbc()}} for more details.
 }

@@ -342,6 +342,26 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <div id="uniformity-test-on-the-sphere" class="section level3">
 <h3>Uniformity test on the Sphere</h3>
+<p>The quadratic distance between two probability distributions <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> is then defined as:</p>
+<p><span class="math display">\[
+d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+\]</span></p>
+<p>where <span class="math inline">\(G\)</span> is a distribution whose
+goodness of fit we wish to assess, that is the uniform distribution on
+the sphere <span class="math inline">\(\mathcal{S}^{d-1}\)</span>, and
+<span class="math inline">\(K\)</span> denotes the Poisson kernel
+defined as:</p>
+<p><span class="math display">\[
+K(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
+(\mathbf{u}\cdot \mathbf{v})\right)^{d/2}},
+\]</span></p>
+<p>for every <span class="math inline">\(\mathbf{u}, \mathbf{v} \in
+\mathcal{S}^{d-1} \times \mathcal{S}^{d-1}\)</span>.</p>
+<p>Let <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> be a
+random sample with empirical distribution function <span class="math inline">\(\hat{F}\)</span>.</p>
+<p>We test the null hypothesis of uniformity on the <span class="math inline">\(d\)</span>-dimensional sphere, i.e., <span class="math inline">\(H_0: F = G\)</span>, by considering the
+U-statistic estimate and the V-statistic estimate of the sample KBQD
+(Kernel-Based Quadratic Distance).</p>
 <p>We generated <span class="math inline">\(n=200\)</span> observations
 from the uniform distribution on <span class="math inline">\(S^{d-1}\)</span>, with <span class="math inline">\(d=3\)</span>, and <span class="math inline">\(\rho
 = 0.7\)</span>.</p>
@@ -352,12 +372,13 @@ from the uniform distribution on <span class="math inline">\(S^{d-1}\)</span>, w
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> d), n, d)</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>dat_sphere <span class="ot">&lt;-</span> z<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">rowSums</span>(z<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
 <p>The <code>pk.test</code> is used for testing uniformity of the
-generated sample.</p>
+generated sample, providing the data matrix as <code>x</code> and the
+value of the concentration parameter <code>rho</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>res_unif <span class="ot">&lt;-</span> <span class="fu">pk.test</span>(<span class="at">x=</span>dat_sphere, <span class="at">rho=</span>rho)</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>res_unif</span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">show</span>(res_unif)</span></code></pre></div>
 <pre><code>## 
 ##  Poisson Kernel-based quadratic distance test of 
 ##                         Uniformity on the Sphere 
@@ -374,6 +395,11 @@ generated sample.</p>
 ## H0 is rejected:  FALSE 
 ## Statistic Vn:  14.89598 
 ## Critical value:  23.22949</code></pre>
+<p>The <code>pk.test()</code> function returns an object of class
+<code>pk.test</code>. The <code>show</code> method displays the computed
+statistics and the corresponding critical values.</p>
+<p>The test correctly does not reject the null hypothesis of
+uniformity.</p>
 <p>The <code>summary</code> method for the <code>pk.test</code> output
 object provides the results of the performed test, and generates a
 figure showing the qq-plots against the uniform distribution of each
@@ -390,6 +416,81 @@ variable with a table of standard descriptive statistics.</p>
 function on the result of the test for uniformity displays the qq-plots
 between the given samples and the uniform distribution with a table of
 the standard descriptive statistics for each variable.</p>
+<div id="multimodal-example" class="section level4">
+<h4>Multimodal example</h4>
+<p>The Poisson kernel-based test for uniformity exhibits excellent
+results especially in the case of multimodal distributions.</p>
+<p>In this example, we generate data points from a mixture of 4 von
+Mises-Fisher distributions in 2 dimensions. The direction of the mean
+vectors for the distributions are set as (1, 0), (0, 1), (-1, 0), and
+(0, -1), with a concentration parameter <span class="math inline">\(\kappa=5\)</span>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">library</span>(movMF)        </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">library</span>(sphunif)      </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co"># Define the mean directions of the 4 von Mises-Fisher distributions</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>),    </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),    </span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>),   </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)    </span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># Define the concentration parameter (kappa)</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>kappa <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co"># Generate 100 samples from a mixture of 4 von Mises-Fisher distributions</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rmovMF</span>(<span class="dv">100</span>, <span class="at">theta =</span> kappa <span class="sc">*</span> means), <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p>We now compare the results of the <code>pk.test</code> function with
+the Ajne and Bingham tests using the <code>sphunif</code> package.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Run the pk.test from the QuadratiK package to test the data</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>pk_test_result <span class="ot">&lt;-</span> <span class="fu">pk.test</span>(samples, <span class="at">rho=</span><span class="fl">0.8</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Run the Bingham and Ajne tests from the sphunif package</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>other_test_result <span class="ot">&lt;-</span> <span class="fu">unif_test</span>(samples, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;Bingham&quot;</span>, <span class="st">&quot;Ajne&quot;</span>))</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>pk_test_result</span></code></pre></div>
+<pre><code>## 
+##  Poisson Kernel-based quadratic distance test of 
+##                         Uniformity on the Sphere 
+## Selected consentration parameter rho:  0.8 
+## 
+## U-statistic:
+## 
+## H0 is rejected:  TRUE 
+## Statistic Un:  2.692594 
+## Critical value:  1.612663 
+## 
+## V-statistic:
+## 
+## H0 is rejected:  TRUE 
+## Statistic Vn:  15.14426 
+## Critical value:  12.8308</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>other_test_result</span></code></pre></div>
+<pre><code>## $Bingham
+## 
+##  Bingham test of circular uniformity
+## 
+## data:  samples
+## statistic = 5.8674, p-value = 0.0532
+## alternative hypothesis: scatter matrix different from constant
+## 
+## 
+## $Ajne
+## 
+##  Ajne test of circular uniformity
+## 
+## data:  samples
+## statistic = 0.28268, p-value = 0.3156
+## alternative hypothesis: any non-axial alternative to circular uniformity</code></pre>
+<p>In this example, the Poisson kernel-based test statistics reject the
+null hypothesis, while the Bingham test and Ajne test obtain p-values
+equal to 0.0532 and 0.3156, respectively.</p>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Ding, Y., Markatou, M., Saraceno, G. (2023). “Poisson Kernel-Based
+Tests for Uniformity on the d-Dimensional Sphere.” <em>Statistica
+Sinica</em>. <a href="https://doi.org/10.5705/ss.202022.0347">doi:10.5705/ss.202022.0347</a>.</p>
 </div>
 
 

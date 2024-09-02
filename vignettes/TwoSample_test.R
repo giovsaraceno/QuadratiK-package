@@ -11,7 +11,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 library(sn)
 library(mvtnorm)
 library(QuadratiK)
-n <- 200
+n <- 100
 d <- 4
 skewness_y <- 0.5
 set.seed(2468)
@@ -19,10 +19,13 @@ x_2 <- rmvnorm(n, mean = rep(0,d))
 y_2 <- rmsn(n=n, xi=0, Omega = diag(d), alpha=rep(skewness_y,d))
 
 ## -----------------------------------------------------------------------------
-h <- 2
 set.seed(2468)
-two_test <- kb.test(x=x_2, y=y_2, h=h)
+two_test <- kb.test(x=x_2, y=y_2)
 two_test
+
+## ----fig.width=6, fig.height=4------------------------------------------------
+two_test@h$h_sel
+two_test@h$power.plot
 
 ## ----fig.width=6, fig.height=8------------------------------------------------
 summary_two <- summary(two_test)
@@ -30,13 +33,13 @@ summary_two <- summary(two_test)
 ## -----------------------------------------------------------------------------
 summary_two$summary_tables
 
-## -----------------------------------------------------------------------------
-# two_test_h <- kb.test(x=x_2, y=y_2)
-
-## ----eval=FALSE, fig.width=6, fig.height=4------------------------------------
-#  set.seed(2468)
-#  h_test2 <- select_h(x=x_2, y=y_2, alternative="skewness")
-
 ## ----eval=FALSE---------------------------------------------------------------
-#  h_test2$h_sel
+#  two_test_h <- select_h(x=x_2, y=y_2, alternative = "skewness")
+
+## -----------------------------------------------------------------------------
+x_pool <- rbind(x_2,y_2)
+y_memb <- rep(c(1,2),each=n)
+h <- two_test@h$h_sel
+set.seed(2468)
+kb.test(x=x_pool, y=y_memb, h=h)
 

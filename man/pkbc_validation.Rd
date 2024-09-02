@@ -4,7 +4,7 @@
 \alias{pkbc_validation}
 \title{Validation of Poisson kernel-based clustering results}
 \usage{
-pkbc_validation(object, true_label = NULL, h = 1.5)
+pkbc_validation(object, true_label = NULL)
 }
 \arguments{
 \item{object}{Object of class \code{pkbc}}
@@ -12,13 +12,13 @@ pkbc_validation(object, true_label = NULL, h = 1.5)
 \item{true_label}{factor or vector of true membership to clusters (if
 available). It must have the same length of final
 memberships.}
-
-\item{h}{Tuning parameter of the k-sample test. (default: 1.5)}
 }
 \value{
 List with the following components:
 \itemize{
-\item \code{metrics} Table of computed evaluation measures.
+\item \code{metrics} Table of computed evaluation measures for each value
+of number of clusters in the \code{pkbc} object. The
+number of cluster is indicated as column name.
 \item \code{IGP} List of in-group proportions for each value of number of
 clusters specified.
 }
@@ -26,16 +26,49 @@ clusters specified.
 \description{
 Method for objects of class \code{pkbc} which computes evaluation measures
 for clustering results.
+The following evaluation measures are computed:
+In-Group Proportion (Kapp and Tibshirani (2007)). If true label are
+provided, ARI, Average Silhouette Width (Rousseeuw (1987)), Macro-Precision
+and Macro-Recall are computed.
 }
 \details{
-The following evaluation measures are computed:
-In-Group Proportion. If true label are provided, ARI, Average
-Silhouette Width, Macro-Precision and Macro-Recall are computed.
+The IGP is a statistical measure that quantifies the proportion of
+observations within a group that belong to the same predefined category or
+class. It is often used to assess the homogeneity of a group by evaluating
+how many of its members share the same label. A higher IGP indicates that the
+group is more cohesive, while a lower proportion suggests greater diversity
+or misclassification within the group (Kapp and Tibshirani 2007).
+
+The Adjusted Rand Index (ARI) is a statistical measure used in data
+clustering analysis. It quantifies the similarity between two partitions of
+a dataset by comparing the assignments of data points to clusters. The ARI
+value ranges from 0 to 1, where a value of 1 indicates a perfect match
+between the partitions and a value close to 0 indicates a random assignment
+of data points to clusters.
+
+Each cluster can represented by a so-called silhouette which is based on the
+comparison of its tightness and separation. The average silhouette width
+provides an evaluation of clustering validity, and might be used to select
+an \emph{appropriate} number of clusters (Rousseeuw 1987).
+
+Macro Precision is a metric used in multi-class classification that
+calculates the precision for each class independently and then takes the
+average of these values. Precision for a class is defined as the proportion
+of true positive predictions out of all predictions made for that class.
+
+Macro Recall is similar to Macro Precision but focuses on recall. Recall for
+a class is the proportion of true positive predictions out of all actual
+instances of that class. Macro Recall is the average of the recall values
+computed for each class.
+}
+\note{
+Note that Macro Precision and Macro Recall depend on the assigned labels,
+while the ARI measures the similarity between partition up to label switching
 }
 \examples{
 #We generate three samples of 100 observations from 3-dimensional
 #Poisson kernel-based densities with rho=0.8 and different mean directions
-\donttest{
+
 size<-20
 groups<-c(rep(1, size), rep(2, size),rep(3,size))
 rho<-0.8
@@ -46,9 +79,9 @@ data3<-rpkb(size, c(1,0,0),rho,method='rejvmf')
 data<-rbind(data1$x,data2$x, data3$x)
 
 #Perform the clustering algorithm
-pkbc_res<- pkbc(data, 2:4)
+pkbc_res<- pkbc(data, 3)
 pkbc_validation(pkbc_res)
-}
+
 
 }
 \references{
@@ -59,4 +92,8 @@ https://doi.org/10.1093/biostatistics/kxj029
 Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and
 validation of cluster analysis. Journal of Computational and Applied
 Mathematics, 20, 53–65.
+}
+\seealso{
+\code{\link[=pkbc]{pkbc()}} for the clustering algorithm \cr
+\linkS4class{pkbc} for the class object definition.
 }

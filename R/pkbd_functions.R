@@ -1,26 +1,52 @@
 #'
 #' The Poisson kernel-based Distribution (PKBD)
 #' 
-#' Density function and random number generation from the Poisson kernel-based 
-#' Distribution with mean direction vector \code{mu} and concentration parameter
-#' \code{rho}.
+#' @description 
+#' The Poisson kernel-based densities are based on the normalized Poisson kernel
+#' and are defined on the \eqn{d}-dimensional unit sphere. Given a vector 
+#' \eqn{\mathbf{\mu} \in \mathcal{S}^{d-1}}, where \eqn{\mathcal{S}^{d-1}= 
+#' \{x \in \mathbb{R}^d : ||x|| = 1\}}, and a parameter \eqn{\rho} such that 
+#' \eqn{0 < \rho < 1}, the probability density function of a \eqn{d}-variate 
+#' Poisson kernel-based density is defined by:
+#' \deqn{f(\mathbf{x}|\rho, \mathbf{\mu}) = \frac{1-\rho^2}{\omega_d 
+#' ||\mathbf{x} - \rho \mathbf{\mu}||^d},}
+#' where \eqn{\mu} is a vector orienting the center of the distribution, 
+#' \eqn{\rho} is a parameter to control the concentration of the distribution 
+#' around the vector \eqn{\mu} and it is related to the variance of the 
+#' distribution. Recall that, for \eqn{x = (x_1, \ldots, x_d) \in \mathbb{R}^d},
+#' \eqn{||x|| = \sqrt{x_1^2 + \ldots + x_d^2}}. Furthermore, \eqn{\omega_d =
+#' 2\pi^{d/2} [\Gamma(d/2)]^{-1}} is the surface area of the unit sphere in
+#' \eqn{\mathbb{R}^d} (see Golzy and Markatou, 2020). When \eqn{\rho \to 0}, 
+#' the Poisson kernel-based density tends to the uniform density on the sphere.
+#' Connection of the PKBDs to other distributions are discussed in detail in 
+#' Golzy and Markatou (2020). Here we note that when \eqn{d=2}, PKBDs reduce to 
+#' the wrapped Cauchy distribution. Additionally, with precise choice of the 
+#' parameters \eqn{\rho} and \eqn{\mu} the two-dimensional PKBD becomes a 
+#' two-dimensional projected normal distribution. However, the connection with 
+#' the \eqn{d}-dimensional projected normal distributions does not carry beyond 
+#' is \eqn{d=2}.  
+#' Golzy and Markatou (2020) proposed an acceptance-rejection method for 
+#' simulating data from a PKBD using von Mises-Fisher envelops (\code{rejvmf} 
+#' method). Furthermore Sablica, Hornik and Leydold (2023) proposed new ways for
+#' simulating from the PKBD, using angular central Gaussian envelops 
+#' (\code{rejacg}) or using the projected Saw distributions (\code{rejpsaw}).
 #'  
-#' @param x Matrix (or data.frame) with number of columns >=2.
-#' @param mu Location parameter with same length as the rows of x. Normalized to
-#' length one.
-#' @param rho Concentration parameter, with 0 <= rho < 1.
-#' @param logdens Logical; if 'TRUE', densities d are given as log(d).
+#' @param x Matrix (or data.frame) of data point on the sphere 
+#'          \eqn{\mathcal{S}^{d-1}}, with \eqn{d \ge 2}.
+#' @param mu Location parameter with same length as the rows of \code{x}.
+#' @param rho Concentration parameter, with \eqn{0 \le} \code{rho} \eqn{< 1}.
+#' @param logdens Logical; if 'TRUE', densities are returned in logarithmic
+#'                scale.
 #'
 #' @return 
 #' \code{dpkb} gives the density value.
 #' \code{rpkb} generates random observations from the PKBD. 
 #' 
-#' The number of observations generated is determined by \code{n} for 
-#' \code{rpkb}. This function returns a list with the matrix of generated 
-#' observations \code{x}, the number of tries \code{numTries} and the number of
-#' acceptances \code{numAccepted}.
+#' @details
+#' This function \code{dpkb()} computes the density value for a given point 
+#' \code{x} from the Poisson kernel-based distribution with mean direction
+#' vector \code{mu} and concentration parameter \code{rho}.
 #'
-#' 
 #' @examples
 #' # Generate some data from pkbd density
 #' pkbd_dat <- rpkb(10, c(0.5,0), 0.5)
@@ -99,6 +125,14 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #'               (for 'rejacg' method).
 #' 
 #' @details
+#' The number of observations generated is determined by \code{n} for 
+#' \code{rpkb()}. This function returns a list with the matrix of generated 
+#' observations \code{x}, the number of tries \code{numTries} and the number of
+#' acceptances \code{numAccepted}.
+#' 
+#' A limitation of the \code{rejvmf} is that the method does not ensure the
+#' computational feasibility of the sampler for \eqn{\rho} approaching 1.
+#' 
 #' If the chosen method is 'rejacg', the function \code{uniroot}, from the 
 #' \code{stat} package, is used to estimate the beta parameter. In this case, 
 #' the complete results are provided as output. 

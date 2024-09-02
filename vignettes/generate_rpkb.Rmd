@@ -16,12 +16,27 @@ vignette: >
 #'                   
 ```
 
-```{r}
+```{r, message=FALSE}
 library(QuadratiK)
 ```
 
 In this example, we generate observations from the Poisson kernel-based 
-distribution on the sphere, $S^{d-1}$. 
+distribution on the sphere, $S^{d-1}$. Given a vector $\mathbf{\mu} \in \mathcal{S}^{d-1}$, where $\mathcal{S}^{d-1}= 
+\{x \in \mathbb{R}^d : ||x|| = 1\}$, and a parameter $\rho$ such that 
+$0 < \rho < 1$, the probability density function of a $d$-variate 
+Poisson kernel-based density is defined by:
+
+$$
+f(\mathbf{x}|\rho, \mathbf{\mu}) = \frac{1-\rho^2}{\omega_d 
+||\mathbf{x} - \rho \mathbf{\mu}||^d},
+$$
+
+where $\mu$ is a vector orienting the center of the distribution, 
+$\rho$ is a parameter to control the concentration of the distribution 
+around the vector $\mu$, and it is related to the variance of the 
+distribution. Furthermore, $\omega_d =2\pi^{d/2} [\Gamma(d/2)]^{-1}$ is the surface area of the unit sphere in $\mathbb{R}^d$ (see Golzy and Markatou, 2020).
+When $\rho \to 0$, the Poisson kernel-based density tends to the uniform density on the sphere. Connection of the PKBDs to other distributions are discussed in detail in Golzy and Markatou (2020).
+
 We consider mean direction $\mu=(0,0,1)$, $d=3$ and the concentration
 parameter is $\rho = 0.8$. 
 ```{r}
@@ -31,6 +46,11 @@ n <- 1000
 rho <- 0.8
 ```
 We sampled $n=1000$ observations for each method available.
+Golzy and Markatou (2020) proposed an acceptance-rejection method for 
+simulating data from a PKBD using von Mises-Fisher envelopes (`rejvmf` method). 
+Furthermore, Sablica, Hornik, and Leydold (2023) proposed new ways for
+simulating from the PKBD, using angular central Gaussian envelopes 
+(`rejacg`) or using the projected Saw distributions (`rejpsaw`).
 
 ```{r}
 n <- 1000
@@ -44,7 +64,10 @@ dat2 <- rpkb(n = n, rho=rho, mu=mu, method="rejacg")
 # Generate observations using the projected Saw distribution
 dat3 <- rpkb(n = n, rho=rho, mu=mu, method="rejpsaw")
 ```
-The function \texttt{rpkb} returns a list with the following components 
+The number of observations generated is determined by `n` for 
+`rpkb()`. This function returns a list with the matrix of generated 
+observations `x`, the number of tries `numTries`, and the number of
+acceptances `numAccepted`.
 ```{r}
 summary(dat1)
 ```
@@ -89,3 +112,18 @@ rglwidget()
 close3d()
 
 ```
+
+### Note
+A limitation of the `rejvmf` method is that it does not ensure the
+computational feasibility of the sampler for $\rho$ approaching 1.
+
+## References
+
+Golzy, M., Markatou, M. (2020). Poisson Kernel-Based Clustering on the Sphere:
+Convergence Properties, Identifiability, and a Method of Sampling, *Journal of
+Computational and Graphical Statistics*, 29(4), 758-770. 
+[DOI: 10.1080/10618600.2020.1740713](https://doi.org/10.1080/10618600.2020.1740713).
+
+Sablica, L., Hornik, K., Leydold, J. (2023). "Efficient sampling from the PKBD 
+distribution", *Electronic Journal of Statistics*, 17(2), 2180-2209.
+[DOI: 10.1214/23-EJS2149](https://doi.org/10.1214/23-EJS2149)

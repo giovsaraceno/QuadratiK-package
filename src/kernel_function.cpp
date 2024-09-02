@@ -284,6 +284,8 @@ Eigen::VectorXd var_two(const Eigen::MatrixXd& Kcen,
 //' @param centeringType String indicating the method used for centering the normal kernel
 //' @param mu_hat Mean vector for the reference distribution 
 //' @param Sigma_hat Covariance matrix of the reference distribution
+//' @param compute_variance indicates if the nonparametric variance is computed.
+//'                         Default is TRUE. 
 //'
 //' @return A scalar value representing the test statistic
 //'
@@ -300,7 +302,8 @@ Eigen::VectorXd var_two(const Eigen::MatrixXd& Kcen,
 // [[Rcpp::export]]
 Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, double h,
                           const Eigen::VectorXd& mu_hat, const Eigen::MatrixXd& Sigma_hat, 
-                          const std::string& centeringType = "Nonparam")
+                          const std::string& centeringType = "Nonparam",
+                          bool compute_variance = true)
 {
  int n_x = x_mat.rows();
  int k = x_mat.cols();
@@ -332,8 +335,6 @@ Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, doub
  n_sample(0) = n_x;
  n_sample(1) = n_y;
  
- Eigen::VectorXd var_nonparam = var_two(k_center, n_sample);
- 
  k_center.diagonal().setZero();
  
  double Test_NonPar = (k_center.block(0, 0, n_x, n_x).sum() / (n_x * (n_x - 1))) -
@@ -346,8 +347,16 @@ Eigen::VectorXd stat2sample(Eigen::MatrixXd& x_mat, Eigen::MatrixXd& y_mat, doub
  Eigen::VectorXd results(4);
  results(0) = Test_NonPar;
  results(1) = Test_trace;
- results(2) = var_nonparam(0);
- results(3) = var_nonparam(1);
+ 
+ if (compute_variance) {
+    Eigen::VectorXd var_nonparam = var_two(k_center, n_sample);
+    results(2) = var_nonparam(0);
+    results(3) = var_nonparam(1);
+ } else {
+    results(2) = 0;
+    results(3) = 0;
+ }
+ 
  return results;
 }
 //'
@@ -417,6 +426,8 @@ Eigen::VectorXd var_k(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& sizes,
 //' @param h The bandwidth parameter for the kernel function.
 //' @param sizes Vector with sample sizes of the considered samples
 //' @param cum_size Vector indicating the cumulative sizes, adding one sample at the time.
+//' @param compute_variance indicates if the nonparametric variance is computed.
+//'                         Default is TRUE. 
 //'
 //' @return A vector containing the two k-sample test statistics
 //'
@@ -428,7 +439,8 @@ Eigen::VectorXd var_k(const Eigen::MatrixXd& Kcen, const Eigen::VectorXd& sizes,
 // [[Rcpp::export]]
 Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd& y,
                                  double h, const Eigen::VectorXd& sizes, 
-                                 const Eigen::VectorXd& cum_size) {
+                                 const Eigen::VectorXd& cum_size,
+                                 bool compute_variance = true) {
    int n = x.rows();
    int d = x.cols();
    
@@ -461,13 +473,19 @@ Eigen::VectorXd stat_ksample_cpp(const Eigen::MatrixXd& x, const Eigen::VectorXd
       }
    }
    
-   Eigen::VectorXd var = var_k(k_center, sizes, cum_size);
    
    Eigen::VectorXd result(4);
    result(0) = (K - 1) * TraceK + Tn;
    result(1) = TraceK;
-   result(2) = var(0);
-   result(3) = var(1);
+   
+   if (compute_variance) {
+      Eigen::VectorXd var = var_k(k_center, sizes, cum_size);
+      result(2) = var(0);
+      result(3) = var(1);
+   } else {
+      result(2) = 0; 
+      result(3) = 0; 
+   }
    
    return result;
 }

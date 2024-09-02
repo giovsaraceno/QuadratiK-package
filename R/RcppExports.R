@@ -138,6 +138,8 @@ var_two <- function(Kcen, nsamples) {
 #' @param centeringType String indicating the method used for centering the normal kernel
 #' @param mu_hat Mean vector for the reference distribution 
 #' @param Sigma_hat Covariance matrix of the reference distribution
+#' @param compute_variance indicates if the nonparametric variance is computed.
+#'                         Default is TRUE. 
 #'
 #' @return A scalar value representing the test statistic
 #'
@@ -151,8 +153,8 @@ var_two <- function(Kcen, nsamples) {
 #' @keywords internal
 #' 
 #' @noRd
-stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Nonparam") {
-    .Call('_QuadratiK_stat2sample', PACKAGE = 'QuadratiK', x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType)
+stat2sample <- function(x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType = "Nonparam", compute_variance = TRUE) {
+    .Call('_QuadratiK_stat2sample', PACKAGE = 'QuadratiK', x_mat, y_mat, h, mu_hat, Sigma_hat, centeringType, compute_variance)
 }
 
 #'
@@ -181,6 +183,8 @@ var_k <- function(Kcen, sizes, cum_size) {
 #' @param h The bandwidth parameter for the kernel function.
 #' @param sizes Vector with sample sizes of the considered samples
 #' @param cum_size Vector indicating the cumulative sizes, adding one sample at the time.
+#' @param compute_variance indicates if the nonparametric variance is computed.
+#'                         Default is TRUE. 
 #'
 #' @return A vector containing the two k-sample test statistics
 #'
@@ -189,7 +193,7 @@ var_k <- function(Kcen, sizes, cum_size) {
 #' @keywords internal
 #' 
 #' @noRd
-stat_ksample_cpp <- function(x, y, h, sizes, cum_size) {
-    .Call('_QuadratiK_stat_ksample_cpp', PACKAGE = 'QuadratiK', x, y, h, sizes, cum_size)
+stat_ksample_cpp <- function(x, y, h, sizes, cum_size, compute_variance = TRUE) {
+    .Call('_QuadratiK_stat_ksample_cpp', PACKAGE = 'QuadratiK', x, y, h, sizes, cum_size, compute_variance)
 }
 

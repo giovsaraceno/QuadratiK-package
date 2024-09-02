@@ -1,7 +1,8 @@
 #' Select the value of the kernel tuning parameter
 #'
 #' This function computes the kernel bandwidth of the Gaussian kernel for the 
-#' normality, two-sample and k-sample kernel-based quadratic distance (KBQD) tests.
+#' normality, two-sample and k-sample kernel-based quadratic distance (KBQD) 
+#' tests.
 #'
 #' @param x Data set of observations from X.
 #' @param y Numeric matrix or vector of data values. Depending on the input 
@@ -49,10 +50,59 @@
 #' generating samples according to the family of \code{alternative} specified, 
 #' for the chosen values of \code{h_values} and \code{delta}.
 #' 
+#' We consider target alternatives \eqn{F_\delta(\hat{\mathbf{\mu}},
+#' \hat{\mathbf{\Sigma}}, \hat{\mathbf{\lambda}})}, where \eqn{\hat{\mathbf{\mu}},
+#' \hat{\mathbf{\Sigma}}} and \eqn{\hat{\mathbf{\lambda}}} indicate the location,
+#' covariance and skewness parameter estimates from the pooled sample. 
+#' - Compute the estimates of mean \eqn{\hat{\mu}}, covariance matrix
+#'  \eqn{\hat{\Sigma}} and skewness \eqn{\hat{\lambda}} from the pooled sample.  
+#' - Choose the family of alternatives \eqn{F_\delta = F_\delta(\hat{\mu}
+#' ,\hat{\Sigma}, \hat{\lambda})}. \cr \cr
+#' *For each value of \eqn{\delta} and \eqn{h}:*
+#' - Generate \eqn{\mathbf{X}_1,\ldots,\mathbf{X}_{k-1}  \sim F_0}, for 
+#' \eqn{\delta=0};
+#' - Generate \eqn{\mathbf{X}_k \sim F_\delta};
+#' - Compute the \eqn{k}-sample test statistic between \eqn{\mathbf{X}_1, 
+#' \mathbf{X}_2, \ldots, \mathbf{X}_k} with kernel parameter \eqn{h};
+#' - Compute the power of the test. If it is greater than 0.5, 
+#' select \eqn{h} as optimal value. 
+#' - If an optimal value has not been selected, choose the \eqn{h} which
+#'  corresponds to maximum power. 
+#'
+#' The available \code{alternative} are \cr
+#' *location* alternatives, \eqn{F_\delta = 
+#' SN_d(\hat{\mu} + \delta,\hat{\Sigma}, \hat{\lambda})},with 
+#' \eqn{\delta = 0.2, 0.3, 0.4}; \cr
+#' *scale* alternatives, 
+#' \eqn{F_\delta = SN_d(\hat{\mu} ,\hat{\Sigma}*\delta, \hat{\lambda})}, 
+#' \eqn{\delta = 0.1, 0.3, 0.5}; \cr
+#' *skewness* alternatives, 
+#' \eqn{F_\delta = SN_d(\hat{\mu} ,\hat{\Sigma}, \hat{\lambda} + \delta)}, 
+#' with \eqn{\delta = 0.2, 0.3, 0.6}. \cr
+#' The values of \eqn{h = 0.6, 1, 1.4, 1.8, 2.2} and \eqn{N=50} are set as 
+#' default values. \cr
+#' The function \code{select_h()} allows the user to 
+#' set the values of \eqn{\delta} and \eqn{h} for a more extensive grid search. 
+#' We suggest to set a more extensive grid search when computational resources 
+#' permit.
+#' 
+#' @note Please be aware that the `select_h()` function may take a significant 
+#' amount of time to run, especially with larger datasets or when using an 
+#' larger number of parameters in \code{h_values} and \code{delta}. Consider 
+#' this when applying the function to large or complex data.
+#' 
 #' @references
-#' Markatou, M., Saraceno, G., Chen, Y. (2023). “Two- and k-Sample Tests Based 
-#' on Quadratic Distances.” Manuscript, (Department of Biostatistics, University
-#' at Buffalo)
+#' Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for
+#' Multivariate Two- and k-Sample Kernel-based Quadratic Distance 
+#' Goodness-of-Fit Tests.” \cr 
+#' https://doi.org/10.48550/arXiv.2407.16374
+#' 
+#' Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan 
+#' (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK 
+#' package in R and Python. \cr
+#' https://arxiv.org/abs/2402.02290.
+#' 
+#' @seealso The function \code{select_h} is used in the [kb.test()] function.
 #' 
 #' @examples
 #' # Select the value of h using the mid-power algorithm
@@ -213,8 +263,9 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       #y <- as.matrix(ynew[sample(m, replace = FALSE),])
       
       STATISTIC <- stat2sample(xnew, ynew, h, rep(0,d),
-                               diag(d),"Nonparam")
-      CV <- compute_CV(B, Quantile, pooled, n, m, h, method, b)
+                               diag(d),"Nonparam",compute_variance=FALSE)
+      CV <- compute_CV(B, Quantile, pooled, n, m, h, method, b,
+                       compute_variance=FALSE)
       cv <- CV$cv
       return(c(STATISTIC[1] < cv[1]))
    }
@@ -246,8 +297,9 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       sizes_new <- as.vector(table(ynew))
       cum_size_new <- c(0,cumsum(sizes_new))
       STATISTIC <- stat_ksample_cpp(xnew, ynew, h, sizes_new,
-                                                cum_size_new)
-      CV <- cv_ksample(xnew, ynew, h, B, b, Quantile, method)
+                                    cum_size_new,compute_variance=FALSE)
+      CV <- cv_ksample(xnew, ynew, h, B, b, Quantile, method,
+                       compute_variance=FALSE)
       cv <- CV$cv
       return(c(STATISTIC[1] < cv[1]))
    }

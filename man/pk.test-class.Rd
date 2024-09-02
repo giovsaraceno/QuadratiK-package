@@ -11,8 +11,7 @@ quadratic distance tests for Uniformity on the sphere.
 \section{Slots}{
 
 \describe{
-\item{\code{method}}{The method used for the test ("Poisson Kernel-based quadratic
-distance test of Uniformity on the Sphere").}
+\item{\code{method}}{Description of the test.}
 
 \item{\code{x}}{Matrix of data}
 
@@ -45,4 +44,7 @@ size=200
 x_sp <- sample_hypersphere(d, n_points=size)
 pk.test(x_sp,rho=0.8)
 
+}
+\seealso{
+\code{\link[=pk.test]{pk.test()}}
 }

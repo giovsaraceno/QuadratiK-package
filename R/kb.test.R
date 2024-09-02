@@ -487,7 +487,6 @@ setMethod("show", "kb.test",
 #' @importFrom stats median
 #' @importFrom stats sd
 #' @importFrom stats qqnorm
-#' @importFrom ggpp geom_table_npc
 #' 
 #' @export
 setMethod("summary", "kb.test", function(object) {

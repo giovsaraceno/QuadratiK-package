@@ -50,7 +50,8 @@ Suggests:
     roxygen2,
     testthat (>= 3.0.0),
     rgl,
-    sphunif
+    sphunif,
+    circular
 LinkingTo: 
     Rcpp,
     RcppEigen

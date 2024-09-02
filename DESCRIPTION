@@ -27,7 +27,6 @@ Depends:
 Imports: 
     doParallel,
     foreach,
-    ggpp,
     ggplot2,
     ggpubr,
     methods,

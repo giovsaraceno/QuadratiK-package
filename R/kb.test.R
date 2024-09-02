@@ -472,13 +472,11 @@ setMethod("show", "kb.test",
 #' @seealso [kb.test()] and \linkS4class{kb.test} for more details.
 #'
 #' @importFrom ggpubr ggarrange
-#' @importFrom ggpp geom_table_npc
 #' @import ggplot2
 #'
 #'@examples
 #' # create a kb.test object
 #' x <- matrix(rnorm(100),ncol=2)
-#' y <- matrix(rnorm(100),ncol=2)
 #' # Normality test
 #' my_test <- kb.test(x, h=0.5)
 #' summary(my_test)
@@ -529,14 +527,15 @@ setMethod("summary", "kb.test", function(object) {
       colnames(sample2) <- colnames(sample1)
       plot_list <- lapply(names(sample1), function(name) {
          list(
-            compare_qq(sample1[[name]], sample2[[name]], name),
-            compute_stats(sample1[[name]], sample2[[name]], name)$plots
+            compare_qq(sample1[[name]], sample2[[name]], name)
+            #compute_stats(sample1[[name]], sample2[[name]], name)$plots
          )
       })
       plot_list <- do.call(c, plot_list)
-      figure <- ggarrange(plotlist = plot_list, ncol = 2, 
-                          nrow = length(plot_list) / 2, widths=c(1,1.3))
-      
+      figure <- ggarrange(plotlist = plot_list, ncol = 1)
+      # figure <- ggarrange(plotlist = plot_list, ncol = 2, 
+      #                     nrow = length(plot_list) / 2, widths=c(1,1.3))
+       
       stats <- lapply(names(sample1), function(name) {
          
          compute_stats(sample1[[name]], sample2[[name]], name)$stats
@@ -575,24 +574,24 @@ setMethod("summary", "kb.test", function(object) {
          
          stats[length(stats) +1] <- stats_step
          
-         pl_stat <- ggplot() +
-      geom_table_npc(data = data.frame(Stat = rownames(stats_step), stats_step),
-                           aes(npcx = 0.5, npcy = 0.5, 
-             label = list(data.frame(Stat = rownames(stats_step), stats_step))),
-                           hjust = 0.5, vjust = 0.5) +
-         # annotate('table', x = 0.5, y = 0.5, 
-         #          label = data.frame(Stat = rownames(stats_step),stats_step),
-         #          hjust = 0.5, vjust = 0.5) +
-            theme_void() +
-            ggtitle("")+
-            scale_color_brewer(palette='Set1')
-         
-         plot_list[[length(plot_list) + 1]] <- list(pl,pl_stat)
+      #    pl_stat <- ggplot() +
+      # geom_table_npc(data = data.frame(Stat = rownames(stats_step), stats_step),
+      #                      aes(npcx = 0.5, npcy = 0.5, 
+      #        label = list(data.frame(Stat = rownames(stats_step), stats_step))),
+      #                      hjust = 0.5, vjust = 0.5) +
+      #    # annotate('table', x = 0.5, y = 0.5, 
+      #    #          label = data.frame(Stat = rownames(stats_step),stats_step),
+      #    #          hjust = 0.5, vjust = 0.5) +
+      #       theme_void() +
+      #       ggtitle("")+
+      #       scale_color_brewer(palette='Set1')
+      #    
+         #plot_list[[length(plot_list) + 1]] <- list(pl,pl_stat)
+         plot_list[[length(plot_list) + 1]] <- list(pl)
          
       }
       plot_list <- do.call(c, plot_list)
-      figure <- ggarrange(plotlist = plot_list,
-                          nrow = length(plot_list)/2, ncol = 2)
+      figure <- ggarrange(plotlist = plot_list,ncol = 1)
       print(figure)
       
       stats <- do.call(cbind, stats)

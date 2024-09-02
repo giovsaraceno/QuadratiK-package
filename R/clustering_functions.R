@@ -951,7 +951,6 @@ setMethod("predict", signature(object="pkbc"),
 #' @param true_label factor or vector of true membership to clusters (if 
 #'                   available). It must have the same length of final 
 #'                   memberships.
-#' @param h Tuning parameter of the k-sample test. (default: 1.5)
 #'
 #' @details   
 #' The IGP is a statistical measure that quantifies the proportion of 
@@ -983,6 +982,10 @@ setMethod("predict", signature(object="pkbc"),
 #' instances of that class. Macro Recall is the average of the recall values 
 #' computed for each class.
 #'
+#' @note
+#' Note that Macro Precision and Macro Recall depend on the assigned labels, 
+#' while the ARI measures the similarity between partition up to label switching
+#' 
 #' @return List with the following components:
 #' \itemize{
 #'    \item \code{metrics} Table of computed evaluation measures for each value
@@ -1032,7 +1035,7 @@ setMethod("predict", signature(object="pkbc"),
 #' @srrstats {UL3.2} true label can be provided as a separate input 
 #' 
 #' @export
-pkbc_validation <- function(object, true_label=NULL, h=1.5){
+pkbc_validation <- function(object, true_label=NULL){
    
    x <- object@input$dat
    x <- x/sqrt(rowSums(x^2))
@@ -1067,8 +1070,6 @@ pkbc_validation <- function(object, true_label=NULL, h=1.5){
       # Compute the Average Silhouette Width
       sil <- mean(silhouette(x =object@res_k[[k]]$finalMemb, dist =dist(x))[,3])
       
-     # test_res <- cbind(test_res, c(k, k_test@Un[1], k_test@CV_Un[1], 
-                               #   k_test@H0_Un[1]))
       
       # If true labels are provided
       if(!is.null(true_label)){

@@ -81,11 +81,34 @@ test_that("Function respects the stopping rule", {
 # Test 5: Test for clustering algorithm
 test_that("Clustering algorithm works", {
    
+   # Generated well separated clusters and show that the clustering algorithm
+   # works properly in this simple case
    set.seed(123)
-   dat<-rbind(matrix(rnorm(50),ncol=2), matrix(rnorm(50,4),ncol=2))
+   x <- rpkb(50, c(1,0,0),0.95, method = "rejpsaw")$x
+   y <- rpkb(50, c(0,0,1),0.95, method = "rejpsaw")$x
+   z <- rpkb(50, c(-1,0,0),0.95, method = "rejpsaw")$x
+   dat<-rbind(x,y,z)
+   label <- rep(c(3,1,2),each=50)
    pkbd_res<- pkbc(dat, 3)
    
    expect_true(class(pkbd_res)== "pkbc")
    expect_type(pkbd_res@res_k, "list")
-
+   require(mclust)
+   expect_equal(adjustedRandIndex(pkbd_res@res_k[[3]]$finalMemb,label),1)
+   
+   # Tests for stats_clusters
+   stats_res <- stats_clusters(pkbd_res, 3)
+   expect_equal(stats_res[[1]][1,4], mean(dat[,1]))
+   expect_equal(stats_res[[2]][1,4], mean(dat[,2]))
+   expect_equal(stats_res[[3]][1,4], mean(dat[,3]))
+   
+   # Tests for pkbc_validation
+   cluster_valid <- pkbc_validation(pkbd_res,label)
+   expect_equal(cluster_valid$metrics[2,1],1)
+   expect_gt(cluster_valid$metrics[1,1],0.9)
+   expect_equal(cluster_valid$IGP[[3]],c(1,1,1))
+   
+   # Tests for plot method
+   pkbd_res<- pkbc(dat, c(2,3,4))
+   expect_silent(plot(pkbd_res,3))
 })

@@ -4,7 +4,7 @@
 \alias{pkbc_validation}
 \title{Validation of Poisson kernel-based clustering results}
 \usage{
-pkbc_validation(object, true_label = NULL, h = 1.5)
+pkbc_validation(object, true_label = NULL)
 }
 \arguments{
 \item{object}{Object of class \code{pkbc}}
@@ -12,8 +12,6 @@ pkbc_validation(object, true_label = NULL, h = 1.5)
 \item{true_label}{factor or vector of true membership to clusters (if
 available). It must have the same length of final
 memberships.}
-
-\item{h}{Tuning parameter of the k-sample test. (default: 1.5)}
 }
 \value{
 List with the following components:
@@ -62,6 +60,10 @@ Macro Recall is similar to Macro Precision but focuses on recall. Recall for
 a class is the proportion of true positive predictions out of all actual
 instances of that class. Macro Recall is the average of the recall values
 computed for each class.
+}
+\note{
+Note that Macro Precision and Macro Recall depend on the assigned labels,
+while the ARI measures the similarity between partition up to label switching
 }
 \examples{
 #We generate three samples of 100 observations from 3-dimensional

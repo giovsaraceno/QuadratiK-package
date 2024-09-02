@@ -216,7 +216,6 @@ setMethod("show", "pk.test",
 #' 
 #' @srrstats {G1.4} roxigen2 is used
 #' 
-#' @importFrom ggpp geom_table_npc
 #' @importFrom stats IQR
 #' @importFrom stats median
 #' @importFrom stats sd
@@ -258,19 +257,19 @@ setMethod("summary", "pk.test", function(object) {
       
       stats[[i]] <- stats_step
       
-      pl_stat <- ggplot() +
-      geom_table_npc(data = data.frame(Stat = rownames(stats_step), stats_step),
-                     aes(npcx = 0.5, npcy = 0.5, 
-            label = list(data.frame(Stat = rownames(stats_step), stats_step))),
-                        hjust = 0.5, vjust = 0.5) +
-        #annotate('table', x = 0.5, y = 0.5, 
-                 #   label = data.frame(Stat = rownames(stats_step),stats_step),
-                    # hjust = 0.5, vjust = 0.5) +
-         theme_void() +
-         ggtitle("")+
-         scale_color_brewer(palette='Set1')
-      
-      plot_list[[length(plot_list) + 1]] <- list(pl,pl_stat)
+      # pl_stat <- ggplot() +
+      # geom_table_npc(data = data.frame(Stat = rownames(stats_step), stats_step),
+      #                aes(npcx = 0.5, npcy = 0.5, 
+      #       label = list(data.frame(Stat = rownames(stats_step), stats_step))),
+      #                   hjust = 0.5, vjust = 0.5) +
+      #   #annotate('table', x = 0.5, y = 0.5, 
+      #            #   label = data.frame(Stat = rownames(stats_step),stats_step),
+      #               # hjust = 0.5, vjust = 0.5) +
+      #    theme_void() +
+      #    ggtitle("")+
+      #    scale_color_brewer(palette='Set1')
+      # 
+      plot_list[[length(plot_list) + 1]] <- list(pl)
       
       
    }
@@ -279,8 +278,7 @@ setMethod("summary", "pk.test", function(object) {
    rownames(stats) <- c("mean", "sd", "median", "IQR", "min", "max")
    
    plot_list <- do.call(c, plot_list)
-   figure <- ggarrange(plotlist = plot_list, 
-                       nrow = length(plot_list)/2, ncol = 2)
+   figure <- ggarrange(plotlist = plot_list, ncol = 1)
    
    # Print main results of the test
    cat( "\n", object@method, "\n")

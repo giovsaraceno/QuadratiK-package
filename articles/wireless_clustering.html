@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,13 +78,8 @@ set is used to study the performance of different indoor localization
 algorithms. It is available within the <code>QuadratiK</code> package as
 <code>wireless</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Registered S3 methods overwritten by 'ggpp':</span></span>
-<span><span class="co">##   method                  from   </span></span>
-<span><span class="co">##   heightDetails.titleGrob ggplot2</span></span>
-<span><span class="co">##   widthDetails.titleGrob  ggplot2</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">wireless</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">wireless</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    V1  V2  V3  V4  V5  V6  V7 V8</span></span>
 <span><span class="co">## 1 -64 -56 -61 -66 -71 -82 -81  1</span></span>
 <span><span class="co">## 2 -68 -57 -61 -65 -71 -85 -85  1</span></span>
@@ -101,37 +96,72 @@ indicates the class labels, from 1 to 4, indicating the different rooms.
 Notice that, the Wi-Fi signal strength is measured in dBm, decibel
 milliwatts, which is expressed as a negative value ranging from -100 to
 0. In total, we have 500 observations for each room.</p>
-<p>Given that the Wi-Fi signal strength takes values in a limited range,
-it is appropriate to consider the spherically transformed observations,
-by
+<p>Given that Wi-Fi signal strength values are inherently bounded within
+a certain range, it is possible to consider the spherically transformed
+data points using
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mn>2</mn></msub><annotation encoding="application/x-tex">L_2</annotation></semantics></math>
-normalization, and consequently perform the clustering algorithm on the
-7-dimensional sphere.</p>
+normalization. This transformation maps the data onto the surface of a
+7-dimensional sphere, ensuring that each observation has a uniform
+length. By projecting the data onto this high-dimensional sphere, we can
+take advantage of spherical geometry, and consequently perform the
+proposed clustering algorithm.</p>
 <p>We perform the clustering algorithm on the <code>wireless</code> data
 set. We consider the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">K= 3, 4, 5, 6</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">K= 3, 4, 5</annotation></semantics></math>
 as possible values for the number of clusters.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wire</span> <span class="op">&lt;-</span> <span class="va">wireless</span><span class="op">[</span>,<span class="op">-</span><span class="fl">8</span><span class="op">]</span></span>
 <span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="va">wireless</span><span class="op">[</span>,<span class="fl">8</span><span class="op">]</span></span>
 <span><span class="va">wire_norm</span> <span class="op">&lt;-</span> <span class="va">wire</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">wire</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
-<span><span class="va">res_pk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pkbc.html">pkbc</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">wire_norm</span><span class="op">)</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">res_pk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pkbc.html">pkbc</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">wire_norm</span><span class="op">)</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<p>The <code>pkbc</code> function create an object of class
+<code>pkbc</code> containing the clustering results for each value of
+number of clusters considered.</p>
 <p>To guide the choice of the number of clusters, the function
-<code>validation</code> provides cluster validation measures and
-graphical tools. Specifically, it returns an object with
-<code>IGP</code> the InGroup Proportion (IGP), and <code>metrics</code>
-a table of computed evaluation measures. This table includes the Average
-Siluoette Width (ASW) and, if the true labels are provided, the measures
-of adjusted rand index (ARI), Macro-Precision and Macro-Recall.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code>pkbc_validation</code> provides cluster validation measures and
+graphical tools. Specifically, it returns an object with InGroup
+Proportion (IGP), and <code>metrics</code> a table of computed
+evaluation measures. This table includes the Average Silhouette Width
+(ASW) and, if the true labels are provided, the measures of adjusted
+rand index (ARI), Macro-Precision and Macro-Recall.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
-<span><span class="va">res_validation</span> <span class="op">&lt;-</span> <span class="fu">validation</span><span class="op">(</span><span class="va">res_pk</span>, true_label <span class="op">=</span> <span class="va">labels</span><span class="op">)</span></span>
-<span><span class="va">res_validation</span><span class="op">$</span><span class="va">IGP</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">res_validation</span><span class="op">$</span><span class="va">metrics</span>, <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
-<p>The plot method can be used to display the scatter plot of data
-points and the Elbow plot from the computed within-cluster sum of
-squares values. For the scatter plot, for
+<span><span class="va">res_validation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pkbc_validation.html">pkbc_validation</a></span><span class="op">(</span><span class="va">res_pk</span>, true_label <span class="op">=</span> <span class="va">labels</span><span class="op">)</span></span>
+<span><span class="va">res_validation</span><span class="op">$</span><span class="va">IGP</span></span></code></pre></div>
+<pre><code><span><span class="co">## [[1]]</span></span>
+<span><span class="co">## NULL</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[2]]</span></span>
+<span><span class="co">## NULL</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[3]]</span></span>
+<span><span class="co">## [1] 0.9429038 0.9860558 0.9706215</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[4]]</span></span>
+<span><span class="co">## [1] 0.9662698 0.9733607 0.9526627 0.9880240</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[5]]</span></span>
+<span><span class="co">## [1] 0.9713701 0.7727273 0.9880240 0.9639831 0.9433498</span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">res_validation</span><span class="op">$</span><span class="va">metrics</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##                       3       4       5</span></span>
+<span><span class="co">## ASW             0.35326 0.38031 0.30240</span></span>
+<span><span class="co">## ARI             0.69526 0.94031 0.91409</span></span>
+<span><span class="co">## Macro_Precision 0.48150 0.97719 0.00120</span></span>
+<span><span class="co">## Macro_Recall    0.48700 0.97700 0.00150</span></span></code></pre>
+<p>The clusters identified with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">k=4</annotation></semantics></math>
+achieve high values of ARI, Macro Precision and Macro Recall.</p>
+<p>For a brief description of the reported evaluation measures, with the
+corresponding references, please visit the help documentation of the
+<code>pkbc_validation</code> function.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">pkbc_validation</span><span class="op">)</span></span></code></pre></div>
+<p>The <code>plot</code> method of the <code>pkbc</code> class can be
+used to display the scatter plot of data points and the Elbow plot from
+the computed within-cluster sum of squares values. For the scatter plot,
+for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">d=2</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">d=3</annotation></semantics></math>,
@@ -139,23 +169,35 @@ observations are displayed on the unit circle and unit sphere,
 respectively. If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>&gt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">d&gt;3</annotation></semantics></math>,
 the spherical PCA is applied on the data set, and the first 3 principal
-components are used for visualizing data points on the sphere, after
-application of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mn>2</mn></msub><annotation encoding="application/x-tex">L_2</annotation></semantics></math>
-normalization. In the generated figure, data points are colored by the
-true labels and the assigned membership.</p>
+components are used for visualizing data points on the sphere. In the
+generated figure, data points are colored by the assigned
+membership.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res_pk</span><span class="op">)</span></span></code></pre></div>
+<p><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-1.png" width="576"><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-2.png" width="576"><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-3.png" width="576"><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-4.png" width="576"></p>
 <p>The Elbow plots and the reported metrics suggest
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">K=4</annotation></semantics></math>
 as number of clusters. This is in accordance with the known ground
-truth. Once the number of clusters is selected, the function
-<code>summary_stat</code> in the <code>QuadratiK</code> package can be
-used to obtain additional summary information with respect to the
-clustering results. In particular, the function provides mean, standard
-deviation, median, inter-quantile range, minimum and maximum computed
-for each variable, overall and by the assigned membership.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+truth.</p>
+<p>We can also request the scatter plot only for a specified value of
+number of clusters. Additionally, if true labels are available and are
+provided to the <code>plot</code> method, the scatter plot will display
+the data points colored with respect to the true labels and assigned
+memberships in two adjacent plots.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res_pk</span>, k<span class="op">=</span><span class="fl">4</span>, true_label <span class="op">=</span> <span class="va">labels</span><span class="op">)</span></span></code></pre></div>
+<p><img src="wireless_clustering_files/figure-html/unnamed-chunk-6-1.png" width="768"><img src="wireless_clustering_files/figure-html/unnamed-chunk-6-2.png" width="768"></p>
+<p>The plot of points using the principal components also shows that the
+identified cluster follows the initial labels.</p>
+<p>Once the number of clusters is selected, the method
+<code>summary_stat</code> can be used to obtain additional summary
+information with respect to the clustering results. In particular, the
+function provides mean, standard deviation, median, inter-quantile
+range, minimum and maximum computed for each variable, overall and by
+the assigned membership.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_clust</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stats_clusters.html">stats_clusters</a></span><span class="op">(</span><span class="va">res_pk</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_clust</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">##            Group 1     Group 2     Group 3     Group 4     Overall</span></span>
@@ -219,13 +261,18 @@ for each variable, overall and by the assigned membership.</p>
 <span><span class="co">## IQR     0.02311965  0.03050579  0.02784124  0.02030659  0.03643335</span></span>
 <span><span class="co">## min    -0.50728615 -0.56835661 -0.54571977 -0.53648350 -0.56835661</span></span>
 <span><span class="co">## max    -0.41326597 -0.38995633 -0.43815927 -0.44423198 -0.38995633</span></span></code></pre>
-<p>The clusters identified with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">k=4</annotation></semantics></math>
-achieve high values of ARI, Macro Precision and Macro Recall. The plot
-of points using the principal components also shows that the identified
-cluster follows the initial labels.</p>
 </div>
-  </main>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Golzy, M., Markatou, M. (2020). “Poisson Kernel-Based Clustering on
+the Sphere: Convergence Properties, Identifiability, and a Method of
+Sampling,” <em>Journal of Computational and Graphical Statistics</em>,
+29(4), 758-770. <a href="https://doi.org/10.1080/10618600.2020.1740713" class="external-link">DOI:
+10.1080/10618600.2020.1740713</a>.</p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">QuadratiK</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for class 'pkbc,ANY'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, true_label <span class="op">=</span> <span class="cn">NULL</span>, pca_res <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, k <span class="op">=</span> <span class="cn">NULL</span>, true_label <span class="op">=</span> <span class="cn">NULL</span>, pca_res <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -59,6 +59,12 @@
 <dd><p>Object of class <code>pkbc</code></p></dd>
 
 
+<dt id="arg-k">k<a class="anchor" aria-label="anchor" href="#arg-k"></a></dt>
+<dd><p>number of considered clusters. If it is not provided the scatter
+plot is displayed for each value of number of clusters present in
+the <code>x</code> object</p></dd>
+
+
 <dt id="arg-true-label">true_label<a class="anchor" aria-label="anchor" href="#arg-true-label"></a></dt>
 <dd><p>factor or vector of true membership to clusters (if
 available). It must have the same length of final
@@ -66,13 +72,14 @@ memberships.</p></dd>
 
 
 <dt id="arg-pca-res">pca_res<a class="anchor" aria-label="anchor" href="#arg-pca-res"></a></dt>
-<dd><p>Logical. If TRUE the results from PCALocantore when dimension
-is greater than 3 are also reported.</p></dd>
+<dd><p>Logical. If TRUE the results from PCALocantore are also
+reported (when dimension is greater than 3).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>One of the following plot:</p><ul><li><p>scatterplot of data points colored by final membership</p></li>
+
+<ul><li><p>scatterplot of data points colored by final membership</p></li>
 <li><p>elbow plot</p></li>
 </ul></div>
     <div class="section level2">
@@ -80,13 +87,13 @@ is greater than 3 are also reported.</p></dd>
 
 <ul><li><p>scatterplot: If dimension is equal to 2 or 3, points are displayed on the
 circle and sphere, respectively. If dimension if greater than 3, the
-spherical Principal Component procedure proposed by Locantore et al., (1999)
+spherical Principal Component procedure proposed by Locantore et al. (1999),
 is applied for dimensionality reduction and the first three principal
 components are normalized and displayed on the sphere. For d &gt; 3, the
 complete results from the <code>PcaLocantore</code> function (package <code>rrcov</code>)
-are returned if pca_res=TRUE.</p></li>
+are returned if <code>pca_res=TRUE</code>.</p></li>
 <li><p>elbow plot: the within cluster sum of squares (wcss) is computed using the
-Euclidean distance and the cosine similarity.</p></li>
+Euclidean distance (left) and the cosine similarity (right).</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -94,41 +101,43 @@ Euclidean distance and the cosine similarity.</p></li>
 component analysis for functional data." Test 8, 1–73.
 https://doi.org/10.1007/BF02595862</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="pkbc.html">pkbc()</a></code> for the clustering algorithm <br><a href="pkbc-class.html">pkbc</a> for the class object definition.</p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">300</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">300</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">pkbc_res</span><span class="op">&lt;-</span> <span class="fu"><a href="pkbc.html">pkbc</a></span><span class="op">(</span><span class="va">dat</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="stats_clusters.html">stats_clusters</a></span><span class="op">(</span><span class="va">pkbc_res</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            Group 1    Group 2   Group 3       Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.11423666  0.3590187 0.5147192  0.0009016251</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.59540850  0.3076964        NA  0.5764088492</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.08317254  0.3416886 0.5147192  0.0529415862</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     1.08582765  0.4552225 0.0000000  0.9657622803</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.99815567 -0.2498777 0.5147192 -0.9981556667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.92996966  0.8834617 0.5147192  0.9299696565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            Group 1    Group 2     Group 3     Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.08616614 -0.8522997 0.306305518  0.03032233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.55622334  0.1139002 0.239097130  0.57609801</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median  0.09893314 -0.8590883 0.220771423  0.08528945</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.95811426  0.1154519 0.319424189  0.91819081</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.99815567 -0.9929153 0.007812835 -0.99815567</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.97484325 -0.6046193 0.747318680  0.97484325</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1     Group 2    Group 3     Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.0746302  0.02798259 -0.6126422  0.05702852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.5898005  0.44361604         NA  0.55877530</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median  0.1263663  0.04841560 -0.6126422  0.07707060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.9728322  0.67595429  0.0000000  0.86676405</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.9993915 -0.71110682 -0.6126422 -0.99939152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.9987495  0.75635249 -0.6126422  0.99874954</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            Group 1   Group 2    Group 3      Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.06949009 0.3329087  0.1335748 -0.006875767</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.58955595 0.1928422  0.3058553  0.548503665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.12515153 0.3197409  0.2780209  0.020922028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     1.05338258 0.3475881  0.4344834  0.891655218</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.99465804 0.1143958 -0.3618267 -0.994658036</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.99874954 0.5919510  0.5345903  0.998749545</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1    Group 2   Group 3      Overall</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.1984374 -0.7452149 -0.599778 -0.026584810</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.5021823  0.1944794        NA  0.601351973</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median  0.1485244 -0.7525265 -0.599778 -0.006964457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.7709032  0.3395141  0.000000  1.063345824</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.7126606 -0.9970685 -0.599778 -0.997068462</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.9813179 -0.3946371 -0.599778  0.981317913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Group 1    Group 2    Group 3     Overall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.2862676 0.28557672 0.86077538 -0.08568599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.5104903 0.20295785 0.09470435  0.60742332</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.3332680 0.29047540 0.88064534 -0.07405065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.7500978 0.33726926 0.12384691  1.06925832</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.9996330 0.01117247 0.66139978 -0.99963299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.8079944 0.53294413 0.98131791  0.98131791</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

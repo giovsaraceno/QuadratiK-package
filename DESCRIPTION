@@ -52,8 +52,7 @@ Suggests:
     clusterRepro,
     mclust,
     Tinflex,
-    movMF,
-    devtools
+    movMF
 LinkingTo: 
     Rcpp,
     RcppEigen

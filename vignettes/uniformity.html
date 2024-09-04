@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Uniformity test on the Sphere</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Uniformity test on the Sphere</h1>
+
+
+
+<div id="uniformity-test-on-the-sphere" class="section level3">
+<h3>Uniformity test on the Sphere</h3>
+<p>The quadratic distance between two probability distributions <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> is then defined as:</p>
+<p><span class="math display">\[
+d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+\]</span></p>
+<p>where <span class="math inline">\(G\)</span> is a distribution whose
+goodness of fit we wish to assess, that is the uniform distribution on
+the sphere <span class="math inline">\(\mathcal{S}^{d-1}\)</span>, and
+<span class="math inline">\(K\)</span> denotes the Poisson kernel
+defined as:</p>
+<p><span class="math display">\[
+K(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
+(\mathbf{u}\cdot \mathbf{v})\right)^{d/2}},
+\]</span></p>
+<p>for every <span class="math inline">\(\mathbf{u}, \mathbf{v} \in
+\mathcal{S}^{d-1} \times \mathcal{S}^{d-1}\)</span>.</p>
+<p>Let <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> be a
+random sample with empirical distribution function <span class="math inline">\(\hat{F}\)</span>.</p>
+<p>We test the null hypothesis of uniformity on the <span class="math inline">\(d\)</span>-dimensional sphere, i.e., <span class="math inline">\(H_0: F = G\)</span>, by considering the
+U-statistic estimate and the V-statistic estimate of the sample KBQD
+(Kernel-Based Quadratic Distance).</p>
+<p>We generated <span class="math inline">\(n=200\)</span> observations
+from the uniform distribution on <span class="math inline">\(S^{d-1}\)</span>, with <span class="math inline">\(d=3\)</span>, and <span class="math inline">\(\rho
+= 0.7\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(QuadratiK)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> d), n, d)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>dat_sphere <span class="ot">&lt;-</span> z<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">rowSums</span>(z<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
+<p>The <code>pk.test</code> is used for testing uniformity of the
+generated sample, providing the data matrix as <code>x</code> and the
+value of the concentration parameter <code>rho</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>res_unif <span class="ot">&lt;-</span> <span class="fu">pk.test</span>(<span class="at">x=</span>dat_sphere, <span class="at">rho=</span>rho)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">show</span>(res_unif)</span></code></pre></div>
+<pre><code>## 
+##  Poisson Kernel-based quadratic distance test of 
+##                         Uniformity on the Sphere 
+## Selected consentration parameter rho:  0.7 
+## 
+## U-statistic:
+## 
+## H0 is rejected:  FALSE 
+## Statistic Un:  -0.9756673 
+## Critical value:  1.725683 
+## 
+## V-statistic:
+## 
+## H0 is rejected:  FALSE 
+## Statistic Vn:  14.89598 
+## Critical value:  23.22949</code></pre>
+<p>The <code>pk.test()</code> function returns an object of class
+<code>pk.test</code>. The <code>show</code> method displays the computed
+statistics and the corresponding critical values.</p>
+<p>The test correctly does not reject the null hypothesis of
+uniformity.</p>
+<p>The <code>summary</code> method for the <code>pk.test</code> output
+object provides the results of the performed test, and generates a
+figure showing the qq-plots against the uniform distribution of each
+variable with a table of standard descriptive statistics.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>summary_unif <span class="ot">&lt;-</span> <span class="fu">summary</span>(res_unif)</span></code></pre></div>
+<pre><code>## Warning: Use of `qq_df$x` is discouraged.
+## ℹ Use `x` instead.</code></pre>
+<pre><code>## Warning: Use of `qq_df$sample_quantiles` is discouraged.
+## ℹ Use `sample_quantiles` instead.</code></pre>
+<pre><code>## 
+##  Poisson Kernel-based quadratic distance test of 
+##                         Uniformity on the Sphere 
+##   Test_Statistics Critical_Value Reject_H0
+## 1      -0.9756673       1.725683     FALSE
+## 2      14.8959834      23.229487     FALSE</code></pre>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>The figure automatically generated by the <code>summary</code>
+function on the result of the test for uniformity displays the qq-plots
+between the given samples and the uniform distribution with a table of
+the standard descriptive statistics for each variable.</p>
+<div id="multimodal-example" class="section level4">
+<h4>Multimodal example</h4>
+<p>The Poisson kernel-based test for uniformity exhibits excellent
+results especially in the case of multimodal distributions.</p>
+<p>In this example, we generate data points from a mixture of 4 von
+Mises-Fisher distributions in 2 dimensions. The direction of the mean
+vectors for the distributions are set as (1, 0), (0, 1), (-1, 0), and
+(0, -1), with a concentration parameter <span class="math inline">\(\kappa=5\)</span>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">library</span>(movMF)        </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">library</span>(sphunif)      </span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co"># Define the mean directions of the 4 von Mises-Fisher distributions</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>),    </span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),    </span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>),   </span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)    </span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>)</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co"># Define the concentration parameter (kappa)</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>kappa <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co"># Generate 100 samples from a mixture of 4 von Mises-Fisher distributions</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rmovMF</span>(<span class="dv">100</span>, <span class="at">theta =</span> kappa <span class="sc">*</span> means), <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<p>We now compare the results of the <code>pk.test</code> function with
+the Ajne and Bingham tests using the <code>sphunif</code> package.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Run the pk.test from the QuadratiK package to test the data</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>pk_test_result <span class="ot">&lt;-</span> <span class="fu">pk.test</span>(samples, <span class="at">rho=</span><span class="fl">0.8</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Run the Bingham and Ajne tests from the sphunif package</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>other_test_result <span class="ot">&lt;-</span> <span class="fu">unif_test</span>(samples, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;Bingham&quot;</span>, <span class="st">&quot;Ajne&quot;</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>pk_test_result</span></code></pre></div>
+<pre><code>## 
+##  Poisson Kernel-based quadratic distance test of 
+##                         Uniformity on the Sphere 
+## Selected consentration parameter rho:  0.8 
+## 
+## U-statistic:
+## 
+## H0 is rejected:  TRUE 
+## Statistic Un:  2.692594 
+## Critical value:  1.612663 
+## 
+## V-statistic:
+## 
+## H0 is rejected:  TRUE 
+## Statistic Vn:  15.14426 
+## Critical value:  12.8308</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>other_test_result</span></code></pre></div>
+<pre><code>## $Bingham
+## 
+##  Bingham test of circular uniformity
+## 
+## data:  samples
+## statistic = 5.8674, p-value = 0.0532
+## alternative hypothesis: scatter matrix different from constant
+## 
+## 
+## $Ajne
+## 
+##  Ajne test of circular uniformity
+## 
+## data:  samples
+## statistic = 0.28268, p-value = 0.3156
+## alternative hypothesis: any non-axial alternative to circular uniformity</code></pre>
+<p>In this example, the Poisson kernel-based test statistics reject the
+null hypothesis, while the Bingham test and Ajne test obtain p-values
+equal to 0.0532 and 0.3156, respectively.</p>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Ding, Y., Markatou, M., Saraceno, G. (2023). “Poisson Kernel-Based
+Tests for Uniformity on the d-Dimensional Sphere.” <em>Statistica
+Sinica</em>. <a href="https://doi.org/10.5705/ss.202022.0347">doi:10.5705/ss.202022.0347</a>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

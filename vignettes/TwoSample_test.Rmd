@@ -54,11 +54,7 @@ We generate the samples $x = (x_1, \ldots,x_n)$ from a standard normal distribut
 ```{r setup, include=FALSE} 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 ```
-```{r include=FALSE}
-if (requireNamespace("devtools", quietly = TRUE)) {
-    devtools::load_all(".")
-}
-```
+
 ```{r message=FALSE}
 library(sn)
 library(mvtnorm)

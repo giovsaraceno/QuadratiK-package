@@ -348,7 +348,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    for(k in k_values){
       results <- foreach(pars = params, .combine = rbind, 
                          .packages=c("sn", "moments", "stats", 
-                                     "rlecuyer", "QuadratiK")) %dopar% {
+                                     "rlecuyer")) %dopar% {
          
          h <- as.numeric(pars[[2]])
          if(is.null(y)){

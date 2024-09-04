@@ -137,6 +137,11 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #' \code{stat} package, is used to estimate the beta parameter. In this case, 
 #' the complete results are provided as output. 
 #' 
+#' @note
+#' If the required packages (`movMF` for \code{rejvmf} method, and
+#' `Tinflex` for \code{rejpsaw}) are not installed, the function will display a
+#' message asking the user to install the missing package(s).
+#' 
 #' @references
 #' Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
 #' Convergence Properties, Identifiability, and a Method of Sampling, Journal of
@@ -159,10 +164,31 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #'                   as separate functions.
 #' 
 #' @export
-rpkb <- function(n, mu, rho, method = 'rejvmf', 
+rpkb <- function(n, mu, rho, method = 'rejacg', 
                  tol.eps = .Machine$double.eps^0.25, 
                  max.iter = 1000) {
    
+   if (!requireNamespace("movMF", quietly = TRUE)) {
+      install <- readline(prompt = "'movMF' is required for 'rejvmf' method. 
+                           Would you like to install it now? (yes/no): ")
+      if (tolower(install) == "yes") {
+         install.packages("movMF")
+      } else {
+         message("'rejvmf' cannot be performed without 'movMF'.")
+         return(NULL)
+      }
+   }
+   
+   if (!requireNamespace("Tinflex", quietly = TRUE)) {
+      install <- readline(prompt = "'Tinflex' is required for 'rejpsaw' method. 
+                           Would you like to install it now? (yes/no): ")
+      if (tolower(install) == "yes") {
+         install.packages("Tinflex")
+      } else {
+         message("'rejpsaw' cannot be performed without 'Tinflex'.")
+         return(NULL)
+      }
+   }
    if (rho >= 1 | rho < 0) {
       stop('Input argument rho must be within [0,1)')
    }
@@ -215,7 +241,6 @@ rpkb <- function(n, mu, rho, method = 'rejvmf',
 #' Computational and Graphical Statistics, 29:4, 758-770, 
 #' DOI: 10.1080/10618600.2020.1740713.
 #'
-#' @importFrom movMF rmovMF
 #' @importFrom stats runif
 #' 
 #' @noRd
@@ -230,7 +255,7 @@ rejvmf <- function(n, rho, mu, p) {
    while (numAccepted < n) {
       numTries <- numTries + 1
       theta<-kappa*mu
-      yx<- rmovMF(1,theta,1)
+      yx<- movMF::rmovMF(1,theta,1)
       v<- yx%*%mu
       f1<- (1-rho**2)/ (( 1 + rho**2 - 2*rho*v)^(p/2))
       u <- runif(1)
@@ -325,8 +350,6 @@ rejacg <- function(n, rho, mu, p, tol.eps, max.iter){
 #' Sablica L., Hornik K., Leydold J. (2023) "Efficient sampling from the PKBD 
 #' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 #' 
-#' @importFrom Tinflex Tinflex.setup.C
-#' @importFrom Tinflex Tinflex.sample
 #' 
 #' @noRd
 #' @keywords internal
@@ -347,12 +370,12 @@ rejpsaw <- function(n, rho, mu, p){
       if(p==3) ib <- c(t1+0.000001,t2-0.000001)
       
       ## Create generator object for pSaw distribution
-      pSaw <- Tinflex.setup.C(lpdf, dlpdf, d2lpdf, ib=ib,cT=1, rho=1.05)
+      pSaw <- Tinflex::Tinflex.setup.C(lpdf, dlpdf, d2lpdf, ib=ib,cT=1, rho=1.05)
       ## Print data about generator object.
       #print(gen)
       
       # Step 1
-      W <- Tinflex.sample(pSaw, n=1)
+      W <- Tinflex::Tinflex.sample(pSaw, n=1)
       # Step 2
       y <- sample_hypersphere(p,1)
       # Step 3

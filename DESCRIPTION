@@ -31,7 +31,6 @@ Imports:
     ggpubr,
     methods,
     moments,
-    movMF,
     mvtnorm,
     Rcpp,
     RcppEigen,
@@ -39,10 +38,6 @@ Imports:
     sn,
     stats,
     rrcov,
-    Tinflex,
-    cluster,
-    clusterRepro,
-    mclust,
     scatterplot3d
 Suggests: 
     knitr,
@@ -51,7 +46,12 @@ Suggests:
     testthat (>= 3.0.0),
     rgl,
     sphunif,
-    circular
+    circular,
+    cluster,
+    clusterRepro,
+    mclust,
+    Tinflex,
+    movMF
 LinkingTo: 
     Rcpp,
     RcppEigen

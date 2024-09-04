@@ -93,26 +93,30 @@ uniform distribution.</p></li>
 <span class="r-in"><span><span class="va">x_sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_hypersphere.html">sample_hypersphere</a></span><span class="op">(</span><span class="fl">3</span>, n_points<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">unif_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="pk.test.html">pk.test</a></span><span class="op">(</span><span class="va">x_sp</span>,rho<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">unif_test</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Use of `qq_df$x` is discouraged.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `x` instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Use of `qq_df$sample_quantiles` is discouraged.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `sample_quantiles` instead.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Poisson Kernel-based quadratic distance test of </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         Uniformity on the Sphere </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Test_Statistics Critical_Value Reject_H0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      -0.8881596       1.395522     FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2      39.7335456      52.230766     FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       0.2207214       1.722025     FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      45.0602797      52.230766     FALSE</span>
 <span class="r-plt img"><img src="summary-pk.test-method-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $summary_tables</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 V1           V2          V3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean    0.09516368  0.008816296  0.09046189</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.57156884  0.582301643  0.57170161</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> median  0.20982778 -0.043266014  0.11277328</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.96986229  0.987737591  1.00204113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.99981089 -0.971429044 -0.97149508</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.98313384  0.979168363  0.99285891</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 V1          V2          V3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean   -0.09616741  0.08709887 -0.01460631</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sd      0.57359035  0.57642804  0.57585233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> median -0.17876519  0.20832080 -0.04974959</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IQR     0.95429937  0.89814932  1.00133903</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min    -0.99451952 -0.97609712 -0.92478198</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max     0.94196356  0.98234388  0.93822530</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $test_results</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Test_Statistics Critical_Value Reject_H0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      -0.8881596       1.395522     FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2      39.7335456      52.230766     FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       0.2207214       1.722025     FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      45.0602797      52.230766     FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $qqplots</span>
 <span class="r-plt img"><img src="summary-pk.test-method-2.png" alt="" width="700" height="433"></span>

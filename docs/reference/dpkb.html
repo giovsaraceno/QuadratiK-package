@@ -148,7 +148,7 @@ simulating from the PKBD, using angular central Gaussian envelops
 <span>  <span class="va">n</span>,</span>
 <span>  <span class="va">mu</span>,</span>
 <span>  <span class="va">rho</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"rejvmf"</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"rejacg"</span>,</span>
 <span>  tol.eps <span class="op">=</span> <span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">^</span><span class="fl">0.25</span>,</span>
 <span>  max.iter <span class="op">=</span> <span class="fl">1000</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -221,6 +221,12 @@ computational feasibility of the sampler for \(\rho\) approaching 1.</p>
 <p>If the chosen method is 'rejacg', the function <code>uniroot</code>, from the
 <code>stat</code> package, is used to estimate the beta parameter. In this case,
 the complete results are provided as output.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>If the required packages (<code>movMF</code> for <code>rejvmf</code> method, and
+<code>Tinflex</code> for <code>rejpsaw</code>) are not installed, the function will display a
+message asking the user to install the missing package(s).</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

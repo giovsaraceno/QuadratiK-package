@@ -984,7 +984,12 @@ setMethod("predict", signature(object="pkbc"),
 #'
 #' @note
 #' Note that Macro Precision and Macro Recall depend on the assigned labels, 
-#' while the ARI measures the similarity between partition up to label switching
+#' while the ARI measures the similarity between partition up to label 
+#' switching.   
+#' 
+#' If the required packages (`mclust` for ARI, `clusterRepro` for IGP, and
+#' `cluster` for ASW) are not installed, the function will display a message
+#' asking the user to install the missing package(s).
 #' 
 #' @return List with the following components:
 #' \itemize{
@@ -1007,10 +1012,8 @@ setMethod("predict", signature(object="pkbc"),
 #' validation of cluster analysis. Journal of Computational and Applied 
 #' Mathematics, 20, 53–65.
 #'
-#' @importFrom mclust adjustedRandIndex
-#' @importFrom clusterRepro IGP.clusterRepro
-#' @importFrom cluster silhouette
 #' @importFrom stats dist
+#' @importFrom utils install.packages
 #'
 #' @examples
 #' #We generate three samples of 100 observations from 3-dimensional
@@ -1036,6 +1039,39 @@ setMethod("predict", signature(object="pkbc"),
 #' 
 #' @export
 pkbc_validation <- function(object, true_label=NULL){
+   
+   if (!requireNamespace("mclust", quietly = TRUE)) {
+      install <- readline(prompt = "'mclust' is required for ARI. Would you 
+                          like to install it now? (yes/no): ")
+      if (tolower(install) == "yes") {
+         install.packages("mclust")
+      } else {
+         message("ARI will not be computed without 'mclust'.")
+         return(NULL)
+      }
+   }
+   
+   if (!requireNamespace("cluster", quietly = TRUE)) {
+      install <- readline(prompt = "'cluster' is required for ASW. Would you 
+                          like to install it now? (yes/no): ")
+      if (tolower(install) == "yes") {
+         install.packages("cluster")
+      } else {
+         message("ASW will not be computed without 'cluster'.")
+         return(NULL)
+      }
+   }
+   
+   if (!requireNamespace("clusterRepro", quietly = TRUE)) {
+      install <- readline(prompt = "'clusterRepro' is required for IGP. 
+                           Would you like to install it now? (yes/no): ")
+      if (tolower(install) == "yes") {
+         install.packages("clusterRepro")
+      } else {
+         message("IGP will not be computed without 'clusterRepro'.")
+         return(NULL)
+      }
+   }
    
    x <- object@input$dat
    x <- x/sqrt(rowSums(x^2))
@@ -1063,19 +1099,21 @@ pkbc_validation <- function(object, true_label=NULL){
       
       # Compute the In-Group Proportion
       if(k>1){
-         igp_k[[k]] <- IGP.clusterRepro(as.data.frame(t(x)), 
+         igp_k[[k]] <- clusterRepro::IGP.clusterRepro(as.data.frame(t(x)), 
                               as.data.frame(t(object@res_k[[k]]$params$mu)))$IGP
       }
       
       # Compute the Average Silhouette Width
-      sil <- mean(silhouette(x =object@res_k[[k]]$finalMemb, dist =dist(x))[,3])
+      sil <- mean(cluster::silhouette(x =object@res_k[[k]]$finalMemb, 
+                                      dist =dist(x))[,3])
       
       
       # If true labels are provided
       if(!is.null(true_label)){
          
          # Compute the Adjusted Rand Index
-         ari <- adjustedRandIndex(object@res_k[[k]]$finalMemb, true_label)
+         ari <- mclust::adjustedRandIndex(object@res_k[[k]]$finalMemb, 
+                                          true_label)
          
          m <- max(length(unique(true_label)),
                   length(unique(object@res_k[[k]]$finalMemb)))

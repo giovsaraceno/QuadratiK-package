@@ -63,7 +63,12 @@ computed for each class.
 }
 \note{
 Note that Macro Precision and Macro Recall depend on the assigned labels,
-while the ARI measures the similarity between partition up to label switching
+while the ARI measures the similarity between partition up to label
+switching.
+
+If the required packages (\code{mclust} for ARI, \code{clusterRepro} for IGP, and
+\code{cluster} for ASW) are not installed, the function will display a message
+asking the user to install the missing package(s).
 }
 \examples{
 #We generate three samples of 100 observations from 3-dimensional

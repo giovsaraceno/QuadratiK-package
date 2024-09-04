@@ -76,7 +76,7 @@ and Macro-Recall are computed.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pkbc_validation</span><span class="op">(</span><span class="va">object</span>, true_label <span class="op">=</span> <span class="cn">NULL</span>, h <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pkbc_validation</span><span class="op">(</span><span class="va">object</span>, true_label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -89,10 +89,6 @@ and Macro-Recall are computed.</p>
 <dd><p>factor or vector of true membership to clusters (if
 available). It must have the same length of final
 memberships.</p></dd>
-
-
-<dt>h</dt>
-<dd><p>Tuning parameter of the k-sample test. (default: 1.5)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -131,6 +127,15 @@ of true positive predictions out of all predictions made for that class.</p>
 a class is the proportion of true positive predictions out of all actual
 instances of that class. Macro Recall is the average of the recall values
 computed for each class.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>Note that Macro Precision and Macro Recall depend on the assigned labels,
+while the ARI measures the similarity between partition up to label
+switching.</p>
+<p>If the required packages (<code>mclust</code> for ARI, <code>clusterRepro</code> for IGP, and
+<code>cluster</code> for ASW) are not installed, the function will display a message
+asking the user to install the missing package(s).</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

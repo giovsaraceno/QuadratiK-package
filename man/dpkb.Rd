@@ -11,7 +11,7 @@ rpkb(
   n,
   mu,
   rho,
-  method = "rejvmf",
+  method = "rejacg",
   tol.eps = .Machine$double.eps^0.25,
   max.iter = 1000
 )
@@ -97,6 +97,11 @@ computational feasibility of the sampler for \eqn{\rho} approaching 1.
 If the chosen method is 'rejacg', the function \code{uniroot}, from the
 \code{stat} package, is used to estimate the beta parameter. In this case,
 the complete results are provided as output.
+}
+\note{
+If the required packages (\code{movMF} for \code{rejvmf} method, and
+\code{Tinflex} for \code{rejpsaw}) are not installed, the function will display a
+message asking the user to install the missing package(s).
 }
 \examples{
 # Generate some data from pkbd density

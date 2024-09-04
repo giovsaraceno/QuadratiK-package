@@ -12,7 +12,11 @@ vignette: >
 #' 
 #' @srrstats {G1.5} k-sample test example in the associated paper
 ```            
-
+```{r include=FALSE}
+if (requireNamespace("devtools", quietly = TRUE)) {
+    devtools::load_all(".")
+}
+```
 The quadratic distance between two probability distributions $F$ and $G$ is
 defined as:
 

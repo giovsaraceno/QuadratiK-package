@@ -723,22 +723,31 @@ scatterplotMethod <- function(object, k, true_label = NULL, pca_res = FALSE) {
       colors <- rainbow(length(unique(y)))
       color_labels <- colors[as.numeric(y)]
       
-      s3d <- scatterplot3d(x[,1], x[,2], x[,3], color = color_labels, pch = 16, cex.symbols = 0.7,
-                           main = "Final Membership", xlab = "X", ylab = "Y", zlab = "Z",
-                           xlim = range(x[,1]), ylim = range(x[,2]), zlim = range(x[,3]))
+      s3d <- scatterplot3d(x[,1], x[,2], x[,3], color = color_labels, pch = 16, 
+                           cex.symbols = 0.7, main = "Final Membership", 
+                           xlab = "X", ylab = "Y", zlab = "Z",
+                           xlim = range(x[,1]), ylim = range(x[,2]), 
+                           zlim = range(x[,3]))
       
-      legend("topright", legend = levels(y), col = colors, pch = 16, pt.cex = 1.2, cex = 0.5, bty = "n", title = "Clusters")
+      legend("topright", legend = levels(y), col = colors, pch = 16, 
+             pt.cex = 1.2, cex = 0.5, bty = "n", title = "Clusters")
       
       # If true labels are provided, plot them in a separate panel
       if (!is.null(true_label)) {
          colors_true <- rainbow(length(unique(true_label)))
          color_labels_true <- colors_true[as.numeric(true_label)]
          
-         s3d_true <- scatterplot3d(x[,1], x[,2], x[,3], color = color_labels_true, pch = 16, cex.symbols = 0.7,
-                                   main = "True Labels", xlab = "X", ylab = "Y", zlab = "Z",
-                                   xlim = range(x[,1]), ylim = range(x[,2]), zlim = range(x[,3]))
+         s3d_true <- scatterplot3d(x[,1], x[,2], x[,3], 
+                                   color = color_labels_true, pch = 16, 
+                                   cex.symbols = 0.7,
+                                   main = "True Labels", xlab = "X", 
+                                   ylab = "Y", zlab = "Z",
+                                   xlim = range(x[,1]), ylim = range(x[,2]), 
+                                   zlim = range(x[,3]))
          
-         legend("topright", legend = levels(as.factor(true_label)), col = colors_true, pch = 16, pt.cex = 1.2, cex = 0.5, bty = "n", title = "True Labels")
+         legend("topright", legend = levels(as.factor(true_label)), 
+                col = colors_true, pch = 16, pt.cex = 1.2, cex = 0.5, 
+                bty = "n", title = "True Labels")
       }
       
       # Reset layout if it was changed
@@ -747,7 +756,8 @@ scatterplotMethod <- function(object, k, true_label = NULL, pca_res = FALSE) {
       }
       
    } else {
-      # For data with more than 3 dimensions, perform PCA and plot the first 3 components
+      # For data with more than 3 dimensions, perform PCA and plot the 
+      # first 3 components
       pca_result <- PcaLocantore(x)
       pca_data <- data.frame(PC1 = pca_result@scores[,1], 
                              PC2 = pca_result@scores[,2], 
@@ -762,19 +772,27 @@ scatterplotMethod <- function(object, k, true_label = NULL, pca_res = FALSE) {
       colors <- rainbow(length(unique(y)))
       color_labels <- colors[as.numeric(pca_data$Cluster)]
       
-      s3d <- scatterplot3d(pca_data$PC1, pca_data$PC2, pca_data$PC3, color = color_labels, pch = 16, cex.symbols = 0.7,
-                           main = "Final Membership", xlab = "PC1", ylab = "PC2", zlab = "PC3")
+      s3d <- scatterplot3d(pca_data$PC1, pca_data$PC2, pca_data$PC3, 
+                           color = color_labels, pch = 16, cex.symbols = 0.7,
+                           main = "Final Membership", xlab = "PC1", 
+                           ylab = "PC2", zlab = "PC3")
       
-      legend("topright", legend = levels(y), col = colors, pch = 16, pt.cex = 1.2, cex = 0.5, bty = "n", title = "Clusters")
+      legend("topright", legend = levels(y), col = colors, pch = 16, 
+             pt.cex = 1.2, cex = 0.5, bty = "n", title = "Clusters")
       
       if (!is.null(true_label)) {
          colors_true <- rainbow(length(unique(true_label)))
          color_labels_true <- colors_true[as.numeric(true_label)]
          
-         s3d_true <- scatterplot3d(pca_data$PC1, pca_data$PC2, pca_data$PC3, color = color_labels_true, pch = 16, cex.symbols = 0.7,
-                                   main = "True Labels", xlab = "PC1", ylab = "PC2", zlab = "PC3")
+         s3d_true <- scatterplot3d(pca_data$PC1, pca_data$PC2, pca_data$PC3, 
+                                   color = color_labels_true, pch = 16, 
+                                   cex.symbols = 0.7,
+                                   main = "True Labels", xlab = "PC1", 
+                                   ylab = "PC2", zlab = "PC3")
          
-         legend("topright", legend = levels(as.factor(true_label)), col = colors_true, pch = 16, pt.cex = 1.2, cex = 0.5, bty = "n", title = "True Labels")
+         legend("topright", legend = levels(as.factor(true_label)), 
+                col = colors_true, pch = 16, pt.cex = 1.2, cex = 0.5, 
+                bty = "n", title = "True Labels")
       }
       
       if (pca_res) {

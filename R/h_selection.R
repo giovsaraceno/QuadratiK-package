@@ -116,13 +116,15 @@
 #' @importFrom moments skewness
 #' @importFrom sn rmsn
 #' @import doParallel
-#' @import foreach
+#' @importFrom foreach foreach
+#' @importFrom foreach %dopar%
 #' @importFrom stats cov
 #' @importFrom stats aggregate
 #' @importFrom stats power
 #' @import rlecuyer
 #' @import ggplot2
 #' @import RcppEigen
+#' @importFrom Rcpp sourceCpp
 #'
 #' @useDynLib QuadratiK
 #'
@@ -138,7 +140,6 @@
 select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, 
                      B=100, delta_dim=1, delta=NULL, h_values=NULL,Nrep=50, 
                      n_cores=2, Quantile=0.95, power.plot=TRUE) {
-   
    
    # Convert vectors to a single column matrix
    if(!is.numeric(x) & !is.data.frame(x)){
@@ -345,8 +346,11 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
                      h=numeric(), power=numeric())
    pars <- NULL
    
+   required_functions <- c("stat2sample", "compute_CV", "stat_ksample_cpp", 
+                           "cv_ksample", "kbNormTest", "normal_CV")
    for(k in k_values){
       results <- foreach(pars = params, .combine = rbind, 
+                         .export = required_functions,
                          .packages=c("sn", "moments", "stats", 
                                      "rlecuyer")) %dopar% {
          

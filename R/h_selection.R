@@ -51,8 +51,9 @@
 #' for the chosen values of \code{h_values} and \code{delta}.
 #' 
 #' We consider target alternatives \eqn{F_\delta(\hat{\mathbf{\mu}},
-#' \hat{\mathbf{\Sigma}}, \hat{\mathbf{\lambda}})}, where \eqn{\hat{\mathbf{\mu}},
-#' \hat{\mathbf{\Sigma}}} and \eqn{\hat{\mathbf{\lambda}}} indicate the location,
+#' \hat{\mathbf{\Sigma}}, \hat{\mathbf{\lambda}})}, where 
+#' \eqn{\hat{\mathbf{\mu}}, \hat{\mathbf{\Sigma}}} and 
+#' \eqn{\hat{\mathbf{\lambda}}} indicate the location,
 #' covariance and skewness parameter estimates from the pooled sample. 
 #' - Compute the estimates of mean \eqn{\hat{\mu}}, covariance matrix
 #'  \eqn{\hat{\Sigma}} and skewness \eqn{\hat{\lambda}} from the pooled sample.  

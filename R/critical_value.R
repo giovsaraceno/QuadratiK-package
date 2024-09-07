@@ -67,7 +67,8 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1,
                                    "Nonparam", compute_variance)[1:2]
    }
    
-   cv_res <- apply(Results,2,function(x) as.numeric(quantile(x,Quantile,na.rm=T)))
+   cv_res <- apply(Results,2,
+                   function(x) as.numeric(quantile(x,Quantile,na.rm=T)))
    return(list(cv=cv_res))
 }
 #' 
@@ -87,7 +88,7 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1,
 #'
 #' @details 
 #' For each replication, a sample of d-dimensional observations from the uniform
-#' #' distribution on the Sphere are generated and the Poisson kernel-based 
+#' distribution on the Sphere are generated and the Poisson kernel-based 
 #' U-statistic is computed. After B iterations, the critical value is selected 
 #' as the \code{Quantile} of the empirical distribution of the computed test 
 #' statistics.
@@ -208,7 +209,7 @@ cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95,
       if(method=="bootstrap"){
          
          ind_k <- unlist(lapply(1:K, function(k) sample(1:sizes[k], sizes[k], 
-                                                      replace=T) + cum_size[k]))
+                                                   replace=T) + cum_size[k]))
          ind_k <- sample(ind_k,length(ind_k),replace = F)
          
       } else if(method=="permutation"){

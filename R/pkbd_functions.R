@@ -370,7 +370,8 @@ rejpsaw <- function(n, rho, mu, p){
       if(p==3) ib <- c(t1+0.000001,t2-0.000001)
       
       ## Create generator object for pSaw distribution
-      pSaw <- Tinflex::Tinflex.setup.C(lpdf, dlpdf, d2lpdf, ib=ib,cT=1, rho=1.05)
+      pSaw <- Tinflex::Tinflex.setup.C(lpdf, dlpdf, d2lpdf, 
+                                       ib=ib,cT=1, rho=1.05)
       ## Print data about generator object.
       #print(gen)
       

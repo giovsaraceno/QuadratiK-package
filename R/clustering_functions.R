@@ -128,11 +128,11 @@
 #' @srrstats {UL1.4} assumptions are taken into consideration
 #' 
 #' @export
-setGeneric("pkbc",function(dat,
-                           nClust=NULL,
+setGeneric("pkbc",function(dat, 
+                           nClust = NULL,
                            maxIter = 300,
-                           stoppingRule = 'loglik',
-                           initMethod = 'sampleData',
+                           stoppingRule = "loglik",
+                           initMethod = "sampleData",
                            numInit = 10){
    
    standardGeneric("pkbc")
@@ -154,20 +154,20 @@ setGeneric("pkbc",function(dat,
 #' @export
 setMethod("pkbc", signature(dat = "ANY"),
     function(dat,
-             nClust=NULL,
+             nClust = NULL,
              maxIter = 300,
-             stoppingRule = 'loglik',
-             initMethod = 'sampleData',
+             stoppingRule = "loglik",
+             initMethod = "sampleData",
              numInit = 10){
        # Constant defining threshold by which log likelihood must change 
        # to continue iterations, if applicable.
        LL_TOL <- 1e-7
        
        # validate input
-       if(is.null(nClust)){
+       if(is.null(nClust)) {
           stop("Input parameter nClust is required. Provide one specific 
                value or a set of possible values.")
-       } else if(is.vector(nClust) & is.numeric(nClust)){
+       } else if(is.vector(nClust) & is.numeric(nClust)) {
           if(any(nClust < 1)){
              stop('Values in the input parameter nClust must be 
                   greater than 0')
@@ -177,34 +177,34 @@ setMethod("pkbc", signature(dat = "ANY"),
                   values")
        }
        if (maxIter < 1) {
-          stop('Input parameter maxIter must be greater than 0')
+          stop("Input parameter maxIter must be greater than 0")
        }
-       if ( !(stoppingRule %in% c('max', 'membership', 'loglik')) ) {
-          stop(paste('Unrecognized value "', stoppingRule, '" in input 
-          parameter stoppingRule.', sep=''))
+       if ( !(stoppingRule %in% c("max", "membership", "loglik")) ) {
+          stop(paste("Unrecognized value ", stoppingRule, " in input 
+          parameter stoppingRule.", sep=''))
        }
-       if ( !(initMethod %in% c('sampleData')) ) {
-          stop(paste('Unrecognized value "', initMethod, '" in input 
-          parameter initMethod.', sep=''))
+       if (!(initMethod %in% c("sampleData"))) {
+          stop(paste("Unrecognized value ", initMethod, " in input 
+          parameter initMethod.", sep=''))
        }
        if (numInit < 1) {
-          stop('Input parameter numInit must be greater than 0')
+          stop("Input parameter numInit must be greater than 0")
        }
        
        # set options for stopping rule
-       checkMembership <- stoppingRule == 'membership'
-       checkLoglik <- stoppingRule == 'loglik'
+       checkMembership <- stoppingRule == "membership"
+       checkLoglik <- stoppingRule == "loglik"
        
        if(is.data.frame(dat)){
           dat <- as.matrix(dat)
        } else if(!is.matrix(dat)){
           stop("dat must be a matrix or a data.frame")
        }
-       if(!is.numeric(dat)){
+       if(!is.numeric(dat)) {
           stop("dat must be a numeric matrix or data.frame")
        }
        
-       if(any(is.na(dat))){
+       if(any(is.na(dat))) {
           stop("There are missing values in the data set!")
        } else if(any(is.infinite(dat) |is.nan(dat))){
           stop("There are undefined values, that is Nan, Inf, -Inf")
@@ -224,12 +224,12 @@ setMethod("pkbc", signature(dat = "ANY"),
           alpha_best <- rep(-99, numClust)
           rho_best <- rep(-99, numClust)
           mu_best <- matrix(nrow = numClust, ncol = numVar)
-          normprobMat_best <- matrix(-99,nrow=numData, ncol=numClust)
-          if (initMethod == 'sampleData') {
+          normprobMat_best <- matrix(-99, nrow=numData, ncol=numClust)
+          if (initMethod == "sampleData") {
              uniqueData <- unique(dat)
              numUniqueObs <- nrow(uniqueData)
              if (numUniqueObs < numClust) {
-                stop(paste('Only', numUniqueObs, 'unique observations.',
+                stop(paste("Only ", numUniqueObs, " unique observations.",
                            'When initMethod = "sampleData", must have more
                            than numClust unique observations.'
                 ))

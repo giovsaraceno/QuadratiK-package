@@ -84,10 +84,6 @@ var_norm <- function(Sigma_h, V, n){
    
    res <- 2/(n*(n-1)) * 1/(2*pi)^(d) * res
    
-   # h2 <- h^2
-   # h_const <- ((h2+2)/(h2^2*(h2+4)))^(d/2) -2/((h2+1)*(h2+3))^(d/2) + (h2+2)^(-d)
-   # res <- 2/(n*(n-1)) * 1/(2*pi)^(d)  * h_const
-   # 
    return(res)
 }
 #'

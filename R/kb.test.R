@@ -64,10 +64,10 @@
 #' tuning parameter \eqn{h}. \cr
 #' \itemize{
 #'    \item **Test for Normality**: \cr
-#'    Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical distribution
-#'    function \eqn{\hat F}. To test the null hypothesis of normality, i.e.
-#'    \eqn{H_0:F=\mathcal{N}_d(\mu, \Sigma)}, we consider the U-statistic 
-#'    estimate and the V-statistic estimate of the sample KBQD.
+#'    Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical 
+#'    distribution function \eqn{\hat F}. To test the null hypothesis of 
+#'    normality, i.e. \eqn{H_0:F=\mathcal{N}_d(\mu, \Sigma)}, we consider the 
+#'    U-statistic estimate and the V-statistic estimate of the sample KBQD.
 #'    
 #'    \item **Two-sample test**: \cr
 #'    Let \eqn{x_1, x_2, ..., x_{n_1} \sim F} and 
@@ -573,19 +573,19 @@ setMethod("summary", "kb.test", function(object) {
          
          stats[length(stats) +1] <- stats_step
          
-      #    pl_stat <- ggplot() +
-      # geom_table_npc(data = data.frame(Stat = rownames(stats_step), stats_step),
-      #                      aes(npcx = 0.5, npcy = 0.5, 
-      #        label = list(data.frame(Stat = rownames(stats_step), stats_step))),
-      #                      hjust = 0.5, vjust = 0.5) +
-      #    # annotate('table', x = 0.5, y = 0.5, 
-      #    #          label = data.frame(Stat = rownames(stats_step),stats_step),
-      #    #          hjust = 0.5, vjust = 0.5) +
-      #       theme_void() +
-      #       ggtitle("")+
-      #       scale_color_brewer(palette='Set1')
-      #    
-         #plot_list[[length(plot_list) + 1]] <- list(pl,pl_stat)
+   #    pl_stat <- ggplot() +
+   # geom_table_npc(data = data.frame(Stat = rownames(stats_step), stats_step),
+   #                      aes(npcx = 0.5, npcy = 0.5, 
+   #        label = list(data.frame(Stat = rownames(stats_step), stats_step))),
+   #                      hjust = 0.5, vjust = 0.5) +
+   #    # annotate('table', x = 0.5, y = 0.5, 
+   #    #          label = data.frame(Stat = rownames(stats_step),stats_step),
+   #    #          hjust = 0.5, vjust = 0.5) +
+   #       theme_void() +
+   #       ggtitle("")+
+   #       scale_color_brewer(palette='Set1')
+   #    
+      #plot_list[[length(plot_list) + 1]] <- list(pl,pl_stat)
          plot_list[[length(plot_list) + 1]] <- list(pl)
          
       }

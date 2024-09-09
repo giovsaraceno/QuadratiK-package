@@ -22,6 +22,6 @@ jobs:
     steps:
     - name: Check R version
       run: R --version
-    - uses: ropensci-review-tools/pkgcheck-action@v2
+    - uses: ropensci-review-tools/pkgcheck-action@main
       with:
           summary-only: false

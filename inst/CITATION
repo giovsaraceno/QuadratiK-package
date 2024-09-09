@@ -1,0 +1,31 @@
+citHeader("If you use this package in your research or work, please cite it as follows:")
+
+citation <- bibentry(
+  bibtype = "Manual",
+  title = "QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances",
+  author = c(
+    person("Giovanni", "Saraceno"),
+    person("Marianthi", "Markatou"),
+    person("Raktim", "Mukhopadhyay"),
+    person("Mojgan", "Golzy")
+  ),
+  year = "2024",
+  note = "Version 1.0.0",
+  url = "https://github.com/giovsaraceno/QuadratiK-package"
+)
+
+citHeader("And the associated paper:")
+
+citation2 <- bibentry(
+  bibtype = "Article",
+  title = "A Unified Framework for Multivariate Two- and k-Sample Kernel-based Quadratic Distance Goodness-of-Fit Tests",
+  author = c(
+    person("Marianthi", "Markatou"),
+    person("Giovanni", "Saraceno")
+  ),
+  journal = "arXiv preprint",
+  year = "2024",
+  note = "https://doi.org/10.48550/arXiv.2407.16374"
+)
+
+citFooter("See the QuadratiK GitHub repository for further information.")

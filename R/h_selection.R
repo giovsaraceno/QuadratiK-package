@@ -363,9 +363,10 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    res <- data.frame(delta=numeric(),
                      h=numeric(), power=numeric())
    
+   i <- NULL
    for(k in k_values){
    
-      results <- foreach(i = 1:length(params), 
+      results <- foreach(i = seq_along(params), 
                          .combine = rbind,
                          .packages=c("sn", "moments", "stats",
                                      "rlecuyer")) %dopar% {

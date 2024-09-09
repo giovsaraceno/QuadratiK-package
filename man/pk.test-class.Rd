@@ -40,7 +40,7 @@ rejected according to Vn.}
 \examples{
 # create a pk.test object
 d=3
-size=200
+size=100
 x_sp <- sample_hypersphere(d, n_points=size)
 pk.test(x_sp,rho=0.8)
 

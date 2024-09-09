@@ -48,19 +48,19 @@ test_that("Error on invalid method input", {
 test_that("Select h", {
    set.seed(123)
    # normality
-   # result <- select_h(x = matrix(rnorm(20),ncol=2), alternative="location")
-   # expect_equal(class(result$h_sel), "numeric")
-   # expect_equal(class(result$power), "data.frame")
-   # 
-   # # two-sample
-   # result <- select_h(x = matrix(rnorm(20),ncol=2),
-   # y = matrix(rnorm(20),ncol=2), alternative="skewness")
-   # expect_equal(class(result$h_sel), "numeric")
-   # expect_equal(class(result$power), "data.frame")
-   # 
-   # # k-sample
-   # result <- select_h(x = matrix(rnorm(30),ncol=2), y = rep(c(1,2,3),each=5),
-   # alternative="scale")
-   # expect_equal(class(result$h_sel), "numeric")
-   # expect_equal(class(result$power), "data.frame")
+   result <- select_h(x = matrix(rnorm(20),ncol=2), alternative="location")
+   expect_equal(class(result$h_sel), "numeric")
+   expect_equal(class(result$power), "data.frame")
+
+   # two-sample
+   result <- select_h(x = matrix(rnorm(20),ncol=2),
+   y = matrix(rnorm(20),ncol=2), alternative="skewness")
+   expect_equal(class(result$h_sel), "numeric")
+   expect_equal(class(result$power), "data.frame")
+
+   # k-sample
+   result <- select_h(x = matrix(rnorm(30),ncol=2), y = rep(c(1,2,3),each=5),
+   alternative="scale")
+   expect_equal(class(result$h_sel), "numeric")
+   expect_equal(class(result$power), "data.frame")
 })

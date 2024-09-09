@@ -15,7 +15,7 @@ select_h(
   delta = NULL,
   h_values = NULL,
   Nrep = 50,
-  n_cores = 2,
+  n_cores = NULL,
   Quantile = 0.95,
   power.plot = TRUE
 )
@@ -56,8 +56,9 @@ dimension}
 
 \item{Nrep}{Number of bootstrap/permutation/subsampling replications.}
 
-\item{n_cores}{Number of cores used to parallel the h selection algorithm
-(default:2).}
+\item{n_cores}{Number of cores used to parallel the h selection algorithm.
+If this is not provided, the function will detect the
+available cores.}
 
 \item{Quantile}{The quantile to use for critical value estimation, 0.95 is
 the default value.}

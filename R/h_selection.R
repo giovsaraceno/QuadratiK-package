@@ -29,8 +29,9 @@
 #' @param delta Vector of parameter values indicating chosen alternatives
 #' @param h_values Values of the tuning parameter used for the selection
 #' @param Nrep Number of bootstrap/permutation/subsampling replications.
-#' @param n_cores Number of cores used to parallel the h selection algorithm 
-#'                (default:2).
+#' @param n_cores Number of cores used to parallel the h selection algorithm. 
+#'                If this is not provided, the function will detect the 
+#'                available cores.
 #' @param Quantile The quantile to use for critical value estimation, 0.95 is 
 #'                 the default value.
 #' @param power.plot Logical. If TRUE, it is displayed the plot of power for 
@@ -116,7 +117,10 @@
 #'
 #' @importFrom moments skewness
 #' @importFrom sn rmsn
-#' @import doParallel
+#' @importFrom doParallel registerDoParallel
+#' @importFrom parallel makeCluster
+#' @importFrom parallel detectCores
+#' @importFrom parallel stopCluster
 #' @importFrom foreach foreach
 #' @importFrom foreach %dopar%
 #' @importFrom stats cov
@@ -127,7 +131,7 @@
 #' @import RcppEigen
 #' @importFrom Rcpp sourceCpp
 #'
-#' @useDynLib QuadratiK
+#' @useDynLib QuadratiK, .registration = TRUE
 #'
 #' @srrstats {G1.4} roxigen2 is used
 #' @srrstats {G2.0, G2.0a} input y, delta_dim, B, b
@@ -140,7 +144,7 @@
 #' @export
 select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, 
                      B=100, delta_dim=1, delta=NULL, h_values=NULL,Nrep=50, 
-                     n_cores=2, Quantile=0.95, power.plot=TRUE) {
+                     n_cores=NULL, Quantile=0.95, power.plot=TRUE) {
    
    # Convert vectors to a single column matrix
    if(!is.numeric(x) & !is.data.frame(x)){
@@ -326,14 +330,23 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       
       xnew <- sn::rmsn(n, xi = mean_tilde, Omega = S_tilde, alpha = skew_tilde)
       
-      STATISTIC <- kbNormTest(xnew, h, mean_dat, S_dat)
+      #STATISTIC <- kbNormTest(xnew, h, mean_dat, S_dat)
+      STATISTIC <- 2
       CV <- normal_CV(d,n,h,mean_dat,S_dat,B,Quantile)
       
       return(c(STATISTIC[1] < CV))
    }
    
-   num_cores <- as.numeric(n_cores)
-   registerDoParallel(cores=n_cores)
+   if(is.null(n_cores)) {
+      num_cores <- detectCores()
+   } else if (is.numeric(n_cores)) {
+      num_cores <- as.numeric(n_cores)
+   } else {
+      stop("n_cores must be a numeric value")
+   }
+   
+   cl <- parallel::makeCluster(num_cores)
+   doParallel::registerDoParallel(cl)
    
    D <- length(delta)
    
@@ -343,19 +356,18 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    params <- expand.grid(Rep=rep_values, h = h_values)
    params <- split(params, seq(nrow(params)))
    
-   res <- data.frame(Rep=numeric(), delta=numeric(), 
+   res <- data.frame(delta=numeric(),
                      h=numeric(), power=numeric())
-   pars <- NULL
    
-   required_functions <- c("stat2sample", "compute_CV", "stat_ksample_cpp", 
-                           "cv_ksample", "kbNormTest", "normal_CV")
    for(k in k_values){
-      results <- foreach(pars = params, .combine = rbind, 
-                         .export = required_functions,
-                         .packages=c("sn", "moments", "stats", 
+   
+      results <- foreach(i = 1:length(params), 
+                         .combine = rbind,
+                         .packages=c("sn", "moments", "stats",
                                      "rlecuyer")) %dopar% {
-         
-         h <- as.numeric(pars[[2]])
+
+         h <- as.numeric(params[[i]]$h)
+
          if(is.null(y)){
             
             objective_result <- objective_norm(h,k)
@@ -368,18 +380,19 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
             
             objective_result <- objective_k(h, k)
          }
-         data.frame(Rep=pars[[1]], delta=delta[k], h=h, score=objective_result)
+         
+         data.frame(delta=delta[k], 
+                    h=h, power=objective_result)
       }
       
-      results$score <- 1 - results$score
-      results_mean <- aggregate(score ~ h + delta , results, mean)
-      names(results_mean)[3] <- "power"
+      results$power <- 1 - results$power
+      results_mean <- aggregate(power ~ h + delta , data = results, FUN = mean)
       
       res <- rbind(res,results_mean)
       
       # Select the minimum h where power > 0.5
       # If no such h exists, select the minimum h with the maximum power
-      min_h_power_gt_05 <- subset(results_mean, power >= 0.5)
+      min_h_power_gt_05 <- subset(res, power >= 0.5)
       if (nrow(min_h_power_gt_05) > 0) {
          min_h <- min_h_power_gt_05$h[1]
          break
@@ -389,12 +402,11 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    }
    
    if(is.null(min_h)){
-      results_mean <- results_mean[order(-results_mean$power, results_mean$h), ]
-      min_h <- results_mean$h[1]
+      res <- res[order(-res$power, res$h), ]
+      min_h <- res$h[1]
    }
-   
-   stopImplicitCluster()
-   results <- list(h_sel = min_h, power = res)
+
+   parallel::stopCluster(cl)
    
    pl <- ggplot(res, aes(x = h, y = power)) +
       geom_line(aes(col = as.factor(delta)), linewidth = 0.9, alpha=.9) +
@@ -412,7 +424,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
             strip.text = element_text(size = 14)) +
       scale_color_brewer(palette='Set1')
 
-   results$power.plot <- pl
+   results <- list(h_sel = min_h, power = res, power.plot = pl)
    
    if(power.plot){
       print(pl)

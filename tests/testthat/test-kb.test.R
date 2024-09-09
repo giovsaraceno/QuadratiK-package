@@ -168,19 +168,19 @@ test_that("Functionality with valid inputs", {
 # Test 8: Testing selection of h
 test_that("Selection of h from kb.test", {
    
-   # set.seed(123)
-   # x <- matrix(rnorm(100), ncol = 2)
-   # y <- rep(c(1,2), each=25)
-   # 
-   # result <- kb.test(x, method = "subsampling", mu_hat = c(0,0),
-   #                   Sigma_hat = diag(2), b = 0.5)
-   # expect_s4_class(result, "kb.test")
-   # expect_equal(result@method, "Kernel-based quadratic distance Normality test")
-   # expect_equal(class(result@h$h_sel), "numeric")
-   # 
-   # result <- kb.test(x, y, method = "subsampling", b = 0.5)
-   # expect_s4_class(result, "kb.test")
-   # expect_equal(class(result@h$h_sel), "numeric")
+   set.seed(123)
+   x <- matrix(rnorm(100), ncol = 2)
+   y <- rep(c(1,2), each=25)
+
+   result <- kb.test(x, method = "subsampling", mu_hat = c(0,0),
+                     Sigma_hat = diag(2), b = 0.5)
+   expect_s4_class(result, "kb.test")
+   expect_equal(result@method, "Kernel-based quadratic distance Normality test")
+   expect_equal(class(result@h$h_sel), "numeric")
+
+   result <- kb.test(x, y, method = "subsampling", b = 0.5)
+   expect_s4_class(result, "kb.test")
+   expect_equal(class(result@h$h_sel), "numeric")
    
 })
 

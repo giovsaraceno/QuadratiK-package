@@ -31,7 +31,7 @@ test_that("Error is thrown for invalid inputs", {
    
    #Invalid initMethod
    expect_error(pkbc(dat, nClust=2,initMethod="Invalid"), 
-   'Unrecognized value "Invalid" in input 
+   'Unrecognized value Invalid in input 
           parameter initMethod.')
    
    #Invalid numInit

@@ -87,8 +87,9 @@ generating samples according to the family of \code{alternative} specified,
 for the chosen values of \code{h_values} and \code{delta}.
 
 We consider target alternatives \eqn{F_\delta(\hat{\mathbf{\mu}},
-\hat{\mathbf{\Sigma}}, \hat{\mathbf{\lambda}})}, where \eqn{\hat{\mathbf{\mu}},
-\hat{\mathbf{\Sigma}}} and \eqn{\hat{\mathbf{\lambda}}} indicate the location,
+\hat{\mathbf{\Sigma}}, \hat{\mathbf{\lambda}})}, where
+\eqn{\hat{\mathbf{\mu}}, \hat{\mathbf{\Sigma}}} and
+\eqn{\hat{\mathbf{\lambda}}} indicate the location,
 covariance and skewness parameter estimates from the pooled sample.
 \itemize{
 \item Compute the estimates of mean \eqn{\hat{\mu}}, covariance matrix

@@ -235,11 +235,13 @@ setMethod("summary", "pk.test", function(object) {
       
       unif_data <- runif(nrow(dat_x),-1,1)
       probs <- seq(0, 1, length.out = nrow(dat_x))
-      qq_df <- data.frame(
-         x = quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))), 
-         sample_quantiles = quantile(dat_x[,i], probs = probs))
+      # qq_df <- data.frame(
+      #    x = quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))), 
+      #    sample_quantiles = quantile(dat_x[,i], probs = probs))
+      x <- quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))) 
+      sample_quantiles <- quantile(dat_x[,i], probs = probs)
       
-      pl <- ggplot(qq_df, aes(x = qq_df$x, y = qq_df$sample_quantiles)) +
+      pl <- ggplot(mapping=aes(x = x, y = sample_quantiles)) +
          geom_line(col="blue") +
          theme_minimal()+
          geom_abline(slope = 1, intercept = 0,col="red") +

@@ -229,7 +229,7 @@ setMethod("pkbc", signature(dat = "ANY"),
              uniqueData <- unique(dat)
              numUniqueObs <- nrow(uniqueData)
              if (numUniqueObs < numClust) {
-                stop(paste("Only ", numUniqueObs, " unique observations.",
+                stop(paste("Only", numUniqueObs, "unique observations.",
                            'When initMethod = "sampleData", must have more
                            than numClust unique observations.'
                 ))

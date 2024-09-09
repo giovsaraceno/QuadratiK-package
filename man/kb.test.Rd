@@ -139,10 +139,10 @@ for every \eqn{\mathbf{s}, \mathbf{t} \in \mathbb{R}^d \times
 tuning parameter \eqn{h}. \cr
 \itemize{
 \item \strong{Test for Normality}: \cr
-Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical distribution
-function \eqn{\hat F}. To test the null hypothesis of normality, i.e.
-\eqn{H_0:F=\mathcal{N}_d(\mu, \Sigma)}, we consider the U-statistic
-estimate and the V-statistic estimate of the sample KBQD.
+Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical
+distribution function \eqn{\hat F}. To test the null hypothesis of
+normality, i.e. \eqn{H_0:F=\mathcal{N}_d(\mu, \Sigma)}, we consider the
+U-statistic estimate and the V-statistic estimate of the sample KBQD.
 
 \item \strong{Two-sample test}: \cr
 Let \eqn{x_1, x_2, ..., x_{n_1} \sim F} and

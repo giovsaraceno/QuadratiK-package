@@ -552,11 +552,14 @@ setMethod("summary", "kb.test", function(object) {
       stats <- list()
       for(i in seq_len(ncol(dat_x))) {
          
-         qq_df <- data.frame(x = sort(qqnorm(dat_x[,i], plot = FALSE)$x), 
-                     sample_quantiles = quantile(dat_x[,i], 
-                                 probs = seq(0, 1, length.out = nrow(dat_x))))
+         # qq_df <- data.frame(x = sort(qqnorm(dat_x[,i], plot = FALSE)$x), 
+         #             sample_quantiles = quantile(dat_x[,i], 
+         #                         probs = seq(0, 1, length.out = nrow(dat_x))))
+         x <- sort(qqnorm(dat_x[,i], plot = FALSE)$x)
+         sample_quantiles <- quantile(dat_x[,i], 
+                                 probs = seq(0, 1, length.out = nrow(dat_x)))
          
-         pl <- ggplot(qq_df, aes(x = qq_df$x, y = qq_df$sample_quantiles)) +
+         pl <- ggplot(mapping=aes(x = x, y = sample_quantiles)) +
             geom_line(col="blue") +
             theme_minimal()+
             geom_abline(slope = 1, intercept = 0,col="red") +

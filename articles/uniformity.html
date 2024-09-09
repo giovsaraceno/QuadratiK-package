@@ -156,10 +156,6 @@ figure showing the qq-plots against the uniform distribution of each
 variable with a table of standard descriptive statistics.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_unif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res_unif</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Use of `qq_df$x` is discouraged.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `x` instead.</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: Use of `qq_df$sample_quantiles` is discouraged.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Use `sample_quantiles` instead.</span></span></code></pre>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Poisson Kernel-based quadratic distance test of </span></span>
 <span><span class="co">##                         Uniformity on the Sphere </span></span>
@@ -181,11 +177,11 @@ Mises-Fisher distributions in 2 dimensions. The direction of the mean
 vectors for the distributions are set as (1, 0), (0, 1), (-1, 0), and
 (0, -1), with a concentration parameter
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>κ</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">\kappa=5</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load necessary libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">movMF</span><span class="op">)</span>        </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/egarpor/sphunif" class="external-link">sphunif</a></span><span class="op">)</span>      </span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="co"># Define the mean directions of the 4 von Mises-Fisher distributions</span></span>
 <span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
@@ -200,7 +196,7 @@ vectors for the distributions are set as (1, 0), (0, 1), (-1, 0), and
 <span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/movMF/man/movMF_distribution.html" class="external-link">rmovMF</a></span><span class="op">(</span><span class="fl">100</span>, theta <span class="op">=</span> <span class="va">kappa</span> <span class="op">*</span> <span class="va">means</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>We now compare the results of the <code>pk.test</code> function with
 the Ajne and Bingham tests using the <code>sphunif</code> package.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Run the pk.test from the QuadratiK package to test the data</span></span>
 <span><span class="va">pk_test_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pk.test.html">pk.test</a></span><span class="op">(</span><span class="va">samples</span>, rho<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
 <span></span>
@@ -224,7 +220,7 @@ the Ajne and Bingham tests using the <code>sphunif</code> package.</p>
 <span><span class="co">## H0 is rejected:  TRUE </span></span>
 <span><span class="co">## Statistic Vn:  15.14426 </span></span>
 <span><span class="co">## Critical value:  12.8308</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">other_test_result</span></span></code></pre></div>
 <pre><code><span><span class="co">## $Bingham</span></span>
 <span><span class="co">## </span></span>

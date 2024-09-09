@@ -153,7 +153,7 @@ alternatives. Here we consider the location alternatives.</p>
 <p><img src="kSample_test_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h_k</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1.6</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 1.2</span></span></code></pre>
 <p>The <code>select_h</code> function has also generated a figure
 displaying the obtained power versus the considered
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>,
@@ -172,11 +172,11 @@ tests with the <em>optimal</em> value of
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">## U-statistics  Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   4.238404    6.834896 </span></span>
-<span><span class="co">## Critical Value:   1.113956    1.797719 </span></span>
+<span><span class="co">## Test Statistic:   3.76127     5.552056 </span></span>
+<span><span class="co">## Critical Value:   1.270525    1.876836 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.6</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  1.2</span></span></code></pre>
 <p>The function returns an object of class . The method for the object
 shows the computed statistics with corresponding critical values, and
 the logical indicating if the null hypothesis is rejected. The test
@@ -190,8 +190,8 @@ variable computed, overall, and with respect to the provided groups.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn       4.238404       1.113956      TRUE</span></span>
-<span><span class="co">## 2     Trace       6.834896       1.797719      TRUE</span></span></code></pre>
+<span><span class="co">## 1        Dn       3.761270       1.270525      TRUE</span></span>
+<span><span class="co">## 2     Trace       5.552056       1.876836      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>

@@ -42,6 +42,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/generate_rpkb.html">Random sampling from the Poisson kernel-based density</a>
+    <a class="dropdown-item" href="../articles/Introduction.html">Introduction to the QuadratiK Package</a>
     <a class="dropdown-item" href="../articles/kSample_test.html">k-sample test</a>
     <a class="dropdown-item" href="../articles/TwoSample_test.html">Non-parametric Two-sample test</a>
     <a class="dropdown-item" href="../articles/uniformity.html">Uniformity test on the Sphere</a>
@@ -144,7 +145,7 @@ alternatives. Here we consider the location alternatives.</p>
 <p><img src="kSample_test_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h_k</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1.6</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 1.2</span></span></code></pre>
 <p>The <code>select_h</code> function has also generated a figure
 displaying the obtained power versus the considered <span class="math inline">\(h\)</span>, for each value of skewness alternative
 <span class="math inline">\(\delta\)</span> considered.</p>
@@ -158,11 +159,11 @@ tests with the <em>optimal</em> value of <span class="math inline">\(h\)</span>.
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">## U-statistics  Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   4.238404    6.834896 </span></span>
-<span><span class="co">## Critical Value:   1.113956    1.797719 </span></span>
+<span><span class="co">## Test Statistic:   3.76127     5.552056 </span></span>
+<span><span class="co">## Critical Value:   1.270525    1.876836 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.6</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  1.2</span></span></code></pre>
 <p>The function returns an object of class . The method for the object
 shows the computed statistics with corresponding critical values, and
 the logical indicating if the null hypothesis is rejected. The test
@@ -176,8 +177,8 @@ variable computed, overall, and with respect to the provided groups.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn       4.238404       1.113956      TRUE</span></span>
-<span><span class="co">## 2     Trace       6.834896       1.797719      TRUE</span></span></code></pre>
+<span><span class="co">## 1        Dn       3.761270       1.270525      TRUE</span></span>
+<span><span class="co">## 2     Trace       5.552056       1.876836      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>

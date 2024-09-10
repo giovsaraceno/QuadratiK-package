@@ -27,6 +27,7 @@ quadratic distance tests for Uniformity on the sphere."><!-- mathjax --><script 
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/generate_rpkb.html">Random sampling from the Poisson kernel-based density</a>
+    <a class="dropdown-item" href="../articles/Introduction.html">Introduction to the QuadratiK Package</a>
     <a class="dropdown-item" href="../articles/kSample_test.html">k-sample test</a>
     <a class="dropdown-item" href="../articles/TwoSample_test.html">Non-parametric Two-sample test</a>
     <a class="dropdown-item" href="../articles/uniformity.html">Uniformity test on the Sphere</a>
@@ -124,7 +125,7 @@ rejected according to Vn.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># create a pk.test object</span></span></span>
 <span class="r-in"><span><span class="va">d</span><span class="op">=</span><span class="fl">3</span></span></span>
-<span class="r-in"><span><span class="va">size</span><span class="op">=</span><span class="fl">200</span></span></span>
+<span class="r-in"><span><span class="va">size</span><span class="op">=</span><span class="fl">100</span></span></span>
 <span class="r-in"><span><span class="va">x_sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_hypersphere.html">sample_hypersphere</a></span><span class="op">(</span><span class="va">d</span>, n_points<span class="op">=</span><span class="va">size</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="pk.test.html">pk.test</a></span><span class="op">(</span><span class="va">x_sp</span>,rho<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -135,13 +136,13 @@ rejected according to Vn.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> U-statistic:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> H0 is rejected:  FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Statistic Un:  -0.1438295 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Critical value:  1.52535 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Statistic Un:  1.082258 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Critical value:  1.44412 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> V-statistic:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> H0 is rejected:  FALSE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Statistic Vn:  43.30734 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Statistic Vn:  49.19885 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Critical value:  52.23077 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

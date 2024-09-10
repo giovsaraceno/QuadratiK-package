@@ -1161,7 +1161,11 @@ pkbc_validation <- function(object, true_label=NULL){
       
    }
    metrics <- metrics[,-1]
-   metrics <- as.data.frame(metrics,colnames=NULL)
+   if(is.null(true_label)){
+      metrics <- as.data.frame(matrix(metrics,nrow=1),colnames=NULL)
+   } else {
+      metrics <- as.data.frame(metrics,colnames=NULL)
+   }
    
    if(!is.null(true_label)){
       rownames(metrics) <- c("ASW", "ARI","Macro_Precision", 

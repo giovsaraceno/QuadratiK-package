@@ -59,8 +59,9 @@ Science Foundation and Department of Biostatistics, University at Buffalo.
 }
 \note{
 The \code{QuadratiK} package is also available in Python on PyPI
-\url{https://pypi.org/project/QuadratiK/} and also as a Dashboard application
-(ADD LINK).
+\url{https://pypi.org/project/QuadratiK/} and also as a Dashboard application.
+Usage instruction for the Dashboard can be found at
+\url{https://quadratik.readthedocs.io/en/latest/user_guide/dashboard_application_usage.html}.
 }
 \references{
 Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan

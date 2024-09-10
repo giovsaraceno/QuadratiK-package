@@ -405,10 +405,6 @@ object provides the results of the performed test, and generates a
 figure showing the qq-plots against the uniform distribution of each
 variable with a table of standard descriptive statistics.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>summary_unif <span class="ot">&lt;-</span> <span class="fu">summary</span>(res_unif)</span></code></pre></div>
-<pre><code>## Warning: Use of `qq_df$x` is discouraged.
-## ℹ Use `x` instead.</code></pre>
-<pre><code>## Warning: Use of `qq_df$sample_quantiles` is discouraged.
-## ℹ Use `sample_quantiles` instead.</code></pre>
 <pre><code>## 
 ##  Poisson Kernel-based quadratic distance test of 
 ##                         Uniformity on the Sphere 
@@ -428,30 +424,30 @@ results especially in the case of multimodal distributions.</p>
 Mises-Fisher distributions in 2 dimensions. The direction of the mean
 vectors for the distributions are set as (1, 0), (0, 1), (-1, 0), and
 (0, -1), with a concentration parameter <span class="math inline">\(\kappa=5\)</span>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">library</span>(movMF)        </span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">library</span>(sphunif)      </span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co"># Define the mean directions of the 4 von Mises-Fisher distributions</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>),    </span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),    </span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>),   </span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)    </span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>)</span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co"># Define the concentration parameter (kappa)</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>kappa <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co"># Generate 100 samples from a mixture of 4 von Mises-Fisher distributions</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rmovMF</span>(<span class="dv">100</span>, <span class="at">theta =</span> kappa <span class="sc">*</span> means), <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">library</span>(movMF)        </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">library</span>(sphunif)      </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co"># Define the mean directions of the 4 von Mises-Fisher distributions</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>),    </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),    </span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>),   </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)    </span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># Define the concentration parameter (kappa)</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>kappa <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co"># Generate 100 samples from a mixture of 4 von Mises-Fisher distributions</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rmovMF</span>(<span class="dv">100</span>, <span class="at">theta =</span> kappa <span class="sc">*</span> means), <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p>We now compare the results of the <code>pk.test</code> function with
 the Ajne and Bingham tests using the <code>sphunif</code> package.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Run the pk.test from the QuadratiK package to test the data</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>pk_test_result <span class="ot">&lt;-</span> <span class="fu">pk.test</span>(samples, <span class="at">rho=</span><span class="fl">0.8</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Run the Bingham and Ajne tests from the sphunif package</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>other_test_result <span class="ot">&lt;-</span> <span class="fu">unif_test</span>(samples, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;Bingham&quot;</span>, <span class="st">&quot;Ajne&quot;</span>))</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>pk_test_result</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Run the pk.test from the QuadratiK package to test the data</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>pk_test_result <span class="ot">&lt;-</span> <span class="fu">pk.test</span>(samples, <span class="at">rho=</span><span class="fl">0.8</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Run the Bingham and Ajne tests from the sphunif package</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>other_test_result <span class="ot">&lt;-</span> <span class="fu">unif_test</span>(samples, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;Bingham&quot;</span>, <span class="st">&quot;Ajne&quot;</span>))</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>pk_test_result</span></code></pre></div>
 <pre><code>## 
 ##  Poisson Kernel-based quadratic distance test of 
 ##                         Uniformity on the Sphere 
@@ -468,7 +464,7 @@ the Ajne and Bingham tests using the <code>sphunif</code> package.</p>
 ## H0 is rejected:  TRUE 
 ## Statistic Vn:  15.14426 
 ## Critical value:  12.8308</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>other_test_result</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>other_test_result</span></code></pre></div>
 <pre><code>## $Bingham
 ## 
 ##  Bingham test of circular uniformity

@@ -24,6 +24,9 @@ test_that("Random Generation from PKBD works", {
                 'Input argument rho must be within [0,1)',fixed=TRUE)
    expect_error(rpkb(10, mu = c(0,0,0), rho = 0.8), 
                 'Input argument mu cannot be a vector of zeros',fixed=TRUE)
+   expect_error(rpkb(10, mu = 2, rho = 0.8), 
+                'mu must have length >= 2',fixed=TRUE)
+   
    expect_error(rpkb(-10, mu = c(1,0,0), rho = 0.8), 
                 'n must be a positive integer',fixed=TRUE)
    expect_error(rpkb(10, mu = c(1,0,0), rho = 0.8, method = "invalid"), 
@@ -106,20 +109,17 @@ test_that("Random Generation from PKBD compared to wrapped Cauchy", {
    location <- circular(0)  
    rho <- 0.5  
    # Generate data from wrapped cauchy
-   wc <- rvonmises(n, mu = location, kappa = -log(rho))
+   wc <- circular::rvonmises(n, mu = location, kappa = -log(rho))
    # Generate data from pkbd 
    pkbd <- rpkb(n, mu = c(1, 0), rho = 0.5)$x
    
    # Convert Cartesian coordinates to angles for comparison
    pkbd_angles <- atan2(pkbd[,2], pkbd[,1]) %% (2*pi)
-   # Convert PKBD angles to circular data
-   pkbd_circular <- circular(pkbd_angles)
-   # Convert to circular objects for statistical testing
-   wc_circular <- circular(wc)
    
-   # Perform Watson-Wheeler test 
+   # Perform Kolmogorov-smirnov test 
    # (common for comparing two circular distributions)
-   ww_test <- watson.two.test(wc_circular, pkbd_circular)
-   
+   ks_test <- ks.test(pkbd_angles, wc)
+   expect_lt(ks_test$p.value,0.05)
+
    
 })

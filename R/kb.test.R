@@ -104,7 +104,7 @@
 #' We consider the non-parametric centering of the kernel with respect to 
 #' \eqn{\bar{F}=(n_1 F_1 + \ldots n_k F_k)/n} where \eqn{n=\sum_{i=1}^k n_i}. 
 #' Let \eqn{\mathbf{z}_1,\ldots, \mathbf{z}_n} denote the pooled sample. For any
-#' \eqn{s,t \in \{\mathbf{z}_1,\ldots, \mathbf{z}_n\}}, it is given by
+#'  \eqn{s,t \in \{\mathbf{z}_1,\ldots, \mathbf{z}_n\}}, it is given by 
 #' \deqn{K_{cen(\bar{F})}(\mathbf{s},\mathbf{t}) =    K(\mathbf{s},\mathbf{t}) -
 #'  \frac{1}{n}\sum_{i=1}^{n} K(\mathbf{s},\mathbf{z}_i) - 
 #'  \frac{1}{n}\sum_{i=1}^{n} K(\mathbf{z}_i,\mathbf{t}) + 

@@ -55,7 +55,9 @@ test_that("Density of PKBD", {
    log_den <- dpkb(pkbd_dat$x, mu, rho, logdens = TRUE)
    
    expect_equal(dim(log_den),c(size,1))
-   
+})
+
+test_that("Test numerical values", {
    #------------------------------------------------------
    ## Test numerical values
    rho <- 0.8
@@ -70,3 +72,52 @@ test_that("Density of PKBD", {
    expect_equal(as.numeric(dpkb(matrix(mu,nrow=1), mu, rho=0.5, logdens = TRUE)), log(0.47746483))
    
 })
+
+test_that("tests - Density of PKBD", {
+   
+   set.seed(123)
+   size <- 100
+   rho <- 0.8
+   mu <- c(1,0,0)
+   pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejvmf")$x
+   
+   # Check the errors
+   # x
+   pkbd_dat[1,] <- NA
+   expect_error(dpkb(pkbd_dat, mu = mu, rho = rho), 
+                'There are missing values in x!',fixed=TRUE)
+   pkbd_dat[1,] <- Inf
+   expect_error(dpkb(pkbd_dat, mu = mu, rho = rho), 
+                'There are undefined values in x, that is Nan, Inf, -Inf',fixed=TRUE)
+   
+   expect_error(dpkb(rnorm(10), mu = c(0,0,0), rho = 0.8), 
+                "x must be a matrix or a data.frame",fixed=TRUE)
+   expect_error(dpkb(matrix(rnorm(10),ncol=1), mu = c(0,0,0), rho = 0.8), 
+                'x must have dimension >= 2',fixed=TRUE)
+   
+   pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejvmf")
+   expect_error(dpkb(pkbd_dat$x, mu = c(1,0), rho = 0.8), 
+                'number of rows of x must be equal to the length of mu',
+                fixed=TRUE)
+   
+   expect_error(dpkb(pkbd_dat$x, mu = c(1,0,0), rho = 2), 
+                'Input argument rho must be within [0,1)',fixed=TRUE)
+   
+   #------------------------------------------------------
+   ## Generating data point on the Sphere
+   ## and computing the densities
+   den <- dpkb(pkbd_dat$x, mu, rho)
+   
+   expect_equal(dim(den),c(size,1))
+   expect_false(any(den<0))
+   
+   den <- dpkb(data.frame(pkbd_dat$x), mu, rho)
+   
+   expect_equal(dim(den),c(size,1))
+   expect_false(any(den<0))
+   
+   log_den <- dpkb(pkbd_dat$x, mu, rho, logdens = TRUE)
+   
+   expect_equal(dim(log_den),c(size,1))
+})
+

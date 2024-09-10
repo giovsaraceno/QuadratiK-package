@@ -98,9 +98,9 @@
 #'   \code{input}: List of input information.
 #'
 #' @references
-#' Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
-#' Convergence Properties, Identifiability, and a Method of Sampling, Journal of
-#' Computational and Graphical Statistics, 29:4, 758-770, 
+#' Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the 
+#' Sphere: Convergence Properties, Identifiability, and a Method of Sampling, 
+#' Journal of Computational and Graphical Statistics, 29:4, 758-770, 
 #' DOI: 10.1080/10618600.2020.1740713.
 #'
 #' @examples
@@ -231,7 +231,7 @@ setMethod("pkbc", signature(dat = "ANY"),
              if (numUniqueObs < numClust) {
                 stop(paste("Only", numUniqueObs, "unique observations.",
                            'When initMethod = "sampleData", must have more
-                           than numClust unique observations.'
+                           than nClust unique observations.'
                 ))
              }
           }
@@ -569,12 +569,12 @@ setGeneric("stats_clusters",function(object,...){
 #' @export
 setMethod("stats_clusters", "pkbc", function(object, k){
    
-   if(!(k %in% object@input$nClust)){
+   if(!(is.numeric(k) & length(k)==1)){
+      stop("k must be an integer")
+   } else if(!(k %in% object@input$nClust)){
       stop("The provided pkbc object does not contain results for the requested
            number of clusters")
-   } else if(!(is.numeric(k) & length(k)==1)){
-      stop("k must be an integer")
-   }
+   } 
    
    x <- object@input$dat
    y <- as.factor(object@res_k[[k]]$finalMemb)
@@ -648,7 +648,7 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' @srrstats {UL6.0,UL6.2} plot method for pkbc object
 #' 
 #' @export
-setMethod("plot", signature(x="pkbc"), 
+setMethod("plot", "pkbc", 
           function(x, k = NULL, true_label=NULL, pca_res=FALSE) {
              
              if(is.null(k)){

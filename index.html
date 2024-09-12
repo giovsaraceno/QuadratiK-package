@@ -57,7 +57,8 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><p><a href="https://www.repostatus.org/#active" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a> <a href="https://CRAN.R-project.org/package=QuadratiK" class="external-link"><img src="https://www.r-pkg.org/badges/version/QuadratiK" alt="CRAN status"></a> <a href="https://github.com/ropensci/software-review/issues/632" class="external-link"><img src="https://badges.ropensci.org/632_status.svg" alt="Status at rOpenSci Software Peer Review"></a> <a href="https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://cran.r-project.org/package=QuadratiK" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK" alt="CRAN_Downloads_Badge"></a> <a href="https://codecov.io/gh/giovsaraceno/QuadratiK-package" class="external-link"><img src="https://codecov.io/gh/giovsaraceno/QuadratiK-package/branch/main/graph/badge.svg" alt="codecov"></a> !– badges: end –&gt;</p>
+  <main id="main" class="col-md-9">
+<!-- badges: end -->
 <div class="section level1">
 <div class="page-header"><h1 id="collection-of-methods-constructed-using-the-kernel-based-quadratic-distances">Collection of Methods Constructed using the Kernel-Based Quadratic Distances<a class="anchor" aria-label="anchor" href="#collection-of-methods-constructed-using-the-kernel-based-quadratic-distances"></a>
 </h1></div>
@@ -65,7 +66,7 @@
 <ul>
 <li><p><strong>Goodness-of-Fit Tests</strong>: The software implements one, two, and <em>k</em>-sample tests for goodness of fit, offering an efficient and mathematically sound way to assess the fit of probability distributions. Expanded capabilities include supporting tests for uniformity on the <em>d</em>-dimensional Sphere based on Poisson kernel densities. Our tests are particularly useful for large, high dimensional data sets where the assessment of fit of probability models is of interest. Specifically, we offer tests for normality, as well as two- and <em>k</em>-sample tests, where testing equality of two or more distributions is of interest, that is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><msub><mi>F</mi><mn>1</mn></msub><mo>=</mo><msub><mi>F</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">H_0: F_1 = F_2</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><msub><mi>F</mi><mn>1</mn></msub><mo>=</mo><mi>…</mi><mo>=</mo><msub><mi>F</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">H_0: F_1 = \ldots = F_k</annotation></semantics></math> respectively. The proposed tests perform well in terms of level and power for contiguous alternatives, heavy tailed distributions and in higher dimensions.</p></li>
 <li><p><strong>Poisson kernel-based distribution (PKBD)</strong>: the package offers functions for computing the density value and for generating random samples from a PKBD. The Poisson kernel-based densities are based on the normalized Poisson kernel and are defined on the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional unit sphere. Given a vector <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>∈</mo><msup><mi>𝒮</mi><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\mu \in \mathcal{S}^{d-1}</annotation></semantics></math>, and a parameter <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ρ</mi><annotation encoding="application/x-tex">\rho</annotation></semantics></math> such that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>ρ</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0 &lt; \rho &lt; 1</annotation></semantics></math>, the probability density function of a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-variate Poisson kernel-based density is defined by: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐱</mi><mo stretchy="false" form="prefix">|</mo><mi>ρ</mi><mo>,</mo><mi>𝛍</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>ρ</mi><mn>2</mn></msup></mrow><mrow><msub><mi>ω</mi><mi>d</mi></msub><mrow><mo stretchy="true" form="prefix">|</mo><mo stretchy="true" form="postfix">|</mo></mrow><mi>𝐱</mi><mo>−</mo><mi>ρ</mi><mi>𝛍</mi><msup><mrow><mo stretchy="true" form="prefix">|</mo><mo stretchy="true" form="postfix">|</mo></mrow><mi>d</mi></msup></mrow></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">f(\mathbf{x}|\rho, \mathbf{\mu}) = \frac{1-\rho^2}{\omega_d ||\mathbf{x} - \rho \mathbf{\mu}||^d},</annotation></semantics></math> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> is a vector orienting the center of the distribution, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ρ</mi><annotation encoding="application/x-tex">\rho</annotation></semantics></math> is a parameter to control the concentration of the distribution around the vector <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> and it is related to the variance of the distribution. Furthermore, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ω</mi><mi>d</mi></msub><mo>=</mo><mn>2</mn><msup><mi>π</mi><mrow><mi>d</mi><mi>/</mi><mn>2</mn></mrow></msup><msup><mrow><mo stretchy="true" form="prefix">[</mo><mi>Γ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\omega_d = 2\pi^{d/2} [\Gamma(d/2)]^{-1}</annotation></semantics></math> is the surface area of the unit sphere in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>ℝ</mi><mi>d</mi></msup><annotation encoding="application/x-tex">\mathbb{R}^d</annotation></semantics></math> (see Golzy and Markatou, 2020).</p></li>
-<li><p><strong>Clustering Algorithm for Spherical Data</strong>: the package incorporates a unique clustering algorithm specifically tailored for spherical data and it is especially useful in the presence of noise in the data and the presence of non-negligible overlap between clusters. This algorithm leverages a mixture of Poisson kernel-based densities on the Sphere, enabling effective clustering of spherical data or data that has been spherically transformed. The package also provides the functions for density evaluation and random sampling from the Poisson kernel-based distribution.</p></li>
+<li><p><strong>Clustering Algorithm for Spherical Data</strong>: the package incorporates a unique clustering algorithm specifically tailored for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional spherical data and it is especially useful in the presence of noise in the data and the presence of non-negligible overlap between clusters. This algorithm leverages a mixture of Poisson kernel-based densities on the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional Sphere, enabling effective clustering of spherical data or data that has been spherically transformed. The package also provides the functions for density evaluation and random sampling from the Poisson kernel-based distribution.</p></li>
 <li><p><strong>Additional Features</strong>: Alongside these functionalities, the software includes additional graphical functions, aiding users in validating and representing the cluster results as well as enhancing the interpretability and usability of the analysis.</p></li>
 </ul>
 <div class="section level2">
@@ -91,14 +92,28 @@ Email: <a href="mailto:gsaracen@buffalo.edu">gsaracen@buffalo.edu</a></p>
 </h2>
 <p>If you use this package in your research or work, please cite it as follows:</p>
 <p>Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances. <a href="https://cran.r-project.org/package=QuadratiK" class="external-link uri">https://cran.r-project.org/package=QuadratiK</a>, <a href="https://github.com/giovsaraceno/QuadratiK-package" class="external-link uri">https://github.com/giovsaraceno/QuadratiK-package</a>, <a href="https://giovsaraceno.github.io/QuadratiK-package/" class="external-link uri">https://giovsaraceno.github.io/QuadratiK-package/</a>.</p>
-<blockquote>
-<p><code>@Manual{saraceno2024QuadratiK,  title = {QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances},  author = {Giovanni Saraceno and Marianthi Markatou and Raktim Mukhopadhyay and Mojgan Golzy},  year = {2024},  note = {&lt;https://cran.r-project.org/package=QuadratiK&gt;,&lt;https://github.com/giovsaraceno/QuadratiK-package&gt;, &lt;https://giovsaraceno.github.io/QuadratiK-package/&gt;},  }</code></p>
-</blockquote>
+<pre><code>@Manual{saraceno2024QuadratiK,
+   title = {QuadratiK: Collection of Methods Constructed using Kernel-Based
+            Quadratic Distances},
+   author = {Giovanni Saraceno and Marianthi Markatou and Raktim Mukhopadhyay
+             and Mojgan Golzy},
+   year = {2024},
+   note = {&lt;https://cran.r-project.org/package=QuadratiK&gt;,
+            &lt;https://github.com/giovsaraceno/QuadratiK-package&gt;,
+            &lt;https://giovsaraceno.github.io/QuadratiK-package/&gt;},
+}</code></pre>
 <p>and the associated paper:</p>
 <p>Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package in R and Python. arXiv preprint <a href="https://arxiv.org/abs/2402.02290" class="external-link">arXiv:2402.02290</a>.</p>
-<blockquote>
-<p><code>@misc{saraceno2024package, title={Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package in R and Python},  author={Giovanni Saraceno and Marianthi Markatou and Raktim Mukhopadhyay and Mojgan Golzy}, year={2024}, eprint={2402.02290}, archivePrefix={arXiv}, primaryClass={stat.CO}, url={https://arxiv.org/abs/2402.02290},  }</code></p>
-</blockquote>
+<pre><code>@misc{saraceno2024package,
+      title={Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK
+             package in R and Python},
+      author={Giovanni Saraceno and Marianthi Markatou and Raktim Mukhopadhyay
+              and Mojgan Golzy},
+      year={2024},
+      eprint={2402.02290},
+      archivePrefix={arXiv},
+      primaryClass={stat.CO}, url={https://arxiv.org/abs/2402.02290}
+}</code></pre>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -112,7 +127,7 @@ Email: <a href="mailto:gsaracen@buffalo.edu">gsaracen@buffalo.edu</a></p>
 <div class="section level2">
 <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
 </h2>
-<p>The work has been supported by Kaleida Health Foundation, National Science Foundation and Department of Biostatistics, University at Buffalo.</p>
+<p>The work has been supported by Kaleida Health Foundation and National Science Foundation.</p>
 </div>
 </div>
 
@@ -159,7 +174,17 @@ Email: <a href="mailto:gsaracen@buffalo.edu">gsaracen@buffalo.edu</a></p>
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.repostatus.org/#active" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
+<li><a href="https://CRAN.R-project.org/package=QuadratiK" class="external-link"><img src="https://www.r-pkg.org/badges/version/QuadratiK" alt="CRAN status"></a></li>
+<li><a href="https://github.com/ropensci/software-review/issues/632" class="external-link"><img src="https://badges.ropensci.org/632_status.svg" alt="Status at rOpenSci Software Peer Review"></a></li>
+<li><a href="https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://cran.r-project.org/package=QuadratiK" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK" alt="CRAN_Downloads_Badge"></a></li>
+<li><a href="https://codecov.io/gh/giovsaraceno/QuadratiK-package" class="external-link"><img src="https://codecov.io/gh/giovsaraceno/QuadratiK-package/branch/main/graph/badge.svg" alt="codecov"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

@@ -4,8 +4,17 @@ QuadratiK (Next Release)
 ### NEW FEATURES
 
   * Added NEWS.md file
-  * Added badge for rOpenSci review status
-  * More detailed documentation
+  * Added badges for rOpenSci review status, test coverage, R CMD CHECK,
+          CRAN downloads
+  * More detailed README file and documentation, such that the methods are 
+          more usable and clearer for a broader audience. 
+  * Addition of test codes with testthat package. 
+  * In particular, testing that random sampling from the PKBD and the wrapped
+          Cauchy distribution is equivalent.
+  * Solved bugs:
+    - scatter-plots related to the clustering algorithm results.
+    - computation of evaluation measures (pkdc_validation function) when the 
+      true labels are not provided. 
 
 
 QuadratiK 1.1.1 (2024-06-05)

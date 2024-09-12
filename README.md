@@ -5,7 +5,6 @@
 [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) 
 [![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) 
 [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK)
-[![codecov](https://codecov.io/gh/giovsaraceno/QuadratiK-package/branch/main/graph/badge.svg)](https://codecov.io/gh/giovsaraceno/QuadratiK-package)
 [![test-coverage](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/test-coverage.yaml)
 
 <!-- badges: end -->

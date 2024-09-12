@@ -1,6 +1,12 @@
 <!-- badges: start -->
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![CRAN status](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![codecov](https://codecov.io/gh/giovsaraceno/QuadratiK-package/branch/main/graph/badge.svg)](https://codecov.io/gh/giovsaraceno/QuadratiK-package)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) 
+[![CRAN status](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) 
+[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) 
+[![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) 
+[![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) 
+[![cov](https://giovsaraceno.github.io/QuadratiK-package/badges/coverage.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions)
+[![codecov](https://codecov.io/gh/giovsaraceno/QuadratiK-package/branch/main/graph/badge.svg)](https://codecov.io/gh/giovsaraceno/QuadratiK-package)
 
 <!-- badges: end -->
 

@@ -28,7 +28,7 @@ library(devtools)
 devtools::install_github('giovsaraceno/QuadratiK-package')
 ```
 
-The `QuadratiK` package is also available in Python on PyPI and as a Dashboard application (ADD LINK HERE).
+The `QuadratiK` package is also available in Python on PyPI and as a Dashboard application. Usage instruction for the Dashboard can be found at <https://quadratik.readthedocs.io/en/latest/user_guide/dashboard_application_usage.html>.
 
 ### Citation
 
@@ -38,10 +38,14 @@ Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: Collection of
 
 ``` bibtex
 @Manual{saraceno2024QuadratiK, 
-   title = {QuadratiK: Collection of Methods Constructed               using Kernel-Based Quadratic Distances}, 
-   author = {Giovanni Saraceno and Marianthi Markatou and               Raktim Mukhopadhyay and Mojgan Golzy}, 
+   title = {QuadratiK: Collection of Methods Constructed using Kernel-Based 
+            Quadratic Distances}, 
+   author = {Giovanni Saraceno and Marianthi Markatou and Raktim Mukhopadhyay 
+            and Mojgan Golzy}, 
    year = {2024}, 
-   note = {<https://cran.r-project.org/package=QuadratiK>,       <https://github.com/giovsaraceno/QuadratiK-package>,       <https://giovsaraceno.github.io/QuadratiK-package/>} 
+   note = {<https://cran.r-project.org/package=QuadratiK>,
+   <https://github.com/giovsaraceno/QuadratiK-package>, 
+   <https://giovsaraceno.github.io/QuadratiK-package/>} 
 }
 ```
 
@@ -51,8 +55,10 @@ Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan (2024).
 
 ``` bibtex
 @misc{saraceno2024package, 
-   title={Goodness-of-Fit and Clustering of Spherical Data:          the QuadratiK package in R and Python}, 
-   author={Giovanni Saraceno and Marianthi Markatou and             Raktim Mukhopadhyay and Mojgan Golzy}, 
+   title={Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package in
+          R and Python}, 
+   author={Giovanni Saraceno and Marianthi Markatou and Raktim Mukhopadhyay and
+           Mojgan Golzy}, 
    year={2024}, 
    eprint={2402.02290}, 
    archivePrefix={arXiv}, 
@@ -200,7 +206,7 @@ val_res
 
 ```{r, fig.show = "hold", fig.width=6, fig.height=6}
 # Plot method for the pkbc object:
-# - scatter plot of data points on the sphereù
+# - scatter plot of data points on the sphere
 # - elbow plot for helping the choice of the number of clusters
 plot(cluster_res)
 ```

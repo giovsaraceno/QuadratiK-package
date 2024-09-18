@@ -41,7 +41,7 @@ Euclidean distance (left) and the cosine similarity (right).
 }
 \note{
 The elbow plot is commonly used as a graphical method for choosing the
-\emph{approriate} number of clusters. Specifically, plotting the wcss versus the
+\emph{appropriate} number of clusters. Specifically, plotting the wcss versus the
 number of clusters, the suggested number of clusters correspond to the point
 in which the plotted line has the greatest change in slope, showing
 an elbow.

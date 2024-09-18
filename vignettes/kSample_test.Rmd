@@ -118,7 +118,7 @@ If a value of $h$ is not provided to ``kb.test()``, this function performs the f
 ```{r eval=FALSE}
 k_test_h <- kb.test(x=x, y=y)
 ```
-For more details visit the help documenation of the ``select_h()`` function.
+For more details visit the help documentation of the ``select_h()`` function.
 ```{r eval=FALSE} 
 help(select_h) 
 ```

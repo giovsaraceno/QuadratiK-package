@@ -31,7 +31,7 @@ test_that("Error on invalid method input", {
                 "There are missing values in x!", fixed=TRUE)
    x[1,] <- Inf
    expect_error(select_h(x = x, alternative="skewness"), 
-                "There are undefined values in x, that is Nan, Inf, -Inf", fixed=TRUE)
+         "There are undefined values in x, that is Nan, Inf, -Inf", fixed=TRUE)
    
    x <- matrix(rnorm(100), ncol = 2)
    y <- matrix(rnorm(100), ncol = 2)
@@ -40,7 +40,7 @@ test_that("Error on invalid method input", {
                 "There are missing values in y!", fixed=TRUE)
    y[1,] <- Inf
    expect_error(select_h(x = x, y = y, alternative="skewness"), 
-                "There are undefined values in y, that is Nan, Inf, -Inf", fixed=TRUE)
+         "There are undefined values in y, that is Nan, Inf, -Inf", fixed=TRUE)
    
    x <- matrix(rnorm(100), ncol = 2)
    y <- matrix(rnorm(90), ncol = 3)
@@ -60,8 +60,12 @@ test_that("Error on invalid method input", {
    
    x <- matrix(rnorm(100), ncol = 2)
    y <- matrix(rnorm(100), ncol = 2)
-   expect_error(select_h(x, y, alternative="skewness", h_values = c("a","b","c")), "h_values must be a numeric vector", fixed=TRUE)
-   expect_error(select_h(x, y, alternative="skewness", delta = c("a","b","c")), "delta must be a numeric vector", fixed=TRUE)
+   expect_error(select_h(x, y, alternative="skewness", 
+                         h_values = c("a","b","c")), 
+                "h_values must be a numeric vector", fixed=TRUE)
+   expect_error(select_h(x, y, alternative="skewness", 
+                         delta = c("a","b","c")), 
+                "delta must be a numeric vector", fixed=TRUE)
    
 })
 
@@ -70,7 +74,8 @@ test_that("Error on invalid method input", {
 test_that("Select h", {
    set.seed(123)
    # normality
-   result <- select_h(x = as.data.frame(matrix(rnorm(20),ncol=2)), alternative="location")
+   result <- select_h(x = as.data.frame(matrix(rnorm(20),ncol=2)), 
+                      alternative="location")
    expect_equal(class(result$h_sel), "numeric")
    expect_equal(class(result$power), "data.frame")
 

@@ -86,7 +86,7 @@ two_test@h$h_sel
 two_test@h$power.plot
 ```
 
-For more details visit the help documenation of the ``select_h()`` function.
+For more details visit the help documentation of the ``select_h()`` function.
 ```{r eval=FALSE} 
 help(select_h) 
 ```

@@ -11,8 +11,8 @@ vignette: >
 #' 
 #' 
 #' @srrstats {PD4.2} The results of the random sampling using the different 
-#'                   distributions are compared graphically, by plotting on the 
-#'                   sphere the generated observations.   
+#'                   distributions are compared graphically, by plotting on 
+#'                   the sphere the generated observations.   
 #'                   
 ```
 
@@ -107,7 +107,8 @@ title3d("", line = 3, cex = 1.5, font=2, add=TRUE)
 rgl.spheres(0 , col = "transparent", alpha = 0.2)
 # Rotate and zoom the generated 3 dimensional plot to facilitate visualization
 view3d(theta = 10, phi = -25, zoom = 0.5)
-# rglwidget is added in order to display the generated figure into the html replication file.
+# rglwidget is added in order to display the generated figure into the html 
+# replication file.
 rglwidget()
 close3d()
 

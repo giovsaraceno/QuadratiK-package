@@ -635,7 +635,7 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' 
 #' @note
 #' The elbow plot is commonly used as a graphical method for choosing the
-#' *approriate* number of clusters. Specifically, plotting the wcss versus the
+#' *appropriate* number of clusters. Specifically, plotting the wcss versus the
 #' number of clusters, the suggested number of clusters correspond to the point
 #' in which the plotted line has the greatest change in slope, showing 
 #' an elbow.  
@@ -659,8 +659,8 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' 
 #' @name plot.pkbc
 #' @rdname plot.pkbc
+#' @aliases plot.pkbc
 #' @aliases plot,pkbc,ANY-method
-#' 
 #' @export
 setMethod("plot", c(x = "pkbc"), 
           function(x, k = NULL, true_label=NULL, pca_res=FALSE, ...) {

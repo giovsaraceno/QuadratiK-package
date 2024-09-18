@@ -9,7 +9,8 @@
 #' @srrstats {G5.4,G5.4a} correctness tested on simple cases
 #' @srrstats {G5.8, G5.8a,G5.8b,G5.8c} edge conditions
 #' @srrstats {PD4.0} numeric outputs are tested
-#' @srrstats {PD4.1} Tests that density values are as expected for selected inputs
+#' @srrstats {PD4.1} Tests that density values are as expected for selected 
+#'                   inputs
 #' 
 #' @noRd
 library(testthat)
@@ -64,12 +65,15 @@ test_that("Test numerical values", {
    mu <- c(1,0,0)
    d <- 3
    x <- matrix(rnorm(3),nrow=1)
-   # For rho=0 the density corresponds to the normalizing constant for d independently of x
+   # For rho=0 the density corresponds to the normalizing constant for d 
+   # independently of x
    expect_equal(as.numeric(dpkb(x, mu, rho=0)), 1/(2*pi^(d/2)*gamma(d/2)^(-1)))
    
-   # For x = mu the product of x*mu =1 in the poisson density. The remaining depends only on rho and d
+   # For x = mu the product of x*mu =1 in the poisson density. The remaining 
+   # depends only on rho and d
    expect_equal(as.numeric(dpkb(matrix(mu,nrow=1), mu, rho=0.5)), 0.47746483)
-   expect_equal(as.numeric(dpkb(matrix(mu,nrow=1), mu, rho=0.5, logdens = TRUE)), log(0.47746483))
+   expect_equal(as.numeric(dpkb(matrix(mu,nrow=1), mu, rho=0.5, 
+                                logdens = TRUE)), log(0.47746483))
    
 })
 
@@ -88,7 +92,7 @@ test_that("tests - Density of PKBD", {
                 'There are missing values in x!',fixed=TRUE)
    pkbd_dat[1,] <- Inf
    expect_error(dpkb(pkbd_dat, mu = mu, rho = rho), 
-                'There are undefined values in x, that is Nan, Inf, -Inf',fixed=TRUE)
+         'There are undefined values in x, that is Nan, Inf, -Inf',fixed=TRUE)
    
    expect_error(dpkb(rnorm(10), mu = c(0,0,0), rho = 0.8), 
                 "x must be a matrix or a data.frame",fixed=TRUE)

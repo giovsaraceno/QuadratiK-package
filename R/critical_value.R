@@ -53,10 +53,11 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1,
          data_x_star<-as.matrix(data_pool[Ind_x, ])
          data_y_star<-as.matrix(data_pool[Ind_y, ])
       } else if(method=="subsampling"){
-         Ind_x<-sample(1:size_x, round(size_x*b), replace = F)
-         Ind_y<-sample((size_x+1):(size_x+size_y), round(size_y*b), replace = F)
+         Ind_x<-sample(1:size_x, round(size_x*b), replace = FALSE)
+         Ind_y<-sample((size_x+1):(size_x+size_y), round(size_y*b), 
+                       replace = FALSE)
          newind <- c(Ind_x,Ind_y)
-         newsample <- sample(newind,length(newind),replace = F)
+         newsample <- sample(newind,length(newind),replace = FALSE)
          m <- length(newsample)
          data_x_star<-as.matrix(data_pool[newsample[1:round(size_x*b)], ])
          data_y_star<-as.matrix(data_pool[newsample[(round(size_x*b)+1):m], ])

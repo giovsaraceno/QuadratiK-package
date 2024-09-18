@@ -60,7 +60,7 @@
 #'
 #' @param x A numeric d-dim matrix of data points on the Sphere S^(d-1).
 #' @param rho Concentration parameter of the Poisson kernel function.
-#' @param B Number of Monte Carlo iterations for critical value estimation of Un 
+#' @param B Number of Monte Carlo iterations for critical value estimation of Un
 #'          (default: 300).
 #' @param Quantile The quantile to use for critical value estimation, 
 #'                 0.95 is the default value.

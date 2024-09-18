@@ -9,7 +9,5 @@ test_that("Random Generation from PKBD works", {
    x_sp <- sample_hypersphere(d, size)
    
    expect_equal(dim(x_sp),c(size,d))
-   expect_true(any(rowSums(x_sp^2) ==1))
-   
-   
+   expect_true(any(rowSums(x_sp^2) == 1))
 })

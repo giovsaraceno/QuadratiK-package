@@ -114,7 +114,8 @@ test_that("Random Generation from PKBD compared to wrapped Cauchy", {
    # Generate data from pkbd 
    pkbd <- rpkb(n, mu = c(-1, 0), rho = rho)$x
    # Convert Cartesian coordinates to angles for comparison
-   pkbd_angles <- circular::coord2rad(pkbd, control.circular = list(modulo="asis"))
+   pkbd_angles <- circular::coord2rad(pkbd, 
+                                      control.circular = list(modulo="asis"))
    
    # Compute the sample circular quantiles 
    vect_quantiles <- c(0.05,seq(0.1,0.9,0.05), 0.95)

@@ -29,17 +29,18 @@ alternatives, heavy tailed distributions and in higher dimensions.
 \item \strong{Poisson kernel-based distribution (PKBD)}: the package offers
 functions for computing the density value and for generating random samples
 from a PKBD. The Poisson kernel-based densities are based on the normalized
-Poisson kernel and are defined on the \eqn{d}-dimensional unit sphere. Given a
-vector \eqn{\mu \in \mathcal{S}^{d-1}}, and a parameter \eqn{\rho} such that
-\eqn{0 < \rho < 1}, the probability density function of a \eqn{d}-variate
-Poisson kernel-based density is defined by: \deqn{f(\mathbf{x}|\rho,
- \mathbf{\mu}) = \frac{1-\rho^2}{\omega_d ||\mathbf{x} - 
- \rho \mathbf{\mu}||^d},} where \eqn{\mu} is a vector orienting the center of
-the distribution, \eqn{\rho} is a parameter to control the concentration of
-the distribution around the vector \eqn{\mu} and it is related to the
-variance of the distribution. Furthermore,
-\eqn{\omega_d = 2\pi^{d/2} [\Gamma(d/2)]^{-1}} is the surface area of the
-unit sphere in \eqn{\mathbb{R}^d} (see Golzy and Markatou, 2020).
+Poisson kernel and are defined on the \eqn{d}-dimensional unit sphere.
+Given a vector \eqn{\mu \in \mathcal{S}^{d-1}}, and a parameter \eqn{\rho}
+such that \eqn{0 < \rho < 1}, the probability density function of a
+\eqn{d}-variate Poisson kernel-based density is defined by:
+\deqn{f(\mathbf{x}|\rho, \mathbf{\mu}) = \frac{1-\rho^2}{\omega_d 
+||\mathbf{x} - \rho \mathbf{\mu}||^d},}
+where \eqn{\mu} is a vector orienting the center of the distribution,
+\eqn{\rho} is a parameter to control the concentration of the distribution
+around the vector \eqn{\mu} and it is related to the variance of the
+distribution. Furthermore, \eqn{\omega_d = 2\pi^{d/2} [\Gamma(d/2)]^{-1}}
+is the surface area of the unit sphere in \eqn{\mathbb{R}^d}
+(see Golzy and Markatou, 2020).
 \item \strong{Clustering Algorithm for Spherical Data}: the package incorporates a
 unique clustering algorithm specifically tailored for spherical data and it
 is especially useful in the presence of noise in the data and the presence

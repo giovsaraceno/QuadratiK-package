@@ -58,7 +58,7 @@
 #' \eqn{\hat{\mathbf{\lambda}}} indicate the location,
 #' covariance and skewness parameter estimates from the pooled sample. 
 #' - Compute the estimates of the mean \eqn{\hat{\mu}}, covariance matrix
-#'  \eqn{\hat{\Sigma}} and skewness \eqn{\hat{\lambda}} from the pooled sample.  
+#'  \eqn{\hat{\Sigma}} and skewness \eqn{\hat{\lambda}} from the pooled sample.
 #' - Choose the family of alternatives \eqn{F_\delta = F_\delta(\hat{\mu}
 #' ,\hat{\Sigma}, \hat{\lambda})}. \cr \cr
 #' *For each value of \eqn{\delta} and \eqn{h}:*

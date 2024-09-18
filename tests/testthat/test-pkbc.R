@@ -69,7 +69,7 @@ test_that("Error is thrown for invalid data", {
    dat <- matrix(rnorm(100),ncol=2)
    dat[1,] <- Inf 
    expect_error(pkbc(dat = dat, nClust = 2), 
-                'There are undefined values, that is Nan, Inf, -Inf', fixed=TRUE)
+            'There are undefined values, that is Nan, Inf, -Inf', fixed=TRUE)
    dat <- matrix(rnorm(100),ncol=2)
    dat[1,] <- NaN 
    expect_error(pkbc(dat = dat, nClust = 2), 
@@ -121,7 +121,7 @@ test_that("Clustering algorithm works", {
    expect_true(class(pkbd_res)== "pkbc")
    expect_type(pkbd_res@res_k, "list")
    require(mclust)
-   expect_equal(mclust::adjustedRandIndex(pkbd_res@res_k[[3]]$finalMemb,label),1)
+ expect_equal(mclust::adjustedRandIndex(pkbd_res@res_k[[3]]$finalMemb,label),1)
    
    # Tests for stats_clusters, correct input
    expect_error(stats_clusters(pkbd_res, "invalid"), 
@@ -187,7 +187,8 @@ test_that("plot method for the clustering algorithm", {
    # Tests for predict method
    expect_equal(predict(pkbd_res,k=2),pkbd_res@res_k[[2]]$finalMemb)
    
-   newdat <- rbind(rpkb(50, c(1,0),0.99, method = "rejacg")$x,rpkb(50, c(-1,0),0.99, method = "rejacg")$x)
+   newdat <- rbind(rpkb(50, c(1,0),0.99, method = "rejacg")$x,
+                   rpkb(50, c(-1,0),0.99, method = "rejacg")$x)
    expect_equal(predict(pkbd_res, k=2, newdat)$Memb,rep(c(2,1),each=50))
    
 
@@ -205,16 +206,21 @@ test_that("show and summary methods for the clustering algorithm", {
    output <- capture.output(show(pkbd_res))
    
    # Verify that the output contains expected components
-   expect_true(any(grepl("Poisson Kernel-Based Clustering on the Sphere", output)))
+   expect_true(any(grepl("Poisson Kernel-Based Clustering on the Sphere", 
+                         output)))
    expect_true(any(grepl("Available components", output)))
    expect_true(any(grepl("Input Parameters", output)))
-   expect_true(any(grepl("Considered possible number of clusters:  2 3", output)))
-   expect_true(any(grepl("Available components for each value of number of clusters:", output)))
+   expect_true(any(grepl("Considered possible number of clusters:  2 3", 
+                         output)))
+   expect_true(any({
+   grepl("Available components for each value of number of clusters:", output)
+      }))
    
    out_sum <- capture.output(summary(pkbd_res))
    
    # Verify that the output contains the expected components
-   expect_true(any(grepl("Poisson Kernel-Based Clustering on the Sphere", out_sum)))
+   expect_true(any(grepl("Poisson Kernel-Based Clustering on the Sphere", 
+                         out_sum)))
    expect_true(any(grepl("Summary:", out_sum)))
    expect_true(any(grepl("LogLik", out_sum)))
    expect_true(any(grepl("WCSS", out_sum)))

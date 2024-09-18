@@ -661,6 +661,8 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' @rdname plot.pkbc
 #' @aliases plot.pkbc
 #' @aliases plot,pkbc,ANY-method
+#' @return The scatter-plot(s) and the elbow plot.
+#' 
 #' @export
 setMethod("plot", c(x = "pkbc"), 
           function(x, k = NULL, true_label=NULL, pca_res=FALSE, ...) {

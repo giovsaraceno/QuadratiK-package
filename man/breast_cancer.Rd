@@ -8,10 +8,9 @@
 A data frame of 569 observations and 31 variables.
 }
 \source{
-Wolberg,William, Mangasarian,Olvi, Street,Nick, and Street,W.. (1995).
+Wolberg, W., Mangasarian, O., Street, N., & Street, W. (1993).
 Breast Cancer Wisconsin (Diagnostic).
 UCI Machine Learning Repository.
-
 https://doi.org/10.24432/C5DW2B.
 }
 \usage{

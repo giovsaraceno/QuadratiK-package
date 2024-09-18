@@ -137,7 +137,8 @@ are fairly well concentrated around the vectors \(\mu_j\) of each cluster;
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>dat</dt>
 <dd><p>Data matrix or data.frame of data points on the sphere to be
-clustered. The observations in <code>dat</code> are normalized to ensure
+clustered. The observations in <code>dat</code> are normalized by
+dividing with the length of the vector to ensure
 that they lie on the \(d\)-dimensional sphere. Note that
 \(d &gt; 1\).</p></dd>
 
@@ -221,10 +222,10 @@ clustering algorithm.</p>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>The clustering algorithm is tailored for data points on the sphere
-\(\mathcal{S}^{d-1}\), but it can be also performed on spherically
+\(\mathcal{S}^{d-1}\), but it can also be performed on spherically
 transformed observations, i.e. data points on the Euclidean space
 \(\mathbb{R}^d\) that are normalized such that they lie on the
-corresponding $d$-dimensional sphere \(\mathcal{S}^{d-1}\).</p>
+corresponding \(d\)-dimensional sphere \(\mathcal{S}^{d-1}\).</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

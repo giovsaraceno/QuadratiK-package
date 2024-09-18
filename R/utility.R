@@ -46,17 +46,6 @@ DOF_norm <- function(Sigma_h, V){
    
    const <- den_dof/num_dof
    
-   # h2 <- h^2
-   # dof_num <- 1 - (h2/(h2+2))^(d/2)
-   # dof_den <- ((h2+2)/(h2+4))^(d/2) - 2* (h2/(h2+1))^(d/2)*(h2/(h2+3))^(d/2) +
-   #    (h2/(h2+2))^(d)
-   # dof <- dof_num^2/dof_den
-   # 
-   # c_num <- ((h2+2)/(h2*(h2+4)))^(d/2) - 
-   # 2* (h2/(h2+1))^(d/2)*(1/(h2+3))^(d/2) +
-   #    (h/(h2+2))^(d)
-   # const <- c_num/dof_num
-   # 
    result <- list("DOF"=dof,"Coefficient"=const)
    return(result)
 }
@@ -89,7 +78,7 @@ var_norm <- function(Sigma_h, V, n){
 #'
 #' Generate random sample from the hypersphere
 #'
-#' Generate random sample from the uniform distribution on the hypersphere
+#' Generate a random sample from the uniform distribution on the hypersphere.
 #' 
 #' @param d Number of dimensions.
 #' @param n_points Number of sampled observations.

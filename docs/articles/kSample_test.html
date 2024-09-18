@@ -85,13 +85,29 @@
 
     
     
-<p>The quadratic distance between two probability distributions <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> is defined as:</p>
-<p><span class="math display">\[
-d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
-\]</span></p>
-<p>where <span class="math inline">\(G\)</span> is a distribution whose
-goodness of fit we wish to assess, and <span class="math inline">\(K\)</span> denotes the Normal kernel defined
-as:</p>
+<p>Consider <span class="math inline">\(k\)</span> random samples of
+i.i.d. observations <span class="math inline">\(\mathbf{x}^{(i)}_1,
+\mathbf{x}^{(i)}_{2}, \ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i\)</span>,
+for <span class="math inline">\(i = 1, \ldots, k\)</span>.</p>
+<p>We test if the samples are generated from the same <em>unknown</em>
+distribution <span class="math inline">\(\bar{F}\)</span>, that is:
+<span class="math display">\[
+H_0: F_1 = F_2 = \ldots = F_k = \bar{F}
+\]</span> versus the alternative where two of the <span class="math inline">\(k\)</span> distributions differ, that is <span class="math display">\[
+H_1: F_i \not = F_j,
+\]</span> for some <span class="math inline">\(1 \le i \not = j \le
+k\)</span>.</p>
+<p>Upon the construction of a matrix distance <span class="math inline">\(\hat{\mathbf{D}}\)</span>, with off-diagonal
+elements <span class="math display">\[
+    \hat{D}_{ij} = \frac{1}{n_i n_j}
+\sum_{\ell=1}^{n_i}\sum_{r=1}^{n_j}K_{\bar{F}}(\mathbf{x}^{(i)}_\ell,\mathbf{x}^{(j)}_r),
+\qquad \mbox{ for }i \not= j
+\]</span> and in the diagonal <span class="math display">\[  
+\hat{D}_{ii} = \frac{1}{n_i (n_i -1)} \sum_{\ell=1}^{n_i}\sum_{r\not=
+\ell}^{n_i}K_{\bar{F}}(\mathbf{x}^{(i)}_\ell,\mathbf{x}^{(i)}_r), \qquad
+\mbox{ for }i = j,
+\]</span> where <span class="math inline">\(K_{\bar{F}}\)</span> denotes
+the Normal kernel <span class="math inline">\(K\)</span>, defined as</p>
 <p><span class="math display">\[
 K(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2}
 \left(\det{\mathbf{\Sigma}_h}\right)^{-\frac{1}{2}}  
@@ -100,19 +116,26 @@ K(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2}
 \]</span></p>
 <p>for every <span class="math inline">\(\mathbf{s}, \mathbf{t} \in
 \mathbb{R}^d \times \mathbb{R}^d\)</span>, with covariance matrix <span class="math inline">\(\mathbf{\Sigma}_h = h^2 I\)</span> and tuning
-parameter.</p>
-<p>Consider <span class="math inline">\(k\)</span> random samples of
-i.i.d. observations <span class="math inline">\(\mathbf{x}^{(i)}_1,
-\mathbf{x}^{(i)}_{2}, \ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i\)</span>,
-for <span class="math inline">\(i = 1, \ldots, k\)</span>.</p>
-<p>We test if the samples are generated from the same distribution, that
-is: <span class="math display">\[
-H_0: F_1 = F_2 = \ldots = F_k
-\]</span> versus <span class="math display">\[
-H_1: F_i \not = F_j,
-\]</span> for some <span class="math inline">\(1 \le i \not = j \le
-k\)</span>.</p>
-<p>We generated three samples, with <span class="math inline">\(n=50\)</span> observations each, from a
+parameter <span class="math inline">\(h\)</span>, centered with respect
+to <span class="math display">\[
+\bar{F} = \frac{n_1 \hat{F}_1 + \ldots + n_k \hat{F}_k}{n}, \quad \mbox{
+with } n=\sum_{i=1}^k n_i.
+\]</span> For more information about the centering of the kernel, see
+the documentation of the <code><a href="../reference/kb.test.html">kb.test()</a></code> function.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">kb.test</span><span class="op">)</span> </span></code></pre></div>
+<p>We compute the trace statistic <span class="math display">\[  
+\mathrm{trace}(\hat{\mathbf{D}}_n) =  \sum_{i=1}^{k}\hat{D}_{ii}.
+\]</span> and <span class="math inline">\(D_n\)</span>, derived
+considering all the possible pairwise comparisons in the <span class="math inline">\(k\)</span>-sample null hypothesis, given as <span class="math display">\[  
+D_{n} = (k-1) \mathrm{trace}(\hat{\mathbf{D}}_n) - 2
+\sum_{i=1}^{k}\sum_{j&gt; i}^{k}\hat{D}_{ij}.
+\]</span></p>
+<p>We show the usage of the <code><a href="../reference/kb.test.html">kb.test()</a></code> function with the
+following example of <span class="math inline">\(k=3\)</span> samples of
+bivariate observations following normal distributions with different
+mean vectors.</p>
+<p>We generate three samples, with <span class="math inline">\(n=50\)</span> observations each, from a
 2-dimensional Gaussian distributions with mean vectors <span class="math inline">\(\mu_1 = (0, \frac{\sqrt{3}}{3})\)</span>, <span class="math inline">\({\mu}_2 = (-\frac{1}{2},
 -\frac{\sqrt{3}}{6})\)</span> and <span class="math inline">\(\mu_3 =
 (\frac{1}{2}, -\frac{\sqrt{3}}{6})\)</span>, and the Identity matrix as
@@ -121,9 +144,10 @@ separated, following different Gaussian distributions, i.e. <span class="math i
 perform the <span class="math inline">\(k\)</span>-sample tests, we need
 to define the vector <code>y</code> which indicates the membership to
 groups.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org" class="external-link">mvtnorm</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
@@ -132,6 +156,12 @@ groups.</p>
 <span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html" class="external-link">rmvnorm</a></span><span class="op">(</span><span class="va">sizes</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">eps</span><span class="op">/</span><span class="fl">2</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">*</span><span class="va">eps</span><span class="op">/</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, <span class="va">x3</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, times<span class="op">=</span><span class="va">sizes</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">x</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, color <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Generated Points"</span>, x <span class="op">=</span> <span class="st">"X1"</span>, y <span class="op">=</span> <span class="st">"X2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="kSample_test_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 <p>To use the <code><a href="../reference/kb.test.html">kb.test()</a></code> function, we need to provide the
 value for the tuning parameter <span class="math inline">\(h\)</span>.
 The function <code>select_h</code> can be used for identifying on
@@ -139,47 +169,48 @@ The function <code>select_h</code> can be used for identifying on
 function needs the input <code>x</code> and <code>y</code> as the
 function <code>kb.test</code>, and the selection of the family of
 alternatives. Here we consider the location alternatives.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">h_k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_h.html">select_h</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span>, alternative<span class="op">=</span><span class="st">"location"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="kSample_test_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p><img src="kSample_test_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h_k</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1.2</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 1.6</span></span></code></pre>
 <p>The <code>select_h</code> function has also generated a figure
-displaying the obtained power versus the considered <span class="math inline">\(h\)</span>, for each value of skewness alternative
-<span class="math inline">\(\delta\)</span> considered.</p>
+displaying the obtained power versus the considered <span class="math inline">\(h\)</span>, for each value of alternative <span class="math inline">\(\delta\)</span> considered.</p>
 <p>We can now perform the <span class="math inline">\(k\)</span>-sample
 tests with the <em>optimal</em> value of <span class="math inline">\(h\)</span>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">k_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span>, h<span class="op">=</span><span class="va">h_k</span><span class="op">$</span><span class="va">h_sel</span><span class="op">)</span></span>
 <span><span class="fu">show</span><span class="op">(</span><span class="va">k_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">## U-statistics  Dn          Trace </span></span>
+<span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   3.76127     5.552056 </span></span>
-<span><span class="co">## Critical Value:   1.270525    1.876836 </span></span>
+<span><span class="co">## Test Statistic:   4.238404    6.834896 </span></span>
+<span><span class="co">## Critical Value:   1.113956    1.797719 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.2</span></span></code></pre>
-<p>The function returns an object of class . The method for the object
-shows the computed statistics with corresponding critical values, and
-the logical indicating if the null hypothesis is rejected. The test
-correctly rejects the null hypothesis, in fact the values of the
-statistics are greater than the computed critical values. The package
-provides also the <code>summary</code> method which returns the results
-of the tests together with the standard descriptive statistics for each
-variable computed, overall, and with respect to the provided groups.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<span><span class="co">## Selected tuning parameter h:  1.6</span></span></code></pre>
+<p>The function <code><a href="../reference/kb.test.html">kb.test()</a></code> returns an object of class
+<code>kb.test</code>. The <code>show</code> method for the
+<code>kb.test</code> object shows the computed statistics with
+corresponding critical values, and the logical indicating if the null
+hypothesis is rejected. The test correctly rejects the null hypothesis,
+in fact the values of the statistics are greater than the computed
+critical values. The package provides also the <code>summary</code>
+function which returns the results of the tests together with the
+standard descriptive statistics for each variable computed, overall, and
+with respect to the provided groups.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">k_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn       3.761270       1.270525      TRUE</span></span>
-<span><span class="co">## 2     Trace       5.552056       1.876836      TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<span><span class="co">##   Statistic    Value Critical_Value Reject_H0</span></span>
+<span><span class="co">## 1        Dn 4.238404       1.113956      TRUE</span></span>
+<span><span class="co">## 2     Trace 6.834896       1.797719      TRUE</span></span></code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">##            Group 1    Group 2    Group 3      Overall</span></span>
@@ -202,12 +233,28 @@ variable computed, overall, and with respect to the provided groups.</p>
 <h4 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h4>
 <p>If a value of <span class="math inline">\(h\)</span> is not provided
-to the , this function performs the function <code>select_h</code> for
-automatic search of an <em>optimal</em> value of <span class="math inline">\(h\)</span> to use. . The following code shows its
-usage, but it is not executed since we would obtain the same
+to <code><a href="../reference/kb.test.html">kb.test()</a></code>, this function performs the function
+<code>select_h</code> for automatic search of an <em>optimal</em> value
+of <span class="math inline">\(h\)</span> to use. . The following code
+shows its usage, but it is not executed since we would obtain the same
 results.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">k_test_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<p>For more details visit the help documenation of the
+<code><a href="../reference/select_h.html">select_h()</a></code> function.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">select_h</span><span class="op">)</span> </span></code></pre></div>
+<p>In the <code><a href="../reference/kb.test.html">kb.test()</a></code> function, the critical value can be
+computed with the subsampling, bootstrap or permutation algorithm. The
+default method is set to subsampling since it needs less computational
+time. For details on the sampling algorithm see the documentation of the
+<code><a href="../reference/kb.test.html">kb.test()</a></code> function and the following reference.</p>
+<p>The proposed tests exhibit high power against asymmetric alternatives
+that are close to the null hypothesis and with small sample size, as
+well as in the <span class="math inline">\(k \ge 3\)</span> sample
+comparison, for dimension <span class="math inline">\(d&gt;2\)</span>
+and all sample sizes. For more details, see the extensive simulation
+study reported in the following reference.</p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

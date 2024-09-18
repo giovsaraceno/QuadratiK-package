@@ -133,9 +133,9 @@ test_that("Functionality with valid inputs", {
 # Test 7: Testing main functionality: k-sample test
 test_that("Functionality with valid inputs", {
    set.seed(123)
-   x <- matrix(rnorm(100), ncol = 2)
-   y <- rep(c(1,2), each=25)
-   result <- kb.test(x, y, h=0.5, method = "subsampling", b = 0.5)
+   x <- matrix(rnorm(200), ncol = 2)
+   y <- rep(c(1,2), each=50)
+   result <- kb.test(x, y, h=0.5, method = "bootstrap")
    expect_s4_class(result, "kb.test")
    expect_equal(result@method, "Kernel-based quadratic distance k-sample test")
    expect_true(is.numeric(result@Un))
@@ -144,8 +144,8 @@ test_that("Functionality with valid inputs", {
    
    # test show method
    output <- capture.output(show(result))
-   expect_true(any(grepl("U-statistics\t Dn \t\t Trace", output)))
-   expect_true(any(grepl("CV method:  subsampling ", output)))
+   expect_true(any(grepl("U-statistic\t Dn \t\t Trace", output)))
+   expect_true(any(grepl("CV method:  bootstrap ", output)))
    
    # test summary method
    s <- summary(result)

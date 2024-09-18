@@ -15,12 +15,12 @@ test statistics and the k-sample tests.
 \item{\code{method}}{String indicating the kernel-based quadratic distance
 test performed.}
 
-\item{\code{Un}}{The value of the test U-statistics.}
+\item{\code{Un}}{The value of the test U-statistic.}
 
 \item{\code{Vn}}{The value of the test V-statistic.}
 
 \item{\code{H0_Un}}{A logical value indicating whether or not the null hypothesis is
-rejected according to U-statistics.}
+rejected according to U-statistic.}
 
 \item{\code{H0_Vn}}{A logical value indicating whether or not the null hypothesis is
 rejected according to Vn.}

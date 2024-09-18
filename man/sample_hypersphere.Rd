@@ -15,7 +15,7 @@ sample_hypersphere(d, n_points = 1)
 Data matrix with the sampled observations.
 }
 \description{
-Generate random sample from the uniform distribution on the hypersphere
+Generate a random sample from the uniform distribution on the hypersphere.
 }
 \examples{
 x_sp <- sample_hypersphere(3,100)

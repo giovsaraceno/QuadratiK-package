@@ -87,7 +87,7 @@ ParamCentering <- function(kmat_zz, z_mat, H, mu_hat, Sigma_hat) {
 #' 
 #' @return A scalar value representing the test statistic.
 #'
-#' @useDynLib QuadratiK, .registration = TRUE
+#' @useDynLib QuadratiK
 #' @rdname kbNormTest
 #' @keywords internal
 #' 

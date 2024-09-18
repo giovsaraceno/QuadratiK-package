@@ -93,7 +93,7 @@ We consider target alternatives \eqn{F_\delta(\hat{\mathbf{\mu}},
 \eqn{\hat{\mathbf{\lambda}}} indicate the location,
 covariance and skewness parameter estimates from the pooled sample.
 \itemize{
-\item Compute the estimates of mean \eqn{\hat{\mu}}, covariance matrix
+\item Compute the estimates of the mean \eqn{\hat{\mu}}, covariance matrix
 \eqn{\hat{\Sigma}} and skewness \eqn{\hat{\lambda}} from the pooled sample.
 \item Choose the family of alternatives \eqn{F_\delta = F_\delta(\hat{\mu}
 ,\hat{\Sigma}, \hat{\lambda})}. \cr \cr
@@ -148,9 +148,9 @@ Multivariate Two- and k-Sample Kernel-based Quadratic Distance
 Goodness-of-Fit Tests.” \cr
 https://doi.org/10.48550/arXiv.2407.16374
 
-Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan
-(2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK
-package in R and Python. \cr
+Saraceno, G., Markatou, M., Mukhopadhyay, R., Golzy, M. (2024).
+Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package
+in R and Python. \cr
 https://arxiv.org/abs/2402.02290.
 }
 \seealso{

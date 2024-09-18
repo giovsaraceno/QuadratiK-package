@@ -11,7 +11,8 @@ Collection of Methods Constructed using the Kernel-Based Quadratic Distances
 
 \code{QuadratiK} provides the first implementation, in R and Python, of a
 comprehensive set of goodness-of-fit tests and a clustering technique for
-spherical data using kernel-based quadratic distances. It includes:
+\eqn{d}-dimensional spherical data \eqn{d \ge 2} using kernel-based quadratic
+distances. It includes:
 \itemize{
 \item \strong{Goodness-of-Fit Tests}: The software implements one, two, and
 \emph{k}-sample tests for goodness of fit, offering an efficient and
@@ -28,7 +29,7 @@ alternatives, heavy tailed distributions and in higher dimensions.
 \item \strong{Poisson kernel-based distribution (PKBD)}: the package offers
 functions for computing the density value and for generating random samples
 from a PKBD. The Poisson kernel-based densities are based on the normalized
-Poisson kernel and are defined on the $d$-dimensional unit sphere. Given a
+Poisson kernel and are defined on the \eqn{d}-dimensional unit sphere. Given a
 vector \eqn{\mu \in \mathcal{S}^{d-1}}, and a parameter \eqn{\rho} such that
 \eqn{0 < \rho < 1}, the probability density function of a \eqn{d}-variate
 Poisson kernel-based density is defined by: \deqn{f(\mathbf{x}|\rho,
@@ -54,8 +55,8 @@ and usability of the analysis.
 }
 }
 \details{
-The work has been supported by Kaleida Health Foundation, National
-Science Foundation and Department of Biostatistics, University at Buffalo.
+The work has been supported by Kaleida Health Foundation and the
+National Science Foundation.
 }
 \note{
 The \code{QuadratiK} package is also available in Python on PyPI

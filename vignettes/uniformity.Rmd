@@ -14,33 +14,41 @@ vignette: >
 #' 
 #' @srrstats {G1.5} Uniformity test example in the associated paper
 ```
-The quadratic distance between two probability distributions $F$ and $G$ is
-then defined as:
+Let $x_1, x_2, \ldots, x_n \sim F$ be a random sample with empirical distribution
+function $\hat{F}$.
+We test the null hypothesis of uniformity on the $d$-dimensional sphere, i.e., 
+$H_0: F = G$ where $G$ is the uniform distribution on the $d$-dimensional sphere
+$\mathcal{S}^{d-1}$.
 
+We compute the U-statistic estimate of the sample KBQD (Kernel-Based Quadratic Distance)
 $$
-d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+U_{n}=\frac{2}{n(n-1)}\sum_{i=2}^{n}\sum_{j=1}^{i-1}K_{cen}(\mathbf{x}_{i}, \mathbf{x}_{j}),
+$$
+then the first test statistic is given as
+$$T_{n}=\frac{U_{n}}{\sqrt{Var(U_{n})}},$$
+with
+$$
+Var(U_{n})= \frac{2}{n(n-1)}\left[\frac{1+\rho^{2}}{(1-\rho^{2})^{d-1}}-1\right],
 $$
 
-where $G$ is a distribution whose goodness of fit we wish to assess, that
-is the uniform distribution on the sphere $\mathcal{S}^{d-1}$, and 
-$K$ denotes the Poisson kernel defined as:
-
+and the V-statistic estimate of the KBQD  
 $$
-K(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
+V_{n} = \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}K_{cen}(\mathbf{x}_{i}, \mathbf{x}_{j}),
+$$
+where $K_{cen}$ denotes the Poisson kernel $K_\rho$ centered with respect to the uniform distribution on the $d$-dimensional sphere, that is
+$$
+K_{cen}(\mathbf{u}, \mathbf{v}) = K_\rho(\mathbf{u}, \mathbf{v}) -1 
+$$
+and
+$$
+K_\rho(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
 (\mathbf{u}\cdot \mathbf{v})\right)^{d/2}},
 $$
 
-for every $\mathbf{u}, \mathbf{v} \in \mathcal{S}^{d-1} \times 
-\mathcal{S}^{d-1}$.
+for every $\mathbf{u}, \mathbf{v} \in \mathcal{S}^{d-1} \times \mathcal{S}^{d-1}$.
 
-Let $x_1, x_2, \ldots, x_n$ be a random sample with empirical distribution
-function $\hat{F}$.
 
-We test the null hypothesis of uniformity on the 
-$d$-dimensional sphere, i.e., $H_0: F = G$, by considering the U-statistic 
-estimate and the V-statistic estimate of the sample KBQD (Kernel-Based Quadratic Distance).
-
-We generated $n=200$ observations from the uniform distribution on $S^{d-1}$, with $d=3$, and $\rho = 0.7$. 
+We generated $n=200$ observations from the uniform distribution on $S^{d-1}$, with $d=3$. 
 ```{r, message=FALSE}
 library(QuadratiK)
 n <- 200
@@ -58,11 +66,11 @@ res_unif <- pk.test(x=dat_sphere, rho=rho)
 
 show(res_unif)
 ```
-The ``pk.test()`` function returns an object of class ``pk.test``. The ``show`` method displays the computed statistics and the corresponding critical values. 
+The ``pk.test()`` function returns an object of class ``pk.test``. The ``show`` function displays the computed statistics and the corresponding critical values. 
 
 The test correctly does not reject the null hypothesis of uniformity.
 
-The ``summary`` method for the ``pk.test`` output object provides the results of the performed test, and generates a figure showing the qq-plots against the uniform distribution of each variable with a table of standard descriptive statistics. 
+The ``summary`` function for the ``pk.test`` output object provides the results of the performed test, and generates a figure showing the qq-plots against the uniform distribution of each variable with a table of standard descriptive statistics. 
 ```{r fig.width=6, fig.height=8}
 summary_unif <- summary(res_unif)
 ```

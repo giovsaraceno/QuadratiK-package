@@ -23,7 +23,7 @@ rpkb(
 \item{mu}{location vector parameter with length indicating the dimension of
 generated points.}
 
-\item{rho}{is the concentration parameter, with 0 <= rho < 1.}
+\item{rho}{Concentration parameter, with \eqn{0 \le} \code{rho} \eqn{< 1}.}
 
 \item{logdens}{Logical; if 'TRUE', densities are returned in logarithmic
 scale.}
@@ -48,7 +48,7 @@ Golzy and Markatou 2020);
 \item{max.iter}{the maximum number of iterations (for 'rejacg' method).}
 }
 \value{
-\code{dpkb} gives the density value.
+\code{dpkb} gives the density value;
 \code{rpkb} generates random observations from the PKBD.
 }
 \description{
@@ -68,13 +68,13 @@ distribution. Recall that, for \eqn{x = (x_1, \ldots, x_d) \in \mathbb{R}^d},
 2\pi^{d/2} [\Gamma(d/2)]^{-1}} is the surface area of the unit sphere in
 \eqn{\mathbb{R}^d} (see Golzy and Markatou, 2020). When \eqn{\rho \to 0},
 the Poisson kernel-based density tends to the uniform density on the sphere.
-Connection of the PKBDs to other distributions are discussed in detail in
+Connections of the PKBDs to other distributions are discussed in detail in
 Golzy and Markatou (2020). Here we note that when \eqn{d=2}, PKBDs reduce to
 the wrapped Cauchy distribution. Additionally, with precise choice of the
 parameters \eqn{\rho} and \eqn{\mu} the two-dimensional PKBD becomes a
 two-dimensional projected normal distribution. However, the connection with
 the \eqn{d}-dimensional projected normal distributions does not carry beyond
-is \eqn{d=2}.
+\eqn{d=2}.
 Golzy and Markatou (2020) proposed an acceptance-rejection method for
 simulating data from a PKBD using von Mises-Fisher envelops (\code{rejvmf}
 method). Furthermore Sablica, Hornik and Leydold (2023) proposed new ways for

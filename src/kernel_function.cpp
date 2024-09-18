@@ -146,7 +146,7 @@ Eigen::MatrixXd ParamCentering(const Eigen::MatrixXd& kmat_zz, const Eigen::Matr
 //' 
 //' @return A scalar value representing the test statistic.
 //'
-//' @useDynLib QuadratiK, .registration = TRUE
+//' @useDynLib QuadratiK
 //' @rdname kbNormTest
 //' @keywords internal
 //' 

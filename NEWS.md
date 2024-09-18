@@ -1,4 +1,4 @@
-QuadratiK (Next Release) 
+QuadratiK 1.1.2 (Work in Progress) 
 =========================
 
 ### NEW FEATURES
@@ -14,7 +14,9 @@ QuadratiK (Next Release)
   * Solved bugs:
     - scatter-plots related to the clustering algorithm results.
     - computation of evaluation measures (pkdc_validation function) when the 
-      true labels are not provided. 
+      true labels are not provided.
+  * The help documentation for the methods defined for the classes in the package
+    can be accessed directly (addition of roxygen tag @name and @aliases)
 
 
 QuadratiK 1.1.1 (2024-06-05)

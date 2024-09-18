@@ -28,7 +28,8 @@ pkbc(
 }
 \arguments{
 \item{dat}{Data matrix or data.frame of data points on the sphere to be
-clustered. The observations in \code{dat} are normalized to ensure
+clustered. The observations in \code{dat} are normalized by
+dividing with the length of the vector to ensure
 that they lie on the \eqn{d}-dimensional sphere. Note that
 \eqn{d > 1}.}
 
@@ -124,10 +125,10 @@ clustering algorithm.
 }
 \note{
 The clustering algorithm is tailored for data points on the sphere
-\eqn{\mathcal{S}^{d-1}}, but it can be also performed on spherically
+\eqn{\mathcal{S}^{d-1}}, but it can also be performed on spherically
 transformed observations, i.e. data points on the Euclidean space
 \eqn{\mathbb{R}^d} that are normalized such that they lie on the
-corresponding $d$-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
+corresponding \eqn{d}-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
 }
 \examples{
 #We generate three samples of 100 observations from 3-dimensional

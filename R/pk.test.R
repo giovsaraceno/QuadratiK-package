@@ -7,26 +7,36 @@
 #' with concentration parameter \code{rho}. 
 #' 
 #' @details
-#' The quadratic distance between two probability distributions \eqn{F} and
-#' \eqn{G} is
-#' then defined as \deqn{d_{K}(F,G)=\int\int K(x,y)d(F-G)(x)d(F-G)(y),}
-#' where \eqn{G} is a distribution whose goodness of fit we wish to assess, that
-#' is the uniform distribution on the sphere \eqn{\mathcal{S}^{d-1}}, and 
-#' \eqn{K} denotes the Poisson kernel defined as 
-#' \deqn{ K(\mathbf{u}, \mathbf{v})= \frac{1-\rho^{2}}{\left ( 1+\rho^{2}-2\rho
-#' (\mathbf{u}\cdot \mathbf{v})\right )^{d/2}},}
-#' for every \eqn{\mathbf{u}, \mathbf{v} \in \mathcal{S}^{d-1} \times 
-#' \mathcal{S}^{d-1}}.
 #' Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical distribution
 #' function \eqn{\hat F}. 
 #' We test the null hypothesis of uniformity on the 
-#' \eqn{d}-dimensional sphere, i.e. \eqn{H_0:F=G}, we consider the U-statistic 
-#' estimate and the V-statistic estimate of the sample KBQD.
+#' \eqn{d}-dimensional sphere, i.e. \eqn{H_0:F=G}, where \eqn{G} is the uniform
+#' distribution on the \eqn{d}-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
+#' We compute the U-statistic estimate of the sample KBQD (Kernel-Based 
+#' Quadratic Distance)
+#' \deqn{U_{n}=\frac{1}{n(n-1)}\sum_{i=2}^{n}\sum_{j=1}^{i-1}K_{cen}
+#' (\mathbf{x}_{i}, \mathbf{x}_{j}),}
+#' then the first test statistic is given as
+#' \deqn{T_{n}=\frac{U_{n}}{\sqrt{Var(U_{n})}},}
+#' with
+#' \deqn{Var(U_{n})= \frac{2}{n(n-1)}
+#' \left[\frac{1+\rho^{2}}{(1-\rho^{2})^{d-1}}-1\right],}
+#' and the V-statistic estimate of the KBQD  
+#' \deqn{V_{n} = \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}K_{cen}
+#' (\mathbf{x}_{i}, \mathbf{x}_{j}),}
+#' where \eqn{K_{cen}} denotes the Poisson kernel \eqn{K_\rho} centered with
+#' respect to the uniform distribution on the \eqn{d}-dimensional sphere, that 
+#' is
+#' \deqn{K_{cen}(\mathbf{u}, \mathbf{v}) = K_\rho(\mathbf{u}, \mathbf{v}) -1} 
+#' and
+#' \deqn{K_\rho(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-
+#' 2\rho (\mathbf{u}\cdot \mathbf{v})\right)^{d/2}},}
+#' for every \eqn{\mathbf{u}, \mathbf{v} \in \mathcal{S}^{d-1} 
+#' \times \mathcal{S}^{d-1}}.
 #' 
 #' The asymptotic distribution of the V-statistic is an infinite combination
-#' of independent chi-squared random variables with one degree of freedom. 
-#' The cutoff value is obtained using the 
-#' Satterthwaite approximation 
+#' of weighted independent chi-squared random variables with one degree of 
+#' freedom. The cutoff value is obtained using the Satterthwaite approximation 
 #' \eqn{c \cdot \chi_{DOF}^2}, where \deqn{c=\frac{(1+\rho^{2})-
 #' (1-\rho^{2})^{d-1}}{(1+\rho)^{d}-(1-\rho^{2})^{d-1}}} and \deqn{DOF(K_{cen}
 #' )=\left(\frac{1+\rho}{1-\rho} \right)^{d-1}\left\{ 
@@ -221,6 +231,9 @@ setMethod("show", "pk.test",
 #' @importFrom stats sd
 #' @importFrom stats runif
 #' 
+#' @name summary.pk.test
+#' @rdname summary.pk.test
+#' @aliases summary,pk.test-method
 #' @export
 #'
 setMethod("summary", "pk.test", function(object) {

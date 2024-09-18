@@ -37,9 +37,9 @@ wire_norm <- wire/sqrt(rowSums(wire^2))
 set.seed(2468)
 res_pk <- pkbc(as.matrix(wire_norm),3:5)
 ```
-The `pkbc` function create an object of class `pkbc` containing the clustering results for each value of number of clusters considered. 
+The `pkbc` function creates an object of class `pkbc` containing the clustering results for each value of number of clusters considered. 
 
-To guide the choice of the number of clusters, the function `pkbc_validation` provides cluster validation measures and graphical tools. Specifically, it returns an object with InGroup Proportion (IGP), and `metrics` a table of computed evaluation measures. This table includes the Average Silhouette Width (ASW) and, if the true labels are provided, the measures of adjusted rand index (ARI), Macro-Precision and Macro-Recall.
+To guide the choice of the number of clusters, the function `pkbc_validation` provides cluster validation measures and graphical tools. Specifically, it returns an object with InGroup Proportion (IGP), and `metrics`, a table of computed evaluation measures. This table includes the Average Silhouette Width (ASW) and, if the true labels are provided, the measures of adjusted rand index (ARI), Macro-Precision and Macro-Recall.
 
 ```{r}
 set.seed(2468)
@@ -55,15 +55,15 @@ For a brief description of the reported evaluation measures, with the correspond
 help(pkbc_validation)
 ```
 
-The `plot` method of the `pkbc` class can be used to display the scatter plot of data points and the Elbow plot from the computed within-cluster sum of squares values. For the scatter plot, for $d=2$ and $d=3$, observations are displayed on the unit circle and unit sphere, respectively. If $d>3$, the spherical PCA is applied on the data set, and the first 3 principal components are used for visualizing data points on the sphere. In the generated figure, data points are colored by the assigned membership.
+The `plot` method of the `pkbc` class can be used to display the scatter plot of data points and the Elbow plot from the computed within-cluster sum of squares values. For the scatter plot, for $d=2$ and $d=3$, observations are displayed on the unit circle and unit sphere, respectively. If $d>3$, the spherical PCA is applied on the data set, and the first 3 principal components are used for visualizing data points on the sphere. In the generated scatter plot for the specified number of clusters, data points are colored by the assigned membership.
 
 ```{r , fig.show = "hold", fig.width=6, fig.height=6}
-plot(res_pk)
+plot(res_pk, k = 4)
 ```
 
 The Elbow plots and the reported metrics suggest $K=4$ as number of clusters. This is in accordance with the known ground truth.
 
-We can also request the scatter plot only for a specified value of number of clusters. Additionally, if true labels are available and are provided to the ``plot`` method, the scatter plot will display the data points colored with respect to the true labels and assigned memberships in two adjacent plots.   
+Additionally, if true labels are available and are provided to the ``plot`` method, the scatter plot will display the data points colored with respect to the true labels and assigned memberships in two adjacent plots.   
 
 ```{r, fig.show = "hold", fig.width=8, fig.height=5}
 plot(res_pk, k=4, true_label = labels)
@@ -80,6 +80,10 @@ summary_clust <- stats_clusters(res_pk,4)
 ```{r}
 summary_clust
 ```
+
+## Note
+
+If the number of cluster *k* is not provided to the `plot` function, one scatter plot is displeyed for each possible number of clusters available in the object of class `pkbc`.
 
 ## References
 

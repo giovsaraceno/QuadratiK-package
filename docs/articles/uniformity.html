@@ -88,29 +88,37 @@
 <div class="section level3">
 <h3 id="uniformity-test-on-the-sphere">Uniformity test on the Sphere<a class="anchor" aria-label="anchor" href="#uniformity-test-on-the-sphere"></a>
 </h3>
-<p>The quadratic distance between two probability distributions <span class="math inline">\(F\)</span> and <span class="math inline">\(G\)</span> is then defined as:</p>
-<p><span class="math display">\[
-d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+<p>Let <span class="math inline">\(x_1, x_2, \ldots, x_n \sim F\)</span>
+be a random sample with empirical distribution function <span class="math inline">\(\hat{F}\)</span>. We test the null hypothesis of
+uniformity on the <span class="math inline">\(d\)</span>-dimensional
+sphere, i.e., <span class="math inline">\(H_0: F = G\)</span> where
+<span class="math inline">\(G\)</span> is the uniform distribution on
+the <span class="math inline">\(d\)</span>-dimensional sphere <span class="math inline">\(\mathcal{S}^{d-1}\)</span>.</p>
+<p>We compute the U-statistic estimate of the sample KBQD (Kernel-Based
+Quadratic Distance) <span class="math display">\[
+U_{n}=\frac{2}{n(n-1)}\sum_{i=2}^{n}\sum_{j=1}^{i-1}K_{cen}(\mathbf{x}_{i},
+\mathbf{x}_{j}),
+\]</span> then the first test statistic is given as <span class="math display">\[T_{n}=\frac{U_{n}}{\sqrt{Var(U_{n})}},\]</span>
+with <span class="math display">\[
+Var(U_{n})=
+\frac{2}{n(n-1)}\left[\frac{1+\rho^{2}}{(1-\rho^{2})^{d-1}}-1\right],
 \]</span></p>
-<p>where <span class="math inline">\(G\)</span> is a distribution whose
-goodness of fit we wish to assess, that is the uniform distribution on
-the sphere <span class="math inline">\(\mathcal{S}^{d-1}\)</span>, and
-<span class="math inline">\(K\)</span> denotes the Poisson kernel
-defined as:</p>
-<p><span class="math display">\[
-K(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
+<p>and the V-statistic estimate of the KBQD<br><span class="math display">\[
+V_{n} = \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}K_{cen}(\mathbf{x}_{i},
+\mathbf{x}_{j}),
+\]</span> where <span class="math inline">\(K_{cen}\)</span> denotes the
+Poisson kernel <span class="math inline">\(K_\rho\)</span> centered with
+respect to the uniform distribution on the <span class="math inline">\(d\)</span>-dimensional sphere, that is <span class="math display">\[
+K_{cen}(\mathbf{u}, \mathbf{v}) = K_\rho(\mathbf{u}, \mathbf{v}) -1
+\]</span> and <span class="math display">\[
+K_\rho(\mathbf{u}, \mathbf{v}) =
+\frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
 (\mathbf{u}\cdot \mathbf{v})\right)^{d/2}},
 \]</span></p>
 <p>for every <span class="math inline">\(\mathbf{u}, \mathbf{v} \in
 \mathcal{S}^{d-1} \times \mathcal{S}^{d-1}\)</span>.</p>
-<p>Let <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> be a
-random sample with empirical distribution function <span class="math inline">\(\hat{F}\)</span>.</p>
-<p>We test the null hypothesis of uniformity on the <span class="math inline">\(d\)</span>-dimensional sphere, i.e., <span class="math inline">\(H_0: F = G\)</span>, by considering the
-U-statistic estimate and the V-statistic estimate of the sample KBQD
-(Kernel-Based Quadratic Distance).</p>
 <p>We generated <span class="math inline">\(n=200\)</span> observations
-from the uniform distribution on <span class="math inline">\(S^{d-1}\)</span>, with <span class="math inline">\(d=3\)</span>, and <span class="math inline">\(\rho
-= 0.7\)</span>.</p>
+from the uniform distribution on <span class="math inline">\(S^{d-1}\)</span>, with <span class="math inline">\(d=3\)</span>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
@@ -144,11 +152,11 @@ value of the concentration parameter <code>rho</code>.</p>
 <span><span class="co">## Statistic Vn:  14.89598 </span></span>
 <span><span class="co">## Critical value:  23.22949</span></span></code></pre>
 <p>The <code><a href="../reference/pk.test.html">pk.test()</a></code> function returns an object of class
-<code>pk.test</code>. The <code>show</code> method displays the computed
-statistics and the corresponding critical values.</p>
+<code>pk.test</code>. The <code>show</code> function displays the
+computed statistics and the corresponding critical values.</p>
 <p>The test correctly does not reject the null hypothesis of
 uniformity.</p>
-<p>The <code>summary</code> method for the <code>pk.test</code> output
+<p>The <code>summary</code> function for the <code>pk.test</code> output
 object provides the results of the performed test, and generates a
 figure showing the qq-plots against the uniform distribution of each
 variable with a table of standard descriptive statistics.</p>

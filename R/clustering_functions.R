@@ -21,7 +21,8 @@
 #' (3) the percentage of noise in the data increases.
 #' 
 #' @param dat Data matrix or data.frame of data points on the sphere to be 
-#'            clustered. The observations in \code{dat} are normalized to ensure
+#'            clustered. The observations in \code{dat} are normalized by 
+#'            dividing with the length of the vector to ensure
 #'            that they lie on the \eqn{d}-dimensional sphere. Note that 
 #'            \eqn{d > 1}.
 #' @param nClust Number of clusters. It can be a single value or a numeric 
@@ -64,10 +65,10 @@
 #'          
 #' @note
 #' The clustering algorithm is tailored for data points on the sphere
-#' \eqn{\mathcal{S}^{d-1}}, but it can be also performed on spherically
+#' \eqn{\mathcal{S}^{d-1}}, but it can also be performed on spherically
 #' transformed observations, i.e. data points on the Euclidean space 
 #' \eqn{\mathbb{R}^d} that are normalized such that they lie on the 
-#' corresponding $d$-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
+#' corresponding \eqn{d}-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
 #'
 #' @return An S4 object of class \code{pkbc} containing the results of the 
 #' clustering procedure based on Poisson kernel-based distributions. The object 
@@ -477,7 +478,9 @@ setMethod("show", "pkbc", function(object) {
 #' @srrstats {G1.4} roxigen2 is used
 #' @srrstats {UL4.4} summary method for pkbc object
 #' 
+#' @name summary.pkbc
 #' @rdname summary.pkbc
+#' @aliases summary,pkbc-method
 #' @export
 setMethod("summary", "pkbc", function(object) {
    cat("Poisson Kernel-Based Clustering on the Sphere (pkbc) Results\n")
@@ -565,7 +568,9 @@ setGeneric("stats_clusters",function(object,...){
 #' @importFrom stats median
 #' @importFrom stats IQR 
 #' 
-#' @rdname stats_clusters                  
+#' @name stats_clusters
+#' @rdname stats_clusters 
+#' @aliases stats_clusters,pkbc-method                 
 #' @export
 setMethod("stats_clusters", "pkbc", function(object, k){
    
@@ -599,7 +604,7 @@ setMethod("stats_clusters", "pkbc", function(object, k){
    
    return(metrics)
 })
-#' @rdname plot.pkbc
+#' 
 #' 
 #' @title Plotting method for Poisson kernel-based clustering
 #' 
@@ -607,6 +612,7 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' Plots for a pkbc object.
 #'  
 #' @param x Object of class \code{pkbc}
+#' @param ... Additional arguments that can be passed to the plot function
 #' @param k number of considered clusters. If it is not provided the scatter 
 #'          plot is displayed for each value of number of clusters present in 
 #'          the \code{x} object 
@@ -627,29 +633,37 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #' - elbow plot: the within cluster sum of squares (wcss) is computed using the 
 #' Euclidean distance (left) and the cosine similarity (right). 
 #' 
+#' @note
+#' The elbow plot is commonly used as a graphical method for choosing the
+#' *approriate* number of clusters. Specifically, plotting the wcss versus the
+#' number of clusters, the suggested number of clusters correspond to the point
+#' in which the plotted line has the greatest change in slope, showing 
+#' an elbow.  
+#' 
 #' @seealso [pkbc()] for the clustering algorithm \cr
 #'          \linkS4class{pkbc} for the class object definition.
 #' 
 #' @examples
 #' dat<-matrix(rnorm(300),ncol=3)
 #' pkbc_res<- pkbc(dat, 3)
-#' stats_clusters(pkbc_res, 3)
+#' plot(pkbc_res, 3)
 #' 
 #' @references
 #' Locantore, N., Marron, J.S., Simpson, D.G. et al. (1999) "Robust principal 
 #' component analysis for functional data." Test 8, 1–73. 
 #' https://doi.org/10.1007/BF02595862
 #' 
-#' @return 
-#' - scatterplot of data points colored by final membership
-#' - elbow plot
 #' 
 #' @srrstats {UL6.1} this function includes a plot method
 #' @srrstats {UL6.0,UL6.2} plot method for pkbc object
 #' 
+#' @name plot.pkbc
+#' @rdname plot.pkbc
+#' @aliases plot,pkbc,ANY-method
+#' 
 #' @export
-setMethod("plot", "pkbc", 
-          function(x, k = NULL, true_label=NULL, pca_res=FALSE) {
+setMethod("plot", c(x = "pkbc"), 
+          function(x, k = NULL, true_label=NULL, pca_res=FALSE, ...) {
              
              if(is.null(k)){
                 for (k in x@input$nClust) {
@@ -854,7 +868,9 @@ elbowMethod <- function(object){
    print(fig)
 
 }
-#' Cluster spherical observations by mixture of Poisson kernel-based densities
+#' @title
+#' Cluster spherical observations using a mixture of Poisson kernel-based 
+#' densities
 #' 
 #' @description
 #' Obtain predictions of membership for spherical observations based on a 
@@ -890,8 +906,9 @@ elbowMethod <- function(object){
 #' @srrstats {G1.a} roxygen2 is used
 #' @srrstats {UL3.3} prediction function for pkbc object
 #' 
+#' @name predict.pkbc
 #' @rdname predict.pkbc
-#' 
+#' @aliases predict,pkbc-method
 #' @export
 setMethod("predict", signature(object="pkbc"), 
           function(object, k, newdata=NULL){

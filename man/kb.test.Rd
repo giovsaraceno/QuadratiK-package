@@ -94,7 +94,7 @@ contains the following slots:
 \item \code{method}: Description of the kernel-based quadratic
 distance test performed.
 \item \code{x} Data list of samples X (and Y).
-\item \code{Un} The value of the U-statistics.
+\item \code{Un} The value of the U-statistic.
 \item \code{H0_Un} A logical value indicating whether or not the null
 hypothesis is rejected according to Un.
 \item \code{CV_Un} The critical value computed for the test Un.
@@ -127,7 +127,7 @@ k-sample tests.
 
 The quadratic distance between two probability distributions \eqn{F} and
 \eqn{G} is
-defined as \deqn{d_{K}(F,G)=\int\int K(x,y)d(F-G)(x)d(F-G)(y),}
+defined as \deqn{d_{K}(F,G)=\iint K(x,y)d(F-G)(x)d(F-G)(y),}
 where \eqn{G} is a distribution whose goodness of fit we wish to assess and
 \eqn{K} denotes the Normal kernel defined as
 \deqn{ K_{{h}}(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2} 
@@ -140,35 +140,93 @@ tuning parameter \eqn{h}. \cr
 \itemize{
 \item \strong{Test for Normality}: \cr
 Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical
-distribution function \eqn{\hat F}. To test the null hypothesis of
-normality, i.e. \eqn{H_0:F=\mathcal{N}_d(\mu, \Sigma)}, we consider the
-U-statistic estimate and the V-statistic estimate of the sample KBQD.
+distribution function \eqn{\hat F}. We test the null hypothesis of
+normality, i.e. \eqn{H_0:F=G=\mathcal{N}_d(\mu, \Sigma)}.
 
-\item \strong{Two-sample test}: \cr
-Let \eqn{x_1, x_2, ..., x_{n_1} \sim F} and
-\eqn{y_1, y_2, ..., y_{n_2} \sim G} be
-random samples from the distributions \eqn{F} and \eqn{G}, respectively.
-We test the null hypothesis that the two samples are generated from
-the same distribution, that is \eqn{H_0: F=G} vs \eqn{H_1:F\not=G}.
+We consider the U-statistic estimate of the sample KBQD
+\deqn{U_{n}=\frac{1}{n(n-1)}\sum_{i=2}^{n}\sum_{j=1}^{i-1}
+   K_{cen}(\mathbf{x}_{i}, \mathbf{x}_{j}),}
+then the first test statistics is
+\deqn{T_{n}=\frac{U_{n}}{\sqrt{Var(U_{n})}},}
+with \eqn{Var(U_n)} computed exactly following Lindsay et al.(2014),
+and the V-statistic estimate \deqn{V_{n} = \frac{1}{n}\sum_{i=1}^{n}
+   \sum_{j=1}^{n}K_{cen}(\mathbf{x}_{i}, \mathbf{x}_{j}),}
+where \eqn{K_{cen}} denotes the Normal kernel \eqn{K_h} with parametric
+centering with respect to the considered normal distribution
+\eqn{G = \mathcal{N}_d(\mu, \Sigma)}.
+
+The asymptotic distribution of the V-statistic is an infinite combination
+of weighted independent chi-squared random variables with one degree of
+freedom. The cutoff value is obtained using the Satterthwaite
+approximation \eqn{c \cdot \chi_{DOF}^2}, where \eqn{c} and \eqn{DOF}
+are computed exactly following the formulas in Lindsay et al.(2014).
+
+For the \eqn{U}-statistic the cutoff is determined empirically:
+\itemize{
+\item Generate data from the considered normal distribution ;
+\item Compute the test statistics for \code{B} Monte Carlo(MC) replications;
+\item Compute the 95th quantile of the empirical distribution of the test
+statistic.
+}
 
 \item \strong{k-sample test}: \cr
 Consider \eqn{k} random samples of i.i.d. observations
 \eqn{\mathbf{x}^{(i)}_1,
    \mathbf{x}^{(i)}_{2},\ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i},
 \eqn{i = 1, \ldots, k}.
-We test if the samples are generated from the same distribution, that is
-\eqn{H_0: F_1 = F_2 = \ldots = F_k} versus \eqn{H_1: F_i \not = F_j}, for
-some \eqn{1 \le i \not = j \le k}
+We test if the samples are generated from the same \emph{unknown} distribution,
+that is \eqn{H_0: F_1 = F_2 = \ldots = F_k} versus
+\eqn{H_1: F_i \not = F_j}, for some \eqn{1 \le i \not = j \le k}. \cr
+We construct a matrix distance \eqn{\hat{\mathbf{D}}}, with
+off-diagonal elements
+\deqn{\hat{D}_{ij} = \frac{1}{n_i n_j} \sum_{\ell=1}^{n_i}
+   \sum_{r=1}^{n_j}K_{\bar{F}}(\mathbf{x}^{(i)}_\ell,\mathbf{x}^{(j)}_r), 
+   \qquad \mbox{ for }i \not= j}
+and in the diagonal
+\deqn{\hat{D}_{ii} = \frac{1}{n_i (n_i -1)} \sum_{\ell=1}^{n_i}
+   \sum_{r\not= \ell}^{n_i} K_{\bar{F}}(\mathbf{x}^{(i)}_\ell,
+   \mathbf{x}^{(i)}_r), \qquad \mbox{ for }i = j,}
+where \eqn{K_{\bar{F}}} denotes the Normal kernel \eqn{K_h}
+centered non-parametrically with respect to
+\deqn{\bar{F} = \frac{n_1 \hat{F}_1 + \ldots + n_k \hat{F}_k}{n}, 
+   \quad \mbox{ with } n=\sum_{i=1}^k n_i.}
 
+We compute the trace statistic
+\deqn{\mathrm{trace}(\hat{\mathbf{D}}_n) =  \sum_{i=1}^{k}\hat{D}_{ii}}
+and \eqn{D_n}, derived considering all the possible pairwise comparisons
+in the \emph{k}-sample null hypothesis, given as
+\deqn{D_n = (k-1) \mathrm{trace}(\hat{\mathbf{D}}_n) 
+   - 2 \sum_{i=1}^{k}\sum_{j> i}^{k}\hat{D}_{ij}.}
+
+We compute the empirical critical value by employing numerical techniques
+such as the bootstrap, permutation and subsampling algorithms:
+\itemize{
+\item Generate k-tuples, of total size \eqn{n_B}, from the pooled sample
+following one of the sampling methods;
+\item Compute the k-sample test statistic;
+\item Repeat \code{B} times;
+\item Select the \eqn{95^{th}} quantile of the obtained values.
 }
 
+\item \strong{Two-sample test}: \cr
+Let \eqn{x_1, x_2, ..., x_{n_1} \sim F} and
+\eqn{y_1, y_2, ..., y_{n_2} \sim G} be
+random samples from the distributions \eqn{F} and \eqn{G}, respectively.
+We test the null hypothesis that the two samples are generated from
+the same \emph{unknown} distribution, that is \eqn{H_0: F=G} vs
+\eqn{H_1:F\not=G}. The test statistics coincide with the \eqn{k}-sample
+test statistics when \eqn{k=2}.
+}
+\subsection{Kernel centering}{
+
 The arguments \code{mu_hat} and \code{Sigma_hat} indicate the normal model
-considered for the normality test, that is\eqn{H_0: F = N(}\code{mu_hat},
+considered for the normality test, that is \eqn{H_0: F = N(}\code{mu_hat},
 \code{Sigma_hat}).
 For the two-sample and \eqn{k}-sample tests, \code{mu_hat} and
 \code{Sigma_hat} can
 be used for the parametric centering of the kernel, in the case we want to
-specify the reference distribution.
+specify the reference distribution, with \code{centeringType = "Param"}.
+This is the default method when the test for normality is performed.
 The normal kernel centered with respect to
 \eqn{G \sim N_d(\mathbf{\mu}, \mathbf{V})} can be computed as
 \deqn{K_{cen(G)}(\mathbf{s}, \mathbf{t}) = 
@@ -177,7 +235,9 @@ The normal kernel centered with respect to
 -  K_{\mathbf{\Sigma_h} + \mathbf{V}}(\mathbf{s}, \mathbf{\mu}) +
  K_{\mathbf{\Sigma_h} + 2\mathbf{V}}(\mathbf{\mu}, \mathbf{\mu}).}
 We consider the non-parametric centering of the kernel with respect to
-\eqn{\bar{F}=(n_1 F_1 + \ldots n_k F_k)/n} where \eqn{n=\sum_{i=1}^k n_i}.
+\eqn{\bar{F}=(n_1 F_1 + \ldots n_k F_k)/n} where \eqn{n=\sum_{i=1}^k n_i},
+with \code{centeringType = "Nonparam"}, for the two- and \eqn{k}-sample
+tests.
 Let \eqn{\mathbf{z}_1,\ldots, \mathbf{z}_n} denote the pooled sample. For any
 \eqn{s,t \in \{\mathbf{z}_1,\ldots, \mathbf{z}_n\}}, it is given by
 \deqn{K_{cen(\bar{F})}(\mathbf{s},\mathbf{t}) =    K(\mathbf{s},\mathbf{t}) -
@@ -185,21 +245,9 @@ Let \eqn{\mathbf{z}_1,\ldots, \mathbf{z}_n} denote the pooled sample. For any
  \frac{1}{n}\sum_{i=1}^{n} K(\mathbf{z}_i,\mathbf{t}) + 
  \frac{1}{n(n-1)}\sum_{i=1}^{n} \sum_{j \not=i}^{n} 
  K(\mathbf{z}_i,\mathbf{z}_j).}
-
-We compute the empirical critical value by employing numerical techniques
-such as the bootstrap, permutation and subsampling algorithms.
-\itemize{
-\item Generate k-tuples, of total size \eqn{n_B}, from the pooled sample
-following one of sampling method;
-\item Compute the k-sample test statistic;
-\item Repeat \code{B} times;
-\item Select the \eqn{95^{th}} quantile of the obtained values.
 }
 }
 \note{
-The test statistics for the two-sample test coincide with the k-sample test
-statistics for \eqn{k=2}.
-
 For the two- and \eqn{k}-sample tests, the slots \code{Vn}, \code{H0_Vn} and
 \code{CV_Vn} are empty, while the computed statistics are both reported in
 slots \code{Un}, \code{H0_Un} and \code{CV_Un}.

@@ -8,10 +8,10 @@
 #'
 #' @slot method String indicating the kernel-based quadratic distance 
 #'              test performed.
-#' @slot Un The value of the test U-statistics.
+#' @slot Un The value of the test U-statistic.
 #' @slot Vn The value of the test V-statistic.
 #' @slot H0_Un A logical value indicating whether or not the null hypothesis is 
-#'          rejected according to U-statistics.
+#'          rejected according to U-statistic.
 #' @slot H0_Vn A logical value indicating whether or not the null hypothesis is 
 #'          rejected according to Vn.
 #' @slot data List of samples X (and Y).

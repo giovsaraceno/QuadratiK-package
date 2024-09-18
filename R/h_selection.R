@@ -44,6 +44,7 @@
 #'                       values of \code{delta} and \code{h_values};
 #'    \item \code{power.plot} power plots (if \code{power.plot} is \code{TRUE}).
 #' }
+#' 
 #' @details
 #' The function performs the selection of the optimal value for the tuning 
 #' parameter \eqn{h} of the normal kernel function, for normality test, the 
@@ -56,7 +57,7 @@
 #' \eqn{\hat{\mathbf{\mu}}, \hat{\mathbf{\Sigma}}} and 
 #' \eqn{\hat{\mathbf{\lambda}}} indicate the location,
 #' covariance and skewness parameter estimates from the pooled sample. 
-#' - Compute the estimates of mean \eqn{\hat{\mu}}, covariance matrix
+#' - Compute the estimates of the mean \eqn{\hat{\mu}}, covariance matrix
 #'  \eqn{\hat{\Sigma}} and skewness \eqn{\hat{\lambda}} from the pooled sample.  
 #' - Choose the family of alternatives \eqn{F_\delta = F_\delta(\hat{\mu}
 #' ,\hat{\Sigma}, \hat{\lambda})}. \cr \cr
@@ -99,9 +100,9 @@
 #' Goodness-of-Fit Tests.” \cr 
 #' https://doi.org/10.48550/arXiv.2407.16374
 #' 
-#' Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan 
-#' (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK 
-#' package in R and Python. \cr
+#' Saraceno, G., Markatou, M., Mukhopadhyay, R., Golzy, M. (2024). 
+#' Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package 
+#' in R and Python. \cr
 #' https://arxiv.org/abs/2402.02290.
 #' 
 #' @seealso The function \code{select_h} is used in the [kb.test()] function.
@@ -121,14 +122,13 @@
 #' @importFrom parallel makeCluster
 #' @importFrom parallel detectCores
 #' @importFrom parallel stopCluster
-#' @importFrom foreach foreach
-#' @importFrom foreach %dopar%
+#' @import foreach 
 #' @importFrom stats cov
 #' @importFrom stats aggregate
 #' @importFrom stats power
-#' @import rlecuyer
 #' @import ggplot2
 #' @import RcppEigen
+#' @import rlecuyer
 #' @importFrom Rcpp sourceCpp
 #'
 #' @useDynLib QuadratiK, .registration = TRUE
@@ -330,8 +330,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       
       xnew <- sn::rmsn(n, xi = mean_tilde, Omega = S_tilde, alpha = skew_tilde)
       
-      #STATISTIC <- kbNormTest(xnew, h, mean_dat, S_dat)
-      STATISTIC <- 2
+      STATISTIC <- kbNormTest(xnew, h, mean_dat, S_dat)
       CV <- normal_CV(d,n,h,mean_dat,S_dat,B,Quantile)
       
       return(c(STATISTIC[1] < CV))
@@ -366,7 +365,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    i <- NULL
    for(k in k_values){
    
-      results <- foreach(i = seq_along(params), 
+      results <- foreach::foreach(i = seq_along(params), 
                          .combine = rbind,
                          .packages=c("sn", "moments", "stats",
                                      "rlecuyer")) %dopar% {
@@ -391,7 +390,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       }
       
       results$power <- 1 - results$power
-      results_mean <- aggregate(power ~ h + delta , data = results, FUN = mean)
+      results_mean <- aggregate(power ~ h + delta , data = results, FUN = mean) 
       
       res <- rbind(res,results_mean)
       
@@ -413,6 +412,7 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
 
    parallel::stopCluster(cl)
    
+   
    pl <- ggplot(res, aes(x = h, y = power)) +
       geom_line(aes(col = as.factor(delta)), linewidth = 0.9, alpha=.9) +
       labs(y="Power")+
@@ -428,11 +428,12 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
             axis.text.y = element_text(size = 11),
             strip.text = element_text(size = 14)) +
       scale_color_brewer(palette='Set1')
-
+   
    results <- list(h_sel = min_h, power = res, power.plot = pl)
    
    if(power.plot){
       print(pl)
    }
    return(results)
+   
 }

@@ -73,19 +73,38 @@
 <div class="section level3">
 <h3 id="non-parametric-two-sample-test">Non-parametric two-sample test<a class="anchor" aria-label="anchor" href="#non-parametric-two-sample-test"></a>
 </h3>
-<p>The quadratic distance between two probability distributions
+<p>Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi><msub><mi>n</mi><mn>1</mn></msub></msub><mo>∼</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">x_1, x_2, \ldots, x_{n_1} \sim F</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><msub><mi>n</mi><mn>2</mn></msub></msub><mo>∼</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">y_1, y_2, \ldots, y_{n_2} \sim G</annotation></semantics></math>
+be random samples from the distributions
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-is defined as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>K</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>,</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>∫</mo><mo>∫</mo><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>−</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>−</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
-d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>,
+respectively. We test the null hypothesis that the two samples are
+generated from the same <em>unknown</em> distribution
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>F</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{F}</annotation></semantics></math>,
+that is:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>F</mi><mo>=</mo><mi>G</mi><mo>=</mo><mover><mi>F</mi><mo accent="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">
+H_0: F = G = \bar{F}
 </annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-is a distribution whose goodness of fit we wish to assess, and
+<p>versus the alternative hypothesis that the two distributions are
+different, that is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>:</mo><mi>F</mi><mo>≠</mo><mi>G</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
+H_1: F \not = G.
+</annotation></semantics></math> We compute the kernel-based quadratic
+distance (KBQD) tests</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">e</mi></mrow><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><msub><mi>n</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mn>1</mn></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mn>1</mn></msub></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>≠</mo><mi>i</mi></mrow><msub><mi>n</mi><mn>1</mn></msub></munderover><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐱</mi><mi>i</mi></msub><mo>,</mo><msub><mi>𝐱</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><msub><mi>n</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mn>2</mn></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mn>2</mn></msub></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>≠</mo><mi>i</mi></mrow><msub><mi>n</mi><mn>2</mn></msub></munderover><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐲</mi><mi>i</mi></msub><mo>,</mo><msub><mi>𝐲</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+    \mathrm{trace}_n =  \frac{1}{n_1(n_1-1)}\sum_{i=1}^{n_1} \sum_{j \not=i}^{n_1} K_{\bar{F}}(\mathbf{x}_i,\mathbf{x}_j) + \frac{1}{n_2(n_2-1)}\sum_{i=1}^{n_2} \sum_{j \not=i}^{n_2} K_{\bar{F}}(\mathbf{y}_i,\mathbf{y}_j),
+</annotation></semantics></math> and
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><msub><mi>n</mi><mn>1</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mn>1</mn></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mn>1</mn></msub></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>≠</mo><mi>i</mi></mrow><msub><mi>n</mi><mn>2</mn></msub></munderover><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐱</mi><mi>i</mi></msub><mo>,</mo><msub><mi>𝐱</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mfrac><mn>2</mn><mrow><msub><mi>n</mi><mn>1</mn></msub><msub><mi>n</mi><mn>2</mn></msub></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mn>1</mn></msub></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mn>2</mn></msub></munderover><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐱</mi><mi>i</mi></msub><mo>,</mo><msub><mi>𝐲</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mrow><msub><mi>n</mi><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mn>2</mn></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mn>2</mn></msub></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>≠</mo><mi>i</mi></mrow><msub><mi>n</mi><mn>2</mn></msub></munderover><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐲</mi><mi>i</mi></msub><mo>,</mo><msub><mi>𝐲</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
+    D_{n} =  \frac{1}{n_1(n_1-1)}\sum_{i=1}^{n_1} \sum_{j \not=i}^{n_2} K_{\bar{F}}(\mathbf{x}_i,\mathbf{x}_j) - \frac{2}{n_1 n_2}\sum_{i=1}^{n_1} \sum_{j =1}^{n_2} K_{\bar{F}}(\mathbf{x}_i,\mathbf{y}_j) 
+     + \frac{1}{n_2(n_2-1)}\sum_{i=1}^{n_2} \sum_{j \not=i}^{n_2} K_{\bar{F}}(\mathbf{y}_i,\mathbf{y}_j).  \nonumber
+</annotation></semantics></math> where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><annotation encoding="application/x-tex">K_{\bar{F}}</annotation></semantics></math>
+denotes the Normal kernel
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
-denotes the Normal kernel defined as:</p>
+defined as</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐬</mi><mo>,</mo><mi>𝐭</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>π</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mi>d</mi><mi>/</mi><mn>2</mn></mrow></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mo>det</mo><msub><mi>𝚺</mi><mi>h</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></msup><mo>exp</mo><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐬</mi><mo>−</mo><mi>𝐭</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msubsup><mi>𝚺</mi><mi>h</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐬</mi><mo>−</mo><mi>𝐭</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
 K(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2} 
 \left(\det{\mathbf{\Sigma}_h}\right)^{-\frac{1}{2}}  
@@ -96,25 +115,17 @@ K(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2}
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐬</mi><mo>,</mo><mi>𝐭</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>d</mi></msup><mo>×</mo><msup><mi>ℝ</mi><mi>d</mi></msup></mrow><annotation encoding="application/x-tex">\mathbf{s}, \mathbf{t} \in \mathbb{R}^d \times
 \mathbb{R}^d</annotation></semantics></math>, with covariance matrix
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝚺</mi><mi>h</mi></msub><mo>=</mo><msup><mi>h</mi><mn>2</mn></msup><mi>I</mi></mrow><annotation encoding="application/x-tex">\mathbf{\Sigma}_h = h^2 I</annotation></semantics></math>
-and tuning parameter.</p>
-<p>Let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi><msub><mi>n</mi><mn>1</mn></msub></msub><mo>∼</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">x_1, x_2, \ldots, x_{n_1} \sim F</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><msub><mi>n</mi><mn>2</mn></msub></msub><mo>∼</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">y_1, y_2, \ldots, y_{n_2} \sim G</annotation></semantics></math>
-be random samples from the distributions
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>,
-respectively. We test the null hypothesis that the two samples are
-generated from the same distribution, that is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>F</mi><mo>=</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">
-H_0: F = G
-</annotation></semantics></math></p>
-<p>vs</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>:</mo><mi>F</mi><mo>≠</mo><mi>G</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">
-H_1: F \not = G.
-</annotation></semantics></math></p>
-<p>We generate the samples
+and tuning parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>,
+centered with respect to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>F</mi><mo accent="true">‾</mo></mover><mo>=</mo><mfrac><mrow><msub><mi>n</mi><mn>1</mn></msub><mi>F</mi><mo>+</mo><msub><mi>n</mi><mn>2</mn></msub><mi>G</mi></mrow><mrow><msub><mi>n</mi><mn>1</mn></msub><mo>+</mo><msub><mi>n</mi><mn>2</mn></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\bar{F} = \frac{n_1F + n_2G}{n_1 + n_2}</annotation></semantics></math>.
+For more information about the centering of the kernel, see the
+documentation of the <code><a href="../reference/kb.test.html">kb.test()</a></code> function.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">kb.test</span><span class="op">)</span> </span></code></pre></div>
+<p>The KBQD tests exhibit high power against asymmetric alternatives
+that are close to the null hypothesis and with small sample size. We
+consider an example of this scenario. We generate the samples
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">x = (x_1, \ldots,x_n)</annotation></semantics></math>
 from a standard normal distribution
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>d</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msub><mi>I</mi><mi>d</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">N_d(0,I_d)</annotation></semantics></math>
@@ -127,7 +138,7 @@ where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">n=100</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0.5</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>0.5</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\lambda= (0.5,\ldots,0.5)</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://azzalini.stat.unipd.it/SN/" class="external-link">sn</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org" class="external-link">mvtnorm</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
@@ -143,19 +154,19 @@ be compared as <code>x</code> and <code>y</code> to the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>
 is not provided, the function automatically performs the function
 <code>select_h</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">two_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x_2</span>, y<span class="op">=</span><span class="va">y_2</span><span class="op">)</span></span>
 <span><span class="va">two_test</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
-<span><span class="co">## U-statistics  Dn          Trace </span></span>
+<span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.602379    2.048025 </span></span>
-<span><span class="co">## Critical Value:   1.05881     1.354038 </span></span>
+<span><span class="co">## Test Statistic:   1.742844    2.505833 </span></span>
+<span><span class="co">## Critical Value:   1.031779    1.484304 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.2</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
 <p>We can display the chosen <em>optimal</em> value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>
 together with the power plot obtained versus the considered
@@ -163,25 +174,30 @@ together with the power plot obtained versus the considered
 for the alternatives
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>δ</mi><annotation encoding="application/x-tex">\delta</annotation></semantics></math>
 in the <code><a href="../reference/select_h.html">select_h()</a></code> function.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1.2</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">power.plot</span></span></code></pre></div>
-<p><img src="TwoSample_test_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
-<p>For the two-sample case, the <code>summary</code> function provides
-the results from the test and the descriptive statistics per variable
-and per group. Additionally, it generates the qq-plots comparing the
-quantiles of the two groups for each variable.</p>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">summary_two</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">two_test</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">power.plot</span></span></code></pre></div>
 <p><img src="TwoSample_test_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
+<p>For more details visit the help documenation of the
+<code><a href="../reference/select_h.html">select_h()</a></code> function.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">select_h</span><span class="op">)</span> </span></code></pre></div>
+<p>For the two-sample case, the <code>summary</code> function provides
+the results from the test and a list tables of the standard descriptive
+statistics for each variable, computed per group and overall.
+Additionally, it generates the qq-plots comparing the quantiles of the
+two groups for each variable.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">summary_two</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">two_test</span><span class="op">)</span></span></code></pre></div>
+<p><img src="TwoSample_test_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
-<span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn       1.602379       1.058810      TRUE</span></span>
-<span><span class="co">## 2     Trace       2.048025       1.354038      TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<span><span class="co">##   Statistic    Value Critical_Value Reject_H0</span></span>
+<span><span class="co">## 1        Dn 1.742844       1.031779      TRUE</span></span>
+<span><span class="co">## 2     Trace 2.505833       1.484304      TRUE</span></span></code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_two</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">##             Group 1    Group 2    Overall</span></span>
@@ -218,10 +234,6 @@ quantiles of the two groups for each variable.</p>
 <span><span class="co">## IQR     1.30933016  1.4088334  1.39890664</span></span>
 <span><span class="co">## min    -2.29625537 -2.1827156 -2.29625537</span></span>
 <span><span class="co">## max     2.40795077  2.9929942  2.99299420</span></span></code></pre>
-<p>The figure automatically generated by the <code>summary</code>
-function on the result of the two-sample test displays the qq-plots
-between the two samples with a table of the standard descriptive
-statistics for each variable, computed per group and overall.</p>
 <div class="section level4">
 <h4 id="select-h">Select h<a class="anchor" aria-label="anchor" href="#select-h"></a>
 </h4>
@@ -231,8 +243,9 @@ can be performed independently from the test computation using the
 <code>select_h</code> function. It requires the two samples, provided as
 <code>x</code> and <code>y</code>, and the considered family of
 alternatives.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">two_test_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_h.html">select_h</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x_2</span>, y<span class="op">=</span><span class="va">y_2</span>, alternative <span class="op">=</span> <span class="st">"skewness"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
+<span><span class="va">two_test_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_h.html">select_h</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x_2</span>, y<span class="op">=</span><span class="va">y_2</span>, alternative <span class="op">=</span> <span class="st">"skewness"</span><span class="op">)</span></span></code></pre></div>
 <p>The code is not evaluated since we would obtain the same results.</p>
 </div>
 <div class="section level4">
@@ -246,7 +259,7 @@ test statistics when
 Hence, alternatively the two sample tests can be performed providing the
 two samples together as <code>x</code> and indicating the membership to
 the groups with the argument <code>y</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x_pool</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">x_2</span>,<span class="va">y_2</span><span class="op">)</span></span>
 <span><span class="va">y_memb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,each<span class="op">=</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">h</span> <span class="op">&lt;-</span> <span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">h_sel</span></span>
@@ -254,14 +267,22 @@ the groups with the argument <code>y</code>.</p>
 <span><span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x_pool</span>, y<span class="op">=</span><span class="va">y_memb</span>, h<span class="op">=</span><span class="va">h</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">## U-statistics  Dn          Trace </span></span>
+<span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.602379    2.048025 </span></span>
-<span><span class="co">## Critical Value:   1.05881     1.354038 </span></span>
+<span><span class="co">## Test Statistic:   1.742844    2.505833 </span></span>
+<span><span class="co">## Critical Value:   1.031779    1.484304 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.2</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
 <p>See the <em>k-sample test</em> vignette for more details.</p>
+<p>In the <code><a href="../reference/kb.test.html">kb.test()</a></code> function, the critical value can be
+computed with the subsampling, bootstrap or permutation algorithm. The
+default method is set to subsampling since it needs less computational
+time. For details on the sampling algorithm see the documentation of the
+<code><a href="../reference/kb.test.html">kb.test()</a></code> function.</p>
+<p>For more details on the level and power performance of the considered
+two-sample tests, see the extensive simulation study reported in the
+following reference.</p>
 </div>
 </div>
 <div class="section level2">
@@ -282,7 +303,7 @@ Distance Goodness-of-Fit Tests.”<br><a href="https://doi.org/10.48550/arXiv.24
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

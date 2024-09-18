@@ -171,7 +171,7 @@ kernel-based quadratic distance tests, based on the normal kernel. The object
 contains the following slots:</p><ul><li><p><code>method</code>: Description of the kernel-based quadratic
 distance test performed.</p></li>
 <li><p><code>x</code> Data list of samples X (and Y).</p></li>
-<li><p><code>Un</code> The value of the U-statistics.</p></li>
+<li><p><code>Un</code> The value of the U-statistic.</p></li>
 <li><p><code>H0_Un</code> A logical value indicating whether or not the null
 hypothesis is rejected according to Un.</p></li>
 <li><p><code>CV_Un</code> The critical value computed for the test Un.</p></li>
@@ -197,7 +197,7 @@ of multivariate normality, the non-parametric two-sample tests or the
 k-sample tests.</p>
 <p>The quadratic distance between two probability distributions \(F\) and
 \(G\) is
-defined as $$d_{K}(F,G)=\int\int K(x,y)d(F-G)(x)d(F-G)(y),$$
+defined as $$d_{K}(F,G)=\iint K(x,y)d(F-G)(x)d(F-G)(y),$$
 where \(G\) is a distribution whose goodness of fit we wish to assess and
 \(K\) denotes the Normal kernel defined as
 $$ K_{{h}}(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2}
@@ -208,30 +208,83 @@ for every \(\mathbf{s}, \mathbf{t} \in \mathbb{R}^d \times
 \mathbb{R}^d\), with covariance matrix \(\mathbf{\Sigma}_h=h^2 I\) and
 tuning parameter \(h\). <br></p><ul><li><p><strong>Test for Normality</strong>: <br>
 Let \(x_1, x_2, ..., x_n\) be a random sample with empirical
-distribution function \(\hat F\). To test the null hypothesis of
-normality, i.e. \(H_0:F=\mathcal{N}_d(\mu, \Sigma)\), we consider the
-U-statistic estimate and the V-statistic estimate of the sample KBQD.</p></li>
-<li><p><strong>Two-sample test</strong>: <br>
-Let \(x_1, x_2, ..., x_{n_1} \sim F\) and
-\(y_1, y_2, ..., y_{n_2} \sim G\) be
-random samples from the distributions \(F\) and \(G\), respectively.
-We test the null hypothesis that the two samples are generated from
-the same distribution, that is \(H_0: F=G\) vs \(H_1:F\not=G\).</p></li>
+distribution function \(\hat F\). We test the null hypothesis of
+normality, i.e. \(H_0:F=G=\mathcal{N}_d(\mu, \Sigma)\).</p>
+<p>We consider the U-statistic estimate of the sample KBQD
+$$U_{n}=\frac{1}{n(n-1)}\sum_{i=2}^{n}\sum_{j=1}^{i-1}
+   K_{cen}(\mathbf{x}_{i}, \mathbf{x}_{j}),$$
+then the first test statistics is
+$$T_{n}=\frac{U_{n}}{\sqrt{Var(U_{n})}},$$
+with \(Var(U_n)\) computed exactly following Lindsay et al.(2014),
+and the V-statistic estimate $$V_{n} = \frac{1}{n}\sum_{i=1}^{n}
+   \sum_{j=1}^{n}K_{cen}(\mathbf{x}_{i}, \mathbf{x}_{j}),$$
+where \(K_{cen}\) denotes the Normal kernel \(K_h\) with parametric
+centering with respect to the considered normal distribution
+\(G = \mathcal{N}_d(\mu, \Sigma)\).</p>
+<p>The asymptotic distribution of the V-statistic is an infinite combination
+of weighted independent chi-squared random variables with one degree of
+freedom. The cutoff value is obtained using the Satterthwaite
+approximation \(c \cdot \chi_{DOF}^2\), where \(c\) and \(DOF\)
+are computed exactly following the formulas in Lindsay et al.(2014).</p>
+<p>For the \(U\)-statistic the cutoff is determined empirically:</p><ul><li><p>Generate data from the considered normal distribution ;</p></li>
+<li><p>Compute the test statistics for <code>B</code> Monte Carlo(MC) replications;</p></li>
+<li><p>Compute the 95th quantile of the empirical distribution of the test
+statistic.</p></li>
+</ul></li>
 <li><p><strong>k-sample test</strong>: <br>
 Consider \(k\) random samples of i.i.d. observations
 \(\mathbf{x}^{(i)}_1,
    \mathbf{x}^{(i)}_{2},\ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i\),
 \(i = 1, \ldots, k\).
-We test if the samples are generated from the same distribution, that is
-\(H_0: F_1 = F_2 = \ldots = F_k\) versus \(H_1: F_i \not = F_j\), for
-some \(1 \le i \not = j \le k\)</p></li>
-</ul><p>The arguments <code>mu_hat</code> and <code>Sigma_hat</code> indicate the normal model
-considered for the normality test, that is\(H_0: F = N(\)<code>mu_hat</code>,
+We test if the samples are generated from the same <em>unknown</em> distribution,
+that is \(H_0: F_1 = F_2 = \ldots = F_k\) versus
+\(H_1: F_i \not = F_j\), for some \(1 \le i \not = j \le k\). <br>
+We construct a matrix distance \(\hat{\mathbf{D}}\), with
+off-diagonal elements
+$$\hat{D}_{ij} = \frac{1}{n_i n_j} \sum_{\ell=1}^{n_i}
+   \sum_{r=1}^{n_j}K_{\bar{F}}(\mathbf{x}^{(i)}_\ell,\mathbf{x}^{(j)}_r),
+   \qquad \mbox{ for }i \not= j$$
+and in the diagonal
+$$\hat{D}_{ii} = \frac{1}{n_i (n_i -1)} \sum_{\ell=1}^{n_i}
+   \sum_{r\not= \ell}^{n_i} K_{\bar{F}}(\mathbf{x}^{(i)}_\ell,
+   \mathbf{x}^{(i)}_r), \qquad \mbox{ for }i = j,$$
+where \(K_{\bar{F}}\) denotes the Normal kernel \(K_h\)
+centered non-parametrically with respect to
+$$\bar{F} = \frac{n_1 \hat{F}_1 + \ldots + n_k \hat{F}_k}{n},
+   \quad \mbox{ with } n=\sum_{i=1}^k n_i.$$</p>
+<p>We compute the trace statistic
+$$\mathrm{trace}(\hat{\mathbf{D}}_n) =  \sum_{i=1}^{k}\hat{D}_{ii}$$
+and \(D_n\), derived considering all the possible pairwise comparisons
+in the <em>k</em>-sample null hypothesis, given as
+$$D_n = (k-1) \mathrm{trace}(\hat{\mathbf{D}}_n)
+   - 2 \sum_{i=1}^{k}\sum_{j&gt; i}^{k}\hat{D}_{ij}.$$</p>
+<p>We compute the empirical critical value by employing numerical techniques
+such as the bootstrap, permutation and subsampling algorithms:</p><ul><li><p>Generate k-tuples, of total size \(n_B\), from the pooled sample
+following one of the sampling methods;</p></li>
+<li><p>Compute the k-sample test statistic;</p></li>
+<li><p>Repeat <code>B</code> times;</p></li>
+<li><p>Select the \(95^{th}\) quantile of the obtained values.</p></li>
+</ul></li>
+<li><p><strong>Two-sample test</strong>: <br>
+Let \(x_1, x_2, ..., x_{n_1} \sim F\) and
+\(y_1, y_2, ..., y_{n_2} \sim G\) be
+random samples from the distributions \(F\) and \(G\), respectively.
+We test the null hypothesis that the two samples are generated from
+the same <em>unknown</em> distribution, that is \(H_0: F=G\) vs
+\(H_1:F\not=G\). The test statistics coincide with the \(k\)-sample
+test statistics when \(k=2\).</p></li>
+</ul><div class="section">
+<h3 id="kernel-centering">Kernel centering<a class="anchor" aria-label="anchor" href="#kernel-centering"></a></h3>
+
+
+<p>The arguments <code>mu_hat</code> and <code>Sigma_hat</code> indicate the normal model
+considered for the normality test, that is \(H_0: F = N(\)<code>mu_hat</code>,
 <code>Sigma_hat</code>).
 For the two-sample and \(k\)-sample tests, <code>mu_hat</code> and
 <code>Sigma_hat</code> can
 be used for the parametric centering of the kernel, in the case we want to
-specify the reference distribution.
+specify the reference distribution, with <code>centeringType = "Param"</code>.
+This is the default method when the test for normality is performed.
 The normal kernel centered with respect to
 \(G \sim N_d(\mathbf{\mu}, \mathbf{V})\) can be computed as
 $$K_{cen(G)}(\mathbf{s}, \mathbf{t}) =
@@ -240,7 +293,9 @@ $$K_{cen(G)}(\mathbf{s}, \mathbf{t}) =
 -  K_{\mathbf{\Sigma_h} + \mathbf{V}}(\mathbf{s}, \mathbf{\mu}) +
  K_{\mathbf{\Sigma_h} + 2\mathbf{V}}(\mathbf{\mu}, \mathbf{\mu}).$$
 We consider the non-parametric centering of the kernel with respect to
-\(\bar{F}=(n_1 F_1 + \ldots n_k F_k)/n\) where \(n=\sum_{i=1}^k n_i\).
+\(\bar{F}=(n_1 F_1 + \ldots n_k F_k)/n\) where \(n=\sum_{i=1}^k n_i\),
+with <code>centeringType = "Nonparam"</code>, for the two- and \(k\)-sample
+tests.
 Let \(\mathbf{z}_1,\ldots, \mathbf{z}_n\) denote the pooled sample. For any
 \(s,t \in \{\mathbf{z}_1,\ldots, \mathbf{z}_n\}\), it is given by
 $$K_{cen(\bar{F})}(\mathbf{s},\mathbf{t}) =    K(\mathbf{s},\mathbf{t}) -
@@ -248,18 +303,12 @@ $$K_{cen(\bar{F})}(\mathbf{s},\mathbf{t}) =    K(\mathbf{s},\mathbf{t}) -
  \frac{1}{n}\sum_{i=1}^{n} K(\mathbf{z}_i,\mathbf{t}) +
  \frac{1}{n(n-1)}\sum_{i=1}^{n} \sum_{j \not=i}^{n}
  K(\mathbf{z}_i,\mathbf{z}_j).$$</p>
-<p>We compute the empirical critical value by employing numerical techniques
-such as the bootstrap, permutation and subsampling algorithms.</p><ul><li><p>Generate k-tuples, of total size \(n_B\), from the pooled sample
-following one of sampling method;</p></li>
-<li><p>Compute the k-sample test statistic;</p></li>
-<li><p>Repeat <code>B</code> times;</p></li>
-<li><p>Select the \(95^{th}\) quantile of the obtained values.</p></li>
-</ul></div>
+</div>
+
+    </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>The test statistics for the two-sample test coincide with the k-sample test
-statistics for \(k=2\).</p>
-<p>For the two- and \(k\)-sample tests, the slots <code>Vn</code>, <code>H0_Vn</code> and
+    <p>For the two- and \(k\)-sample tests, the slots <code>Vn</code>, <code>H0_Vn</code> and
 <code>CV_Vn</code> are empty, while the computed statistics are both reported in
 slots <code>Un</code>, <code>H0_Un</code> and <code>CV_Un</code>.</p>
 <p>A U-statistic is a type of statistic that is used to estimate a population
@@ -310,7 +359,7 @@ DOI: 10.1080/01621459.2013.836972</p>
 <span class="r-in"><span><span class="va">my_test</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Kernel-based quadratic distance two-sample test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> U-statistics	 Dn 		 Trace </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> U-statistic	 Dn 		 Trace </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic:	 0.239788 	 0.2819997 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Critical Value:	 0.9875162 	 1.162661 </span>
@@ -327,7 +376,7 @@ DOI: 10.1080/01621459.2013.836972</p>
 <span class="r-in"><span><span class="va">my_test</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Kernel-based quadratic distance k-sample test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> U-statistics	 Dn 		 Trace </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> U-statistic	 Dn 		 Trace </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic:	 7.325505 	 11.45482 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Critical Value:	 0.7402039 	 1.158313 </span>
@@ -347,7 +396,7 @@ DOI: 10.1080/01621459.2013.836972</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

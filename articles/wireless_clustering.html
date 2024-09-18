@@ -116,13 +116,13 @@ as possible values for the number of clusters.</p>
 <span><span class="va">wire_norm</span> <span class="op">&lt;-</span> <span class="va">wire</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">wire</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">res_pk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pkbc.html">pkbc</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">wire_norm</span><span class="op">)</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<p>The <code>pkbc</code> function create an object of class
+<p>The <code>pkbc</code> function creates an object of class
 <code>pkbc</code> containing the clustering results for each value of
 number of clusters considered.</p>
 <p>To guide the choice of the number of clusters, the function
 <code>pkbc_validation</code> provides cluster validation measures and
 graphical tools. Specifically, it returns an object with InGroup
-Proportion (IGP), and <code>metrics</code> a table of computed
+Proportion (IGP), and <code>metrics</code>, a table of computed
 evaluation measures. This table includes the Average Silhouette Width
 (ASW) and, if the true labels are provided, the measures of adjusted
 rand index (ARI), Macro-Precision and Macro-Recall.</p>
@@ -171,20 +171,19 @@ respectively. If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>&gt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">d&gt;3</annotation></semantics></math>,
 the spherical PCA is applied on the data set, and the first 3 principal
 components are used for visualizing data points on the sphere. In the
-generated figure, data points are colored by the assigned
-membership.</p>
+generated scatter plot for the specified number of clusters, data points
+are colored by the assigned membership.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res_pk</span><span class="op">)</span></span></code></pre></div>
-<p><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-1.png" width="576"><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-2.png" width="576"><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-3.png" width="576"><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-4.png" width="576"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res_pk</span>, k <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<p><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-1.png" width="576"><img src="wireless_clustering_files/figure-html/unnamed-chunk-5-2.png" width="576"></p>
 <p>The Elbow plots and the reported metrics suggest
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">K=4</annotation></semantics></math>
 as number of clusters. This is in accordance with the known ground
 truth.</p>
-<p>We can also request the scatter plot only for a specified value of
-number of clusters. Additionally, if true labels are available and are
-provided to the <code>plot</code> method, the scatter plot will display
-the data points colored with respect to the true labels and assigned
-memberships in two adjacent plots.</p>
+<p>Additionally, if true labels are available and are provided to the
+<code>plot</code> method, the scatter plot will display the data points
+colored with respect to the true labels and assigned memberships in two
+adjacent plots.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res_pk</span>, k<span class="op">=</span><span class="fl">4</span>, true_label <span class="op">=</span> <span class="va">labels</span><span class="op">)</span></span></code></pre></div>
 <p><img src="wireless_clustering_files/figure-html/unnamed-chunk-6-1.png" width="768"><img src="wireless_clustering_files/figure-html/unnamed-chunk-6-2.png" width="768"></p>
@@ -264,6 +263,14 @@ the assigned membership.</p>
 <span><span class="co">## max    -0.41326597 -0.38995633 -0.43815927 -0.44423198 -0.38995633</span></span></code></pre>
 </div>
 <div class="section level2">
+<h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
+</h2>
+<p>If the number of cluster <em>k</em> is not provided to the
+<code>plot</code> function, one scatter plot is displeyed for each
+possible number of clusters available in the object of class
+<code>pkbc</code>.</p>
+</div>
+<div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <p>Golzy, M., Markatou, M. (2020). “Poisson Kernel-Based Clustering on
@@ -283,7 +290,7 @@ Sampling,” <em>Journal of Computational and Graphical Statistics</em>,
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

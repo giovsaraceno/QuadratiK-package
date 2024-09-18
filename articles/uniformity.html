@@ -73,47 +73,55 @@
 <div class="section level3">
 <h3 id="uniformity-test-on-the-sphere">Uniformity test on the Sphere<a class="anchor" aria-label="anchor" href="#uniformity-test-on-the-sphere"></a>
 </h3>
-<p>The quadratic distance between two probability distributions
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
-and
+<p>Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub><mo>∼</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">x_1, x_2, \ldots, x_n \sim F</annotation></semantics></math>
+be a random sample with empirical distribution function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>F</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{F}</annotation></semantics></math>.
+We test the null hypothesis of uniformity on the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional
+sphere, i.e.,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>F</mi><mo>=</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">H_0: F = G</annotation></semantics></math>
+where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-is then defined as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>K</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>,</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>∫</mo><mo>∫</mo><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>−</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>−</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
-d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
+is the uniform distribution on the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional
+sphere
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝒮</mi><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">\mathcal{S}^{d-1}</annotation></semantics></math>.</p>
+<p>We compute the U-statistic estimate of the sample KBQD (Kernel-Based
+Quadratic Distance)
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>U</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>2</mn><mrow><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>2</mn></mrow><mi>n</mi></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></munderover><msub><mi>K</mi><mrow><mi>c</mi><mi>e</mi><mi>n</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐱</mi><mi>i</mi></msub><mo>,</mo><msub><mi>𝐱</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+U_{n}=\frac{2}{n(n-1)}\sum_{i=2}^{n}\sum_{j=1}^{i-1}K_{cen}(\mathbf{x}_{i}, \mathbf{x}_{j}),
+</annotation></semantics></math> then the first test statistic is given
+as
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>n</mi></msub><mo>=</mo><mfrac><msub><mi>U</mi><mi>n</mi></msub><msqrt><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>U</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msqrt></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">T_{n}=\frac{U_{n}}{\sqrt{Var(U_{n})}},</annotation></semantics></math>
+with
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>a</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>U</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>2</mn><mrow><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mrow><mo stretchy="true" form="prefix">[</mo><mfrac><mrow><mn>1</mn><mo>+</mo><msup><mi>ρ</mi><mn>2</mn></msup></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ρ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+Var(U_{n})= \frac{2}{n(n-1)}\left[\frac{1+\rho^{2}}{(1-\rho^{2})^{d-1}}-1\right],
 </annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-is a distribution whose goodness of fit we wish to assess, that is the
-uniform distribution on the sphere
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝒮</mi><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">\mathcal{S}^{d-1}</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
-denotes the Poisson kernel defined as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐮</mi><mo>,</mo><mi>𝐯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>ρ</mi><mn>2</mn></msup></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><msup><mi>ρ</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>ρ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐮</mi><mo>⋅</mo><mi>𝐯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>d</mi><mi>/</mi><mn>2</mn></mrow></msup></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">
-K(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
+<p>and the V-statistic estimate of the KBQD<br><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>K</mi><mrow><mi>c</mi><mi>e</mi><mi>n</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>𝐱</mi><mi>i</mi></msub><mo>,</mo><msub><mi>𝐱</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
+V_{n} = \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}K_{cen}(\mathbf{x}_{i}, \mathbf{x}_{j}),
+</annotation></semantics></math> where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mrow><mi>c</mi><mi>e</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">K_{cen}</annotation></semantics></math>
+denotes the Poisson kernel
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mi>ρ</mi></msub><annotation encoding="application/x-tex">K_\rho</annotation></semantics></math>
+centered with respect to the uniform distribution on the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional
+sphere, that is
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mrow><mi>c</mi><mi>e</mi><mi>n</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐮</mi><mo>,</mo><mi>𝐯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>K</mi><mi>ρ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐮</mi><mo>,</mo><mi>𝐯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">
+K_{cen}(\mathbf{u}, \mathbf{v}) = K_\rho(\mathbf{u}, \mathbf{v}) -1 
+</annotation></semantics></math> and
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>ρ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐮</mi><mo>,</mo><mi>𝐯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>ρ</mi><mn>2</mn></msup></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><msup><mi>ρ</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>ρ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐮</mi><mo>⋅</mo><mi>𝐯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi>d</mi><mi>/</mi><mn>2</mn></mrow></msup></mfrac><mo>,</mo></mrow><annotation encoding="application/x-tex">
+K_\rho(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-2\rho
 (\mathbf{u}\cdot \mathbf{v})\right)^{d/2}},
 </annotation></semantics></math></p>
 <p>for every
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐮</mi><mo>,</mo><mi>𝐯</mi><mo>∈</mo><msup><mi>𝒮</mi><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>×</mo><msup><mi>𝒮</mi><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\mathbf{u}, \mathbf{v} \in \mathcal{S}^{d-1} \times
-\mathcal{S}^{d-1}</annotation></semantics></math>.</p>
-<p>Let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">x_1, x_2, \ldots, x_n</annotation></semantics></math>
-be a random sample with empirical distribution function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>F</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{F}</annotation></semantics></math>.</p>
-<p>We test the null hypothesis of uniformity on the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional
-sphere, i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>F</mi><mo>=</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">H_0: F = G</annotation></semantics></math>,
-by considering the U-statistic estimate and the V-statistic estimate of
-the sample KBQD (Kernel-Based Quadratic Distance).</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐮</mi><mo>,</mo><mi>𝐯</mi><mo>∈</mo><msup><mi>𝒮</mi><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>×</mo><msup><mi>𝒮</mi><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\mathbf{u}, \mathbf{v} \in \mathcal{S}^{d-1} \times \mathcal{S}^{d-1}</annotation></semantics></math>.</p>
 <p>We generated
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>200</mn></mrow><annotation encoding="application/x-tex">n=200</annotation></semantics></math>
 observations from the uniform distribution on
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>S</mi><mrow><mi>d</mi><mo>−</mo><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">S^{d-1}</annotation></semantics></math>,
 with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">d=3</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>=</mo><mn>0.7</mn></mrow><annotation encoding="application/x-tex">\rho = 0.7</annotation></semantics></math>.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">d=3</annotation></semantics></math>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
@@ -147,11 +155,11 @@ value of the concentration parameter <code>rho</code>.</p>
 <span><span class="co">## Statistic Vn:  14.89598 </span></span>
 <span><span class="co">## Critical value:  23.22949</span></span></code></pre>
 <p>The <code><a href="../reference/pk.test.html">pk.test()</a></code> function returns an object of class
-<code>pk.test</code>. The <code>show</code> method displays the computed
-statistics and the corresponding critical values.</p>
+<code>pk.test</code>. The <code>show</code> function displays the
+computed statistics and the corresponding critical values.</p>
 <p>The test correctly does not reject the null hypothesis of
 uniformity.</p>
-<p>The <code>summary</code> method for the <code>pk.test</code> output
+<p>The <code>summary</code> function for the <code>pk.test</code> output
 object provides the results of the performed test, and generates a
 figure showing the qq-plots against the uniform distribution of each
 variable with a table of standard descriptive statistics.</p>
@@ -262,7 +270,7 @@ Sinica</em>. <a href="https://doi.org/10.5705/ss.202022.0347" class="external-li
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

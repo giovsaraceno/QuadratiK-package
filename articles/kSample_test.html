@@ -70,19 +70,38 @@
 
     
     
-<p>The quadratic distance between two probability distributions
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-is defined as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>K</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>,</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>∫</mo><mo>∫</mo><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>−</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mo>−</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
-d_{K}(F,G) = \int\int K(x,y) d(F-G)(x) d(F-G)(y),
-</annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
-is a distribution whose goodness of fit we wish to assess, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
-denotes the Normal kernel defined as:</p>
+<p>Consider
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+random samples of i.i.d. observations
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>𝐱</mi><mn>1</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><msubsup><mi>𝐱</mi><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><mi>…</mi><mo>,</mo><msubsup><mi>𝐱</mi><msub><mi>n</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>∼</mo><msub><mi>F</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{x}^{(i)}_1, \mathbf{x}^{(i)}_{2}, \ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i</annotation></semantics></math>,
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">i = 1, \ldots, k</annotation></semantics></math>.</p>
+<p>We test if the samples are generated from the same <em>unknown</em>
+distribution
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>F</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar{F}</annotation></semantics></math>,
+that is:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><msub><mi>F</mi><mn>1</mn></msub><mo>=</mo><msub><mi>F</mi><mn>2</mn></msub><mo>=</mo><mi>…</mi><mo>=</mo><msub><mi>F</mi><mi>k</mi></msub><mo>=</mo><mover><mi>F</mi><mo accent="true">‾</mo></mover></mrow><annotation encoding="application/x-tex">
+H_0: F_1 = F_2 = \ldots = F_k = \bar{F}
+</annotation></semantics></math> versus the alternative where two of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+distributions differ, that is
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>:</mo><msub><mi>F</mi><mi>i</mi></msub><mo>≠</mo><msub><mi>F</mi><mi>j</mi></msub><mo>,</mo></mrow><annotation encoding="application/x-tex">
+H_1: F_i \not = F_j,
+</annotation></semantics></math> for some
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≠</mo><mi>j</mi><mo>≤</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">1 \le i \not = j \le k</annotation></semantics></math>.</p>
+<p>Upon the construction of a matrix distance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>𝐃</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\mathbf{D}}</annotation></semantics></math>,
+with off-diagonal elements
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>D</mi><mo accent="true">̂</mo></mover><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><msub><mi>n</mi><mi>i</mi></msub><msub><mi>n</mi><mi>j</mi></msub></mrow></mfrac><munderover><mo>∑</mo><mrow><mo>ℓ</mo><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mi>i</mi></msub></munderover><munderover><mo>∑</mo><mrow><mi>r</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mi>j</mi></msub></munderover><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>𝐱</mi><mo>ℓ</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><msubsup><mi>𝐱</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> for </mtext><mspace width="0.333em"></mspace></mrow><mi>i</mi><mo>≠</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">
+    \hat{D}_{ij} = \frac{1}{n_i n_j} \sum_{\ell=1}^{n_i}\sum_{r=1}^{n_j}K_{\bar{F}}(\mathbf{x}^{(i)}_\ell,\mathbf{x}^{(j)}_r), \qquad \mbox{ for }i \not= j
+</annotation></semantics></math> and in the diagonal
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>D</mi><mo accent="true">̂</mo></mover><mrow><mi>i</mi><mi>i</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><msub><mi>n</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>i</mi></msub><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><munderover><mo>∑</mo><mrow><mo>ℓ</mo><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mi>i</mi></msub></munderover><munderover><mo>∑</mo><mrow><mi>r</mi><mo>≠</mo><mo>ℓ</mo></mrow><msub><mi>n</mi><mi>i</mi></msub></munderover><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><mrow><mo stretchy="true" form="prefix">(</mo><msubsup><mi>𝐱</mi><mo>ℓ</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><msubsup><mi>𝐱</mi><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> for </mtext><mspace width="0.333em"></mspace></mrow><mi>i</mi><mo>=</mo><mi>j</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">  
+\hat{D}_{ii} = \frac{1}{n_i (n_i -1)} \sum_{\ell=1}^{n_i}\sum_{r\not= \ell}^{n_i}K_{\bar{F}}(\mathbf{x}^{(i)}_\ell,\mathbf{x}^{(i)}_r), \qquad \mbox{ for }i = j,
+</annotation></semantics></math> where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mover><mi>F</mi><mo accent="true">‾</mo></mover></msub><annotation encoding="application/x-tex">K_{\bar{F}}</annotation></semantics></math>
+denotes the Normal kernel
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>,
+defined as</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐬</mi><mo>,</mo><mi>𝐭</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>π</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mi>d</mi><mi>/</mi><mn>2</mn></mrow></msup><msup><mrow><mo stretchy="true" form="prefix">(</mo><mo>det</mo><msub><mi>𝚺</mi><mi>h</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></msup><mo>exp</mo><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐬</mi><mo>−</mo><mi>𝐭</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><msubsup><mi>𝚺</mi><mi>h</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐬</mi><mo>−</mo><mi>𝐭</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
 K(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2} 
 \left(\det{\mathbf{\Sigma}_h}\right)^{-\frac{1}{2}}  
@@ -93,23 +112,33 @@ K(\mathbf{s}, \mathbf{t}) = (2 \pi)^{-d/2}
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐬</mi><mo>,</mo><mi>𝐭</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>d</mi></msup><mo>×</mo><msup><mi>ℝ</mi><mi>d</mi></msup></mrow><annotation encoding="application/x-tex">\mathbf{s}, \mathbf{t} \in \mathbb{R}^d \times
 \mathbb{R}^d</annotation></semantics></math>, with covariance matrix
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝚺</mi><mi>h</mi></msub><mo>=</mo><msup><mi>h</mi><mn>2</mn></msup><mi>I</mi></mrow><annotation encoding="application/x-tex">\mathbf{\Sigma}_h = h^2 I</annotation></semantics></math>
-and tuning parameter.</p>
-<p>Consider
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
-random samples of i.i.d. observations
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>𝐱</mi><mn>1</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><msubsup><mi>𝐱</mi><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>,</mo><mi>…</mi><mo>,</mo><msubsup><mi>𝐱</mi><msub><mi>n</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>∼</mo><msub><mi>F</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{x}^{(i)}_1, \mathbf{x}^{(i)}_{2}, \ldots, \mathbf{x}^{(i)}_{n_i} \sim F_i</annotation></semantics></math>,
-for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">i = 1, \ldots, k</annotation></semantics></math>.</p>
-<p>We test if the samples are generated from the same distribution, that
-is:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><msub><mi>F</mi><mn>1</mn></msub><mo>=</mo><msub><mi>F</mi><mn>2</mn></msub><mo>=</mo><mi>…</mi><mo>=</mo><msub><mi>F</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">
-H_0: F_1 = F_2 = \ldots = F_k
-</annotation></semantics></math> versus
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo>:</mo><msub><mi>F</mi><mi>i</mi></msub><mo>≠</mo><msub><mi>F</mi><mi>j</mi></msub><mo>,</mo></mrow><annotation encoding="application/x-tex">
-H_1: F_i \not = F_j,
-</annotation></semantics></math> for some
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>≠</mo><mi>j</mi><mo>≤</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">1 \le i \not = j \le k</annotation></semantics></math>.</p>
-<p>We generated three samples, with
+and tuning parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>,
+centered with respect to
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>F</mi><mo accent="true">‾</mo></mover><mo>=</mo><mfrac><mrow><msub><mi>n</mi><mn>1</mn></msub><msub><mover><mi>F</mi><mo accent="true">̂</mo></mover><mn>1</mn></msub><mo>+</mo><mi>…</mi><mo>+</mo><msub><mi>n</mi><mi>k</mi></msub><msub><mover><mi>F</mi><mo accent="true">̂</mo></mover><mi>k</mi></msub></mrow><mi>n</mi></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> with </mtext><mspace width="0.333em"></mspace></mrow><mi>n</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><msub><mi>n</mi><mi>i</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\bar{F} = \frac{n_1 \hat{F}_1 + \ldots + n_k \hat{F}_k}{n}, \quad \mbox{ with } n=\sum_{i=1}^k n_i.
+</annotation></semantics></math> For more information about the
+centering of the kernel, see the documentation of the
+<code><a href="../reference/kb.test.html">kb.test()</a></code> function.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">kb.test</span><span class="op">)</span> </span></code></pre></div>
+<p>We compute the trace statistic
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">e</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>𝐃</mi><mo accent="true">̂</mo></mover><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><msub><mover><mi>D</mi><mo accent="true">̂</mo></mover><mrow><mi>i</mi><mi>i</mi></mrow></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">  
+\mathrm{trace}(\hat{\mathbf{D}}_n) =  \sum_{i=1}^{k}\hat{D}_{ii}.
+</annotation></semantics></math> and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mi>n</mi></msub><annotation encoding="application/x-tex">D_n</annotation></semantics></math>,
+derived considering all the possible pairwise comparisons in the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-sample
+null hypothesis, given as
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mi>n</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">e</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>𝐃</mi><mo accent="true">̂</mo></mover><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mn>2</mn><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>&gt;</mo><mi>i</mi></mrow><mi>k</mi></munderover><msub><mover><mi>D</mi><mo accent="true">̂</mo></mover><mrow><mi>i</mi><mi>j</mi></mrow></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">  
+D_{n} = (k-1) \mathrm{trace}(\hat{\mathbf{D}}_n) - 2 \sum_{i=1}^{k}\sum_{j&gt; i}^{k}\hat{D}_{ij}.
+</annotation></semantics></math></p>
+<p>We show the usage of the <code><a href="../reference/kb.test.html">kb.test()</a></code> function with the
+following example of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">k=3</annotation></semantics></math>
+samples of bivariate observations following normal distributions with
+different mean vectors.</p>
+<p>We generate three samples, with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>50</mn></mrow><annotation encoding="application/x-tex">n=50</annotation></semantics></math>
 observations each, from a 2-dimensional Gaussian distributions with mean
 vectors
@@ -128,9 +157,10 @@ In order to perform the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-sample
 tests, we need to define the vector <code>y</code> which indicates the
 membership to groups.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org" class="external-link">mvtnorm</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
@@ -139,6 +169,12 @@ membership to groups.</p>
 <span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html" class="external-link">rmvnorm</a></span><span class="op">(</span><span class="va">sizes</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">eps</span><span class="op">/</span><span class="fl">2</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">*</span><span class="va">eps</span><span class="op">/</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, <span class="va">x3</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, times<span class="op">=</span><span class="va">sizes</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">x</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, color <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Generated Points"</span>, x <span class="op">=</span> <span class="st">"X1"</span>, y <span class="op">=</span> <span class="st">"X2"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="kSample_test_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
 <p>To use the <code><a href="../reference/kb.test.html">kb.test()</a></code> function, we need to provide the
 value for the tuning parameter
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>.
@@ -148,52 +184,54 @@ The function <code>select_h</code> can be used for identifying on
 This function needs the input <code>x</code> and <code>y</code> as the
 function <code>kb.test</code>, and the selection of the family of
 alternatives. Here we consider the location alternatives.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">h_k</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_h.html">select_h</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span>, alternative<span class="op">=</span><span class="st">"location"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="kSample_test_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p><img src="kSample_test_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h_k</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 3.2</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
 <p>The <code>select_h</code> function has also generated a figure
 displaying the obtained power versus the considered
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>,
-for each value of skewness alternative
+for each value of alternative
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>δ</mi><annotation encoding="application/x-tex">\delta</annotation></semantics></math>
 considered.</p>
 <p>We can now perform the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-sample
 tests with the <em>optimal</em> value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
 <span><span class="va">k_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span>, h<span class="op">=</span><span class="va">h_k</span><span class="op">$</span><span class="va">h_sel</span><span class="op">)</span></span>
 <span><span class="fu">show</span><span class="op">(</span><span class="va">k_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">## U-statistics  Dn          Trace </span></span>
+<span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   4.800161    8.763971 </span></span>
-<span><span class="co">## Critical Value:   0.9772489   1.78556 </span></span>
+<span><span class="co">## Test Statistic:   4.504812    7.668806 </span></span>
+<span><span class="co">## Critical Value:   1.079711    1.839428 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  3.2</span></span></code></pre>
-<p>The function returns an object of class . The method for the object
-shows the computed statistics with corresponding critical values, and
-the logical indicating if the null hypothesis is rejected. The test
-correctly rejects the null hypothesis, in fact the values of the
-statistics are greater than the computed critical values. The package
-provides also the <code>summary</code> method which returns the results
-of the tests together with the standard descriptive statistics for each
-variable computed, overall, and with respect to the provided groups.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
+<p>The function <code><a href="../reference/kb.test.html">kb.test()</a></code> returns an object of class
+<code>kb.test</code>. The <code>show</code> method for the
+<code>kb.test</code> object shows the computed statistics with
+corresponding critical values, and the logical indicating if the null
+hypothesis is rejected. The test correctly rejects the null hypothesis,
+in fact the values of the statistics are greater than the computed
+critical values. The package provides also the <code>summary</code>
+function which returns the results of the tests together with the
+standard descriptive statistics for each variable computed, overall, and
+with respect to the provided groups.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">k_test</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
-<span><span class="co">##   Statistic Test_Statistic Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn       4.800161      0.9772489      TRUE</span></span>
-<span><span class="co">## 2     Trace       8.763971      1.7855595      TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<span><span class="co">##   Statistic    Value Critical_Value Reject_H0</span></span>
+<span><span class="co">## 1        Dn 4.504812       1.079711      TRUE</span></span>
+<span><span class="co">## 2     Trace 7.668806       1.839428      TRUE</span></span></code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">##            Group 1    Group 2    Group 3      Overall</span></span>
@@ -217,14 +255,31 @@ variable computed, overall, and with respect to the provided groups.</p>
 </h4>
 <p>If a value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>
-is not provided to the , this function performs the function
-<code>select_h</code> for automatic search of an <em>optimal</em> value
-of
+is not provided to <code><a href="../reference/kb.test.html">kb.test()</a></code>, this function performs the
+function <code>select_h</code> for automatic search of an
+<em>optimal</em> value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>
 to use. . The following code shows its usage, but it is not executed
 since we would obtain the same results.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">k_test_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<p>For more details visit the help documenation of the
+<code><a href="../reference/select_h.html">select_h()</a></code> function.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="va">select_h</span><span class="op">)</span> </span></code></pre></div>
+<p>In the <code><a href="../reference/kb.test.html">kb.test()</a></code> function, the critical value can be
+computed with the subsampling, bootstrap or permutation algorithm. The
+default method is set to subsampling since it needs less computational
+time. For details on the sampling algorithm see the documentation of the
+<code><a href="../reference/kb.test.html">kb.test()</a></code> function and the following reference.</p>
+<p>The proposed tests exhibit high power against asymmetric alternatives
+that are close to the null hypothesis and with small sample size, as
+well as in the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">k \ge 3</annotation></semantics></math>
+sample comparison, for dimension
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>&gt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">d&gt;2</annotation></semantics></math>
+and all sample sizes. For more details, see the extensive simulation
+study reported in the following reference.</p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -244,7 +299,7 @@ Distance Goodness-of-Fit Tests.”<br><a href="https://doi.org/10.48550/arXiv.24
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

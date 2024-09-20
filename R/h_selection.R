@@ -341,10 +341,10 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    #    # nocov start
    #    num_cores <- 2
    #    # nocov end
-   # } else
-   if(is.null(n_cores)) {
-      num_cores <- detectCores()
-   } else if (is.numeric(n_cores)) {
+   # } elseif(is.null(n_cores)) {
+   #    num_cores <- detectCores()
+   # } else 
+   if (is.numeric(n_cores)) {
       num_cores <- as.numeric(n_cores)
    } else {
       stop("n_cores must be a numeric value")

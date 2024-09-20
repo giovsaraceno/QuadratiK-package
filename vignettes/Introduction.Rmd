@@ -34,7 +34,7 @@ The `QuadratiK` package is also available in Python on PyPI and as a Dashboard a
 
 If you use this package in your research or work, please cite it as follows:
 
-Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances. <https://cran.r-project.org/package=QuadratiK>
+Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: A Collection of Methods Constructed using Kernel-Based Quadratic Distances. <https://cran.r-project.org/package=QuadratiK>
 
 ``` bibtex
 @Manual{saraceno2024QuadratiK, 
@@ -100,7 +100,7 @@ If needed, we can specify $\mu$ and $\Sigma$, otherwise the standard normal dist
 
 ```{r}
 x <- matrix(rnorm(100,4), ncol = 2)
-# Does x come from a multivariate standard normal distribution?
+# Does x come from the specified multivariate normal distribution?
 kb.test(x, mu_hat = c(4,4), Sigma_hat = diag(2), h = 0.4)
 ```
 

@@ -15,7 +15,7 @@ select_h(
   delta = NULL,
   h_values = NULL,
   Nrep = 50,
-  n_cores = NULL,
+  n_cores = 2,
   Quantile = 0.95,
   power.plot = TRUE
 )

@@ -144,7 +144,7 @@
 #' @export
 select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8, 
                      B=100, delta_dim=1, delta=NULL, h_values=NULL,Nrep=50, 
-                     n_cores=NULL, Quantile=0.95, power.plot=TRUE) {
+                     n_cores=2, Quantile=0.95, power.plot=TRUE) {
    
    # Convert vectors to a single column matrix
    if(!is.numeric(x) & !is.data.frame(x)){
@@ -338,10 +338,10 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    
    # chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
    # if (nzchar(chk) && chk == "TRUE") {
-   #    # nocov start 
+   #    # nocov start
    #    num_cores <- 2
    #    # nocov end
-   # } else 
+   # } else
    if(is.null(n_cores)) {
       num_cores <- detectCores()
    } else if (is.numeric(n_cores)) {

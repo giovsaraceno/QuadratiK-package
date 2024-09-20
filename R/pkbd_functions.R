@@ -168,8 +168,10 @@ rpkb <- function(n, mu, rho, method = 'rejacg',
                  tol.eps = .Machine$double.eps^0.25, 
                  max.iter = 1000) {
    
+
+   # nocov start
    if (!requireNamespace("movMF", quietly = TRUE)) {
-      install <- readline(prompt = "'movMF' is required for 'rejvmf' method. 
+      install <- readline(prompt = "'movMF' is required for 'rejvmf' method.
                            Would you like to install it now? (yes/no): ")
       if (tolower(install) == "yes") {
          install.packages("movMF")
@@ -189,6 +191,7 @@ rpkb <- function(n, mu, rho, method = 'rejacg',
          return(NULL)
       }
    }
+   # nocov end
    if (rho >= 1 | rho < 0) {
       stop('Input argument rho must be within [0,1)')
    }

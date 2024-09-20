@@ -338,8 +338,9 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    
    chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
    if (nzchar(chk) && chk == "TRUE") {
-      # use 2 cores in CRAN/Travis/AppVeyor
-      num_cores <- 2L
+      # nocov start 
+      num_cores <- 2
+      # nocov end
    } else if(is.null(n_cores)) {
       num_cores <- detectCores()
    } else if (is.numeric(n_cores)) {

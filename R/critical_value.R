@@ -118,7 +118,6 @@ poisson_CV<-function(d, size, rho, B, Quantile){
       
    }
    return(as.numeric(quantile(Results, Quantile)))
-   
 }
 #' 
 #' Compute the critical value for the KBQD tests for multivariate Normality 

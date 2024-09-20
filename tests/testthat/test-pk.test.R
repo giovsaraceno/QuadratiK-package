@@ -24,6 +24,19 @@ test_that("Error on invalid x input", {
          "x must be a matrix or a data.frame with dimension greater 
                      than 1.", 
          fixed=TRUE)
+   
+   # NA in the data
+   dat <- matrix(rnorm(100),ncol=2)
+   dat[1,] <- NA 
+   expect_error(pk.test(x = dat, rho = 0.8), 
+                'There are missing values in x!', fixed=TRUE)
+   
+   # Inf or Nan in the data
+   dat <- matrix(rnorm(100),ncol=2)
+   dat[1,] <- Inf 
+   expect_error(pk.test(x = dat, rho = 0.8), 
+                'There are undefined values in x, that is Nan, Inf, -Inf', 
+                fixed=TRUE)
 })
 
 # Test 2: Error on Invalid Quantile Input

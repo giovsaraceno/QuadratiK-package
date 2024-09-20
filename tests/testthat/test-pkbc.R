@@ -171,7 +171,7 @@ test_that("plot method for the clustering algorithm", {
    label <- rep(c(1,2),each=50)
    pkbd_res<- pkbc(dat, c(2,3))
    # Tests for plot method
-   expect_silent(plot(pkbd_res,k = 2))
+   expect_silent(plot(pkbd_res,k = 2, pca_res = TRUE))
    expect_silent(plot(pkbd_res,k = 2,true_label=label))
 })
 
@@ -184,11 +184,27 @@ test_that("plot method for the clustering algorithm", {
    dat<-rbind(x,y)
    label <- rep(c(1,2),each=50)
    pkbd_res<- pkbc(dat, c(2,3))
+   
+   # Correct newdata input
+   newdat <- "invalid"
+   expect_error(predict(pkbd_res, k = 2, newdat), 
+                'newdata must be a matrix or data.frame.', fixed=TRUE)
+   
+   newdat <- matrix("invalid", ncol=2, nrow=50)
+   expect_error(predict(pkbd_res, k = 2, newdat), 
+                'newdata must be numeric', fixed=TRUE)
+   
+   newdat <- matrix(rnorm(150),ncol=3)
+   expect_error(predict(pkbd_res, k = 2, newdat), 
+         'newdata must have the same number of variables as the training data.', 
+                fixed=TRUE)
+   
+   
    # Tests for predict method
    expect_equal(predict(pkbd_res,k=2),pkbd_res@res_k[[2]]$finalMemb)
    
-   newdat <- rbind(rpkb(50, c(1,0),0.99, method = "rejacg")$x,
-                   rpkb(50, c(-1,0),0.99, method = "rejacg")$x)
+   newdat <- as.data.frame(rbind(rpkb(50, c(1,0),0.99, method = "rejacg")$x,
+                   rpkb(50, c(-1,0),0.99, method = "rejacg")$x))
    expect_equal(predict(pkbd_res, k=2, newdat)$Memb,rep(c(2,1),each=50))
    
 

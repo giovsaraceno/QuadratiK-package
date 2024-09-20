@@ -23,6 +23,9 @@ reported (when dimension is greater than 3).}
 
 \item{...}{Additional arguments that can be passed to the plot function}
 }
+\value{
+The scatter-plot(s) and the elbow plot.
+}
 \description{
 Plots for a pkbc object.
 }

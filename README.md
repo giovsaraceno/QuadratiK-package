@@ -1,11 +1,8 @@
 <!-- badges: start -->
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) 
-[![CRAN status](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) 
-[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) 
-[![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) 
-[![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK)
-[![codecov](https://codecov.io/github/giovsaraceno/QuadratiK-package/graph/badge.svg?token=M4CDTQPONE)](https://codecov.io/github/giovsaraceno/QuadratiK-package)
+| Usage  | Release | Development |
+|------------------|------------------------|------------------------------|
+| [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![License: GPL (\>= 3)](https://img.shields.io/badge/license-GPL%20(%3E=%203)-blue.svg)](https://cran.r-project.org/web/licenses/GPL%20(%3E=%203)) | [![arXiv](https://img.shields.io/badge/doi-arXiv:2402.02290v2-green.svg)](https://doi.org/arXiv:2402.02290v2) [![CRAN version](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![GitHub version](https://img.shields.io/badge/devel%20version-1.1.2-blue.svg)](https://github.com/giovsaraceno/QuadratiK-package) | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![codecov](https://codecov.io/github/giovsaraceno/QuadratiK-package/graph/badge.svg?token=M4CDTQPONE)](https://codecov.io/github/giovsaraceno/QuadratiK-package) [![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |
 
 <!-- badges: end -->
 
@@ -64,7 +61,7 @@ Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: Collection of
 
 and the associated paper:
 
-Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package in R and Python. arXiv preprint [arXiv:2402.02290](https://arxiv.org/abs/2402.02290).
+Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package in R and Python. arXiv preprint [arXiv:2402.02290v2](https://arxiv.org/abs/2402.02290).
 
 ```         
 @misc{saraceno2024package, 

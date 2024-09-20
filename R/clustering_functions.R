@@ -926,6 +926,10 @@ setMethod("predict", signature(object="pkbc"),
       newdata <- as.matrix(newdata)
    }
    
+   if(!is.numeric(newdata)){
+      stop("newdata must be numeric")
+   }
+             
    # Ensure that x has the same number of columns as the training data
    if (ncol(newdata) != ncol(object@input$dat)) {
    stop("newdata must have the same number of variables as the training data.")
@@ -1077,6 +1081,7 @@ setMethod("predict", signature(object="pkbc"),
 #' @export
 pkbc_validation <- function(object, true_label=NULL){
    
+   # nocov start
    if (!requireNamespace("mclust", quietly = TRUE)) {
       install <- readline(prompt = "'mclust' is required for ARI. Would you 
                           like to install it now? (yes/no): ")
@@ -1109,6 +1114,7 @@ pkbc_validation <- function(object, true_label=NULL){
          return(NULL)
       }
    }
+   # nocov end
    
    x <- object@input$dat
    x <- x/sqrt(rowSums(x^2))

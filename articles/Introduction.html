@@ -104,7 +104,7 @@ can be found at <a href="https://quadratik.readthedocs.io/en/latest/user_guide/d
 </h3>
 <p>If you use this package in your research or work, please cite it as
 follows:</p>
-<p>Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK:
+<p>Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: A
 Collection of Methods Constructed using Kernel-Based Quadratic
 Distances. <a href="https://cran.r-project.org/package=QuadratiK" class="external-link uri">https://cran.r-project.org/package=QuadratiK</a></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="va">@Manual</span>{<span class="ot">saraceno2024QuadratiK</span>, </span>
@@ -185,7 +185,7 @@ and
 otherwise the standard normal distribution is considered.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">4</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co"># Does x come from a multivariate standard normal distribution?</span></span>
+<span><span class="co"># Does x come from the specified multivariate normal distribution?</span></span>
 <span><span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span><span class="va">x</span>, mu_hat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, Sigma_hat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, h <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance Normality test </span></span>

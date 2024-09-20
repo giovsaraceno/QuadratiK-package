@@ -9,9 +9,10 @@ vignette: >
 
 ## Overview
 
-The `QuadratiK` package provides the first implementation, in R and Python, of a comprehensive set of goodness-of-fit tests and a clustering technique for spherical data using kernel-based quadratic distances. The primary goal of `QuadratiK` is to offer flexible tools for testing multivariate and high-dimensional data for uniformity, normality, comparing two or more samples, and clustering spherical data efficiently.
+The `QuadratiK` package provides the first implementation, in R and Python, of a comprehensive set of goodness-of-fit tests and a clustering technique for spherical data using kernel-based quadratic distances. The primary goal of `QuadratiK` is to offer flexible tools for testing multivariate and high-dimensional data for uniformity, normality, comparing two or more samples. 
 
-This package includes several novel algorithms that are designed to handle spherical data, which is often encountered in fields like directional statistics, geospatial data analysis, and signal processing.
+This package includes several novel algorithms that are designed to handle spherical data, which is often encountered in fields like directional statistics, geospatial data analysis, and signal processing. In particular, it offers functions for clustering spherical data efficiently, for computing the density value and for generating random samples from a Poisson kernel-based density.
+
 
 ### Installation
 

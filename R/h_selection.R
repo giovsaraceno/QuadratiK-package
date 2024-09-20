@@ -336,12 +336,13 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
       return(c(STATISTIC[1] < CV))
    }
    
-   chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
-   if (nzchar(chk) && chk == "TRUE") {
-      # nocov start 
-      num_cores <- 2
-      # nocov end
-   } else if(is.null(n_cores)) {
+   # chk <- Sys.getenv("_R_CHECK_LIMIT_CORES_", "")
+   # if (nzchar(chk) && chk == "TRUE") {
+   #    # nocov start 
+   #    num_cores <- 2
+   #    # nocov end
+   # } else 
+   if(is.null(n_cores)) {
       num_cores <- detectCores()
    } else if (is.numeric(n_cores)) {
       num_cores <- as.numeric(n_cores)

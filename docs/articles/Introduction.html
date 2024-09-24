@@ -187,8 +187,8 @@ dimensions.</p>
 <span><span class="co">##  Kernel-based quadratic distance Normality test </span></span>
 <span><span class="co">##      U-statistic V-statistic</span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.240919    1.210575 </span></span>
-<span><span class="co">## Critical Value:   1.860554    8.901682 </span></span>
+<span><span class="co">## Test Statistic:   -0.7749993      0.7443672 </span></span>
+<span><span class="co">## Critical Value:   1.717875    8.901682 </span></span>
 <span><span class="co">## H0 is rejected:   FALSE       FALSE </span></span>
 <span><span class="co">## Selected tuning parameter h:  0.4</span></span></code></pre>
 <p>If needed, we can specify <span class="math inline">\(\mu\)</span>
@@ -202,8 +202,8 @@ normal distribution is considered.</p>
 <span><span class="co">##  Kernel-based quadratic distance Normality test </span></span>
 <span><span class="co">##      U-statistic V-statistic</span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   -1.433814   0.5710852 </span></span>
-<span><span class="co">## Critical Value:   1.600478    8.901682 </span></span>
+<span><span class="co">## Test Statistic:   -0.9278911      0.6985267 </span></span>
+<span><span class="co">## Critical Value:   1.561671    8.901682 </span></span>
 <span><span class="co">## H0 is rejected:   FALSE       FALSE </span></span>
 <span><span class="co">## Selected tuning parameter h:  0.4</span></span></code></pre>
 <p><strong>Two-sample test</strong></p>
@@ -220,8 +220,8 @@ the null hypothesis <span class="math inline">\(H_0:F=G\)</span> vs
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   5.750229    10.11351 </span></span>
-<span><span class="co">## Critical Value:   0.4638788   0.8167872 </span></span>
+<span><span class="co">## Test Statistic:   5.816289    10.01462 </span></span>
+<span><span class="co">## Critical Value:   0.599184    1.032848 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
 <span><span class="co">## Selected tuning parameter h:  0.4</span></span></code></pre>
@@ -240,8 +240,8 @@ samples, with <span class="math inline">\(k&gt;2\)</span>, that is <span class="
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   8.125129    11.92761 </span></span>
-<span><span class="co">## Critical Value:   0.8287852   1.217556 </span></span>
+<span><span class="co">## Test Statistic:   7.207959    10.45872 </span></span>
+<span><span class="co">## Critical Value:   0.9202125   1.336221 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
 <span><span class="co">## Selected tuning parameter h:  0.4</span></span></code></pre>
@@ -268,14 +268,14 @@ help documentation of the <code><a href="../reference/pk.test.html">pk.test()</a
 <span><span class="co">## </span></span>
 <span><span class="co">## U-statistic:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## H0 is rejected:  TRUE </span></span>
-<span><span class="co">## Statistic Un:  2.588675 </span></span>
-<span><span class="co">## Critical value:  1.691064 </span></span>
+<span><span class="co">## H0 is rejected:  FALSE </span></span>
+<span><span class="co">## Statistic Un:  -1.65177 </span></span>
+<span><span class="co">## Critical value:  1.788593 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## V-statistic:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## H0 is rejected:  TRUE </span></span>
-<span><span class="co">## Statistic Vn:  214.5341 </span></span>
+<span><span class="co">## H0 is rejected:  FALSE </span></span>
+<span><span class="co">## Statistic Vn:  172.7073 </span></span>
 <span><span class="co">## Critical value:  205.5964</span></span></code></pre>
 </div>
 </div>
@@ -297,23 +297,23 @@ more details please visit the help documentation of the
 <span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.9</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dpkb.html">rpkb</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, mu <span class="op">=</span> <span class="va">mu</span>, rho <span class="op">=</span> <span class="va">rho</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##           [,1]         [,2]        [,3]</span></span>
-<span><span class="co">## [1,] 0.9964339  0.022167889  0.08141297</span></span>
-<span><span class="co">## [2,] 0.9775358 -0.165463151 -0.13055896</span></span>
-<span><span class="co">## [3,] 0.9936630  0.001812589  0.11238600</span></span>
-<span><span class="co">## [4,] 0.5294076  0.516742786  0.67283321</span></span>
-<span><span class="co">## [5,] 0.8627705 -0.373685363  0.34056757</span></span>
-<span><span class="co">## [6,] 0.9757206  0.162455910  0.14689230</span></span></code></pre>
+<pre><code><span><span class="co">##           [,1]        [,2]        [,3]</span></span>
+<span><span class="co">## [1,] 0.9972879 -0.05247684  0.05160546</span></span>
+<span><span class="co">## [2,] 0.9578247  0.05934157  0.28115913</span></span>
+<span><span class="co">## [3,] 0.9976190 -0.00375438 -0.06886380</span></span>
+<span><span class="co">## [4,] 0.9960611  0.01051606 -0.08804423</span></span>
+<span><span class="co">## [5,] 0.9973778  0.06613727 -0.02938257</span></span>
+<span><span class="co">## [6,] 0.9551333  0.16815868  0.24380958</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dens_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dpkb.html">dpkb</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">x</span>, mu <span class="op">=</span> <span class="va">mu</span>, rho <span class="op">=</span> <span class="va">rho</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dens_x</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##            [,1]</span></span>
-<span><span class="co">## [1,] 7.18661468</span></span>
-<span><span class="co">## [2,] 1.33487072</span></span>
-<span><span class="co">## [3,] 4.82748212</span></span>
-<span><span class="co">## [4,] 0.01905557</span></span>
-<span><span class="co">## [5,] 0.11604087</span></span>
-<span><span class="co">## [6,] 1.21491905</span></span></code></pre>
+<pre><code><span><span class="co">##           [,1]</span></span>
+<span><span class="co">## [1,] 8.3283233</span></span>
+<span><span class="co">## [2,] 0.6003934</span></span>
+<span><span class="co">## [3,] 8.8549764</span></span>
+<span><span class="co">## [4,] 6.7674772</span></span>
+<span><span class="co">## [5,] 8.4661470</span></span>
+<span><span class="co">## [6,] 0.5529694</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="clustering-algorithm-for-spherical-data">Clustering Algorithm for Spherical Data<a class="anchor" aria-label="anchor" href="#clustering-algorithm-for-spherical-data"></a>
@@ -343,38 +343,38 @@ visit the help documentation of the <code><a href="../reference/pkbc.html">pkbc(
 <span><span class="co">## </span></span>
 <span><span class="co">## Summary:</span></span>
 <span><span class="co">##         LogLik     WCSS</span></span>
-<span><span class="co">## [1,] -635.3387 400.4637</span></span>
-<span><span class="co">## [2,] -339.9154 320.4746</span></span>
-<span><span class="co">## [3,] -331.4067 320.3559</span></span>
+<span><span class="co">## [1,] -630.0381 397.2391</span></span>
+<span><span class="co">## [2,] -381.7998 324.1583</span></span>
+<span><span class="co">## [3,] -374.4578 324.1060</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Results for 2 clusters:</span></span>
 <span><span class="co">## Estimated Mixing Proportions (alpha):</span></span>
-<span><span class="co">## [1] 0.300027 0.699973</span></span>
+<span><span class="co">## [1] 0.3225408 0.6774592</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Clustering table:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   1   2 </span></span>
-<span><span class="co">##  92 208 </span></span>
+<span><span class="co">##  93 207 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Results for 3 clusters:</span></span>
 <span><span class="co">## Estimated Mixing Proportions (alpha):</span></span>
-<span><span class="co">## [1] 0.3271340 0.3309790 0.3418869</span></span>
+<span><span class="co">## [1] 0.3136732 0.3359385 0.3503883</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Clustering table:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   1   2   3 </span></span>
-<span><span class="co">##  98  99 103 </span></span>
+<span><span class="co">##  92 102 106 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Results for 4 clusters:</span></span>
 <span><span class="co">## Estimated Mixing Proportions (alpha):</span></span>
-<span><span class="co">## [1] 0.322564518 0.342066618 0.331313437 0.004055427</span></span>
+<span><span class="co">## [1] 0.314036666 0.350565893 0.003496869 0.331900572</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Clustering table:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   1   2   3   4 </span></span>
-<span><span class="co">##  97 103  99   1</span></span></code></pre>
+<span><span class="co">##  92 106   1 101</span></span></code></pre>
 <p>The software includes additional graphical functions, aiding users in
 validating and representing the cluster results as well as enhancing the
 interpretability and usability of the analysis.</p>
@@ -383,27 +383,27 @@ interpretability and usability of the analysis.</p>
 <span><span class="va">x_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dpkb.html">rpkb</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>, rho <span class="op">=</span> <span class="va">rho</span><span class="op">)</span></span>
 <span><span class="va">memb_mew</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">cluster_res</span>, k <span class="op">=</span> <span class="fl">3</span>, newdata <span class="op">=</span> <span class="va">x_new</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">memb_mew</span><span class="op">$</span><span class="va">Memb</span></span></code></pre></div>
-<pre><code><span><span class="co">##  [1] 1 1 1 1 1 1 1 2 1 1</span></span></code></pre>
+<pre><code><span><span class="co">##  [1] 2 2 2 2 2 2 2 1 2 2</span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute measures for evaluating the clustering results</span></span>
 <span><span class="va">val_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pkbc_validation.html">pkbc_validation</a></span><span class="op">(</span><span class="va">cluster_res</span><span class="op">)</span></span>
 <span><span class="va">val_res</span></span></code></pre></div>
 <pre><code><span><span class="co">## $metrics</span></span>
-<span><span class="co">##           2         3         4</span></span>
-<span><span class="co">## ASW 0.51132 0.6906808 0.5284012</span></span>
+<span><span class="co">##             2         3         4</span></span>
+<span><span class="co">## ASW 0.5148363 0.6620116 0.4330777</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $IGP</span></span>
 <span><span class="co">## $IGP[[1]]</span></span>
 <span><span class="co">## NULL</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $IGP[[2]]</span></span>
-<span><span class="co">## [1] 0.9913043 1.0000000</span></span>
+<span><span class="co">## [1] 1 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $IGP[[3]]</span></span>
-<span><span class="co">## [1] 1.000000 0.989899 1.000000</span></span>
+<span><span class="co">## [1] 1 1 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $IGP[[4]]</span></span>
-<span><span class="co">## [1] 1.000000 1.000000 0.989899 1.000000</span></span></code></pre>
+<span><span class="co">## [1] 1 1 1 1</span></span></code></pre>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot method for the pkbc object:</span></span>
 <span><span class="co"># - scatter plot of data points on the sphere</span></span>

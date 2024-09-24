@@ -120,6 +120,7 @@
 #' @importFrom sn rmsn
 #' @importFrom doParallel registerDoParallel
 #' @importFrom parallel makeCluster
+#' @importFrom parallel clusterExport
 #' @importFrom parallel detectCores
 #' @importFrom parallel stopCluster
 #' @import foreach 
@@ -352,6 +353,9 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    
    cl <- parallel::makeCluster(num_cores)
    doParallel::registerDoParallel(cl)
+   # parallel::clusterExport(cl, varlist = c("kbNormTest", "normal_CV",
+   #                                       "cv_ksample", "stat_ksample_cpp",
+   #                                       "compute_CV","stat2sample"))
    
    D <- length(delta)
    

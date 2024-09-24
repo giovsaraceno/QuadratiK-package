@@ -1,22 +1,32 @@
-QuadratiK 1.1.2 (Work in Progress) 
+QuadratiK 1.1.2 (Development version) 
 =========================
 
 ### NEW FEATURES
 
   * Added NEWS.md file
+  
+  * More detailed information in the README file and documentation (the methods 
+    are more usable and clearer for a broader audience). 
+
+### MINOR IMPROVEMENTS
+
   * Added badges for rOpenSci review status, test coverage, R CMD CHECK,
-          CRAN downloads
-  * More detailed README file and documentation, such that the methods are 
-          more usable and clearer for a broader audience. 
+    CRAN downloads 
   * Addition of test codes with testthat package. 
   * In particular, testing that random sampling from the PKBD and the wrapped
           Cauchy distribution is equivalent.
-  * Solved bugs:
-    - scatter-plots related to the clustering algorithm results.
-    - computation of evaluation measures (pkdc_validation function) when the 
-      true labels are not provided.
-  * The help documentation for the methods defined for the classes in the package
-    can be accessed directly (addition of roxygen tag @name and @aliases)
+  
+### BUG FIXES
+
+  * scatter-plots related to the clustering algorithm results.
+  * computation of evaluation measures (`pkdc_validation` function) when the 
+    true labels are not provided.
+
+### DOCUMENTATION FIXES
+
+  * The help documentation for the methods defined for the classes in the 
+    package can be accessed directly (addition of roxygen tag @name and 
+    @aliases)
 
 
 QuadratiK 1.1.1 (2024-06-05)

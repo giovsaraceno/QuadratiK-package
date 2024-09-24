@@ -44,7 +44,7 @@ kb.test(x, y, h = 0.4)
 # Generate points on the sphere from the uniform ditribution 
 x <- sample_hypersphere(d = 3, n_points = 100)
 # Does x come from the uniform distribution on the sphere?
-pk.test(x, rho = 0.9)
+pk.test(x, rho = 0.7)
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  ?dpkb

@@ -42,11 +42,12 @@ distribution. Furthermore, \eqn{\omega_d = 2\pi^{d/2} [\Gamma(d/2)]^{-1}}
 is the surface area of the unit sphere in \eqn{\mathbb{R}^d}
 (see Golzy and Markatou, 2020).
 \item \strong{Clustering Algorithm for Spherical Data}: the package incorporates a
-unique clustering algorithm specifically tailored for spherical data and it
-is especially useful in the presence of noise in the data and the presence
-of non-negligible overlap between clusters. This algorithm leverages a
-mixture of Poisson kernel-based densities on the Sphere, enabling effective
-clustering of spherical data or data that has been spherically transformed.
+unique clustering algorithm specifically tailored for \eqn{d}-dimensional
+spherical data and it is especially useful in the presence of noise in the
+data and the presence of non-negligible overlap between clusters. This
+algorithm leverages a mixture of Poisson kernel-based densities on the
+Sphere, enabling effective clustering of spherical data or data that has
+been spherically transformed.
 The package also provides the functions for density evaluation and random
 sampling from the Poisson kernel-based distribution.
 \item \strong{Additional Features}: Alongside these functionalities, the software

@@ -1,6 +1,6 @@
 <!-- badges: start -->
 
-| Usage  | Release | Development |
+| Usage | Release | Development |
 |------------------|------------------------|------------------------------|
 | [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![License: GPL (\>= 3)](https://img.shields.io/badge/license-GPL%20(%3E=%203)-blue.svg)](https://cran.r-project.org/web/licenses/GPL%20(%3E=%203)) | [![arXiv](https://img.shields.io/badge/doi-arXiv:2402.02290v2-green.svg)](https://doi.org/arXiv:2402.02290v2) [![CRAN version](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![GitHub version](https://img.shields.io/badge/devel%20version-1.1.2-blue.svg)](https://github.com/giovsaraceno/QuadratiK-package) | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![codecov](https://codecov.io/github/giovsaraceno/QuadratiK-package/graph/badge.svg?token=M4CDTQPONE)](https://codecov.io/github/giovsaraceno/QuadratiK-package) [![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |
 
@@ -8,7 +8,7 @@
 
 # Collection of Methods Constructed using the Kernel-Based Quadratic Distances
 
-`QuadratiK` provides the first implementation, in R and Python, of a comprehensive set of goodness-of-fit tests and a clustering technique for spherical data using kernel-based quadratic distances. It includes:
+`QuadratiK` provides the first implementation, in R and Python, of a comprehensive set of goodness-of-fit tests and a clustering technique for $d$-dimensional spherical data $d \ge 2$ using kernel-based quadratic distances. It includes:
 
 -   **Goodness-of-Fit Tests**: The software implements one, two, and *k*-sample tests for goodness of fit, offering an efficient and mathematically sound way to assess the fit of probability distributions. Expanded capabilities include supporting tests for uniformity on the *d*-dimensional Sphere based on Poisson kernel densities. Our tests are particularly useful for large, high dimensional data sets where the assessment of fit of probability models is of interest. Specifically, we offer tests for normality, as well as two- and *k*-sample tests, where testing equality of two or more distributions is of interest, that is $H_0: F_1 = F_2$ and $H_0: F_1 = \ldots = F_k$ respectively. The proposed tests perform well in terms of level and power for contiguous alternatives, heavy tailed distributions and in higher dimensions.
 
@@ -38,7 +38,7 @@ The `QuadratiK` package is also available in Python on PyPI <https://pypi.org/pr
 ## Authors
 
 Giovanni Saraceno, Marianthi Markatou, Raktim Mukhopadhyay, Mojgan Golzy\
-Email: [gsaracen\@buffalo.edu](mailto:gsaracen@buffalo.edu)
+Mantainer: Giovanni Saraceno \<[gsaracen\@buffalo.edu](mailto:gsaracen@buffalo.edu)\>
 
 ## Citation
 

@@ -68,6 +68,7 @@ Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan (2024).
 }
 ```
 
+
 ## Key features and basic usage
 
 ### Goodness-of-Fit Tests
@@ -144,7 +145,7 @@ To test the null hypothesis of uniformity on the $d$-dimensional sphere $\mathca
 # Generate points on the sphere from the uniform ditribution 
 x <- sample_hypersphere(d = 3, n_points = 100)
 # Does x come from the uniform distribution on the sphere?
-pk.test(x, rho = 0.9)
+pk.test(x, rho = 0.7)
 ```
 
 ### Poisson kernel-based distribution (PKBD)

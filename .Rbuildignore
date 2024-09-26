@@ -11,3 +11,5 @@
 ^docs$
 ^pkgdown$
 ^CODE_OF_CONDUCT\.md$
+^vignettes/TwoSample_test\.Rmd$
+^vignettes/kSample_test\.Rmd$

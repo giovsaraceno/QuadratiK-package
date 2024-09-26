@@ -87,7 +87,7 @@
 #'
 #'
 #' @references
-#' Ding, Y., Markatou, M., Saraceno, G. (2023). “Poisson Kernel-Based Tests for 
+#' Ding, Y., Markatou, M. and Saraceno, G. (2023). “Poisson Kernel-Based Tests for 
 #' Uniformity on the d-Dimensional Sphere.” Statistica Sinica. 
 #' doi:10.5705/ss.202022.0347
 #' 

@@ -90,7 +90,7 @@ pkbc_validation(pkbc_res)
 
 }
 \references{
-Kapp, A.V., Tibshirani, R. (2007) "Are clusters found in one dataset present
+Kapp, A.V. and Tibshirani, R. (2007) "Are clusters found in one dataset present
 in another dataset?", Biostatistics, 8(1), 9–31,
 https://doi.org/10.1093/biostatistics/kxj029
 

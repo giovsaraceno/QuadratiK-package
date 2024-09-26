@@ -67,20 +67,20 @@ Usage instruction for the Dashboard can be found at
 \url{https://quadratik.readthedocs.io/en/latest/user_guide/dashboard_application_usage.html}.
 }
 \references{
-Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan
+Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M.
 (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK
 package in R and Python. arXiv preprint arXiv:2402.02290.
 
-Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson
+Ding, Y., Markatou, M. and Saraceno, G. (2023). “Poisson
 Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.”
 Statistica Sinica. doi: doi:10.5705/ss.202022.0347.
 
-Golzy Mojan & Markatou Marianthi (2020) Poisson Kernel-Based Clustering on
+Golzy, M. and Markatou, M. (2020) Poisson Kernel-Based Clustering on
 the Sphere: Convergence Properties, Identifiability, and a Method of
 Sampling, Journal of Computational and Graphical Statistics, 29:4, 758-770,
 DOI: 10.1080/10618600.2020.1740713.
 
-Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for
+Markatou, M. and Saraceno, G. (2024). “A Unified Framework for
 Multivariate Two- and k-Sample Kernel-based Quadratic Distance
 Goodness-of-Fit Tests.” \cr
 https://doi.org/10.48550/arXiv.2407.16374
@@ -96,7 +96,7 @@ Useful links:
 
 }
 \author{
-Giovanni Saraceno, Marianthi Markatou,
-Raktim Mukhopadhyay, Mojgan Golzy
-\email{gsaracen@buffalo.edu}
+Giovanni Saraceno, Marianthi Markatou, Raktim Mukhopadhyay, Mojgan Golzy
+
+Mantainer: Giovanni Saraceno \email{gsaracen@buffalo.edu}
 }

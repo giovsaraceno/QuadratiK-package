@@ -33,7 +33,7 @@
 #' https://doi.org/10.24432/C51880.
 #'
 #' @references
-#' Rohra, J.G., Perumal, B., Narayanan, S.J., Thakur, P., Bhatt, R.B. (2017). 
+#' Rohra, J.G., Perumal, B., Narayanan, S.J., Thakur, P. and Bhatt, R.B. (2017).
 #' "User Localization in an Indoor Environment Using Fuzzy Hybrid of Particle 
 #' Swarm Optimization & Gravitational Search Algorithm with Neural Networks". 
 #' In: Deep, K., et al. Proceedings of Sixth International Conference on Soft 

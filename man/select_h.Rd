@@ -143,12 +143,12 @@ h_sel
 
 }
 \references{
-Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for
+Markatou, M. and Saraceno, G. (2024). “A Unified Framework for
 Multivariate Two- and k-Sample Kernel-based Quadratic Distance
 Goodness-of-Fit Tests.” \cr
 https://doi.org/10.48550/arXiv.2407.16374
 
-Saraceno, G., Markatou, M., Mukhopadhyay, R., Golzy, M. (2024).
+Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024).
 Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package
 in R and Python. \cr
 https://arxiv.org/abs/2402.02290.

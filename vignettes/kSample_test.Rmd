@@ -129,7 +129,7 @@ The proposed tests exhibit high power against asymmetric alternatives that are c
 
 ## References
 
-Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for 
+Markatou, M. and Saraceno, G. (2024). “A Unified Framework for 
 Multivariate Two- and k-Sample Kernel-based Quadratic Distance 
 Goodness-of-Fit Tests.”  
 [https://doi.org/10.48550/arXiv.2407.16374](https://doi.org/10.48550/arXiv.2407.16374)

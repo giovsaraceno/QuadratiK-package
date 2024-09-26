@@ -148,7 +148,7 @@ show(pkbd)
 
 }
 \references{
-Golzy, M., Markatou, M. (2020) Poisson Kernel-Based Clustering on the
+Golzy, M. and Markatou, M. (2020) Poisson Kernel-Based Clustering on the
 Sphere: Convergence Properties, Identifiability, and a Method of Sampling,
 Journal of Computational and Graphical Statistics, 29:4, 758-770,
 DOI: 10.1080/10618600.2020.1740713.

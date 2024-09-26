@@ -48,7 +48,7 @@ summary(wine)
 
 }
 \references{
-Aeberhard, S., Coomans, D., & De Vel, O. (1994). Comparative analysis of
+Aeberhard, S., Coomans, D. and De Vel, O. (1994). Comparative analysis of
 statistical pattern recognition methods in high dimensional settings.
 Pattern Recognition, 27(8), 1065-1077.
 }

@@ -1,8 +1,8 @@
 <!-- badges: start -->
 
-| Usage | Release | Development |
+| Usage  | Release | Development |
 |------------------|------------------------|------------------------------|
-| [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![License: GPL (\>= 3)](https://img.shields.io/badge/license-GPL%20(%3E=%203)-blue.svg)](https://cran.r-project.org/web/licenses/GPL%20(%3E=%203)) | [![arXiv](https://img.shields.io/badge/doi-arXiv:2402.02290v2-green.svg)](https://doi.org/arXiv:2402.02290v2) [![CRAN version](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![GitHub version](https://img.shields.io/badge/devel%20version-1.1.2-blue.svg)](https://github.com/giovsaraceno/QuadratiK-package) | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![codecov](https://codecov.io/github/giovsaraceno/QuadratiK-package/graph/badge.svg?token=M4CDTQPONE)](https://codecov.io/github/giovsaraceno/QuadratiK-package) [![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |
+| [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![License: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://giovsaraceno.github.io/QuadratiK-package/LICENSE.html)|[![arXiv](https://img.shields.io/badge/doi-arXiv:2402.02290v2-green.svg)](https://doi.org/10.48550/arXiv.2402.02290) [![CRAN version](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![GitHub version](https://img.shields.io/badge/devel%20version-1.1.2-blue.svg)](https://github.com/giovsaraceno/QuadratiK-package) | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![codecov](https://codecov.io/github/giovsaraceno/QuadratiK-package/graph/badge.svg?token=M4CDTQPONE)](https://codecov.io/github/giovsaraceno/QuadratiK-package) [![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |             |
 
 <!-- badges: end -->
 
@@ -44,7 +44,7 @@ Mantainer: Giovanni Saraceno \<[gsaracen\@buffalo.edu](mailto:gsaracen@buffalo.e
 
 If you use this package in your research or work, please cite it as follows:
 
-Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances. <https://cran.r-project.org/package=QuadratiK>, <https://github.com/giovsaraceno/QuadratiK-package>, <https://giovsaraceno.github.io/QuadratiK-package/>.
+Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances. <https://cran.r-project.org/package=QuadratiK>, <https://github.com/giovsaraceno/QuadratiK-package>, <https://giovsaraceno.github.io/QuadratiK-package/>.
 
 ```         
 @Manual{saraceno2024QuadratiK,  
@@ -61,7 +61,7 @@ Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: Collection of
 
 and the associated paper:
 
-Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package in R and Python. arXiv preprint [arXiv:2402.02290v2](https://arxiv.org/abs/2402.02290).
+Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). Goodness-of-Fit and Clustering of Spherical Data: the QuadratiK package in R and Python. arXiv preprint [arXiv:2402.02290v2](https://arxiv.org/abs/2402.02290).
 
 ```         
 @misc{saraceno2024package, 
@@ -78,11 +78,11 @@ Saraceno Giovanni, Markatou Marianthi, Mukhopadhyay Raktim, Golzy Mojgan (2024).
 
 ## References
 
--   Ding Yuxin, Markatou Marianthi, Saraceno Giovanni (2023). “Poisson Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.” Statistica Sinica. doi: [10.5705/ss.202022.0347](https://doi.org/10.5705/ss.202022.0347).
+-   Ding, Y., Markatou, M. and Saraceno, G. (2023). “Poisson Kernel-Based Tests for Uniformity on the d-Dimensional Sphere.” Statistica Sinica. doi: [10.5705/ss.202022.0347](https://doi.org/10.5705/ss.202022.0347).
 
--   Mojgan Golzy & Marianthi Markatou (2020) Poisson Kernel-Based Clustering on the Sphere: Convergence Properties, Identifiability, and a Method of Sampling, Journal of Computational and Graphical Statistics, 29:4, 758-770, DOI: [10.1080/10618600.2020.1740713](https://doi.org/10.1080/10618600.2020.1740713).
+-   Golzy, M. & Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere: Convergence Properties, Identifiability, and a Method of Sampling, Journal of Computational and Graphical Statistics, 29:4, 758-770, DOI: [10.1080/10618600.2020.1740713](https://doi.org/10.1080/10618600.2020.1740713).
 
--   Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for Multivariate Two- and k-Sample Kernel-based Quadratic Distance Goodness-of-Fit Tests.” [arXiv:2407.16374](https://doi.org/10.48550/arXiv.2407.16374)
+-   Markatou, M. and Saraceno, G. (2024). “A Unified Framework for Multivariate Two- and k-Sample Kernel-based Quadratic Distance Goodness-of-Fit Tests.” [arXiv:2407.16374](https://doi.org/10.48550/arXiv.2407.16374)
 
 ## Details
 

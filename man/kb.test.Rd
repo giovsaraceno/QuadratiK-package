@@ -282,12 +282,12 @@ my_test
 
 }
 \references{
-Markatou Marianthi & Saraceno Giovanni (2024). “A Unified Framework for
+Markatou, M. and Saraceno, G. (2024). “A Unified Framework for
 Multivariate Two- and k-Sample Kernel-based Quadratic Distance
 Goodness-of-Fit Tests.” \cr
 https://doi.org/10.48550/arXiv.2407.16374
 
-Lindsay, B.G., Markatou, M. & Ray, S. (2014) "Kernels, Degrees of Freedom,
+Lindsay, B.G., Markatou, M. and Ray, S. (2014) "Kernels, Degrees of Freedom,
 and Power Properties of Quadratic Distance Goodness-of-Fit Tests", Journal
 of the American Statistical Association, 109:505, 395-410,
 DOI: 10.1080/01621459.2013.836972

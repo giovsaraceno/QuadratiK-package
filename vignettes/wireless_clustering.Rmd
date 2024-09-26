@@ -83,7 +83,7 @@ summary_clust
 
 ## Note
 
-If the number of cluster *k* is not provided to the `plot` function, one scatter plot is displeyed for each possible number of clusters available in the object of class `pkbc`.
+If the number of cluster *k* is not provided to the `plot` function, one scatter plot is displayed for each possible number of clusters available in the object of class `pkbc`.
 
 ## References
 

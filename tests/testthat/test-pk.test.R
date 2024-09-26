@@ -87,7 +87,7 @@ test_that("Functionality with valid inputs", {
    expect_true(is.numeric(unif_test@Vn))
    expect_false(unif_test@H0_Un)
    
-   # Test does not reject uniformity
+   # Test reject uniformity
    set.seed(123)
    x_sp <- rpkb(n = size, mu = c(1,0,0), rho = 0.9)$x
    unif_test <- pk.test(x_sp,rho=0.9)

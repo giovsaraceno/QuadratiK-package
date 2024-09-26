@@ -18,6 +18,8 @@
 
 -   **Additional Features**: Alongside these functionalities, the software includes additional graphical functions, aiding users in validating and representing the cluster results as well as enhancing the interpretability and usability of the analysis.
 
+For an introduction to `QuadratiK` see the vignette [Introduction to the QuadratiK Package](https://giovsaraceno.github.io/QuadratiK-package/articles/Introduction.html).
+
 ## Installation
 
 You can install the version published on CRAN of `QuadratiK`

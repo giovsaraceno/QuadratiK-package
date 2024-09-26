@@ -49,6 +49,8 @@
 #'  representing the cluster results as well as enhancing the interpretability 
 #'  and usability of the analysis.
 #'   
+#' For an introduction to `QuadratiK` see the vignette 
+#' \href{../doc/Introduction.html}{Introduction to the QuadratiK Package}.
 #' 
 #' @details The work has been supported by Kaleida Health Foundation and the 
 #' National Science Foundation.

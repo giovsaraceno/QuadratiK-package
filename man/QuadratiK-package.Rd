@@ -55,6 +55,9 @@ includes additional graphical functions, aiding users in validating and
 representing the cluster results as well as enhancing the interpretability
 and usability of the analysis.
 }
+
+For an introduction to \code{QuadratiK} see the vignette
+\href{../doc/Introduction.html}{Introduction to the QuadratiK Package}.
 }
 \details{
 The work has been supported by Kaleida Health Foundation and the

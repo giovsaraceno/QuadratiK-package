@@ -143,12 +143,12 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #' message asking the user to install the missing package(s).
 #' 
 #' @references
-#' Golzy, M. and Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
-#' Convergence Properties, Identifiability, and a Method of Sampling, Journal of
-#' Computational and Graphical Statistics, 29:4, 758-770, 
+#' Golzy, M. and Markatou, M. (2020) Poisson Kernel-Based Clustering on the 
+#' Sphere: Convergence Properties, Identifiability, and a Method of Sampling, 
+#' Journal of Computational and Graphical Statistics, 29:4, 758-770, 
 #' DOI: 10.1080/10618600.2020.1740713.
 #' 
-#' Sablica L., Hornik K. and Leydold J. (2023) "Efficient sampling from the PKBD 
+#' Sablica L., Hornik K. and Leydold J. (2023) "Efficient sampling from the PKBD
 #' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 #'
 #' @srrstats {G1.0} Reference section reports the related literature.
@@ -239,9 +239,9 @@ rpkb <- function(n, mu, rho, method = 'rejacg',
 #' @param p dimension.
 #' 
 #' @references
-#' Golzy, M. and Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
-#' Convergence Properties, Identifiability, and a Method of Sampling, Journal of
-#' Computational and Graphical Statistics, 29:4, 758-770, 
+#' Golzy, M. and Markatou, M. (2020) Poisson Kernel-Based Clustering on the 
+#' Sphere: Convergence Properties, Identifiability, and a Method of Sampling, 
+#' Journal of Computational and Graphical Statistics, 29:4, 758-770, 
 #' DOI: 10.1080/10618600.2020.1740713.
 #'
 #' @importFrom stats runif
@@ -282,7 +282,7 @@ rejvmf <- function(n, rho, mu, p) {
 #' @param p dimension.
 #' 
 #' @references
-#' Sablica L., Hornik K. and Leydold J. (2023) "Efficient sampling from the PKBD 
+#' Sablica L., Hornik K. and Leydold J. (2023) "Efficient sampling from the PKBD
 #' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 #' 
 #' @importFrom stats runif
@@ -350,7 +350,7 @@ rejacg <- function(n, rho, mu, p, tol.eps, max.iter){
 #' @param p dimension.
 #' 
 #' @references
-#' Sablica L., Hornik K. and Leydold J. (2023) "Efficient sampling from the PKBD 
+#' Sablica L., Hornik K. and Leydold J. (2023) "Efficient sampling from the PKBD
 #' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 #' 
 #' 

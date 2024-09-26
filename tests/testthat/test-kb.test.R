@@ -27,7 +27,7 @@ test_that("Error on invalid method input", {
 test_that("Error on invalid b input", {
    set.seed(123)
    expect_error(kb.test(x = matrix(rnorm(100), ncol = 2), h=0.5, b = 10), 
-                "b indicates the proportion used for the subsamples in the 
+                "b indicates the proportion used for the subsamples in the
                      subsampling algoritm. It must be in (0,1].", fixed=TRUE)
 })
 

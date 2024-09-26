@@ -21,7 +21,7 @@ test_that("Error on invalid x input", {
                 "x must be numeric", fixed=TRUE)
    
    expect_error(pk.test(x = rnorm(50), rho = 0.5),
-         "x must be a matrix or a data.frame with dimension greater 
+         "x must be a matrix or a data.frame with dimension greater
                      than 1.", 
          fixed=TRUE)
    

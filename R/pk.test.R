@@ -4,7 +4,10 @@
 #' @description
 #'  This function performs the kernel-based quadratic distance goodness-of-fit 
 #' tests for Uniformity for spherical data \code{x} using the Poisson kernel 
-#' with concentration parameter \code{rho}. 
+#' with concentration parameter \code{rho}. \cr
+#' The Poisson kernel-based test for uniformity exhibits excellent results 
+#' especially in the case of multimodal distributions, as shown in the example
+#' of the \href{../doc/uniformity.html}{Uniformity test on the Sphere vignette}.
 #' 
 #' @details
 #' Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical distribution
@@ -79,7 +82,7 @@
 #'                      asymptotic distribution.
 #'   \item \code{H0_Vn} A logical value indicating whether or not the null 
 #'                      hypothesis is rejected according to Vn.
-#'   \item \code{rho} The value of concentration parameter used for the Poisson 
+#'   \item \code{rho} The value of concentration parameter used for the Poisson
 #'                    kernel function.
 #'   \item \code{B} Number of replications for the critical value of the 
 #'                  U-statistic Un.    
@@ -87,8 +90,8 @@
 #'
 #'
 #' @references
-#' Ding, Y., Markatou, M. and Saraceno, G. (2023). “Poisson Kernel-Based Tests for 
-#' Uniformity on the d-Dimensional Sphere.” Statistica Sinica. 
+#' Ding, Y., Markatou, M. and Saraceno, G. (2023). “Poisson Kernel-Based Tests 
+#' for Uniformity on the d-Dimensional Sphere.” Statistica Sinica. 
 #' doi:10.5705/ss.202022.0347
 #' 
 #' @examples
@@ -107,7 +110,7 @@
 #' @srrstats {G1.4} roxigen2 is used
 #' 
 #' @export
-setGeneric("pk.test",function(x, rho = NULL, B = 300, Quantile = 0.95){
+setGeneric("pk.test",function(x, rho, B = 300, Quantile = 0.95){
    standardGeneric("pk.test")
 })
 #' @rdname pk.test
@@ -126,7 +129,7 @@ setMethod("pk.test", signature(x = "ANY"),
              } else if(is.data.frame(x)) {
                 x <- as.matrix(x)
              } else if(!is.matrix(x)){
-                stop("x must be a matrix or a data.frame with dimension greater 
+                stop("x must be a matrix or a data.frame with dimension greater
                      than 1.")
              }
              if(any(is.na(x))){
@@ -249,7 +252,7 @@ setMethod("summary", "pk.test", function(object) {
       unif_data <- runif(nrow(dat_x),-1,1)
       probs <- seq(0, 1, length.out = nrow(dat_x))
       # qq_df <- data.frame(
-      #    x = quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))), 
+      #    x = quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))),
       #    sample_quantiles = quantile(dat_x[,i], probs = probs))
       x <- quantile(unif_data, probs = seq(0, 1, length.out = nrow(dat_x))) 
       sample_quantiles <- quantile(dat_x[,i], probs = probs)

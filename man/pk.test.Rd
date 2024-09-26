@@ -6,9 +6,9 @@
 \alias{show,pk.test-method}
 \title{Poisson kernel-based quadratic distance test of Uniformity on the sphere}
 \usage{
-pk.test(x, rho = NULL, B = 300, Quantile = 0.95)
+pk.test(x, rho, B = 300, Quantile = 0.95)
 
-\S4method{pk.test}{ANY}(x, rho = NULL, B = 300, Quantile = 0.95)
+\S4method{pk.test}{ANY}(x, rho, B = 300, Quantile = 0.95)
 
 \S4method{show}{pk.test}(object)
 }
@@ -49,7 +49,10 @@ U-statistic Un.
 \description{
 This function performs the kernel-based quadratic distance goodness-of-fit
 tests for Uniformity for spherical data \code{x} using the Poisson kernel
-with concentration parameter \code{rho}.
+with concentration parameter \code{rho}. \cr
+The Poisson kernel-based test for uniformity exhibits excellent results
+especially in the case of multimodal distributions, as shown in the example
+of the \href{../doc/uniformity.html}{Uniformity test on the Sphere vignette}.
 }
 \details{
 Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical distribution
@@ -111,8 +114,8 @@ unif_test
 
 }
 \references{
-Ding, Y., Markatou, M. and Saraceno, G. (2023). “Poisson Kernel-Based Tests for
-Uniformity on the d-Dimensional Sphere.” Statistica Sinica.
+Ding, Y., Markatou, M. and Saraceno, G. (2023). “Poisson Kernel-Based Tests
+for Uniformity on the d-Dimensional Sphere.” Statistica Sinica.
 doi:10.5705/ss.202022.0347
 }
 \seealso{

@@ -11,15 +11,17 @@
 #' -   **Goodness-of-Fit Tests**: The software implements one, two, and 
 #' *k*-sample tests for goodness of fit, offering an efficient and 
 #' mathematically sound way to assess the fit of probability distributions.
-#' Expanded capabilities include supporting tests for uniformity on the 
-#' *d*-dimensional Sphere based on Poisson kernel densities. Our tests are
+#' Our tests are
 #' particularly useful for large, high dimensional data sets where the 
 #' assessment of fit of probability models is of interest. Specifically, we 
 #' offer tests for normality, as well as two- and *k*-sample tests, where 
 #' testing equality of two or more distributions is of interest, that is 
 #' \eqn{H_0: F_1 = F_2} and \eqn{H_0: F_1 = \ldots = F_k} respectively.
 #' The proposed tests perform well in terms of level and power for contiguous
-#'  alternatives, heavy tailed distributions and in higher dimensions.
+#'  alternatives, heavy tailed distributions and in higher dimensions. \cr
+#'  Expanded capabilities include supporting tests for uniformity on the 
+#'  *d*-dimensional Sphere based on the Poisson kernel, exhibiting excellent 
+#'  results especially in the case of multimodal distributions.
 #' -   **Poisson kernel-based distribution (PKBD)**: the package offers 
 #' functions for computing the density value and for generating random samples 
 #' from a PKBD. The Poisson kernel-based densities are based on the normalized 
@@ -42,8 +44,6 @@
 #'  algorithm leverages a mixture of Poisson kernel-based densities on the 
 #'  Sphere, enabling effective clustering of spherical data or data that has 
 #'  been spherically transformed. 
-#'  The package also provides the functions for density evaluation and random
-#'   sampling from the Poisson kernel-based distribution.
 #' -   **Additional Features**: Alongside these functionalities, the software
 #'  includes additional graphical functions, aiding users in validating and 
 #'  representing the cluster results as well as enhancing the interpretability 
@@ -64,7 +64,7 @@
 #' @author 
 #' Giovanni Saraceno, Marianthi Markatou, Raktim Mukhopadhyay, Mojgan Golzy 
 #'          
-#' Mantainer: Giovanni Saraceno \email{gsaracen@buffalo.edu}
+#' Maintainer: Giovanni Saraceno \email{gsaracen@buffalo.edu}
 #'    
 #'          
 #' @references

@@ -112,9 +112,9 @@ dens_val <- dpkb(pkbd_dat$x, c(0.5,0.5),0.5)
 
 }
 \references{
-Golzy, M. and Markatou, M. (2020) Poisson Kernel-Based Clustering on the Sphere:
-Convergence Properties, Identifiability, and a Method of Sampling, Journal of
-Computational and Graphical Statistics, 29:4, 758-770,
+Golzy, M. and Markatou, M. (2020) Poisson Kernel-Based Clustering on the
+Sphere: Convergence Properties, Identifiability, and a Method of Sampling,
+Journal of Computational and Graphical Statistics, 29:4, 758-770,
 DOI: 10.1080/10618600.2020.1740713.
 
 Sablica L., Hornik K. and Leydold J. (2023) "Efficient sampling from the PKBD

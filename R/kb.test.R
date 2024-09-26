@@ -46,7 +46,7 @@
 #' @details 
 #' The function \code{kb.test} performs the kernel-based quadratic
 #' distance tests using the Gaussian kernel with bandwidth parameter \code{h}.
-#' Depending on the shape of the input \code{y} the function performs the tests 
+#' Depending on the shape of the input \code{y} the function performs the tests
 #' of multivariate normality, the non-parametric two-sample tests or the 
 #' k-sample tests.
 #' 
@@ -214,7 +214,7 @@
 #' Goodness-of-Fit Tests.” \cr
 #' https://doi.org/10.48550/arXiv.2407.16374
 #'
-#' Lindsay, B.G., Markatou, M. and Ray, S. (2014) "Kernels, Degrees of Freedom, 
+#' Lindsay, B.G., Markatou, M. and Ray, S. (2014) "Kernels, Degrees of Freedom,
 #' and Power Properties of Quadratic Distance Goodness-of-Fit Tests", Journal 
 #' of the American Statistical Association, 109:505, 395-410, 
 #' DOI: 10.1080/01621459.2013.836972
@@ -280,7 +280,7 @@ setMethod("kb.test", signature(x = "ANY"),
                      'subsampling'")
              }
              if(b<=0 | b>1){
-                stop("b indicates the proportion used for the subsamples in the 
+                stop("b indicates the proportion used for the subsamples in the
                      subsampling algoritm. It must be in (0,1].")
              }
              
@@ -329,7 +329,7 @@ setMethod("kb.test", signature(x = "ANY"),
                 
                 #stop("A value of the tuning parameter h must be provided to 
                 #perform the kernel-based quadratic distance Normality tests")
-                h_best <- select_h(x=x, alternative=alternative, method=method, 
+                h_best <- select_h(x=x, alternative=alternative, method=method,
                                    b=b, B=B, power.plot=FALSE)
                 h <- h_best$h_sel
              

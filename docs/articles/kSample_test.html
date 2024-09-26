@@ -175,7 +175,7 @@ alternatives. Here we consider the location alternatives.</p>
 <p><img src="kSample_test_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h_k</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 1.6</span></span></code></pre>
 <p>The <code>select_h</code> function has also generated a figure
 displaying the obtained power versus the considered <span class="math inline">\(h\)</span>, for each value of alternative <span class="math inline">\(\delta\)</span> considered.</p>
 <p>We can now perform the <span class="math inline">\(k\)</span>-sample
@@ -188,11 +188,11 @@ tests with the <em>optimal</em> value of <span class="math inline">\(h\)</span>.
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   4.504812    7.668806 </span></span>
-<span><span class="co">## Critical Value:   1.079711    1.839428 </span></span>
+<span><span class="co">## Test Statistic:   4.238404    6.834896 </span></span>
+<span><span class="co">## Critical Value:   1.113956    1.797719 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  1.6</span></span></code></pre>
 <p>The function <code><a href="../reference/kb.test.html">kb.test()</a></code> returns an object of class
 <code>kb.test</code>. The <code>show</code> method for the
 <code>kb.test</code> object shows the computed statistics with
@@ -208,8 +208,8 @@ with respect to the provided groups.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">##   Statistic    Value Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn 4.504812       1.079711      TRUE</span></span>
-<span><span class="co">## 2     Trace 7.668806       1.839428      TRUE</span></span></code></pre>
+<span><span class="co">## 1        Dn 4.238404       1.113956      TRUE</span></span>
+<span><span class="co">## 2     Trace 6.834896       1.797719      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_ktest</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>

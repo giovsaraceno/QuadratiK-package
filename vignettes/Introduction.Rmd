@@ -217,7 +217,7 @@ plot(cluster_res)
 
 For more detailed information about the `QuadratiK` package, you can explore the following resources:
 
--   [Package Documentation on CRAN](https://cloud.r-project.org/web/packages/QuadratiK/index.html) – Official package documentation on CRAN.
+-   [Package Documentation on CRAN](https://cran.r-project.org/web/packages/QuadratiK/index.html) – Official package documentation on CRAN.
 -   [GitHub Repository](https://github.com/giovsaraceno/QuadratiK-package) – The GitHub repository with the development version, issues, and community discussions.
 -   [QuadratiK Package Website](https://giovsaraceno.github.io/QuadratiK-package/) – A dedicated website with additional tutorials and examples.
 

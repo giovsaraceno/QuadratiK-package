@@ -19,7 +19,7 @@ Description: It includes test for multivariate normality, test for uniformity on
     Ding, Y., Markatou, M. and Saraceno, G. (2023) <doi:10.5705/ss.202022.0347>, 
     and Golzy, M. and Markatou, M. (2020) <doi:10.1080/10618600.2020.1740713>.
 License: GPL (>= 3)
-URL: https://cran.r-project.org/package=QuadratiK, 
+URL: https://CRAN.R-project.org/package=QuadratiK, 
      https://github.com/giovsaraceno/QuadratiK-package, 
      https://giovsaraceno.github.io/QuadratiK-package/
 BugReports: https://github.com/giovsaraceno/QuadratiK-package/issues

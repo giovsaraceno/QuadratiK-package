@@ -140,7 +140,7 @@ skew-normal distribution <span class="math inline">\(SN_d(0,I_d,
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://azzalini.stat.unipd.it/SN/" class="external-link">sn</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org" class="external-link">mvtnorm</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://CRAN.R-project.org/package=QuadratiK" class="external-link">QuadratiK</a></span><span class="op">)</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
 <span><span class="va">skewness_y</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
@@ -159,18 +159,18 @@ automatically performs the function <code>select_h</code>.</p>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.679763    2.312427 </span></span>
-<span><span class="co">## Critical Value:   1.087455    1.497868 </span></span>
+<span><span class="co">## Test Statistic:   1.742844    2.505833 </span></span>
+<span><span class="co">## Critical Value:   1.031779    1.484304 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.6</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
 <p>We can display the chosen <em>optimal</em> value of <span class="math inline">\(h\)</span> together with the power plot obtained
 versus the considered <span class="math inline">\(h\)</span>, for the
 alternatives <span class="math inline">\(\delta\)</span> in the
 <code><a href="../reference/select_h.html">select_h()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1.6</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">power.plot</span></span></code></pre></div>
 <p><img src="TwoSample_test_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
@@ -189,8 +189,8 @@ two groups for each variable.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
 <span><span class="co">##   Statistic    Value Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn 1.679763       1.087455      TRUE</span></span>
-<span><span class="co">## 2     Trace 2.312427       1.497868      TRUE</span></span></code></pre>
+<span><span class="co">## 1        Dn 1.742844       1.031779      TRUE</span></span>
+<span><span class="co">## 2     Trace 2.505833       1.484304      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_two</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
@@ -260,11 +260,11 @@ argument <code>y</code>.</p>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.679763    2.312427 </span></span>
-<span><span class="co">## Critical Value:   1.087455    1.497868 </span></span>
+<span><span class="co">## Test Statistic:   1.742844    2.505833 </span></span>
+<span><span class="co">## Critical Value:   1.031779    1.484304 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.6</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
 <p>See the <em>k-sample test</em> vignette for more details.</p>
 <p>In the <code><a href="../reference/kb.test.html">kb.test()</a></code> function, the critical value can be
 computed with the subsampling, bootstrap or permutation algorithm. The

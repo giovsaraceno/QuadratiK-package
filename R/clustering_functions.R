@@ -20,9 +20,9 @@
 #' are fairly well concentrated around the vectors \eqn{\mu_j} of each cluster;
 #' (3) the percentage of noise in the data increases.
 #' 
-#' @param dat Data matrix or data.frame of data points on the sphere to be 
-#'            clustered. The observations in \code{dat} are normalized by 
-#'            dividing with the length of the vector to ensure
+#' @param dat \eqn{(n \times d)}-data matrix or data.frame of data points on the
+#'             sphere to be clustered. The observations in \code{dat} are 
+#'             normalized by dividing with the length of the vector to ensure
 #'            that they lie on the \eqn{d}-dimensional sphere. Note that 
 #'            \eqn{d > 1}.
 #' @param nClust Number of clusters. It can be a single value or a numeric 
@@ -68,7 +68,7 @@
 #' \eqn{\mathcal{S}^{d-1}}, but it can also be performed on spherically
 #' transformed observations, i.e. data points on the Euclidean space 
 #' \eqn{\mathbb{R}^d} that are normalized such that they lie on the 
-#' corresponding \eqn{d}-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
+#' corresponding \eqn{(d-1)}-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
 #'
 #' @return An S4 object of class \code{pkbc} containing the results of the 
 #' clustering procedure based on Poisson kernel-based distributions. The object 
@@ -114,7 +114,7 @@
 #' data1<-rpkb(size, c(1,0,0),rho)
 #' data2<-rpkb(size, c(0,1,0),rho)
 #' data3<-rpkb(size, c(0,0,1),rho)
-#' dat<-rbind(data1$x,data2$x, data3$x)
+#' dat<-rbind(data1,data2, data3)
 #'
 #' #Perform the clustering algorithm with number of clusters k=3.
 #' pkbd<- pkbc(dat=dat, nClust=3)
@@ -130,14 +130,12 @@
 #' 
 #' @export
 setGeneric("pkbc",function(dat, 
-                           nClust = NULL,
+                           nClust,
                            maxIter = 300,
                            stoppingRule = "loglik",
                            initMethod = "sampleData",
-                           numInit = 10){
-   
-   standardGeneric("pkbc")
-})
+                           numInit = 10)
+   standardGeneric("pkbc"))
 #' @rdname pkbc
 #' 
 #' @srrstats {G2.0} input nClust
@@ -155,7 +153,7 @@ setGeneric("pkbc",function(dat,
 #' @export
 setMethod("pkbc", signature(dat = "ANY"),
     function(dat,
-             nClust = NULL,
+             nClust,
              maxIter = 300,
              stoppingRule = "loglik",
              initMethod = "sampleData",
@@ -490,8 +488,9 @@ setMethod("summary", "pkbc", function(object) {
             function(res) {
                c(LogLik = res$LogLik, wcss = sum(res$wcss))
             }))
+   summaryMatrix <- cbind(object@input$nClust, summaryMatrix)
    rownames(summaryMatrix) <- names(object@res_k[object@input$nClust])
-   colnames(summaryMatrix) <- c("LogLik", "WCSS")
+   colnames(summaryMatrix) <- c("nClust", "LogLik", "WCSS")
    cat("Summary:\n")
    print(summaryMatrix)
    cat("\n")
@@ -706,7 +705,7 @@ setMethod("plot", c(x = "pkbc"),
 #' @importFrom grDevices rainbow
 #' @importFrom graphics legend
 #' @importFrom graphics par
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot geom_point theme_minimal labs theme
 #' @importFrom rrcov PcaLocantore
 #' 
 #' @srrstats {G1.4} roxigen2 is used
@@ -831,7 +830,7 @@ scatterplotMethod <- function(object, k, true_label = NULL, pca_res = FALSE) {
 #'         within sum of squares computed with the Euclidean distance and the 
 #'         cosine similarity.
 #' 
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot geom_line geom_point labs theme_minimal
 #' @importFrom ggpubr ggarrange
 #' 
 #' @srrstats {G1.4} roxigen2 is used
@@ -1008,10 +1007,12 @@ setMethod("predict", signature(object="pkbc"),
 #' between the partitions and a value close to 0 indicates a random assignment 
 #' of data points to clusters.
 #' 
-#' Each cluster can represented by a so-called silhouette which is based on the
-#' comparison of its tightness and separation. The average silhouette width 
-#' provides an evaluation of clustering validity, and might be used to select 
-#' an *appropriate* number of clusters (Rousseeuw 1987). 
+#' The average silhouette width quantifies the quality of clustering by 
+#' measuring how well each object fits within its assigned cluster. It is the 
+#' mean of silhouette values, which compare the tightness of an object within 
+#' its cluster to its separation from other clusters. Higher values indicate 
+#' well-separated, cohesive clusters, making it useful for selecting the 
+#' *appropriate* number of clusters (Rousseeuw 1987). 
 #' 
 #' Macro Precision is a metric used in multi-class classification that 
 #' calculates the precision for each class independently and then takes the 
@@ -1045,8 +1046,8 @@ setMethod("predict", signature(object="pkbc"),
 #'          \linkS4class{pkbc} for the class object definition.
 #'
 #' @references
-#' Kapp, A.V. and Tibshirani, R. (2007) "Are clusters found in one dataset present 
-#' in another dataset?", Biostatistics, 8(1), 9–31, 
+#' Kapp, A.V. and Tibshirani, R. (2007) "Are clusters found in one dataset 
+#' present in another dataset?", Biostatistics, 8(1), 9–31, 
 #' https://doi.org/10.1093/biostatistics/kxj029
 #' 
 #' Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and
@@ -1067,7 +1068,7 @@ setMethod("predict", signature(object="pkbc"),
 #' data1<-rpkb(size, c(1,0,0),rho,method='rejvmf')
 #' data2<-rpkb(size, c(0,1,0),rho,method='rejvmf')
 #' data3<-rpkb(size, c(1,0,0),rho,method='rejvmf')
-#' data<-rbind(data1$x,data2$x, data3$x)
+#' data<-rbind(data1,data2, data3)
 #'
 #' #Perform the clustering algorithm
 #' pkbc_res<- pkbc(data, 3)

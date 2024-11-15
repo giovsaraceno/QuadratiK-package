@@ -13,7 +13,8 @@ pk.test(x, rho, B = 300, Quantile = 0.95)
 \S4method{show}{pk.test}(object)
 }
 \arguments{
-\item{x}{A numeric d-dim matrix of data points on the Sphere S^(d-1).}
+\item{x}{A numeric \eqn{(n \times d)}-matrix of \eqn{n} data points on the
+Sphere \eqn{\mathcal{S}^(d-1)} as rows.}
 
 \item{rho}{Concentration parameter of the Poisson kernel function.}
 
@@ -48,7 +49,8 @@ U-statistic Un.
 }
 \description{
 This function performs the kernel-based quadratic distance goodness-of-fit
-tests for Uniformity for spherical data \code{x} using the Poisson kernel
+tests for Uniformity for multivariate spherical data \code{x} on
+\eqn{\mathcal{S}^{d-1}} using the Poisson kernel
 with concentration parameter \code{rho}. \cr
 The Poisson kernel-based test for uniformity exhibits excellent results
 especially in the case of multimodal distributions, as shown in the example
@@ -56,10 +58,10 @@ of the \href{../doc/uniformity.html}{Uniformity test on the Sphere vignette}.
 }
 \details{
 Let \eqn{x_1, x_2, ..., x_n} be a random sample with empirical distribution
-function \eqn{\hat F}.
-We test the null hypothesis of uniformity on the
-\eqn{d}-dimensional sphere, i.e. \eqn{H_0:F=G}, where \eqn{G} is the uniform
-distribution on the \eqn{d}-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
+function \eqn{\hat F}. We test the null hypothesis of uniformity on the
+\eqn{(d-1)}-dimensional sphere, i.e. \eqn{H_0:F=G}, where \eqn{G} is the
+uniform distribution on the \eqn{(d-1)}-dimensional sphere
+\eqn{\mathcal{S}^{d-1}}.
 We compute the U-statistic estimate of the sample KBQD (Kernel-Based
 Quadratic Distance)
 \deqn{U_{n}=\frac{1}{n(n-1)}\sum_{i=2}^{n}\sum_{j=1}^{i-1}K_{cen}
@@ -73,8 +75,8 @@ and the V-statistic estimate of the KBQD
 \deqn{V_{n} = \frac{1}{n}\sum_{i=1}^{n}\sum_{j=1}^{n}K_{cen}
 (\mathbf{x}_{i}, \mathbf{x}_{j}),}
 where \eqn{K_{cen}} denotes the Poisson kernel \eqn{K_\rho} centered with
-respect to the uniform distribution on the \eqn{d}-dimensional sphere, that
-is
+respect to the uniform distribution on the \eqn{(d-1)}-dimensional sphere,
+that is
 \deqn{K_{cen}(\mathbf{u}, \mathbf{v}) = K_\rho(\mathbf{u}, \mathbf{v}) -1}
 and
 \deqn{K_\rho(\mathbf{u}, \mathbf{v}) = \frac{1-\rho^{2}}{\left(1+\rho^{2}-

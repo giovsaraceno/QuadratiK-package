@@ -123,16 +123,17 @@
 #' @importFrom parallel clusterExport
 #' @importFrom parallel detectCores
 #' @importFrom parallel stopCluster
-#' @import foreach 
+#' @importFrom foreach foreach %dopar%
 #' @importFrom stats cov
 #' @importFrom stats aggregate
 #' @importFrom stats power
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot geom_line labs theme_minimal theme_light theme
+#' @importFrom ggplot2 scale_color_brewer
 #' @import RcppEigen
 #' @import rlecuyer
 #' @importFrom Rcpp sourceCpp
 #'
-#' @useDynLib QuadratiK, .registration = TRUE
+#' @useDynLib QuadratiK
 #'
 #' @srrstats {G1.4} roxigen2 is used
 #' @srrstats {G2.0, G2.0a} input y, delta_dim, B, b
@@ -358,12 +359,13 @@ select_h <- function(x, y=NULL, alternative=NULL, method="subsampling", b=0.8,
    #                                       "compute_CV","stat2sample"))
    
    D <- length(delta)
+   len_h <- length(h_values)
    
    k_values <- 1:D
    rep_values <- 1:Nrep
    
    params <- expand.grid(Rep=rep_values, h = h_values)
-   params <- split(params, seq(nrow(params)))
+   params <- split(params, seq_len(Nrep*len_h))
    
    res <- data.frame(delta=numeric(),
                      h=numeric(), power=numeric())

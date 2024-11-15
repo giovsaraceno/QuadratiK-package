@@ -1,4 +1,35 @@
-QuadratiK 1.1.2 (Development version) 
+QuadratiK 1.1.3 (Development version) 
+=========================
+
+### NEW FEATURES
+
+  * the function rpkb() returns directly the generated data set and not a list
+    
+
+### MINOR IMPROVEMENTS
+
+  * packages ggplot2 and foreach not called as full packages but using 
+    importFrom
+    
+  * nClust argument of pkbc function has no default value
+  
+  * usage of standardGeneric (see https://adv-r.hadley.nz/s4.html#s4-generics)
+  
+### BUG FIXES
+
+  * goodpractice sugestions
+
+### DOCUMENTATION FIXES
+
+  * Uniform notation: d is dimension in Eucldean space with spherical data lying
+    on the (d-1)-dimensional sphere
+  
+  * Specify dimension of input matrix x in clustering functions.
+  
+  * Improve explaination of Average Silhouette Width
+
+
+QuadratiK 1.1.2 (2024-10-29) 
 =========================
 
 ### NEW FEATURES
@@ -25,8 +56,8 @@ QuadratiK 1.1.2 (Development version)
 ### DOCUMENTATION FIXES
 
   * The help documentation for the methods defined for the classes in the 
-    package can be accessed directly (addition of roxygen tag @name and 
-    @aliases)
+    package can be accessed directly (addition of roxygen tag name and 
+    aliases)
 
 
 QuadratiK 1.1.1 (2024-06-05)

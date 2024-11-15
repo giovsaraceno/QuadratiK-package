@@ -53,7 +53,6 @@ simulating from the PKBD, using angular central Gaussian envelopes
 (`rejacg`) or using the projected Saw distributions (`rejpsaw`).
 
 ```{r}
-n <- 1000
 set.seed(2468)
 # Generate observations using the rejection algorithm with von-Mises 
 # distribution envelopes
@@ -65,15 +64,10 @@ dat2 <- rpkb(n = n, rho=rho, mu=mu, method="rejacg")
 dat3 <- rpkb(n = n, rho=rho, mu=mu, method="rejpsaw")
 ```
 The number of observations generated is determined by `n` for 
-`rpkb()`. This function returns a list with the matrix of generated 
-observations `x`, the number of tries `numTries`, and the number of
-acceptances `numAccepted`.
+`rpkb()`. This function returns the matrix of generated 
+observations `x`. We create a unique data set.
 ```{r}
-summary(dat1)
-```
-We extract the generated data sets and create a unique data set.
-```{r}
-x <- rbind(dat1$x, dat2$x, dat3$x)
+x <- rbind(dat1, dat2, dat3)
 ```
 Finally, the observations generated through the different methods are compared
 graphically, by displaying the data points on the sphere colored with respect to

@@ -17,7 +17,6 @@ n <- 1000
 rho <- 0.8
 
 ## -----------------------------------------------------------------------------
-n <- 1000
 set.seed(2468)
 # Generate observations using the rejection algorithm with von-Mises 
 # distribution envelopes
@@ -29,10 +28,7 @@ dat2 <- rpkb(n = n, rho=rho, mu=mu, method="rejacg")
 dat3 <- rpkb(n = n, rho=rho, mu=mu, method="rejpsaw")
 
 ## -----------------------------------------------------------------------------
-summary(dat1)
-
-## -----------------------------------------------------------------------------
-x <- rbind(dat1$x, dat2$x, dat3$x)
+x <- rbind(dat1, dat2, dat3)
 
 ## ----fig.width=6, fig.height=8------------------------------------------------
 library(rgl)

@@ -89,7 +89,7 @@ test_that("Functionality with valid inputs", {
    
    # Test reject uniformity
    set.seed(123)
-   x_sp <- rpkb(n = size, mu = c(1,0,0), rho = 0.9)$x
+   x_sp <- rpkb(n = size, mu = c(1,0,0), rho = 0.9)
    unif_test <- pk.test(x_sp,rho=0.9)
    
    expect_s4_class(unif_test, "pk.test")

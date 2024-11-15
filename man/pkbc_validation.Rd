@@ -46,10 +46,12 @@ value ranges from 0 to 1, where a value of 1 indicates a perfect match
 between the partitions and a value close to 0 indicates a random assignment
 of data points to clusters.
 
-Each cluster can represented by a so-called silhouette which is based on the
-comparison of its tightness and separation. The average silhouette width
-provides an evaluation of clustering validity, and might be used to select
-an \emph{appropriate} number of clusters (Rousseeuw 1987).
+The average silhouette width quantifies the quality of clustering by
+measuring how well each object fits within its assigned cluster. It is the
+mean of silhouette values, which compare the tightness of an object within
+its cluster to its separation from other clusters. Higher values indicate
+well-separated, cohesive clusters, making it useful for selecting the
+\emph{appropriate} number of clusters (Rousseeuw 1987).
 
 Macro Precision is a metric used in multi-class classification that
 calculates the precision for each class independently and then takes the
@@ -81,7 +83,7 @@ set.seed(081423)
 data1<-rpkb(size, c(1,0,0),rho,method='rejvmf')
 data2<-rpkb(size, c(0,1,0),rho,method='rejvmf')
 data3<-rpkb(size, c(1,0,0),rho,method='rejvmf')
-data<-rbind(data1$x,data2$x, data3$x)
+data<-rbind(data1,data2, data3)
 
 #Perform the clustering algorithm
 pkbc_res<- pkbc(data, 3)
@@ -90,8 +92,8 @@ pkbc_validation(pkbc_res)
 
 }
 \references{
-Kapp, A.V. and Tibshirani, R. (2007) "Are clusters found in one dataset present
-in another dataset?", Biostatistics, 8(1), 9–31,
+Kapp, A.V. and Tibshirani, R. (2007) "Are clusters found in one dataset
+present in another dataset?", Biostatistics, 8(1), 9–31,
 https://doi.org/10.1093/biostatistics/kxj029
 
 Rousseeuw, P.J. (1987) Silhouettes: A graphical aid to the interpretation and

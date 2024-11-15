@@ -21,7 +21,7 @@ test_that("Error is thrown for invalid inputs", {
    expect_error(pkbc(dat, nClust = 0), 
    "Values in the input parameter nClust must be 
                   greater than 0", fixed=TRUE)
-   expect_error(pkbc(dat), 
+   expect_error(pkbc(dat, nClust = NULL), 
    "Input parameter nClust is required. Provide one specific 
                value or a set of possible values.", fixed=TRUE)
    expect_error(pkbc(dat, nClust="invalid"), 
@@ -111,9 +111,9 @@ test_that("Clustering algorithm works", {
    # Generated well separated clusters and show that the clustering algorithm
    # works properly in this simple case
    set.seed(123)
-   x <- rpkb(50, c(1,0,0),0.99, method = "rejacg")$x
-   y <- rpkb(50, c(0,0,1),0.99, method = "rejacg")$x
-   z <- rpkb(50, c(-1,0,0),0.99, method = "rejacg")$x
+   x <- rpkb(50, c(1,0,0),0.99, method = "rejacg")
+   y <- rpkb(50, c(0,0,1),0.99, method = "rejacg")
+   z <- rpkb(50, c(-1,0,0),0.99, method = "rejacg")
    dat<-rbind(x,y,z)
    label <- rep(c(3,1,2),each=50)
    pkbd_res<- pkbc(dat, 3)
@@ -155,8 +155,8 @@ test_that("plot method for the clustering algorithm", {
    
    # d=2
    set.seed(123)
-   x <- rpkb(50, c(1,0),0.95, method = "rejacg")$x
-   y <- rpkb(50, c(0,1),0.95, method = "rejacg")$x
+   x <- rpkb(50, c(1,0),0.95, method = "rejacg")
+   y <- rpkb(50, c(0,1),0.95, method = "rejacg")
    dat<-rbind(x,y)
    label <- rep(c(1,2),each=50)
    pkbd_res<- pkbc(dat, c(2,3))
@@ -165,8 +165,8 @@ test_that("plot method for the clustering algorithm", {
    
    # d>3
    set.seed(123)
-   x <- rpkb(50, c(1,0,0,0),0.95, method = "rejacg")$x
-   y <- rpkb(50, c(0,0,1,0),0.95, method = "rejacg")$x
+   x <- rpkb(50, c(1,0,0,0),0.95, method = "rejacg")
+   y <- rpkb(50, c(0,0,1,0),0.95, method = "rejacg")
    dat<-rbind(x,y)
    label <- rep(c(1,2),each=50)
    pkbd_res<- pkbc(dat, c(2,3))
@@ -179,8 +179,8 @@ test_that("plot method for the clustering algorithm", {
 test_that("plot method for the clustering algorithm", {
    
    set.seed(123)
-   x <- rpkb(50, c(1,0),0.99, method = "rejacg")$x
-   y <- rpkb(50, c(-1,0),0.99, method = "rejacg")$x
+   x <- rpkb(50, c(1,0),0.99, method = "rejacg")
+   y <- rpkb(50, c(-1,0),0.99, method = "rejacg")
    dat<-rbind(x,y)
    label <- rep(c(1,2),each=50)
    pkbd_res<- pkbc(dat, c(2,3))
@@ -196,15 +196,15 @@ test_that("plot method for the clustering algorithm", {
    
    newdat <- matrix(rnorm(150),ncol=3)
    expect_error(predict(pkbd_res, k = 2, newdat), 
-         'newdata must have the same number of variables as the training data.', 
+      'newdata must have the same number of variables as the training data.',
                 fixed=TRUE)
    
    
    # Tests for predict method
    expect_equal(predict(pkbd_res,k=2),pkbd_res@res_k[[2]]$finalMemb)
    
-   newdat <- as.data.frame(rbind(rpkb(50, c(1,0),0.99, method = "rejacg")$x,
-                   rpkb(50, c(-1,0),0.99, method = "rejacg")$x))
+   newdat <- as.data.frame(rbind(rpkb(50, c(1,0),0.99, method = "rejacg"),
+                   rpkb(50, c(-1,0),0.99, method = "rejacg")))
    expect_equal(predict(pkbd_res, k=2, newdat)$Memb,rep(c(2,1),each=50))
    
 
@@ -214,8 +214,8 @@ test_that("plot method for the clustering algorithm", {
 test_that("show and summary methods for the clustering algorithm", {
    
    set.seed(123)
-   x <- rpkb(50, c(1,0),0.99, method = "rejacg")$x
-   y <- rpkb(50, c(-1,0),0.99, method = "rejacg")$x
+   x <- rpkb(50, c(1,0),0.99, method = "rejacg")
+   y <- rpkb(50, c(-1,0),0.99, method = "rejacg")
    dat<-rbind(x,y)
    label <- rep(c(1,2),each=50)
    pkbd_res<- pkbc(dat, c(2,3))

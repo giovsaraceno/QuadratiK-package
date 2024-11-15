@@ -256,10 +256,8 @@ setGeneric("kb.test",function(x, y=NULL, h = NULL, method = "subsampling",
                               B = 150, b = NULL, Quantile = 0.95, 
                               mu_hat = NULL, Sigma_hat = NULL, 
                               centeringType="Nonparam", 
-                              K_threshold=10, alternative="skewness"){
-   
-   standardGeneric("kb.test")
-})
+                              K_threshold=10, alternative="skewness")
+   standardGeneric("kb.test"))
 #' @rdname kb.test
 #' 
 #' @srrstats {G1.4} roxigen2 is used
@@ -517,7 +515,8 @@ setMethod("show", "kb.test",
 #' @seealso [kb.test()] and \linkS4class{kb.test} for more details.
 #'
 #' @importFrom ggpubr ggarrange
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot geom_line theme_minimal geom_abline ggtitle
+#' @importFrom ggplot2 xlab ylab
 #'
 #'@examples
 #' # create a kb.test object

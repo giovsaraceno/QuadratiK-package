@@ -142,7 +142,8 @@ generate_SN<-function(d, size_x, size_y, mu_x, mu_y,
 #'
 #' @return QQ-plot of given samples
 #'
-#' @import ggplot2
+#' @importFrom ggplot2 ggplot geom_abline geom_line ggtitle theme_minimal
+#' @importFrom ggplot2 theme scale_color_brewer
 #' 
 #' @srrstats {G1.4a} roxigen2 is used
 #' 

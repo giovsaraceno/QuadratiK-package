@@ -17,8 +17,8 @@ rpkb(
 )
 }
 \arguments{
-\item{x}{Matrix (or data.frame) of data point on the sphere
-\eqn{\mathcal{S}^{d-1}}, with \eqn{d \ge 2}.}
+\item{x}{\eqn{n \times d}-matrix (or data.frame) of \eqn{n} data point on the
+sphere \eqn{\mathcal{S}^{d-1}}, with \eqn{d \ge 2}.}
 
 \item{mu}{location vector parameter with length indicating the dimension of
 generated points.}
@@ -53,7 +53,7 @@ Golzy and Markatou 2020);
 }
 \description{
 The Poisson kernel-based densities are based on the normalized Poisson kernel
-and are defined on the \eqn{d}-dimensional unit sphere. Given a vector
+and are defined on the \eqn{(d-1)}-dimensional unit sphere. Given a vector
 \eqn{\mathbf{\mu} \in \mathcal{S}^{d-1}}, where \eqn{\mathcal{S}^{d-1}= 
 \{x \in \mathbb{R}^d : ||x|| = 1\}}, and a parameter \eqn{\rho} such that
 \eqn{0 < \rho < 1}, the probability density function of a \eqn{d}-variate
@@ -87,9 +87,8 @@ This function \code{dpkb()} computes the density value for a given point
 vector \code{mu} and concentration parameter \code{rho}.
 
 The number of observations generated is determined by \code{n} for
-\code{rpkb()}. This function returns a list with the matrix of generated
-observations \code{x}, the number of tries \code{numTries} and the number of
-acceptances \code{numAccepted}.
+\code{rpkb()}. This function returns the \eqn{(n \times d)}-matrix of
+generated \eqn{n} observations on \eqn{\mathcal{S}^{(d-1)}}.
 
 A limitation of the \code{rejvmf} is that the method does not ensure the
 computational feasibility of the sampler for \eqn{\rho} approaching 1.
@@ -108,7 +107,7 @@ message asking the user to install the missing package(s).
 pkbd_dat <- rpkb(10, c(0.5,0), 0.5)
 
 # Calculate the PKBD density values
-dens_val <- dpkb(pkbd_dat$x, c(0.5,0.5),0.5)
+dens_val <- dpkb(pkbd_dat, c(0.5,0.5),0.5)
 
 }
 \references{

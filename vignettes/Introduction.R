@@ -54,8 +54,8 @@ pk.test(x, rho = 0.7)
 mu <- c(1,0,0)
 rho <- 0.9
 x <- rpkb(n = 100, mu = mu, rho = rho)
-head(x$x)
-dens_x <- dpkb(x$x, mu = mu, rho = rho)
+head(x)
+dens_x <- dpkb(x, mu = mu, rho = rho)
 head(dens_x)
 
 ## ----eval=FALSE---------------------------------------------------------------
@@ -66,7 +66,7 @@ head(dens_x)
 x1 <- rpkb(n = 100, mu = c(1,0,0), rho = rho)
 x2 <- rpkb(n = 100, mu = c(-1,0,0), rho = rho)
 x3 <- rpkb(n = 100, mu = c(0,0,1), rho = rho)
-x <- rbind(x1$x, x2$x, x3$x)
+x <- rbind(x1, x2, x3)
 # Perform the clustering algorithm
 # Serch for 2, 3 or 4 clusters
 cluster_res <- pkbc(dat = x, nClust = c(2, 3, 4))
@@ -75,7 +75,7 @@ summary(cluster_res)
 ## -----------------------------------------------------------------------------
 # Predict the membership of new data with respect to the clustering results
 x_new <- rpkb(n = 10, mu = c(1,0,0), rho = rho)
-memb_mew <- predict(cluster_res, k = 3, newdata = x_new$x)
+memb_mew <- predict(cluster_res, k = 3, newdata = x_new)
 memb_mew$Memb
 
 

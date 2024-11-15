@@ -39,47 +39,41 @@ test_that("Random Generation from PKBD works", {
    rho <- 0.8
    mu <- c(1,0,0)
    pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejvmf")
-   expect_equal(dim(pkbd_dat$x),c(size,length(mu)))
-   expect_true(is.matrix(pkbd_dat$x))
-   expect_equal(rowSums(pkbd_dat$x^2), rep(1,size))
+   expect_equal(dim(pkbd_dat),c(size,length(mu)))
+   expect_true(is.matrix(pkbd_dat))
+   expect_equal(rowSums(pkbd_dat^2), rep(1,size))
    
    ## "rejacg"
    size <- 100
    rho <- 0.8
    mu <- c(1,0,0)
    pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejacg")
-   expect_equal(dim(pkbd_dat$x),c(size,length(mu)))
-   expect_true(is.matrix(pkbd_dat$x))
-   expect_equal(rowSums(pkbd_dat$x^2), rep(1,size))
-   
-   pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejacg", max.iter=20)
-   expect_lt(pkbd_dat$beta$iter, 20)
-   
-   pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejacg", tol.eps=1e-7)
-   expect_lt(pkbd_dat$beta$estim.prec, 1e-7)
+   expect_equal(dim(pkbd_dat),c(size,length(mu)))
+   expect_true(is.matrix(pkbd_dat))
+   expect_equal(rowSums(pkbd_dat^2), rep(1,size))
    
    ## "rejpsaw"
    size <- 100
    rho <- 0.8
    mu <- c(1,0,0)
    pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejpsaw")
-   expect_equal(dim(pkbd_dat$x),c(size,length(mu)))
-   expect_true(is.matrix(pkbd_dat$x))
-   expect_equal(rowSums(pkbd_dat$x^2), rep(1,size))
+   expect_equal(dim(pkbd_dat),c(size,length(mu)))
+   expect_true(is.matrix(pkbd_dat))
+   expect_equal(rowSums(pkbd_dat^2), rep(1,size))
    
    # dimension = 2
    mu <- c(1,0)
    pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejpsaw")
-   expect_equal(dim(pkbd_dat$x),c(size,length(mu)))
-   expect_true(is.matrix(pkbd_dat$x))
-   expect_equal(rowSums(pkbd_dat$x^2), rep(1,size))
+   expect_equal(dim(pkbd_dat),c(size,length(mu)))
+   expect_true(is.matrix(pkbd_dat))
+   expect_equal(rowSums(pkbd_dat^2), rep(1,size))
    
    # dimension > 3 
    mu <- c(1,0,0,0)
    pkbd_dat <- rpkb(size, mu = mu, rho = rho, method = "rejpsaw")
-   expect_equal(dim(pkbd_dat$x),c(size,length(mu)))
-   expect_true(is.matrix(pkbd_dat$x))
-   expect_equal(rowSums(pkbd_dat$x^2), rep(1,size))
+   expect_equal(dim(pkbd_dat),c(size,length(mu)))
+   expect_true(is.matrix(pkbd_dat))
+   expect_equal(rowSums(pkbd_dat^2), rep(1,size))
    
    #------------------------------------------------------
    ## Test numerical values
@@ -90,12 +84,12 @@ test_that("Random Generation from PKBD works", {
    
    x <- rpkb(size, mu = mu, rho = rho, method = "rejpsaw")
    # Test if the mean of generated points is close to the true mean
-   expect_lt(max(abs(colMeans(x$x)-mu)),1e-1)
+   expect_lt(max(abs(colMeans(x)-mu)),1e-1)
    
    x <- rpkb(size, mu = mu, rho = 0.99, method = "rejpsaw")
    # Test if the mean of generated points is close to the true mean
    # higher rho, less variability
-   expect_lt(max(abs(colMeans(x$x)-mu)),1e-2)
+   expect_lt(max(abs(colMeans(x)-mu)),1e-2)
    
    
 })
@@ -112,7 +106,7 @@ test_that("Random Generation from PKBD compared to wrapped Cauchy", {
    # Generate data from wrapped cauchy
    wc <- circular::rwrappedcauchy(n, mu = location, rho = rho)
    # Generate data from pkbd 
-   pkbd <- rpkb(n, mu = c(-1, 0), rho = rho)$x
+   pkbd <- rpkb(n, mu = c(-1, 0), rho = rho)
    # Convert Cartesian coordinates to angles for comparison
    pkbd_angles <- circular::coord2rad(pkbd, 
                                       control.circular = list(modulo="asis"))

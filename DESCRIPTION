@@ -1,13 +1,14 @@
 Type: Package
 Package: QuadratiK
 Title: Collection of Methods Constructed using Kernel-Based Quadratic Distances
-Version: 1.1.2
+Version: 1.1.3
 Authors@R: c(
     person("Giovanni", "Saraceno", ,"gsaracen@buffalo.edu", role = c("aut", "cre"),
            comment = "ORCID 000-0002-1753-2367"),
     person("Marianthi", "Markatou", role = "aut"),
     person("Raktim", "Mukhopadhyay", role = "aut"),
-    person("Mojgan", "Golzy", role = c("aut"))
+    person("Mojgan", "Golzy", role = c("aut")),
+    person("Hingee", "Kassel", role = "rev")
   )
 Maintainer: Giovanni Saraceno <gsaracen@buffalo.edu>
 Description: It includes test for multivariate normality, test for uniformity on the d-dimensional 

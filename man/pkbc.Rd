@@ -8,7 +8,7 @@
 \usage{
 pkbc(
   dat,
-  nClust = NULL,
+  nClust,
   maxIter = 300,
   stoppingRule = "loglik",
   initMethod = "sampleData",
@@ -17,7 +17,7 @@ pkbc(
 
 \S4method{pkbc}{ANY}(
   dat,
-  nClust = NULL,
+  nClust,
   maxIter = 300,
   stoppingRule = "loglik",
   initMethod = "sampleData",
@@ -27,9 +27,9 @@ pkbc(
 \S4method{show}{pkbc}(object)
 }
 \arguments{
-\item{dat}{Data matrix or data.frame of data points on the sphere to be
-clustered. The observations in \code{dat} are normalized by
-dividing with the length of the vector to ensure
+\item{dat}{\eqn{(n \times d)}-data matrix or data.frame of data points on the
+sphere to be clustered. The observations in \code{dat} are
+normalized by dividing with the length of the vector to ensure
 that they lie on the \eqn{d}-dimensional sphere. Note that
 \eqn{d > 1}.}
 
@@ -128,7 +128,7 @@ The clustering algorithm is tailored for data points on the sphere
 \eqn{\mathcal{S}^{d-1}}, but it can also be performed on spherically
 transformed observations, i.e. data points on the Euclidean space
 \eqn{\mathbb{R}^d} that are normalized such that they lie on the
-corresponding \eqn{d}-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
+corresponding \eqn{(d-1)}-dimensional sphere \eqn{\mathcal{S}^{d-1}}.
 }
 \examples{
 #We generate three samples of 100 observations from 3-dimensional
@@ -140,7 +140,7 @@ set.seed(081423)
 data1<-rpkb(size, c(1,0,0),rho)
 data2<-rpkb(size, c(0,1,0),rho)
 data3<-rpkb(size, c(0,0,1),rho)
-dat<-rbind(data1$x,data2$x, data3$x)
+dat<-rbind(data1,data2, data3)
 
 #Perform the clustering algorithm with number of clusters k=3.
 pkbd<- pkbc(dat=dat, nClust=3)

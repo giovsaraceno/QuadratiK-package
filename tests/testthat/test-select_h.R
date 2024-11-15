@@ -90,7 +90,8 @@ test_that("Select h", {
 
    # two-sample
    result <- select_h(x = matrix(rnorm(20),ncol=2),
-                      y = as.data.frame(matrix(rnorm(20),ncol=2)), alternative="location")
+                      y = as.data.frame(matrix(rnorm(20),ncol=2)), 
+                      alternative="location")
    expect_equal(class(result$h_sel), "numeric")
    expect_equal(class(result$power), "data.frame")
    

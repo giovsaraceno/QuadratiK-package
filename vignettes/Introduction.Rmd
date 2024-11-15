@@ -133,13 +133,13 @@ kb.test(x, y, h = 0.4)
 
 #### Test for uniformity on the sphere
 
-Expanded capabilities include supporting tests for uniformity on the *d*-dimensional Sphere based on Poisson kernel. The Poisson kernel depends on the concentration parameter $\rho$ and a location vector $\mu$. For more details please visit the help documentation of the `pk.test()` function.
+Expanded capabilities include supporting tests for uniformity on the *(d-1)*-dimensional Sphere based on Poisson kernel. The Poisson kernel depends on the concentration parameter $\rho$ and a location vector $\mu$. For more details please visit the help documentation of the `pk.test()` function.
 
 ```{r, eval=FALSE}
 ?pk.test
 ```
 
-To test the null hypothesis of uniformity on the $d$-dimensional sphere $\mathcal{S}^{d-1} = \{x \in \mathbb{R}^d : ||x||=1 \}$
+To test the null hypothesis of uniformity on the $(d-1)$-dimensional sphere $\mathcal{S}^{d-1} = \{x \in \mathbb{R}^d : ||x||=1 \}$
 
 ```{r}
 # Generate points on the sphere from the uniform ditribution 
@@ -150,7 +150,7 @@ pk.test(x, rho = 0.7)
 
 ### Poisson kernel-based distribution (PKBD)
 
-The package offers functions for computing the density value and for generating random samples from a PKBD. The Poisson kernel-based densities are based on the normalized Poisson kernel and are defined on the $d$-dimensional unit sphere. For more details please visit the help documentation of the `dpkb()` and `rpkb()` functions.
+The package offers functions for computing the density value and for generating random samples from a PKBD. The Poisson kernel-based densities are based on the normalized Poisson kernel and are defined on the $(d-1)$-dimensional unit sphere. For more details please visit the help documentation of the `dpkb()` and `rpkb()` functions.
 
 ```{r, eval=FALSE}
 ?dpkb
@@ -163,8 +163,8 @@ The package offers functions for computing the density value and for generating 
 mu <- c(1,0,0)
 rho <- 0.9
 x <- rpkb(n = 100, mu = mu, rho = rho)
-head(x$x)
-dens_x <- dpkb(x$x, mu = mu, rho = rho)
+head(x)
+dens_x <- dpkb(x, mu = mu, rho = rho)
 head(dens_x)
 ```
 
@@ -183,7 +183,7 @@ The package incorporates a unique clustering algorithm specifically tailored for
 x1 <- rpkb(n = 100, mu = c(1,0,0), rho = rho)
 x2 <- rpkb(n = 100, mu = c(-1,0,0), rho = rho)
 x3 <- rpkb(n = 100, mu = c(0,0,1), rho = rho)
-x <- rbind(x1$x, x2$x, x3$x)
+x <- rbind(x1, x2, x3)
 # Perform the clustering algorithm
 # Serch for 2, 3 or 4 clusters
 cluster_res <- pkbc(dat = x, nClust = c(2, 3, 4))
@@ -195,7 +195,7 @@ The software includes additional graphical functions, aiding users in validating
 ```{r}
 # Predict the membership of new data with respect to the clustering results
 x_new <- rpkb(n = 10, mu = c(1,0,0), rho = rho)
-memb_mew <- predict(cluster_res, k = 3, newdata = x_new$x)
+memb_mew <- predict(cluster_res, k = 3, newdata = x_new)
 memb_mew$Memb
 
 ```

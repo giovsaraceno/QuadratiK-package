@@ -142,7 +142,7 @@ setMethod("pk.test", signature(x = "ANY"),
              if(Quantile<=0 | Quantile>1){
                 stop("Quantile must be in (0,1].")
              }
-             if(!is.numeric(rho) | (rho<=0 | rho>1)){
+             if(!is.numeric(rho) | (rho<=0 | rho>=1)){
                 stop("rho must be in (0,1).")
              }
              

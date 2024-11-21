@@ -8,8 +8,8 @@
 <title>Clustering algorithm on the Wireless data • QuadratiK</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Clustering algorithm on the Wireless data">
 </head>
 <body>
@@ -97,15 +97,20 @@ indicates the class labels, from 1 to 4, indicating the different rooms.
 Notice that, the Wi-Fi signal strength is measured in dBm, decibel
 milliwatts, which is expressed as a negative value ranging from -100 to
 0. In total, we have 500 observations for each room.</p>
-<p>Given that Wi-Fi signal strength values are inherently bounded within
-a certain range, it is possible to consider the spherically transformed
-data points using
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mn>2</mn></msub><annotation encoding="application/x-tex">L_2</annotation></semantics></math>
-normalization. This transformation maps the data onto the surface of a
-7-dimensional sphere, ensuring that each observation has a uniform
-length. By projecting the data onto this high-dimensional sphere, we can
-take advantage of spherical geometry, and consequently perform the
-proposed clustering algorithm.</p>
+<p>In many wireless applications, the relative signal strengths across
+routers are more relevant to the underlying spatial patterns and device
+positioning than the absolute magnitudes. Additionally, absolute signal
+strength can be affected by noise, device orientation or environmental
+factors. In this case, it is reasonable to consider the spherically
+transformed data points using L2 normalization. This transformation maps
+the data onto the surface of a 6-dimensional sphere, ensuring that each
+observation has a uniform length. Given that absolute signal strength is
+not critical to the research question, the spherical representation
+provides a meaningful and interpretable framework for studying the data
+set. In general, it is appropriate to consider spherically transformed
+data points when: (i) the absolute length of the measurements is
+irrelevant or too noisy; (ii) if we are more interested in the relative
+distributions (or angular relationships) between data points.</p>
 <p>We perform the clustering algorithm on the <code>wireless</code> data
 set. We consider the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>=</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">K= 3, 4, 5</annotation></semantics></math>

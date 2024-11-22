@@ -25,5 +25,3 @@ jobs:
     - uses: ropensci-review-tools/pkgcheck-action@main
       with:
           summary-only: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

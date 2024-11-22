@@ -112,14 +112,20 @@ indicates the class labels, from 1 to 4, indicating the different rooms.
 Notice that, the Wi-Fi signal strength is measured in dBm, decibel
 milliwatts, which is expressed as a negative value ranging from -100 to
 0. In total, we have 500 observations for each room.</p>
-<p>Given that Wi-Fi signal strength values are inherently bounded within
-a certain range, it is possible to consider the spherically transformed
-data points using <span class="math inline">\(L_2\)</span>
-normalization. This transformation maps the data onto the surface of a
-7-dimensional sphere, ensuring that each observation has a uniform
-length. By projecting the data onto this high-dimensional sphere, we can
-take advantage of spherical geometry, and consequently perform the
-proposed clustering algorithm.</p>
+<p>In many wireless applications, the relative signal strengths across
+routers are more relevant to the underlying spatial patterns and device
+positioning than the absolute magnitudes. Additionally, absolute signal
+strength can be affected by noise, device orientation or environmental
+factors. In this case, it is reasonable to consider the spherically
+transformed data points using L2 normalization. This transformation maps
+the data onto the surface of a 6-dimensional sphere, ensuring that each
+observation has a uniform length. Given that absolute signal strength is
+not critical to the research question, the spherical representation
+provides a meaningful and interpretable framework for studying the data
+set. In general, it is appropriate to consider spherically transformed
+data points when: (i) the absolute length of the measurements is
+irrelevant or too noisy; (ii) if we are more interested in the relative
+distributions (or angular relationships) between data points.</p>
 <p>We perform the clustering algorithm on the <code>wireless</code> data
 set. We consider the <span class="math inline">\(K= 3, 4, 5\)</span> as
 possible values for the number of clusters.</p>

@@ -3,30 +3,29 @@ QuadratiK 1.1.3 (Development version)
 
 ### NEW FEATURES
 
-  * the function rpkb() returns directly the generated data set and not a list
+  * the function rpkb() returns directly the generated data set and not a list.
     
 
 ### MINOR IMPROVEMENTS
 
   * packages ggplot2 and foreach not called as full packages but using 
-    importFrom
-    
-  * nClust argument of pkbc function has no default value
-  
-  * usage of standardGeneric (see https://adv-r.hadley.nz/s4.html#s4-generics)
+    importFrom.
+  * nClust argument of pkbc function has no default value.
+  * usage of standardGeneric (see https://adv-r.hadley.nz/s4.html#s4-generics).
   
 ### BUG FIXES
 
-  * goodpractice sugestions
+  * goodpractice suggestions.
+  * specify that rho in pk.test() cannot be equal 1.
 
 ### DOCUMENTATION FIXES
 
   * Uniform notation: d is dimension in Eucldean space with spherical data lying
     on the (d-1)-dimensional sphere
-  
   * Specify dimension of input matrix x in clustering functions.
-  
-  * Improve explaination of Average Silhouette Width
+  * Improve explanation of Average Silhouette Width.
+  * Better explanation of motivation for L2 normalization in the wireless data
+    set application.
 
 
 QuadratiK 1.1.2 (2024-10-29) 
@@ -34,7 +33,7 @@ QuadratiK 1.1.2 (2024-10-29)
 
 ### NEW FEATURES
 
-  * Added NEWS.md file
+  * Added NEWS.md file.
   
   * More detailed information in the README file and documentation (the methods 
     are more usable and clearer for a broader audience). 
@@ -42,7 +41,7 @@ QuadratiK 1.1.2 (2024-10-29)
 ### MINOR IMPROVEMENTS
 
   * Added badges for rOpenSci review status, test coverage, R CMD CHECK,
-    CRAN downloads 
+    CRAN downloads.
   * Addition of test codes with testthat package. 
   * In particular, testing that random sampling from the PKBD and the wrapped
           Cauchy distribution is equivalent.
@@ -57,7 +56,7 @@ QuadratiK 1.1.2 (2024-10-29)
 
   * The help documentation for the methods defined for the classes in the 
     package can be accessed directly (addition of roxygen tag name and 
-    aliases)
+    aliases).
 
 
 QuadratiK 1.1.1 (2024-06-05)

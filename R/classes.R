@@ -23,17 +23,17 @@
 #'         kernel. If the function \code{select_h} is used, then also the matrix
 #'         of computed power values and the resulting power plot are provided. 
 #' @slot B Number of bootstrap/permutation/subsampling replications.
-#' @slot var_Un exact variance of the kernel-based U-statistic.
+#' @slot var_Un Exact variance of the kernel-based U-statistic.
 #'
 #' @examples
 #' # create a kb.test object
-#' x <- matrix(rnorm(100),ncol=2)
-#' y <- matrix(rnorm(100),ncol=2)
+#' x <- matrix(rnorm(100), ncol = 2)
+#' y <- matrix(rnorm(100), ncol = 2)
 #' # Normality test
-#' kb.test(x, h=0.5)
+#' kb.test(x, h = 0.5)
 #' 
 #' # Two-sample test
-#' kb.test(x,y,h=0.5, method="subsampling",b=0.9)
+#' kb.test(x, y, h=0.5, method = "subsampling", b = 0.9)
 #' 
 #' @srrstats {G1.4} roxigen2 is used
 #' 

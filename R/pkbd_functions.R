@@ -49,10 +49,10 @@
 #'
 #' @examples
 #' # Generate some data from pkbd density
-#' pkbd_dat <- rpkb(10, c(0.5,0), 0.5)
+#' pkbd_dat <- rpkb(10, c(0.5, 0), 0.5)
 #' 
 #' # Calculate the PKBD density values
-#' dens_val <- dpkb(pkbd_dat, c(0.5,0.5),0.5)
+#' dens_val <- dpkb(pkbd_dat, c(0.5, 0.5), 0.5)
 #'
 #' @srrstats {G1.4} roxigen2 is used
 #' @srrstats {G2.0,G2.0a} check input mu 

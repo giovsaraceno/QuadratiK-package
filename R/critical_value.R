@@ -36,7 +36,7 @@
 #' @srrstats {G1.4a} roxigen2 is used
 #' 
 #' @keywords internal
-compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1,
+compute_CV <- function(B, Quantile, data_pool, size_x, size_y, h, method, b=1,
                      compute_variance){
    
    Results <- matrix(rep(0,2*B),ncol=2)
@@ -103,10 +103,10 @@ compute_CV<-function(B, Quantile, data_pool, size_x, size_y, h, method, b=1,
 #' @importFrom stats quantile
 #' @import RcppEigen
 #'
-#' @srrstats {G1.4a} roxigen2 is used
+#' @srrstats {G1.4a} roxygen2 is used
 #'  
 #' @keywords internal
-poisson_CV<-function(d, size, rho, B, Quantile){
+poisson_CV <- function(d, size, rho, B, Quantile) {
    
    Results <- rep(0,B)
    for(i in 1:B) {
@@ -150,7 +150,7 @@ poisson_CV<-function(d, size, rho, B, Quantile){
 #' @srrstats {G1.4a} roxigen2 is used
 #' 
 #' @keywords internal
-normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
+normal_CV <- function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95) {
    
    Results <- rep(0,B)
    for(i in 1:B) {
@@ -193,8 +193,8 @@ normal_CV<-function(d, size, h, mu_hat, Sigma_hat, B = 150, Quantile=0.95){
 #' @srrstats {G1.4a} roxigen2 is used
 #' 
 #' @keywords internal
-cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile =0.95, 
-                       method="subsampling",compute_variance=TRUE){
+cv_ksample <- function(x, y, h, B=150, b=0.9, Quantile=0.95, 
+                       method="subsampling", compute_variance=TRUE){
    
    sizes <- as.vector(table(y))
    cum_size <- c(0,cumsum(sizes))

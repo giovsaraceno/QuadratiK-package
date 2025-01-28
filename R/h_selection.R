@@ -110,9 +110,9 @@
 #' @examples
 #' # Select the value of h using the mid-power algorithm
 #' \donttest{
-#' x <- matrix(rnorm(100),ncol=2)
-#' y <- matrix(rnorm(100),ncol=2)
-#' h_sel <- select_h(x,y,"skewness")
+#' x <- matrix(rnorm(100), ncol = 2)
+#' y <- matrix(rnorm(100), ncol = 2)
+#' h_sel <- select_h(x, y, "skewness")
 #' h_sel
 #' }
 #'

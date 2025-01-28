@@ -24,7 +24,7 @@
 #' and biomedical visualization (Vol. 1905, pp. 861-870). SPIE.
 #' 
 #' @srrstats {G1.0} Reference section reports the related literature
-#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G1.4} roxygen2 is used
 #' @srrstats {G5.1} the data set is made available
 #' 
 "breast_cancer"

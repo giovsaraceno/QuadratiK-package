@@ -172,7 +172,7 @@ setMethod("pkbc", signature(dat = "ANY"),
                   greater than 0')
           }
        } else {
-          stop("nClust must be a signle value or a numeric vector of possible
+          stop("nClust must be a single value or a numeric vector of possible
                   values")
        }
        if (maxIter < 1) {

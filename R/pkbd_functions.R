@@ -151,7 +151,7 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #' distribution", Electronic Journal of Statistics, 17(2), 2180-2209.
 #'
 #' @srrstats {G1.0} Reference section reports the related literature.
-#' @srrstats {G1.4} roxigen2 is used.
+#' @srrstats {G1.4} roxygen2 is used.
 #' @srrstats {G2.0,G2.0a} check input mu. 
 #' @srrstats {PD1.0} references on choice and usage of the probability 
 #'                   distributions are provided.

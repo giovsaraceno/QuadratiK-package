@@ -23,9 +23,9 @@ two-dimensional projected normal distribution. However, the connection with
 the \(d\)-dimensional projected normal distributions does not carry beyond
 \(d=2\).
 Golzy and Markatou (2020) proposed an acceptance-rejection method for
-simulating data from a PKBD using von Mises-Fisher envelops (rejvmf
+simulating data from a PKBD using von Mises-Fisher envelopes (rejvmf
 method). Furthermore Sablica, Hornik and Leydold (2023) proposed new ways for
-simulating from the PKBD, using angular central Gaussian envelops
+simulating from the PKBD, using angular central Gaussian envelopes
 (rejacg) or using the projected Saw distributions (rejpsaw)."><meta property="og:description" content="The Poisson kernel-based densities are based on the normalized Poisson kernel
 and are defined on the \((d-1)\)-dimensional unit sphere. Given a vector
 \(\mathbf{\mu} \in \mathcal{S}^{d-1}\), where \(\mathcal{S}^{d-1}=
@@ -50,9 +50,9 @@ two-dimensional projected normal distribution. However, the connection with
 the \(d\)-dimensional projected normal distributions does not carry beyond
 \(d=2\).
 Golzy and Markatou (2020) proposed an acceptance-rejection method for
-simulating data from a PKBD using von Mises-Fisher envelops (rejvmf
+simulating data from a PKBD using von Mises-Fisher envelopes (rejvmf
 method). Furthermore Sablica, Hornik and Leydold (2023) proposed new ways for
-simulating from the PKBD, using angular central Gaussian envelops
+simulating from the PKBD, using angular central Gaussian envelopes
 (rejacg) or using the projected Saw distributions (rejpsaw)."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -121,9 +121,9 @@ two-dimensional projected normal distribution. However, the connection with
 the \(d\)-dimensional projected normal distributions does not carry beyond
 \(d=2\).
 Golzy and Markatou (2020) proposed an acceptance-rejection method for
-simulating data from a PKBD using von Mises-Fisher envelops (<code>rejvmf</code>
+simulating data from a PKBD using von Mises-Fisher envelopes (<code>rejvmf</code>
 method). Furthermore Sablica, Hornik and Leydold (2023) proposed new ways for
-simulating from the PKBD, using angular central Gaussian envelops
+simulating from the PKBD, using angular central Gaussian envelopes
 (<code>rejacg</code>) or using the projected Saw distributions (<code>rejpsaw</code>).</p>
     </div>
 
@@ -171,9 +171,9 @@ scale.</p></dd>
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
 <dd><p>string that indicates the method used for sampling
 observations. The available methods are</p><ul><li><p><code>'rejvmf'</code> acceptance-rejection algorithm using
-von Mises-Fisher envelops (Algorithm in Table 2 of
+von Mises-Fisher envelopes (Algorithm in Table 2 of
 Golzy and Markatou 2020);</p></li>
-<li><p><code>'rejacg'</code> using angular central Gaussian envelops
+<li><p><code>'rejacg'</code> using angular central Gaussian envelopes
 (Algorithm in Table 1 of Sablica et al. 2023);</p></li>
 <li><p><code>'rejpsaw'</code> using projected Saw distributions
 (Algorithm in Table 2 of Sablica et al. 2023).</p></li>
@@ -227,10 +227,10 @@ distribution", Electronic Journal of Statistics, 17(2), 2180-2209.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Generate some data from pkbd density</span></span></span>
-<span class="r-in"><span><span class="va">pkbd_dat</span> <span class="op">&lt;-</span> <span class="fu">rpkb</span><span class="op">(</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">0</span><span class="op">)</span>, <span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pkbd_dat</span> <span class="op">&lt;-</span> <span class="fu">rpkb</span><span class="op">(</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculate the PKBD density values</span></span></span>
-<span class="r-in"><span><span class="va">dens_val</span> <span class="op">&lt;-</span> <span class="fu">dpkb</span><span class="op">(</span><span class="va">pkbd_dat</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>,<span class="fl">0.5</span><span class="op">)</span>,<span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dens_val</span> <span class="op">&lt;-</span> <span class="fu">dpkb</span><span class="op">(</span><span class="va">pkbd_dat</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>, <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

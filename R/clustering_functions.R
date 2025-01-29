@@ -143,7 +143,6 @@ setGeneric("pkbc",function(dat,
 #' @srrstats {G2.13,G2.14,G2.14a,G2.15,G2.16} error for NA, Nan, Inf, -Inf
 #' 
 #' @srrstats {UL2.1} normalization of input dat
-#' @srrstats {UL2.3} inputs are all checked
 #' @srrstats {UL7.0} error messages are inserted for inappropriate inputs
 #' 
 #' @importFrom methods new

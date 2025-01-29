@@ -145,32 +145,32 @@ skew-normal distribution <span class="math inline">\(SN_d(0,I_d,
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
 <span><span class="va">skewness_y</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
-<span><span class="va">x_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html" class="external-link">rmvnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">d</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">y_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sn/man/dmsn.html" class="external-link">rmsn</a></span><span class="op">(</span>n<span class="op">=</span><span class="va">n</span>, xi<span class="op">=</span><span class="fl">0</span>, Omega <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, alpha<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">skewness_y</span>,<span class="va">d</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">x_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html" class="external-link">rmvnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">d</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sn/man/dmsn.html" class="external-link">rmsn</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, xi <span class="op">=</span> <span class="fl">0</span>, Omega <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">skewness_y</span>, <span class="va">d</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The two-sample test can be performed by providing the two samples to
 be compared as <code>x</code> and <code>y</code> to the
 <code><a href="../reference/kb.test.html">kb.test()</a></code> function. If a value of <span class="math inline">\(h\)</span> is not provided, the function
 automatically performs the function <code>select_h</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
-<span><span class="va">two_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x_2</span>, y<span class="op">=</span><span class="va">y_2</span><span class="op">)</span></span>
+<span><span class="va">two_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_2</span>, y <span class="op">=</span> <span class="va">y_2</span><span class="op">)</span></span>
 <span><span class="va">two_test</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.679763    2.312427 </span></span>
-<span><span class="co">## Critical Value:   1.087455    1.497868 </span></span>
+<span><span class="co">## Test Statistic:   1.783107    2.626058 </span></span>
+<span><span class="co">## Critical Value:   0.9841307   1.450181 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.6</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  2.4</span></span></code></pre>
 <p>We can display the chosen <em>optimal</em> value of <span class="math inline">\(h\)</span> together with the power plot obtained
 versus the considered <span class="math inline">\(h\)</span>, for the
 alternatives <span class="math inline">\(\delta\)</span> in the
 <code><a href="../reference/select_h.html">select_h()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1.6</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 2.4</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">power.plot</span></span></code></pre></div>
 <p><img src="TwoSample_test_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
@@ -189,8 +189,8 @@ two groups for each variable.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
 <span><span class="co">##   Statistic    Value Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn 1.679763       1.087455      TRUE</span></span>
-<span><span class="co">## 2     Trace 2.312427       1.497868      TRUE</span></span></code></pre>
+<span><span class="co">## 1        Dn 1.783107      0.9841307      TRUE</span></span>
+<span><span class="co">## 2     Trace 2.626058      1.4501810      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_two</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
@@ -238,7 +238,7 @@ requires the two samples, provided as <code>x</code> and <code>y</code>,
 and the considered family of alternatives.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
-<span><span class="va">two_test_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_h.html">select_h</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x_2</span>, y<span class="op">=</span><span class="va">y_2</span>, alternative <span class="op">=</span> <span class="st">"skewness"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">two_test_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_h.html">select_h</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_2</span>, y <span class="op">=</span> <span class="va">y_2</span>, alternative <span class="op">=</span> <span class="st">"skewness"</span><span class="op">)</span></span></code></pre></div>
 <p>The code is not evaluated since we would obtain the same results.</p>
 </div>
 <div class="section level4">
@@ -251,20 +251,20 @@ sample tests can be performed providing the two samples together as
 <code>x</code> and indicating the membership to the groups with the
 argument <code>y</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x_pool</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">x_2</span>,<span class="va">y_2</span><span class="op">)</span></span>
-<span><span class="va">y_memb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,each<span class="op">=</span><span class="va">n</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">x_pool</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">x_2</span>, <span class="va">y_2</span><span class="op">)</span></span>
+<span><span class="va">y_memb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, each <span class="op">=</span> <span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">h</span> <span class="op">&lt;-</span> <span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">h_sel</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x_pool</span>, y<span class="op">=</span><span class="va">y_memb</span>, h<span class="op">=</span><span class="va">h</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/kb.test.html">kb.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_pool</span>, y <span class="op">=</span> <span class="va">y_memb</span>, h <span class="op">=</span> <span class="va">h</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.679763    2.312427 </span></span>
-<span><span class="co">## Critical Value:   1.087455    1.497868 </span></span>
+<span><span class="co">## Test Statistic:   1.783107    2.626058 </span></span>
+<span><span class="co">## Critical Value:   0.9841307   1.450181 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.6</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  2.4</span></span></code></pre>
 <p>See the <em>k-sample test</em> vignette for more details.</p>
 <p>In the <code><a href="../reference/kb.test.html">kb.test()</a></code> function, the critical value can be
 computed with the subsampling, bootstrap or permutation algorithm. The

@@ -17,6 +17,7 @@ QuadratiK 1.1.3 (Development version)
 
   * goodpractice suggestions.
   * specify that rho in pk.test() cannot be equal 1.
+  * styling and spelling errors.
 
 ### DOCUMENTATION FIXES
 

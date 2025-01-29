@@ -134,7 +134,7 @@ possible values for the number of clusters.</p>
 <span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="va">wireless</span><span class="op">[</span>,<span class="fl">8</span><span class="op">]</span></span>
 <span><span class="va">wire_norm</span> <span class="op">&lt;-</span> <span class="va">wire</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">wire</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
-<span><span class="va">res_pk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pkbc.html">pkbc</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">wire_norm</span><span class="op">)</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">res_pk</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pkbc.html">pkbc</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">wire_norm</span><span class="op">)</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>pkbc</code> function creates an object of class
 <code>pkbc</code> containing the clustering results for each value of
 number of clusters considered.</p>
@@ -207,7 +207,7 @@ function provides mean, standard deviation, median, inter-quantile
 range, minimum and maximum computed for each variable, overall and by
 the assigned membership.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">summary_clust</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stats_clusters.html">stats_clusters</a></span><span class="op">(</span><span class="va">res_pk</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">summary_clust</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stats_clusters.html">stats_clusters</a></span><span class="op">(</span><span class="va">res_pk</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_clust</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>

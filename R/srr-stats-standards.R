@@ -25,6 +25,7 @@
 #' @srrstatsNA {UL1.4a,UL1.4b} there are no differences with respect to scales
 #' @srrstatsNA {UL2.0} Violations of assumptions are not considered.
 #' @srrstatsNA {UL2.2} do not accept NA
+#' @srrstatsNA {UL2.3} collinearity is not considered
 #' @srrstatsNA {UL3.0,UL7.2,UL7.3} Labels are not ordered with respect to sizes
 #' @srrstatsNA {UL3.1} not a dimensionality reduction software 
 #' @srrstatsNA {UL7.5,UL7.5a} there are no batch processes

@@ -132,7 +132,7 @@ value of the concentration parameter <code>rho</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.7</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2468</span><span class="op">)</span></span>
-<span><span class="va">res_unif</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pk.test.html">pk.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">dat_sphere</span>, rho<span class="op">=</span><span class="va">rho</span><span class="op">)</span></span>
+<span><span class="va">res_unif</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pk.test.html">pk.test</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dat_sphere</span>, rho <span class="op">=</span> <span class="va">rho</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/methods/show.html" class="external-link">show</a></span><span class="op">(</span><span class="va">res_unif</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -192,18 +192,18 @@ vectors for the distributions are set as (1, 0), (0, 1), (-1, 0), and
 <span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,    </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,    </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span>,   </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,   </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>    </span>
 <span><span class="op">)</span></span>
 <span><span class="co"># Define the concentration parameter (kappa)</span></span>
 <span><span class="va">kappa</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="co"># Generate 100 samples from a mixture of 4 von Mises-Fisher distributions</span></span>
-<span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/movMF/man/movMF_distribution.html" class="external-link">rmovMF</a></span><span class="op">(</span><span class="fl">100</span>, theta <span class="op">=</span> <span class="va">kappa</span> <span class="op">*</span> <span class="va">means</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/movMF/man/movMF_distribution.html" class="external-link">rmovMF</a></span><span class="op">(</span><span class="fl">100</span>, theta <span class="op">=</span> <span class="va">kappa</span> <span class="op">*</span> <span class="va">means</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>We now compare the results of the <code>pk.test</code> function with
 the Ajne and Bingham tests using the <code>sphunif</code> package.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Run the pk.test from the QuadratiK package to test the data</span></span>
-<span><span class="va">pk_test_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pk.test.html">pk.test</a></span><span class="op">(</span><span class="va">samples</span>, rho<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="va">pk_test_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pk.test.html">pk.test</a></span><span class="op">(</span><span class="va">samples</span>, rho <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Run the Bingham and Ajne tests from the sphunif package</span></span>
 <span><span class="va">other_test_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/sphunif/man/unif_test.html" class="external-link">unif_test</a></span><span class="op">(</span><span class="va">samples</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Bingham"</span>, <span class="st">"Ajne"</span><span class="op">)</span><span class="op">)</span></span>

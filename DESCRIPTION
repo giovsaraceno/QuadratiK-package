@@ -8,7 +8,8 @@ Authors@R: c(
     person("Marianthi", "Markatou", role = "aut"),
     person("Raktim", "Mukhopadhyay", role = "aut"),
     person("Mojgan", "Golzy", role = c("aut")),
-    person("Hingee", "Kassel", role = "rev")
+    person("Hingee", "Kassel", role = "rev"),
+    person("Emi", "Tanaka", role = "rev")
   )
 Maintainer: Giovanni Saraceno <gsaracen@buffalo.edu>
 Description: It includes test for multivariate normality, test for uniformity on the d-dimensional 

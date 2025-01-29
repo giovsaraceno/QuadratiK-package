@@ -175,8 +175,12 @@ setMethod("pkbc", signature(dat = "ANY"),
           stop("nClust must be a single value or a numeric vector of possible
                   values")
        }
-       if (maxIter < 1) {
-          stop("Input parameter maxIter must be greater than 0")
+       if(is.vector(maxIter) & is.integer(maxIter)) {
+          if (maxIter < 0) {
+             stop("Input parameter maxIter must be an integer greater than 0.")
+          }
+       } else {
+          stop("maxIter must be a single integer value.") 
        }
        if ( !(stoppingRule %in% c("max", "membership", "loglik")) ) {
           stop(paste("Unrecognized value ", stoppingRule, " in input 
@@ -186,8 +190,12 @@ setMethod("pkbc", signature(dat = "ANY"),
           stop(paste("Unrecognized value ", initMethod, " in input 
           parameter initMethod.", sep=''))
        }
-       if (numInit < 1) {
-          stop("Input parameter numInit must be greater than 0")
+       if(is.vector(numInit) & is.integer(numInit)) {
+          if (numInit < 0) {
+             stop("Input parameter numInit must be greater than 0.")
+          }
+       } else {
+          stop("numInit must be a single integer value.")
        }
        
        # set options for stopping rule

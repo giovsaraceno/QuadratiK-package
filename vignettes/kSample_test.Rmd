@@ -78,10 +78,10 @@ x1 <- rmvnorm(sizes[1], mean = c(0,sqrt(3)*eps/3))
 x2 <- rmvnorm(sizes[2], mean = c(-eps/2,-sqrt(3)*eps/6))
 x3 <- rmvnorm(sizes[3], mean = c(eps/2,-sqrt(3)*eps/6))
 x <- rbind(x1, x2, x3)
-y <- as.factor(rep(c(1,2,3), times=sizes))
+y <- as.factor(rep(c(1, 2, 3), times = sizes))
 ```
 ```{r fig.width=6, fig.height=4}
-ggplot(data.frame(x=x, y=y), aes(x = x[,1], y = x[,2], color = y)) +
+ggplot(data.frame(x = x, y = y), aes(x = x[,1], y = x[,2], color = y)) +
   geom_point(size = 2) +
   labs(title = "Generated Points", x = "X1", y = "X2") +
   theme_minimal()
@@ -90,7 +90,7 @@ ggplot(data.frame(x=x, y=y), aes(x = x[,1], y = x[,2], color = y)) +
 To use the ``kb.test()`` function, we need to provide the value for the tuning parameter $h$. The function ``select_h`` can be used for identifying on *optimal* value of $h$. This function needs the input ``x`` and ``y`` as the function ``kb.test``, and the selection of the family of alternatives. Here we consider the location alternatives. 
 ```{r fig.width=6, fig.height=4}
 set.seed(2468)
-h_k <- select_h(x=x, y=y, alternative="location")
+h_k <- select_h(x = x, y = y, alternative = "location")
 ```
 ```{r}
 h_k$h_sel
@@ -100,7 +100,7 @@ The ``select_h`` function has also generated a figure displaying the obtained po
 We can now perform the $k$-sample tests with the *optimal* value of $h$. 
 ```{r}
 set.seed(2468)
-k_test <- kb.test(x=x, y=y, h=h_k$h_sel)
+k_test <- kb.test(x = x, y = y, h = h_k$h_sel)
 show(k_test)
 ```
 The function ``kb.test()`` returns an object of class ``kb.test``.
@@ -116,7 +116,7 @@ summary_ktest$summary_tables
 
 If a value of $h$ is not provided to ``kb.test()``, this function performs the function ``select_h`` for automatic search of an *optimal* value of $h$ to use. . The following code shows its usage, but it is not executed since we would obtain the same results.
 ```{r eval=FALSE}
-k_test_h <- kb.test(x=x, y=y)
+k_test_h <- kb.test(x = x, y = y)
 ```
 For more details visit the help documentation of the ``select_h()`` function.
 ```{r eval=FALSE} 

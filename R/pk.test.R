@@ -98,8 +98,8 @@
 #' 
 #' @examples
 #' # create a pk.test object
-#' x_sp <- sample_hypersphere(3, n_points=100)
-#' unif_test <- pk.test(x_sp,rho=0.8)
+#' x_sp <- sample_hypersphere(3, n_points = 100)
+#' unif_test <- pk.test(x_sp, rho = 0.8)
 #' unif_test
 #'
 #' @importFrom stats qchisq

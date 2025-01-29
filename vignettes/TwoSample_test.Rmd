@@ -70,13 +70,13 @@ n <- 100
 d <- 4
 skewness_y <- 0.5
 set.seed(2468)
-x_2 <- rmvnorm(n, mean = rep(0,d))
-y_2 <- rmsn(n=n, xi=0, Omega = diag(d), alpha=rep(skewness_y,d))
+x_2 <- rmvnorm(n, mean = rep(0, d))
+y_2 <- rmsn(n = n, xi = 0, Omega = diag(d), alpha = rep(skewness_y, d))
 ```
 The two-sample test can be performed by providing the two samples to be compared as ``x`` and ``y`` to the ``kb.test()`` function. If a value of $h$ is not provided, the function automatically performs the function ``select_h``. 
 ```{r }
 set.seed(2468)
-two_test <- kb.test(x=x_2, y=y_2)
+two_test <- kb.test(x = x_2, y = y_2)
 two_test
 ```
 We can display the chosen *optimal* value of $h$ together with the power plot obtained versus the considered $h$, for the alternatives $\delta$ in the ``select_h()`` function.
@@ -107,7 +107,7 @@ summary_two$summary_tables
 The search for the *optimal* value of the tuning parameter $h$ can be performed independently from the test computation using the ``select_h`` function. It requires the two samples, provided as ``x`` and ``y``, and the considered family of alternatives. 
 ```{r, eval=FALSE}
 set.seed(2468)
-two_test_h <- select_h(x=x_2, y=y_2, alternative = "skewness")
+two_test_h <- select_h(x = x_2, y = y_2, alternative = "skewness")
 ```
 The code is not evaluated since we would obtain the same results. 
 
@@ -115,11 +115,11 @@ The code is not evaluated since we would obtain the same results.
 
 Notice that the test statistics for two-sample testing coincide with the $k$-sample test statistics when $k=2$. Hence, alternatively the two sample tests can be performed providing the two samples together as ``x`` and indicating the membership to the groups with the argument ``y``.
 ```{r }
-x_pool <- rbind(x_2,y_2)
-y_memb <- rep(c(1,2),each=n)
+x_pool <- rbind(x_2, y_2)
+y_memb <- rep(c(1, 2), each = n)
 h <- two_test@h$h_sel
 set.seed(2468)
-kb.test(x=x_pool, y=y_memb, h=h)
+kb.test(x = x_pool, y = y_memb, h = h)
 ```
 See the *k-sample test* vignette for more details.
 

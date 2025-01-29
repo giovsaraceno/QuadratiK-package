@@ -105,19 +105,19 @@
 #' DOI: 10.1080/10618600.2020.1740713.
 #'
 #' @examples
-#' #We generate three samples of 100 observations from 3-dimensional
-#' #Poisson kernel-based densities with rho=0.8 and different mean directions
-#' size<-100
-#' groups<-c(rep(1, size), rep(2, size),rep(3,size))
-#' rho<-0.8
+#' # We generate three samples of 100 observations from 3-dimensional
+#' # Poisson kernel-based densities with rho=0.8 and different mean directions
+#' size <- 100
+#' groups <- c(rep(1, size), rep(2, size), rep(3, size))
+#' rho <- 0.8
 #' set.seed(081423)
-#' data1<-rpkb(size, c(1,0,0),rho)
-#' data2<-rpkb(size, c(0,1,0),rho)
-#' data3<-rpkb(size, c(0,0,1),rho)
-#' dat<-rbind(data1,data2, data3)
+#' data1 <- rpkb(size, c(1, 0, 0), rho)
+#' data2 <- rpkb(size, c(0, 1, 0), rho)
+#' data3 <- rpkb(size, c(0, 0, 1), rho)
+#' dat <- rbind(data1, data2, data3)
 #'
-#' #Perform the clustering algorithm with number of clusters k=3.
-#' pkbd<- pkbc(dat=dat, nClust=3)
+#' # Perform the clustering algorithm with number of clusters k=3.
+#' pkbd <- pkbc(dat = dat, nClust = 3)
 #' show(pkbd)
 #'
 #' @srrstats {G2.0a} Documentation of input nClust
@@ -172,7 +172,7 @@ setMethod("pkbc", signature(dat = "ANY"),
                   greater than 0')
           }
        } else {
-          stop("nClust must be a signle value or a numeric vector of possible
+          stop("nClust must be a single value or a numeric vector of possible
                   values")
        }
        if (maxIter < 1) {
@@ -466,8 +466,8 @@ setMethod("show", "pkbc", function(object) {
 #'         with a table with the assigned memberships.
 #' 
 #' @examples
-#' dat <- rbind(matrix(rnorm(100),2),matrix(rnorm(100,5),2))
-#' res <- pkbc(dat,2:4)
+#' dat <- rbind(matrix(rnorm(100), 2), matrix(rnorm(100, 5), 2))
+#' res <- pkbc(dat, 2:4)
 #' summary(res)
 #' 
 #' @seealso [pkbc()] for the clustering algorithm \cr
@@ -527,7 +527,7 @@ setMethod("summary", "pkbc", function(object) {
 #'          \linkS4class{pkbc} for the class object definition.
 #'          
 #' @export
-setGeneric("stats_clusters",function(object,...){
+setGeneric("stats_clusters",function(object,...) {
    
    standardGeneric("stats_clusters")
 })
@@ -571,11 +571,11 @@ setGeneric("stats_clusters",function(object,...){
 #' @rdname stats_clusters 
 #' @aliases stats_clusters,pkbc-method                 
 #' @export
-setMethod("stats_clusters", "pkbc", function(object, k){
+setMethod("stats_clusters", "pkbc", function(object, k) {
    
-   if(!(is.numeric(k) & length(k)==1)){
+   if(!(is.numeric(k) & length(k)==1)) {
       stop("k must be an integer")
-   } else if(!(k %in% object@input$nClust)){
+   } else if(!(k %in% object@input$nClust)) {
       stop("The provided pkbc object does not contain results for the requested
            number of clusters")
    } 
@@ -585,7 +585,7 @@ setMethod("stats_clusters", "pkbc", function(object, k){
    
    metrics <- list()
    
-   for(i in seq_len(ncol(x))){
+   for(i in seq_len(ncol(x))) {
       res <- rbind(as.numeric(by(x[,i],y,mean)),
                    as.numeric(by(x[,i],y,sd)),
                    as.numeric(by(x[,i],y,median)),
@@ -643,8 +643,8 @@ setMethod("stats_clusters", "pkbc", function(object, k){
 #'          \linkS4class{pkbc} for the class object definition.
 #' 
 #' @examples
-#' dat<-matrix(rnorm(300),ncol=3)
-#' pkbc_res<- pkbc(dat, 3)
+#' dat <- matrix(rnorm(300), ncol = 3)
+#' pkbc_res <- pkbc(dat, 3)
 #' plot(pkbc_res, 3)
 #' 
 #' @references
@@ -708,7 +708,7 @@ setMethod("plot", c(x = "pkbc"),
 #' @importFrom ggplot2 ggplot geom_point theme_minimal labs theme
 #' @importFrom rrcov PcaLocantore
 #' 
-#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G1.4} roxygen2 is used
 #' 
 #' @keywords internal
 #' @noRd
@@ -833,15 +833,15 @@ scatterplotMethod <- function(object, k, true_label = NULL, pca_res = FALSE) {
 #' @importFrom ggplot2 ggplot geom_line geom_point labs theme_minimal
 #' @importFrom ggpubr ggarrange
 #' 
-#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G1.4} roxygen2 is used
 #' 
 #' @keywords internal
 #' @noRd
-elbowMethod <- function(object){
+elbowMethod <- function(object) {
    
    wcss <- matrix(ncol=2)
    
-   for(k in object@input$nClust){
+   for(k in object@input$nClust) {
       wcss <- rbind(wcss, object@res_k[[k]]$wcss)
    }
    wcss <- wcss[-1,]
@@ -892,14 +892,14 @@ elbowMethod <- function(object){
 #' 
 #' @examples
 #' # generate data
-#' dat <- rbind(matrix(rnorm(100),ncol=2),matrix(rnorm(100,5),ncol=2))
-#' res <- pkbc(dat,2)
+#' dat <- rbind(matrix(rnorm(100), ncol = 2), matrix(rnorm(100, 5), ncol = 2))
+#' res <- pkbc(dat, 2)
 #' 
 #' # extract membership of dat
-#' predict(res,k=2)
+#' predict(res, k = 2)
 #' # predict membership of new data
-#' newdat <- rbind(matrix(rnorm(10),ncol=2),matrix(rnorm(10,5),ncol=2))
-#' predict(res, k=2, newdat)
+#' newdat <- rbind(matrix(rnorm(10), ncol = 2), matrix(rnorm(10, 5), ncol = 2))
+#' predict(res, k = 2, newdat)
 #'  
 #' @seealso [pkbc()] for the clustering algorithm \cr
 #'          \linkS4class{pkbc} for the class object definition.
@@ -1061,17 +1061,17 @@ setMethod("predict", signature(object="pkbc"),
 #' #We generate three samples of 100 observations from 3-dimensional
 #' #Poisson kernel-based densities with rho=0.8 and different mean directions
 #' 
-#' size<-20
-#' groups<-c(rep(1, size), rep(2, size),rep(3,size))
-#' rho<-0.8
+#' size <- 20
+#' groups <- c(rep(1, size), rep(2, size), rep(3, size))
+#' rho <- 0.8
 #' set.seed(081423)
-#' data1<-rpkb(size, c(1,0,0),rho,method='rejvmf')
-#' data2<-rpkb(size, c(0,1,0),rho,method='rejvmf')
-#' data3<-rpkb(size, c(1,0,0),rho,method='rejvmf')
-#' data<-rbind(data1,data2, data3)
+#' data1 <- rpkb(size, c(1,0,0), rho, method = 'rejvmf')
+#' data2 <- rpkb(size, c(0,1,0), rho, method = 'rejvmf')
+#' data3 <- rpkb(size, c(1,0,0), rho, method = 'rejvmf')
+#' data <- rbind(data1, data2, data3)
 #'
 #' #Perform the clustering algorithm
-#' pkbc_res<- pkbc(data, 3)
+#' pkbc_res <- pkbc(data, 3)
 #' pkbc_validation(pkbc_res)
 #' 
 #' 
@@ -1080,7 +1080,7 @@ setMethod("predict", signature(object="pkbc"),
 #' @srrstats {UL3.2} true label can be provided as a separate input 
 #' 
 #' @export
-pkbc_validation <- function(object, true_label=NULL){
+pkbc_validation <- function(object, true_label=NULL) {
    
    # nocov start
    if (!requireNamespace("mclust", quietly = TRUE)) {

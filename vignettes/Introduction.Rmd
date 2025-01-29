@@ -95,7 +95,7 @@ To test the null hypothesis of normality $H_0:F=\mathcal{N}_d(\mu, \Sigma)$
 ```{r}
 x <- matrix(rnorm(100), ncol = 2)
 # Does x come from a multivariate standard normal distribution?
-kb.test(x, h=0.4)
+kb.test(x, h = 0.4)
 ```
 
 If needed, we can specify $\mu$ and $\Sigma$, otherwise the standard normal distribution is considered.

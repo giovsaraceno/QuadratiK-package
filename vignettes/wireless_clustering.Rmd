@@ -37,7 +37,7 @@ wire <- wireless[,-8]
 labels <- wireless[,8]
 wire_norm <- wire/sqrt(rowSums(wire^2))
 set.seed(2468)
-res_pk <- pkbc(as.matrix(wire_norm),3:5)
+res_pk <- pkbc(as.matrix(wire_norm), 3:5)
 ```
 The `pkbc` function creates an object of class `pkbc` containing the clustering results for each value of number of clusters considered. 
 
@@ -76,7 +76,7 @@ The plot of points using the principal components also shows that the identified
 Once the number of clusters is selected, the method `summary_stat` can be used to obtain additional summary information with respect to the clustering results. In particular, the function provides mean, standard deviation, median, inter-quantile range, minimum and maximum computed for each variable, overall and by the assigned membership.
 
 ```{r }
-summary_clust <- stats_clusters(res_pk,4)
+summary_clust <- stats_clusters(res_pk, 4)
 ```
 
 ```{r}

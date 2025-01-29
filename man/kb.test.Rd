@@ -261,23 +261,23 @@ required.
 }
 \examples{
 # create a kb.test object
-x <- matrix(rnorm(100),ncol=2)
-y <- matrix(rnorm(100),ncol=2)
+x <- matrix(rnorm(100), ncol = 2)
+y <- matrix(rnorm(100), ncol = 2)
 
 # Normality test
 my_test <- kb.test(x, h=0.5)
 my_test
 
 # Two-sample test
-my_test <- kb.test(x,y,h=0.5, method="subsampling",b=0.9,
-                     centeringType = "Nonparam")
+my_test <- kb.test(x, y, h = 0.5, method = "subsampling", b = 0.9,
+                   centeringType = "Nonparam")
 my_test
 
 # k-sample test
-z <- matrix(rnorm(100,2),ncol=2)
-dat <- rbind(x,y,z)
-group <- rep(c(1,2,3),each=50)
-my_test <- kb.test(x=dat,y=group,h=0.5, method="subsampling",b=0.9)
+z <- matrix(rnorm(100, 2), ncol = 2)
+dat <- rbind(x, y, z)
+group <- rep(c(1, 2, 3), each = 50)
+my_test <- kb.test(x = dat, y = group, h = 0.5, method = "subsampling", b = 0.9)
 my_test
 
 }

@@ -15,7 +15,7 @@ dat_sphere <- z/sqrt(rowSums(z^2))
 ## -----------------------------------------------------------------------------
 rho <- 0.7
 set.seed(2468)
-res_unif <- pk.test(x=dat_sphere, rho=rho)
+res_unif <- pk.test(x = dat_sphere, rho = rho)
 
 show(res_unif)
 
@@ -33,17 +33,17 @@ set.seed(2468)
 means <- rbind(
   c(1, 0),    
   c(0, 1),    
-  c(-1,0),   
+  c(-1, 0),   
   c(0, -1)    
 )
 # Define the concentration parameter (kappa)
 kappa <- 5
 # Generate 100 samples from a mixture of 4 von Mises-Fisher distributions
-samples <- matrix(rmovMF(100, theta = kappa * means), ncol=2)
+samples <- matrix(rmovMF(100, theta = kappa * means), ncol = 2)
 
 ## -----------------------------------------------------------------------------
 # Run the pk.test from the QuadratiK package to test the data
-pk_test_result <- pk.test(samples, rho=0.8)
+pk_test_result <- pk.test(samples, rho = 0.8)
 
 # Run the Bingham and Ajne tests from the sphunif package
 other_test_result <- unif_test(samples, type = c("Bingham", "Ajne"))

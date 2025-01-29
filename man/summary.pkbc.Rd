@@ -20,8 +20,8 @@ with a table with the assigned memberships.
 Summary method for class "pkbc"
 }
 \examples{
-dat <- rbind(matrix(rnorm(100),2),matrix(rnorm(100,5),2))
-res <- pkbc(dat,2:4)
+dat <- rbind(matrix(rnorm(100), 2), matrix(rnorm(100, 5), 2))
+res <- pkbc(dat, 2:4)
 summary(res)
 
 }

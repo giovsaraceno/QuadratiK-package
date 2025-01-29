@@ -40,18 +40,18 @@ of computed power values and the resulting power plot are provided.}
 
 \item{\code{B}}{Number of bootstrap/permutation/subsampling replications.}
 
-\item{\code{var_Un}}{exact variance of the kernel-based U-statistic.}
+\item{\code{var_Un}}{Exact variance of the kernel-based U-statistic.}
 }}
 
 \examples{
 # create a kb.test object
-x <- matrix(rnorm(100),ncol=2)
-y <- matrix(rnorm(100),ncol=2)
+x <- matrix(rnorm(100), ncol = 2)
+y <- matrix(rnorm(100), ncol = 2)
 # Normality test
-kb.test(x, h=0.5)
+kb.test(x, h = 0.5)
 
 # Two-sample test
-kb.test(x,y,h=0.5, method="subsampling",b=0.9)
+kb.test(x, y, h=0.5, method = "subsampling", b = 0.9)
 
 }
 \seealso{

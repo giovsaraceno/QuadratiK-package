@@ -25,12 +25,12 @@ test_that("Error is thrown for invalid inputs", {
    "Input parameter nClust is required. Provide one specific 
                value or a set of possible values.", fixed=TRUE)
    expect_error(pkbc(dat, nClust="invalid"), 
-                "nClust must be a signle value or a numeric vector of possible
+                "nClust must be a single value or a numeric vector of possible
                   values", fixed=TRUE)
    
    #Invalid maxIter
    expect_error(pkbc(dat, nClust=2,maxIter=0), 
-                "Input parameter maxIter must be greater than 0")
+                "Input parameter maxIter must be an integer greater than 0.")
    
    #Invalid initMethod
    expect_error(pkbc(dat, nClust=2,initMethod="Invalid"), 
@@ -39,7 +39,7 @@ test_that("Error is thrown for invalid inputs", {
    
    #Invalid numInit
    expect_error(pkbc(dat, nClust=2,numInit=0), 
-                "Input parameter numInit must be greater than 0")
+                "Input parameter numInit must be greater than 0.")
 })
 
 # Test 2: Verify Error on Invalid data

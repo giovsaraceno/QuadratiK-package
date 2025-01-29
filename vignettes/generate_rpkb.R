@@ -11,7 +11,7 @@
 library(QuadratiK)
 
 ## -----------------------------------------------------------------------------
-mu <- c(0,0,1)
+mu <- c(0, 0, 1)
 d <- 3
 n <- 1000
 rho <- 0.8
@@ -20,12 +20,12 @@ rho <- 0.8
 set.seed(2468)
 # Generate observations using the rejection algorithm with von-Mises 
 # distribution envelopes
-dat1 <- rpkb(n = n, rho=rho, mu=mu, method="rejvmf")
+dat1 <- rpkb(n = n, rho = rho, mu = mu, method = "rejvmf")
 # Generate observations using the rejection algorithm with angular central 
 # Gaussian distribution envelopes
-dat2 <- rpkb(n = n, rho=rho, mu=mu, method="rejacg")
+dat2 <- rpkb(n = n, rho = rho, mu = mu, method = "rejacg")
 # Generate observations using the projected Saw distribution
-dat3 <- rpkb(n = n, rho=rho, mu=mu, method="rejpsaw")
+dat3 <- rpkb(n = n, rho = rho, mu = mu, method = "rejpsaw")
 
 ## -----------------------------------------------------------------------------
 x <- rbind(dat1, dat2, dat3)
@@ -50,10 +50,10 @@ for (i in seq_along(classes)) {
    text3d(legend_x, legend_y, legend_z[i], texts = classes[i], adj = c(0, 0.5))
    points3d(legend_x-0.1, legend_y, legend_z[i], col = colors[i], size = 5)
 }
-title3d("", line = 3, cex = 1.5, font=2, add=TRUE)
+title3d("", line = 3, cex = 1.5, font = 2, add = TRUE)
 # Plot the sampled observations colored with respect to the used method
-plot3d(x[,1], x[,2], x[,3], col = labels, size = 5, add=TRUE)
-title3d("", line = 3, cex = 1.5, font=2, add=TRUE)
+plot3d(x[,1], x[,2], x[,3], col = labels, size = 5, add = TRUE)
+title3d("", line = 3, cex = 1.5, font = 2, add = TRUE)
 # Add a Sphere as background
 rgl.spheres(0 , col = "transparent", alpha = 0.2)
 # Rotate and zoom the generated 3 dimensional plot to facilitate visualization

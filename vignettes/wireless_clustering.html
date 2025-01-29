@@ -387,7 +387,7 @@ possible values for the number of clusters.</p>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>labels <span class="ot">&lt;-</span> wireless[,<span class="dv">8</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>wire_norm <span class="ot">&lt;-</span> wire<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">rowSums</span>(wire<span class="sc">^</span><span class="dv">2</span>))</span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2468</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>res_pk <span class="ot">&lt;-</span> <span class="fu">pkbc</span>(<span class="fu">as.matrix</span>(wire_norm),<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>res_pk <span class="ot">&lt;-</span> <span class="fu">pkbc</span>(<span class="fu">as.matrix</span>(wire_norm), <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <p>The <code>pkbc</code> function creates an object of class
 <code>pkbc</code> containing the clustering results for each value of
 number of clusters considered.</p>
@@ -454,7 +454,7 @@ information with respect to the clustering results. In particular, the
 function provides mean, standard deviation, median, inter-quantile
 range, minimum and maximum computed for each variable, overall and by
 the assigned membership.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>summary_clust <span class="ot">&lt;-</span> <span class="fu">stats_clusters</span>(res_pk,<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>summary_clust <span class="ot">&lt;-</span> <span class="fu">stats_clusters</span>(res_pk, <span class="dv">4</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>summary_clust</span></code></pre></div>
 <pre><code>## [[1]]
 ##            Group 1     Group 2     Group 3     Group 4     Overall

@@ -175,8 +175,8 @@ setMethod("pkbc", signature(dat = "ANY"),
           stop("nClust must be a single value or a numeric vector of possible
                   values")
        }
-       if(is.vector(maxIter) & is.integer(maxIter)) {
-          if (maxIter < 0) {
+       if(is.vector(maxIter) & is.numeric(maxIter)) {
+          if (maxIter < 1) {
              stop("Input parameter maxIter must be an integer greater than 0.")
           }
        } else {
@@ -190,8 +190,8 @@ setMethod("pkbc", signature(dat = "ANY"),
           stop(paste("Unrecognized value ", initMethod, " in input 
           parameter initMethod.", sep=''))
        }
-       if(is.vector(numInit) & is.integer(numInit)) {
-          if (numInit < 0) {
+       if(is.vector(numInit) & is.numeric(numInit)) {
+          if (numInit < 1) {
              stop("Input parameter numInit must be greater than 0.")
           }
        } else {
@@ -567,7 +567,6 @@ setGeneric("stats_clusters",function(object,...) {
 #'
 #'
 #' @srrstats {G1.4} roxigen2 is used
-#' @srrstats {UL3.2} true label can be provided as a separate input
 #' @srrstats {UL3.4} the function computes summary statistics with respect to 
 #'                   the identified clusters.
 #'                   
@@ -660,7 +659,7 @@ setMethod("stats_clusters", "pkbc", function(object, k) {
 #' component analysis for functional data." Test 8, 1–73. 
 #' https://doi.org/10.1007/BF02595862
 #' 
-#' 
+#' @srrstats {UL3.2} true label can be provided as a separate input
 #' @srrstats {UL6.1} this function includes a plot method
 #' @srrstats {UL6.0,UL6.2} plot method for pkbc object
 #' 

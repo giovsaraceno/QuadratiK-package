@@ -31,14 +31,14 @@ mixture of Poisson kernel-based densities estimated by \code{pkbc}
 }
 \examples{
 # generate data
-dat <- rbind(matrix(rnorm(100),ncol=2),matrix(rnorm(100,5),ncol=2))
-res <- pkbc(dat,2)
+dat <- rbind(matrix(rnorm(100), ncol = 2), matrix(rnorm(100, 5), ncol = 2))
+res <- pkbc(dat, 2)
 
 # extract membership of dat
-predict(res,k=2)
+predict(res, k = 2)
 # predict membership of new data
-newdat <- rbind(matrix(rnorm(10),ncol=2),matrix(rnorm(10,5),ncol=2))
-predict(res, k=2, newdat)
+newdat <- rbind(matrix(rnorm(10), ncol = 2), matrix(rnorm(10, 5), ncol = 2))
+predict(res, k = 2, newdat)
  
 }
 \seealso{

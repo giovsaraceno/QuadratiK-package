@@ -50,8 +50,8 @@ in which the plotted line has the greatest change in slope, showing
 an elbow.
 }
 \examples{
-dat<-matrix(rnorm(300),ncol=3)
-pkbc_res<- pkbc(dat, 3)
+dat <- matrix(rnorm(300), ncol = 3)
+pkbc_res <- pkbc(dat, 3)
 plot(pkbc_res, 3)
 
 }

@@ -26,9 +26,9 @@
 #' the \eqn{d}-dimensional projected normal distributions does not carry beyond 
 #' \eqn{d=2}.  
 #' Golzy and Markatou (2020) proposed an acceptance-rejection method for 
-#' simulating data from a PKBD using von Mises-Fisher envelops (\code{rejvmf} 
+#' simulating data from a PKBD using von Mises-Fisher envelopes (\code{rejvmf} 
 #' method). Furthermore Sablica, Hornik and Leydold (2023) proposed new ways for
-#' simulating from the PKBD, using angular central Gaussian envelops 
+#' simulating from the PKBD, using angular central Gaussian envelopes 
 #' (\code{rejacg}) or using the projected Saw distributions (\code{rejpsaw}).
 #'  
 #' @param x \eqn{n \times d}-matrix (or data.frame) of \eqn{n} data point on the
@@ -54,7 +54,7 @@
 #' # Calculate the PKBD density values
 #' dens_val <- dpkb(pkbd_dat, c(0.5, 0.5), 0.5)
 #'
-#' @srrstats {G1.4} roxigen2 is used
+#' @srrstats {G1.4} roxygen2 is used
 #' @srrstats {G2.0,G2.0a} check input mu 
 #' @srrstats {G2.7,G2.8} different input x
 #' @srrstats {G2.13,G2.14,G2.14a,G2.15,G2.16} error for NA, Nan, Inf, -Inf
@@ -113,9 +113,9 @@ dpkb <- function(x, mu, rho, logdens = FALSE) {
 #'          observations. The available methods are 
 #' \itemize{
 #'    \item \code{'rejvmf'} acceptance-rejection algorithm using 
-#'                         von Mises-Fisher envelops (Algorithm in Table 2 of 
+#'                         von Mises-Fisher envelopes (Algorithm in Table 2 of 
 #'                         Golzy and Markatou 2020);
-#'    \item \code{'rejacg'} using angular central Gaussian envelops 
+#'    \item \code{'rejacg'} using angular central Gaussian envelopes 
 #'                         (Algorithm in Table 1 of Sablica et al. 2023);
 #'    \item \code{'rejpsaw'} using projected Saw distributions 
 #'                         (Algorithm in Table 2 of Sablica et al. 2023).

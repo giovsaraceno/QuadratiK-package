@@ -162,11 +162,11 @@ is not provided, the function automatically performs the function
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.602379    2.048025 </span></span>
-<span><span class="co">## Critical Value:   1.05881     1.354038 </span></span>
+<span><span class="co">## Test Statistic:   1.742844    2.505833 </span></span>
+<span><span class="co">## Critical Value:   1.031779    1.484304 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.2</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
 <p>We can display the chosen <em>optimal</em> value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>
 together with the power plot obtained versus the considered
@@ -176,7 +176,7 @@ for the alternatives
 in the <code><a href="../reference/select_h.html">select_h()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">h_sel</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1.2</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">two_test</span><span class="op">@</span><span class="va">h</span><span class="op">$</span><span class="va">power.plot</span></span></code></pre></div>
 <p><img src="TwoSample_test_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
@@ -195,8 +195,8 @@ two groups for each variable.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Kernel-based quadratic distance two-sample test </span></span>
 <span><span class="co">##   Statistic    Value Critical_Value Reject_H0</span></span>
-<span><span class="co">## 1        Dn 1.602379       1.058810      TRUE</span></span>
-<span><span class="co">## 2     Trace 2.048025       1.354038      TRUE</span></span></code></pre>
+<span><span class="co">## 1        Dn 1.742844       1.031779      TRUE</span></span>
+<span><span class="co">## 2     Trace 2.505833       1.484304      TRUE</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_two</span><span class="op">$</span><span class="va">summary_tables</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
@@ -269,11 +269,11 @@ the groups with the argument <code>y</code>.</p>
 <span><span class="co">##  Kernel-based quadratic distance k-sample test </span></span>
 <span><span class="co">## U-statistic   Dn          Trace </span></span>
 <span><span class="co">## ------------------------------------------------</span></span>
-<span><span class="co">## Test Statistic:   1.602379    2.048025 </span></span>
-<span><span class="co">## Critical Value:   1.05881     1.354038 </span></span>
+<span><span class="co">## Test Statistic:   1.742844    2.505833 </span></span>
+<span><span class="co">## Critical Value:   1.031779    1.484304 </span></span>
 <span><span class="co">## H0 is rejected:   TRUE        TRUE </span></span>
 <span><span class="co">## CV method:  subsampling </span></span>
-<span><span class="co">## Selected tuning parameter h:  1.2</span></span></code></pre>
+<span><span class="co">## Selected tuning parameter h:  2</span></span></code></pre>
 <p>See the <em>k-sample test</em> vignette for more details.</p>
 <p>In the <code><a href="../reference/kb.test.html">kb.test()</a></code> function, the critical value can be
 computed with the subsampling, bootstrap or permutation algorithm. The

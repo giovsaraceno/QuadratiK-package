@@ -2,7 +2,7 @@
 
 | Usage  | Release | Development |
 |------------------|------------------------|------------------------------|
-| [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![License: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://giovsaraceno.github.io/QuadratiK-package/LICENSE.html)|[![arXiv](https://img.shields.io/badge/doi-arXiv:2402.02290v2-green.svg)](https://doi.org/10.48550/arXiv.2402.02290) [![CRAN version](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![GitHub version](https://img.shields.io/badge/devel%20version-1.1.3-blue.svg)](https://github.com/giovsaraceno/QuadratiK-package) | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![codecov](https://codecov.io/github/giovsaraceno/QuadratiK-package/graph/badge.svg?token=M4CDTQPONE)](https://app.codecov.io/github/giovsaraceno/QuadratiK-package) [![R-CMD-check](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/giovsaraceno/QuadratiK-package/actions/workflows/R-CMD-check.yaml) [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |             |
+| [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![License: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://docs.ropensci.org/QuadratiK-package/LICENSE.html)|[![arXiv](https://img.shields.io/badge/doi-arXiv:2402.02290v2-green.svg)](https://doi.org/10.48550/arXiv.2402.02290) [![CRAN version](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![GitHub version](https://img.shields.io/badge/devel%20version-1.1.3-blue.svg)](https://github.com/ropensci/QuadratiK-package) | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![codecov](https://codecov.io/github/ropensci/QuadratiK-package/graph/badge.svg?token=M4CDTQPONE)](https://app.codecov.io/github/ropensci/QuadratiK-package) [![R-CMD-check](https://github.com/ropensci/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/QuadratiK-package/actions/workflows/R-CMD-check.yaml) [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |             |
 
 <!-- badges: end -->
 
@@ -19,7 +19,7 @@ Expanded capabilities include supporting tests for uniformity on the *d*-dimensi
 
 -   **Additional Features**: Alongside these functionalities, the software includes additional graphical functions, aiding users in validating and representing the cluster results as well as enhancing the interpretability and usability of the analysis.
 
-For an introduction to the usage of `QuadratiK` see the vignette [Introduction to the QuadratiK Package](https://giovsaraceno.github.io/QuadratiK-package/articles/Introduction.html).
+For an introduction to the usage of `QuadratiK` see the vignette [Introduction to the QuadratiK Package](https://docs.ropensci.org/QuadratiK-package/articles/Introduction.html).
 
 ## Installation
 
@@ -29,11 +29,13 @@ You can install the version published on CRAN of `QuadratiK`
 install.packages("QuadratiK")
 ```
 
-or the development version on GitHub
+or the development version from GitHub
 
 ``` r
 library(devtools)
 install_github('giovsaraceno/QuadratiK-package')
+# or via the rOpenSci organization repository
+install.packages("QuadratiK", repos = "https://ropensci.r-universe.dev")
 ```
 
 The `QuadratiK` package is also available in Python on PyPI <https://pypi.org/project/QuadratiK/> and also as a Dashboard application. Usage instruction for the Dashboard can be found at <https://quadratik.readthedocs.io/en/latest/user_guide/dashboard_application_usage.html>.
@@ -41,13 +43,14 @@ The `QuadratiK` package is also available in Python on PyPI <https://pypi.org/pr
 ## Authors
 
 Giovanni Saraceno, Marianthi Markatou, Raktim Mukhopadhyay, Mojgan Golzy\
-Maintainer: Giovanni Saraceno \<[gsaracen\@buffalo.edu](mailto:gsaracen@buffalo.edu)\>
+Maintainer: Giovanni Saraceno \<[giovanni.saraceno\@unipd.it](mailto:giovanni.saraceno@unipd.it)\>
+
 
 ## Citation
 
 If you use this package in your research or work, please cite it as follows:
 
-Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances. <https://cran.r-project.org/package=QuadratiK>, <https://github.com/giovsaraceno/QuadratiK-package>, <https://giovsaraceno.github.io/QuadratiK-package/>.
+Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances. <https://cran.r-project.org/package=QuadratiK>, <https://github.com/ropensci/QuadratiK-package>, <https://docs.ropensci.org/QuadratiK-package/>.
 
 ```         
 @Manual{saraceno2024QuadratiK,  
@@ -57,8 +60,8 @@ Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). QuadratiK: Co
              and Mojgan Golzy},  
    year = {2024},  
    note = {<https://cran.r-project.org/package=QuadratiK>,
-            <https://github.com/giovsaraceno/QuadratiK-package>,
-            <https://giovsaraceno.github.io/QuadratiK-package/>},  
+            <https://github.com/ropensci/QuadratiK-package>,
+            <https://docs.ropensci.org/QuadratiK-package/>},  
 }
 ```
 
@@ -90,3 +93,5 @@ Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). Goodness-of-F
 ## Details
 
 The work has been supported by Kaleida Health Foundation and National Science Foundation.
+
+Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.

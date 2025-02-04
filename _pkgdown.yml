@@ -1,4 +1,6 @@
 url: ~
-
+template:
+  params:
+    mathjax: true
 
 

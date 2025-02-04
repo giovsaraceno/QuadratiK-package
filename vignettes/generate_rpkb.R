@@ -1,11 +1,11 @@
 ## ----srr-tags, eval = FALSE, echo = FALSE-------------------------------------
-#  #' srr tags
-#  #'
-#  #'
-#  #' @srrstats {PD4.2} The results of the random sampling using the different
-#  #'                   distributions are compared graphically, by plotting on
-#  #'                   the sphere the generated observations.
-#  #'
+# #' srr tags
+# #'
+# #'
+# #' @srrstats {PD4.2} The results of the random sampling using the different
+# #'                   distributions are compared graphically, by plotting on
+# #'                   the sphere the generated observations.
+# #'
 
 ## ----message=FALSE------------------------------------------------------------
 library(QuadratiK)

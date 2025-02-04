@@ -1,16 +1,18 @@
 ## ----eval = FALSE-------------------------------------------------------------
-#  install.packages("QuadratiK")
+# install.packages("QuadratiK")
 
 ## ----eval = FALSE-------------------------------------------------------------
-#  library(devtools)
-#  devtools::install_github('giovsaraceno/QuadratiK-package')
+# library(devtools)
+# install_github('ropensci/QuadratiK')
+# # or via the rOpenSci organization repository
+# install.packages("QuadratiK", repos = "https://ropensci.r-universe.dev")
 
 ## -----------------------------------------------------------------------------
 library(QuadratiK)
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  ?kb.test
-#  ?select_h
+# ?kb.test
+# ?select_h
 
 ## -----------------------------------------------------------------------------
 x <- matrix(rnorm(100), ncol = 2)
@@ -38,7 +40,7 @@ x <- rbind(x1, x2, x3)
 kb.test(x, y, h = 0.4)
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  ?pk.test
+# ?pk.test
 
 ## -----------------------------------------------------------------------------
 # Generate points on the sphere from the uniform ditribution 
@@ -47,8 +49,8 @@ x <- sample_hypersphere(d = 3, n_points = 100)
 pk.test(x, rho = 0.7)
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  ?dpkb
-#  ?rpkb
+# ?dpkb
+# ?rpkb
 
 ## -----------------------------------------------------------------------------
 mu <- c(1,0,0)
@@ -59,7 +61,7 @@ dens_x <- dpkb(x, mu = mu, rho = rho)
 head(dens_x)
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  ?pkbc
+# ?pkbc
 
 ## -----------------------------------------------------------------------------
 # Generate 3 samples from the PKBD with different location directions

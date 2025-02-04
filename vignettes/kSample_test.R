@@ -1,11 +1,11 @@
 ## ----srr-tags, eval = FALSE, echo = FALSE-------------------------------------
-#  #' srr tags
-#  #'
-#  #'
-#  #' @srrstats {G1.5} k-sample test example in the associated paper
+# #' srr tags
+# #'
+# #'
+# #' @srrstats {G1.5} k-sample test example in the associated paper
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  help(kb.test)
+# help(kb.test)
 
 ## ----message=FALSE, warning=FALSE---------------------------------------------
 library(mvtnorm)
@@ -43,8 +43,8 @@ summary_ktest <- summary(k_test)
 summary_ktest$summary_tables
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  k_test_h <- kb.test(x = x, y = y)
+# k_test_h <- kb.test(x = x, y = y)
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  help(select_h)
+# help(select_h)
 

@@ -1,9 +1,9 @@
 ## ----srr-tags, eval = FALSE, echo = FALSE-------------------------------------
-#  #' srr tags
-#  #'
-#  #'
-#  #' @srrstats {G1.5} application to the wireless data set in the
-#  #'                  associated paper
+# #' srr tags
+# #'
+# #'
+# #' @srrstats {G1.5} application to the wireless data set in the
+# #'                  associated paper
 
 ## ----message=FALSE------------------------------------------------------------
 library(QuadratiK)
@@ -23,7 +23,7 @@ res_validation$IGP
 round(res_validation$metrics, 5)
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  help(pkbc_validation)
+# help(pkbc_validation)
 
 ## ----fig.show = "hold", fig.width=6, fig.height=6-----------------------------
 plot(res_pk, k = 4)

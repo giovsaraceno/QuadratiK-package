@@ -93,14 +93,14 @@ https://doi.org/10.48550/arXiv.2407.16374
 Useful links:
 \itemize{
   \item \url{https://CRAN.R-project.org/package=QuadratiK}
-  \item \url{https://github.com/giovsaraceno/QuadratiK-package}
-  \item \url{https://giovsaraceno.github.io/QuadratiK-package/}
-  \item Report bugs at \url{https://github.com/giovsaraceno/QuadratiK-package/issues}
+  \item \url{https://github.com/ropensci/QuadratiK/}
+  \item \url{https://docs.ropensci.org/QuadratiK/}
+  \item Report bugs at \url{https://github.com/ropensci/QuadratiK/issues}
 }
 
 }
 \author{
 Giovanni Saraceno, Marianthi Markatou, Raktim Mukhopadhyay, Mojgan Golzy
 
-Maintainer: Giovanni Saraceno \email{gsaracen@buffalo.edu}
+Maintainer: Giovanni Saraceno \email{giovanni.saracen@unipd.it}
 }

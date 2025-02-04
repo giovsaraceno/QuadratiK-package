@@ -26,7 +26,7 @@
       "@type": "Person",
       "givenName": "Giovanni",
       "familyName": "Saraceno",
-      "email": "gsaracen@buffalo.edu"
+      "email": "giovanni.saraceno@unipd.it"
     },
     {
       "@type": "Person",
@@ -49,7 +49,7 @@
       "@type": "Person",
       "givenName": "Giovanni",
       "familyName": "Saraceno",
-      "email": "gsaracen@buffalo.edu"
+      "email": "giovanni.saraceno@unipd.it"
     }
   ],
   "softwareSuggestions": [
@@ -367,7 +367,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2355.156KB",
+  "fileSize": "51936.238KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -395,7 +395,7 @@
         }
       ],
       "name": "QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances",
-      "url": "https://github.com/giovsaraceno/QuadratiK-package",
+      "url": "https://github.com/ropensci/QuadratiK",
       "description": "Version 1.1.2"
     },
     {

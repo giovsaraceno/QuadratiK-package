@@ -26,7 +26,9 @@ Or the development version on GitHub:
 
 ```{r, eval = FALSE}
 library(devtools)
-devtools::install_github('giovsaraceno/QuadratiK-package')
+install_github('ropensci/QuadratiK')
+# or via the rOpenSci organization repository
+install.packages("QuadratiK", repos = "https://ropensci.r-universe.dev")
 ```
 
 The `QuadratiK` package is also available in Python on PyPI and as a Dashboard application. Usage instruction for the Dashboard can be found at <https://quadratik.readthedocs.io/en/latest/user_guide/dashboard_application_usage.html>.
@@ -45,8 +47,8 @@ Saraceno G, Markatou M, Mukhopadhyay R, Golzy M (2024). QuadratiK: A Collection 
             and Mojgan Golzy}, 
    year = {2024}, 
    note = {<https://cran.r-project.org/package=QuadratiK>,
-   <https://github.com/giovsaraceno/QuadratiK-package>, 
-   <https://giovsaraceno.github.io/QuadratiK-package/>} 
+            <https://github.com/ropensci/QuadratiK>,
+            <https://docs.ropensci.org/QuadratiK/>} 
 }
 ```
 
@@ -218,16 +220,16 @@ plot(cluster_res)
 For more detailed information about the `QuadratiK` package, you can explore the following resources:
 
 -   [Package Documentation on CRAN](https://CRAN.R-project.org/package=QuadratiK) – Official package documentation on CRAN.
--   [GitHub Repository](https://github.com/giovsaraceno/QuadratiK-package) – The GitHub repository with the development version, issues, and community discussions.
--   [QuadratiK Package Website](https://giovsaraceno.github.io/QuadratiK-package/) – A dedicated website with additional tutorials and examples.
+-   [GitHub Repository](https://github.com/ropensci/QuadratiK) – The GitHub repository with the development version, issues, and community discussions.
+-   [QuadratiK Package Website](https://docs.ropensci.org/QuadratiK/) – A dedicated website with additional tutorials and examples.
 
 If you're new to the package, we recommend starting with the available vignettes:
 
--   [Two-sample test](https://giovsaraceno.github.io/QuadratiK-package/articles/TwoSample_test.html)
--   [k-sample test](https://giovsaraceno.github.io/QuadratiK-package/articles/kSample_test.html)
--   [Test for uniformity](https://giovsaraceno.github.io/QuadratiK-package/articles/uniformity.html)
--   [Clustering on the sphere](https://giovsaraceno.github.io/QuadratiK-package/articles/wireless_clustering.html)
--   [Generate from PKBD](https://giovsaraceno.github.io/QuadratiK-package/articles/generate_rpkb.html)
+-   [Two-sample test](https://docs.ropensci.org/QuadratiK/articles/TwoSample_test.html)
+-   [k-sample test](https://docs.ropensci.org/QuadratiK/articles/kSample_test.html)
+-   [Test for uniformity](https://docs.ropensci.org/QuadratiK/articles/uniformity.html)
+-   [Clustering on the sphere](https://docs.ropensci.org/QuadratiK/articles/wireless_clustering.html)
+-   [Generate from PKBD](https://docs.ropensci.org/QuadratiK/articles/generate_rpkb.html)
 
 ### References
 

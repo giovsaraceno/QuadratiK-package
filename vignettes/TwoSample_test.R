@@ -1,11 +1,11 @@
 ## ----srr-tags, eval = FALSE, echo = FALSE-------------------------------------
-#  #' srr tags
-#  #'
-#  #'
-#  #' @srrstats {G1.5} two-sample test example in the associated paper
+# #' srr tags
+# #'
+# #'
+# #' @srrstats {G1.5} two-sample test example in the associated paper
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  help(kb.test)
+# help(kb.test)
 
 ## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -31,7 +31,7 @@ two_test@h$h_sel
 two_test@h$power.plot
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  help(select_h)
+# help(select_h)
 
 ## ----fig.width=6, fig.height=8------------------------------------------------
 summary_two <- summary(two_test)
@@ -40,8 +40,8 @@ summary_two <- summary(two_test)
 summary_two$summary_tables
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  set.seed(2468)
-#  two_test_h <- select_h(x = x_2, y = y_2, alternative = "skewness")
+# set.seed(2468)
+# two_test_h <- select_h(x = x_2, y = y_2, alternative = "skewness")
 
 ## -----------------------------------------------------------------------------
 x_pool <- rbind(x_2, y_2)

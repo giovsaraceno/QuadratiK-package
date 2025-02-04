@@ -2,7 +2,7 @@
 
 | Usage  | Release | Development |
 |------------------|------------------------|------------------------------|
-| [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![License: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://docs.ropensci.org/QuadratiK-package/LICENSE.html)|[![arXiv](https://img.shields.io/badge/doi-arXiv:2402.02290v2-green.svg)](https://doi.org/10.48550/arXiv.2402.02290) [![CRAN version](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![GitHub version](https://img.shields.io/badge/devel%20version-1.1.3-blue.svg)](https://github.com/ropensci/QuadratiK-package) | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![codecov](https://codecov.io/github/ropensci/QuadratiK-package/graph/badge.svg?token=M4CDTQPONE)](https://app.codecov.io/github/ropensci/QuadratiK-package) [![R-CMD-check](https://github.com/ropensci/QuadratiK-package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/QuadratiK-package/actions/workflows/R-CMD-check.yaml) [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |             |
+| [![CRAN_Downloads_Badge](https://cranlogs.r-pkg.org/badges/grand-total/QuadratiK)](https://cran.r-project.org/package=QuadratiK) [![License: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://docs.ropensci.org/QuadratiK/LICENSE.html)|[![arXiv](https://img.shields.io/badge/doi-arXiv:2402.02290v2-green.svg)](https://doi.org/10.48550/arXiv.2402.02290) [![CRAN version](https://www.r-pkg.org/badges/version/QuadratiK)](https://CRAN.R-project.org/package=QuadratiK) [![GitHub version](https://img.shields.io/badge/devel%20version-1.1.3-blue.svg)](https://github.com/ropensci/QuadratiK) | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/632_status.svg)](https://github.com/ropensci/software-review/issues/632) [![codecov](https://codecov.io/github/ropensci/QuadratiK/graph/badge.svg?token=M4CDTQPONE)](https://app.codecov.io/github/ropensci/QuadratiK-package) [![R-CMD-check](https://github.com/ropensci/QuadratiK/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/QuadratiK/actions/workflows/R-CMD-check.yaml) [![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |             |
 
 <!-- badges: end -->
 
@@ -19,7 +19,7 @@ Expanded capabilities include supporting tests for uniformity on the *d*-dimensi
 
 -   **Additional Features**: Alongside these functionalities, the software includes additional graphical functions, aiding users in validating and representing the cluster results as well as enhancing the interpretability and usability of the analysis.
 
-For an introduction to the usage of `QuadratiK` see the vignette [Introduction to the QuadratiK Package](https://docs.ropensci.org/QuadratiK-package/articles/Introduction.html).
+For an introduction to the usage of `QuadratiK` see the vignette [Introduction to the QuadratiK Package](https://docs.ropensci.org/QuadratiK/articles/Introduction.html).
 
 ## Installation
 
@@ -33,7 +33,7 @@ or the development version from GitHub
 
 ``` r
 library(devtools)
-install_github('giovsaraceno/QuadratiK-package')
+install_github('ropensci/QuadratiK')
 # or via the rOpenSci organization repository
 install.packages("QuadratiK", repos = "https://ropensci.r-universe.dev")
 ```
@@ -50,7 +50,7 @@ Maintainer: Giovanni Saraceno \<[giovanni.saraceno\@unipd.it](mailto:giovanni.sa
 
 If you use this package in your research or work, please cite it as follows:
 
-Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances. <https://cran.r-project.org/package=QuadratiK>, <https://github.com/ropensci/QuadratiK-package>, <https://docs.ropensci.org/QuadratiK-package/>.
+Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). QuadratiK: Collection of Methods Constructed using Kernel-Based Quadratic Distances. <https://cran.r-project.org/package=QuadratiK>, <https://github.com/ropensci/QuadratiK>, <https://docs.ropensci.org/QuadratiK/>.
 
 ```         
 @Manual{saraceno2024QuadratiK,  
@@ -60,8 +60,8 @@ Saraceno, G., Markatou, M., Mukhopadhyay, R. and Golzy, M. (2024). QuadratiK: Co
              and Mojgan Golzy},  
    year = {2024},  
    note = {<https://cran.r-project.org/package=QuadratiK>,
-            <https://github.com/ropensci/QuadratiK-package>,
-            <https://docs.ropensci.org/QuadratiK-package/>},  
+            <https://github.com/ropensci/QuadratiK>,
+            <https://docs.ropensci.org/QuadratiK/>},  
 }
 ```
 

@@ -65,7 +65,7 @@
 #' @author 
 #' Giovanni Saraceno, Marianthi Markatou, Raktim Mukhopadhyay, Mojgan Golzy 
 #'          
-#' Maintainer: Giovanni Saraceno \email{gsaracen@buffalo.edu}
+#' Maintainer: Giovanni Saraceno \email{giovanni.saracen@unipd.it}
 #'    
 #'          
 #' @references

@@ -1,6 +1,6 @@
 # Contributing to QuadratiK package
 
-*Version: 1.1.2*
+*Version: 1.1.3*
 
 First of all, thanks for considering contributing to `QuadratiK`! 👍
 
@@ -8,7 +8,7 @@ First of all, thanks for considering contributing to `QuadratiK`! 👍
 
 ## Code of conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms. By participating in this project you agree to abide by its terms.
 
 ### Share the love ❤️
 
@@ -18,13 +18,13 @@ Using `QuadratiK` for a paper you are writing? [Cite it](https://arxiv.org/abs/2
 
 ### Ask a question
 
-Using `QuadratiK` and got stuck? Browse the [documentation](https://github.com/giovsaraceno/QuadratiK-package) to see if you can find a solution. Post your questions and requests as an [issue on GitHub](https://github.com/giovsaraceno/QuadratiK-package/issues/new). We'll try to do our best to address it, as questions often lead to better documentation or the discovery of bugs.
+Using `QuadratiK` and got stuck? Browse the [documentation](https://github.com/ropensci/QuadratiK) to see if you can find a solution. Post your questions and requests as an [issue on GitHub](https://github.com/ropensci/QuadratiK/issues/new). We'll try to do our best to address it, as questions often lead to better documentation or the discovery of bugs.
 
-Want to ask a question in private? Contact the package maintainer by [gsaracen\@buffalo.edu](mailto:gsaracen@buffalo.edu).
+Want to ask a question in private? Contact the package maintainer by [giovanni.saraceno\@unipd.it](mailto:giovanni.saraceno@unipd.it).
 
 ### Propose an idea 💡
 
-Have an idea for a new `QuadratiK` feature? Take a look at the [documentation](https://github.com/giovsaraceno/QuadratiK-package) and [issue list](https://github.com/giovsaraceno/QuadratiK-package/issues) to see if it isn't included or suggested yet. If not, suggest your idea as an [issue on GitHub](https://github.com/giovsaraceno/QuadratiK-package/issues/new). Please
+Have an idea for a new `QuadratiK` feature? Take a look at the [documentation](https://github.com/ropensci/QuadratiK) and [issue list](https://github.com/ropensci/QuadratiK/issues) to see if it isn't included or suggested yet. If not, suggest your idea as an [issue on GitHub](https://github.com/ropensci/QuadratiK/issues/new). Please
 
 -   Explain in detail how it would work.
 -   Keep the scope as narrow as possible.
@@ -33,7 +33,7 @@ Have an idea for a new `QuadratiK` feature? Take a look at the [documentation](h
 
 We try to follow the [GitHub flow](https://guides.github.com/introduction/flow/) for development.
 
-1.  Fork [this repo](https://github.com/giovsaraceno/QuadratiK-package) and clone it to your computer. To learn more about this process, see [this guide](https://guides.github.com/activities/forking/).
+1.  Fork [this repo](https://github.com/ropensci/QuadratiK) and clone it to your computer. To learn more about this process, see [this guide](https://guides.github.com/activities/forking/).
 2.  If you have forked and cloned the project before and it has been a while since you worked on it, [pull changes from the original repo](https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/) to your clone by using `git pull upstream master`.
 3.  Open the RStudio project file (`.Rproj`).
 4.  Make your changes:
@@ -46,15 +46,11 @@ We try to follow the [GitHub flow](https://guides.github.com/introduction/flow/)
 
 ### Report a bug
 
-Using `QuadratiK` and discovered a bug? That's annoying! Don't let others have the same experience and report it as an [issue on GitHub](https://github.com/giovsaraceno/QuadratiK-package/issues/new) so we can fix it. A good bug report makes it easier for us to do so, so please include:
+Using `QuadratiK` and discovered a bug? That's annoying! Don't let others have the same experience and report it as an [issue on GitHub](https://github.com/ropensci/QuadratiK/issues/new) so we can fix it. A good bug report makes it easier for us to do so, so please include:
 
 -   Your operating system name and version (e.g. Mac OS 10.13.6).
 -   Any details about your local setup that might be helpful in troubleshooting.
 -   Detailed steps to reproduce the bug.
-
-#### The website
-
-[This website](https://github.com/giovsaraceno/QuadratiK-package) is generated with [`pkgdown`](http://pkgdown.r-lib.org/). That means we don't have to write any html: content is pulled together from documentation in the code, vignettes, [Markdown](https://guides.github.com/features/mastering-markdown/) files, the package `DESCRIPTION` and `_pkgdown.yml` settings. If you know your way around `pkgdown`, you can [propose a file change](https://help.github.com/articles/editing-files-in-another-user-s-repository/) to improve documentation. If not, [report an issue](https://github.com/giovsaraceno/QuadratiK-package/issues/new) and we can point you in the right direction.
 
 ## Workflow
 

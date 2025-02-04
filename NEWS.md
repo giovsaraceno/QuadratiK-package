@@ -4,7 +4,7 @@ QuadratiK 1.1.3 (Development version)
 ### NEW FEATURES
 
   * the function rpkb() returns directly the generated data set and not a list.
-    
+  * change repository name from QuadratiK-package to QuadratiK.
 
 ### MINOR IMPROVEMENTS
 

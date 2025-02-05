@@ -1,4 +1,4 @@
-QuadratiK 1.1.3 (Development version) 
+QuadratiK 1.1.3 (2025-02-04) 
 =========================
 
 ### NEW FEATURES
